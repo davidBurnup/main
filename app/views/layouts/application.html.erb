@@ -6,15 +6,18 @@
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Worship" %>">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag "simplex", :media => "all" %>
     <%= csrf_meta_tags %>
   </head>
   <body>
     <header>
       <%= render 'layouts/navigation' %>
     </header>
-    <main role="main">
+    <main role="main" class="container">
+      <div class="row">
        <%= render 'layouts/messages' %>
        <%= yield %>
+      </div>
     </main>
   </body>
 </html>

@@ -1,0 +1,15 @@
+fr:
+  activerecord:
+    models:
+      user:
+        one: "Utilisateur"
+        other: "Utilisateurs"
+    attributes:
+      user:
+        name: Nom
+        email: Adresse email
+        password: Mot de passe
+        password_confirmation: Mot de passe de confirmation
+        current_password: Mot de passe actuel
+  leave_blank_to_not_modify: Laissez ces champs vides si vous ne voulez pas changer votre mot de passe
+  fill_in_current_password_to_modify_anything: Vous devez entrer votre mot de passe actuel pour modifier votre profil

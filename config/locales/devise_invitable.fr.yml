@@ -1,0 +1,10 @@
+fr:
+  devise:
+    invitations:
+      send_instructions: Une invitation a été envoyée à %{email}.
+      invitation_token_invalid: Le jeton d'invitation fourni est invalide.
+      updated: Votre mot de passe a été mis à jour avec succès. Vous êtes maintenant connecté(e).
+      no_invitations_remaining: Vous n'avez plus d'invitation.
+    mailer:
+      invitation_instructions:
+        subject: Invitation - Instructions
