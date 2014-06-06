@@ -15,6 +15,7 @@ gem 'devise_invitable'
 gem 'mysql2'
 gem 'pundit'
 gem 'simple_form'
+gem 'autogrow-textarea-rails'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :mri_21, :rbx]

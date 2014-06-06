@@ -1,19 +1,30 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @song.title %>
-</p>
+<div class="row">
+  <div id="song_title">
+    <%= @song.title %>
+  </div>
+  <div class="col-lg-4">
+    <label>
+      Clé par défaut
+    </label>
+    <%= @song.key %>
+  </div>
+  <div class="col-lg-4">
+    <%= simple_form_for @song.user_song_preference(current_user), :remote => true do |sp| %>
+        <%= sp.input :prefered_key, :collection => Song.notes %>
+    <% end %>
+  </div>
+</div>
 
-<p>
-  <strong>Content:</strong>
-  <%= @song.content %>
-</p>
+<div class="row">
 
-<p>
-  <strong>Key:</strong>
-  <%= @song.key %>
-</p>
+  <div id="song-container">
+    <%= render "song_container", :song => @song %>
+  </div>
+
+</div>
+
 
 <%= link_to 'Edit', edit_song_path(@song) %> |
 <%= link_to 'Back', songs_path %>

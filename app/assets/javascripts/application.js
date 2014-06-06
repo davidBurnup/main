@@ -14,6 +14,9 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
+//= require "jquery.autogrowtextarea"
+//= require main
+//= require songs
 
 
 jQuery(function(){

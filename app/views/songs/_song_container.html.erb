@@ -1,0 +1,15 @@
+<% song ||= nil %>
+
+<% if song %>
+    <% prefered_key = song.prefered_key(current_user) %>
+    <div id="song-notes">
+      <% song.notes.each do |note| %>
+          <% note_key = note.transpose_to(prefered_key) %>
+          <div class="note" data-line="<%= note.line %>" data-offset="<%= note.offset %>">
+            <%= note_key %>
+          </div>
+
+      <% end %>
+    </div>
+    <%= raw song.clean_html_content %>
+<% end %>

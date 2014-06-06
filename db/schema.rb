@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140603192419) do
+ActiveRecord::Schema.define(version: 20140606110255) do
+
+  create_table "notes", force: true do |t|
+    t.integer  "song_id"
+    t.integer  "line"
+    t.integer  "offset"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "note"
+  end
 
   create_table "songs", force: true do |t|
     t.string   "title"
@@ -21,6 +30,16 @@ ActiveRecord::Schema.define(version: 20140603192419) do
     t.datetime "updated_at"
     t.string   "transposed_key"
     t.integer  "transpose_offset"
+    t.string   "note"
+    t.text     "clean_content"
+  end
+
+  create_table "user_song_preferences", force: true do |t|
+    t.integer  "song_id"
+    t.integer  "user_id"
+    t.string   "prefered_key"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

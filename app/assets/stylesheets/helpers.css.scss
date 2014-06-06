@@ -1,0 +1,123 @@
+//CSS LESS SCRIPTS
+@mixin rounded-corners($radius: 5px) {
+  border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+}
+@mixin rounded-corners-top($radius: 5px) {
+  border-top-right-radius: $radius;
+  -webkit-border-top-right-radius: $radius;
+  -moz-border-radius-topright: $radius;
+  border-top-left-radius: $radius;
+  -webkit-border-top-left-radius: $radius;
+  -moz-border-radius-topleft: $radius;
+}
+@mixin rounded-corners-bottom($radius: 5px) {
+  border-bottom-right-radius: $radius;
+  -webkit-border-bottom-right-radius: $radius;
+  -moz-border-radius-bottomright: $radius;
+  border-bottom-left-radius: $radius;
+  -webkit-border-bottom-left-radius: $radius;
+  -moz-border-radius-bottomleft: $radius;
+}
+@mixin rounded-corners-left($radius: 5px) {
+  border-top-left-radius: $radius;
+  -webkit-border-top-left-radius: $radius;
+  -moz-border-radius-topleft: $radius;
+  border-bottom-left-radius: $radius;
+  -webkit-border-bottom-left-radius: $radius;
+  -moz-border-radius-bottomleft: $radius;
+}
+@mixin rounded-corners-right($radius: 5px) {
+  border-top-right-radius: $radius;
+  -webkit-border-top-right-radius: $radius;
+  -moz-border-radius-topright: $radius;
+  border-bottom-right-radius: $radius;
+  -webkit-border-bottom-right-radius: $radius;
+  -moz-border-radius-bottomright: $radius;
+}
+@mixin rounded-corners-full($top_left: 2px, $top_right:2px,$bottom_right:2px, $bottom_left:2px) {
+//TOP LEFT
+  border-top-left-radius: $top_left;
+  -webkit-border-top-left-radius: $top_left;
+  -moz-border-radius-topleft: $top_left;
+
+//TOP RIGHT
+  border-top-right-radius: $top_right;
+  -webkit-border-top-right-radius: $top_right;
+  -moz-border-radius-topright: $top_right;
+
+//BOTTOM RIGHT
+  border-bottom-right-radius: $bottom_right;
+  -webkit-border-bottom-right-radius: $bottom_right;
+  -moz-border-radius-bottomright: $bottom_right;
+
+//BOTTOM LEFT
+  border-bottom-left-radius: $bottom_left;
+  -webkit-border-bottom-left-radius: $bottom_left;
+  -moz-border-radius-bottomleft: $bottom_left;
+
+}
+
+@mixin box-shadow-dark($x: 0, $y: 0, $blur: 1px, $alpha: 0.5) {
+  $val: $x $y $blur rgba(0, 0, 0, $alpha);
+
+  box-shadow:         $val;
+  -webkit-box-shadow: $val;
+  -moz-box-shadow:    $val;
+}
+@mixin box-shadow-color($x: 0, $y: 0, $blur: 1px, $alpha: 0.5,$color: black) {
+  $val: $x $y $blur $color;
+
+  box-shadow:         $val;
+  -webkit-box-shadow: $val;
+  -moz-box-shadow:    $val;
+}
+@mixin text-shadow-dark($x: 0, $y: 0, $blur: 1px, $alpha: 0.5) {
+  $val: $x $y $blur rgba(0, 0, 0, $alpha);
+
+  text-shadow:         $val;
+  -webkit-text-shadow: $val;
+  -moz-text-shadow:    $val;
+}
+@mixin text-shadow-stamp()
+{
+  text-shadow: 0px -1px 1px #2c4d93;
+}
+@mixin text-shadow-stamp-white()
+{
+  text-shadow: 0px -1px 1px #ffffff ;
+}
+@mixin text-shadow-stamp-color($color)
+{
+  text-shadow: 0px -1px 1px $color;
+}
+@mixin text-shadow-erase() {
+  text-shadow: 0px 0px 0px transparent;
+}
+@mixin box-shadow-erase() {
+  box-shadow: 0px 0px 0px transparent;
+}
+@mixin rotate($deg: 2deg){
+  -webkit-transform: rotate($deg);
+  -moz-transform: rotate($deg);
+  -o-transform:rotate($deg);
+  -ms-transform:rotate($deg);
+}
+@mixin transition($lasting:1s){
+  -webkit-transition: all $lasting ease;
+  -moz-transition: all $lasting ease;
+  -ms-transition: all $lasting ease;
+  -o-transition: all $lasting ease;
+  transition: all $lasting ease;
+}
+@mixin transform-origin($position){
+  -webkit-transform-origin: $position;
+  -moz-transform-origin: $position;
+  -ms-transform-origin: $position;
+  -o-transform-origin: $position;
+  transform-origin: $position;
+}
+
+
+$main_color: #00AFEA;

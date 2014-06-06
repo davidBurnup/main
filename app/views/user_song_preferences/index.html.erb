@@ -1,0 +1,23 @@
+<h1>Listing user_song_preferences</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_song_preferences.each do |user_song_preference| %>
+      <tr>
+        <td><%= link_to 'Show', user_song_preference %></td>
+        <td><%= link_to 'Edit', edit_user_song_preference_path(user_song_preference) %></td>
+        <td><%= link_to 'Destroy', user_song_preference, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User song preference', new_user_song_preference_path %>
