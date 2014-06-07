@@ -12,7 +12,8 @@
   </div>
   <div class="col-lg-4">
     <%= simple_form_for @song.user_song_preference(current_user), :remote => true do |sp| %>
-        <%= sp.input :prefered_key, :collection => Song.notes %>
+        <%= sp.input :prefered_key, :collection => @song.available_keys, :include_blank => false %>
+        <%= sp.input :prefered_capo, :collection => (0..12).to_a, :include_blank => false %>
     <% end %>
   </div>
 </div>

@@ -12,7 +12,8 @@
       <label class="select optional control-label col-lg-1 col-md-1" for="song_key">Clé</label>
         <%= f.input :key,
                     :as => :select,
-                    :collection => Song.notes,
+                    :include_blank => false,
+                    :collection => @song.available_keys,
                     :label => false,
                     :wrapper_html => {:class => "col-lg-2 col-md-2 col-sm-2 col-xs-2"} %>
         <%= f.input :content, :wrapper_html => {:class => "col-lg-12"}, :input_html => {:rows => 20, :class => "autogrow"}, :label => false, :placeholder => "Paroles" %>

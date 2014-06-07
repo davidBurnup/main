@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140606110255) do
+ActiveRecord::Schema.define(version: 20140607095024) do
 
   create_table "notes", force: true do |t|
     t.integer  "song_id"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20140606110255) do
     t.string   "prefered_key"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "prefered_capo"
   end
 
   create_table "users", force: true do |t|

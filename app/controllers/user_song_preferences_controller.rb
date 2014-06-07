@@ -72,6 +72,6 @@ class UserSongPreferencesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_song_preference_params
-      params.require(:user_song_preference).permit(:prefered_key)
+      params.require(:user_song_preference).permit(:prefered_key, :prefered_capo)
     end
 end

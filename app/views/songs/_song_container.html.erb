@@ -2,9 +2,10 @@
 
 <% if song %>
     <% prefered_key = song.prefered_key(current_user) %>
+    <% prefered_capo = song.prefered_capo(current_user) %>
     <div id="song-notes">
       <% song.notes.each do |note| %>
-          <% note_key = note.transpose_to(prefered_key) %>
+          <% note_key = note.transpose_and_capose(prefered_key,prefered_capo) %>
           <div class="note" data-line="<%= note.line %>" data-offset="<%= note.offset %>">
             <%= note_key %>
           </div>

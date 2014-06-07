@@ -3,31 +3,35 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
-$ ->
-  if $("#song-container").length > 0
+@load_chords = ->
+  setTimeout (->
+    if $("#song-container").length > 0
 
-    line_height = 80
-    offset_width = 5.6
+      console.log('in')
+      line_height = 80
+      offset_width = 5.6
 
-    content_notes = $('#song-container .content-note')
+      content_notes = $('#song-container .content-note')
 
-    note_index = 0
-    $('#song-notes > div.note').each ->
-      offset = $(this).attr('data-offset')
-      line = $(this).attr('data-line')
-      content_note = content_notes[note_index]
+      note_index = 0
+      $('#song-notes > div.note').each ->
+        offset = $(this).attr('data-offset')
+        line = $(this).attr('data-line')
+        content_note = content_notes[note_index]
 
-      real_line = (line_height * (line - 1))
-      real_offset = (offset_width * offset)
+        real_line = (line_height * (line - 1))
+        real_offset = (offset_width * offset)
 
-      if content_note
-        real_offset = $(content_note).position().left
-        real_line = $(content_note).position().top - 20
+        if content_note
+          real_offset = $(content_note).position().left
+          real_line = $(content_note).position().top - 20
 
-      $(this).css('top', real_line + "px")
-      $(this).css('left', real_offset + "px")
-      note_index += 1
-
+        $(this).css('top', real_line + "px")
+        $(this).css('left', real_offset + "px")
+        note_index += 1
+  ), 300
+ready = ->
+  load_chords()
 
 
   if $('form.edit_user_song_preference').length > 0
@@ -35,3 +39,8 @@ $ ->
       $(this).change ->
         console.log('in')
         $('form.edit_user_song_preference').submit()
+
+
+
+$(document).ready(ready)
+$(document).on('page:load', ready)

@@ -7,13 +7,15 @@ class Song < ActiveRecord::Base
   has_many :user_song_preferences
 
 
+  validates :key, :presence => true
+
   def Song.match_note
     match_note = /\[([A-Za-z].*?)\]/
   end
 
   def user_song_preference(user)
     if user
-      any_song_preference = self.user_song_preferences.where(:user => user).first
+      any_song_preference = self.user_song_preferences.where(:user_id => user.id).first
 
       unless any_song_preference
         any_song_preference = UserSongPreference.create({
@@ -35,6 +37,16 @@ class Song < ActiveRecord::Base
     end
 
     prefered_key
+  end
+
+  def prefered_capo(user)
+    prefered_capo = 0
+    usp = user_song_preference(user)
+    if usp and usp.prefered_capo
+      prefered_capo = usp.prefered_capo
+    end
+
+    prefered_capo
   end
 
   def parse_notes
@@ -93,25 +105,19 @@ class Song < ActiveRecord::Base
 
   def self.notes
     [
-        "C",
-        "C#",
-        "Db",
-        "D",
-        "D#",
-        "Eb",
-        "E",
-        "F",
-        "F#",
-        "Gb",
-        "G",
-        "G#",
-        "Ab",
-        "A",
-        "A#",
-        "Bb",
-        "B"
-    #"Cb" # N'existe pas !!
-    ]
+        ["B"],
+        ["A#", "Bb"],
+        ["A"],
+        ["G#", "Ab"],
+        ["G"],
+        ["F#", "Gb"],
+        ["F"],
+        ["E"],
+        ["D#", "Eb"],
+        ["D"],
+        ["C#", "Db"],
+        ["C"]
+    ].reverse
   end
 
   def self.base_notes
@@ -143,6 +149,26 @@ class Song < ActiveRecord::Base
     self.base_notes - ["C", "F"]
   end
 
+  def available_keys
+    first_key = self.key.present? ? self.key : "C"
+    available_keys = [first_key]
+    initial_key_index = Song.chord_index(first_key)
+    key_index = initial_key_index + 1
+
+    while key_index != initial_key_index
+      key_value = Song.chord_value(key_index,first_key, {:reverse => true})
+      available_keys << key_value
+
+      if key_index < (Song.chords.size - 2)
+        key_index += 1
+      else
+        key_index = 0
+      end
+    end
+
+    available_keys
+  end
+
 
   def self.chord_index(chord)
     chord_index = 0
@@ -154,50 +180,105 @@ class Song < ActiveRecord::Base
 
     chord_index
   end
+  def self.reverse_chord_index(chord)
+    chord_index = 0
 
-  def self.chord_value(chord_index, key)
+    self.notes.each_with_index do |c, i|
+      chord_index = i
+      break if c.include? chord
+    end
+
+    chord_index
+  end
+
+  def self.chord_value(chord_index, key, options = {})
     chord_value = ""
     pitch = Song.pitch(key)
 
-    if Song.chords[chord_index]
-      chord_value = Song.chords[chord_index][0]
+    chords = Song.chords
+
+    if options[:reverse].present? and options[:reverse]
+      chords = chords.reverse
+    end
+
+    if chords[chord_index]
+      chord_value = chords[chord_index][0]
       if chord_value.size > 1 && pitch == "flat"
-        chord_value = Song.chords[chord_index][1]
+        chord_value = chords[chord_index][1]
       end
     end
 
     chord_value
   end
 
+  def self.note_offsets(from_note, to_note)
+    offset = 0
+
+    from_note_index = Song.reverse_chord_index(from_note)
+
+    to_note_index = Song.reverse_chord_index(to_note)
+
+    # Direct distance
+    direct_offset = to_note_index - from_note_index
+
+    # Indirect distance
+    top_offset = Song.chords.size - to_note_index
+    bottom_offset = from_note_index
+
+    indirect_offset = top_offset + bottom_offset
+
+    offset = direct_offset
+
+    if indirect_offset < direct_offset
+      #offset = indirect_offset
+    end
+
+    offset
+  end
+
+  def transpose_to(chord, aimed_chord)
+
+    offset = Song.note_offsets(self.key, aimed_chord)
+    transpose(chord, offset)
+
+  end
+
   def capose(chord, offset)
 
     base_chord, extra_chord = Song.clean(chord)
 
-    new_key = Song.transpose(self.key, offset)
 
     final_chord = nil
 
     # Find current chord index
     chord_index = Song.chord_index(base_chord)
+    current_key_index = Song.chord_index(self.key)
 
     if offset == 0
-      return Song.chords[chord_index]
+      return chord
     elsif offset > 0
       chord_index += 1
+      current_key_index += 1
     else
       chord_index -= 1
+      current_key_index -= 1
     end
+
 
     initial_index = chord_index
     full_index = initial_index
 
     while (full_index != (initial_index + offset)) do
+    print chord_index
+    print "\n"
+
+      new_key = Song.chord_value(current_key_index, self.key)
       if final_chord = Song.chord_value(chord_index, new_key) and final_chord.present?
       else
-        if chord_index > (self.chords.size - 1)
-          chord_index -= self.chords.size
+        if chord_index > (Song.chords.size - 1)
+          chord_index -= Song.chords.size
         else
-          chord_index -= self.chords.size
+          chord_index -= Song.chords.size
         end
         final_chord = Song.chord_value(chord_index, new_key)
       end
@@ -205,10 +286,12 @@ class Song < ActiveRecord::Base
       if offset > 0
         chord_index += 1
         full_index += 1
+        current_key_index += 1
 
       else
         chord_index -= 1
         full_index -= 1
+        current_key_index -= 1
       end
     end
 
@@ -255,48 +338,7 @@ class Song < ActiveRecord::Base
     pitch
   end
 
-  def self.transpose(note, offset)
-
-    final_note = nil
-
-    # Find current note index
-    note_index = self.notes.index(note) || 0
-
-
-    if offset == 0
-      return self.notes[note_index]
-    elsif offset > 0
-      note_index += 1
-    else
-      note_index -= 1
-    end
-
-    initial_index = note_index
-    full_index = initial_index
-
-    while (full_index != (initial_index + offset)) do
-      if self.notes[note_index]
-        final_note = self.notes[note_index]
-      else
-        if note_index > (self.notes.size - 1)
-          note_index = note_index - self.notes.size
-        else
-          note_index = note_index + self.notes.size
-        end
-        final_note = self.notes[note_index]
-      end
-
-      if offset > 0
-        note_index += 1
-        full_index += 1
-
-      else
-        note_index -= 1
-        full_index -= 1
-      end
-    end
-
-    final_note
-
+  def transpose(chord, offset)
+    capose(chord, offset * -1)
   end
 end
