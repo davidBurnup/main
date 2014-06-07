@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Worship" %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Worship" %>">
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    <%= stylesheet_link_tag "simplex", :media => "all" %>
-    <%= csrf_meta_tags %>
-  </head>
-  <body>
-    <header>
-      <%= render 'layouts/navigation' %>
-    </header>
-    <main role="main" class="container">
-      <div class="row">
-       <%= render 'layouts/messages' %>
-       <%= yield %>
-      </div>
-    </main>
-  </body>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= content_for?(:title) ? yield(:title) : "Worship" %></title>
+  <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Worship" %>">
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag "simplex", :media => "all" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<header>
+  <%= render 'layouts/navigation' %>
+</header>
+<main role="main" class="container">
+  <div class="row">
+    <div class="col-lg-12" id="headers">
+      <%= yield :headers %>
+      <%= render 'layouts/messages' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-8 col-md-8 col-sm-12" id="left-column">
+      <%= yield :left_column %>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12" id="right-column">
+      <%= yield :right_column %>
+    </div>
+  </div>
+</main>
+</body>
 </html>

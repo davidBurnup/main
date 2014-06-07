@@ -31,14 +31,25 @@
   font-size: 16px;
   position: relative;
   line-height: 25px;
+
   .content-note {
     display: inline-block;
     width:0;
   }
   #song-notes {
     .note {
+
+      @include transition();
       line-height: 20px;
       position: absolute;
+    }
+  }
+
+  &.loading {
+    #song-notes {
+      .note {
+        opacity: 0;
+      }
     }
   }
 }

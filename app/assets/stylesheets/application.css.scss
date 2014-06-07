@@ -15,3 +15,10 @@
  *= require_self
  *= require_tree .
  */
+
+[data-link-to]:hover {
+  cursor: pointer;
+}
+#headers {
+  margin-bottom:20px;
+}

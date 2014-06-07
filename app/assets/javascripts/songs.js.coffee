@@ -7,7 +7,6 @@
   setTimeout (->
     if $("#song-container").length > 0
 
-      console.log('in')
       line_height = 80
       offset_width = 5.6
 
@@ -29,7 +28,9 @@
         $(this).css('top', real_line + "px")
         $(this).css('left', real_offset + "px")
         note_index += 1
-  ), 300
+
+      $('#song-container').removeClass('loading')
+  ), 200
 ready = ->
   load_chords()
 
@@ -37,7 +38,8 @@ ready = ->
   if $('form.edit_user_song_preference').length > 0
     $('form.edit_user_song_preference').find('input, select').each ->
       $(this).change ->
-        console.log('in')
+
+        $('#song-container').addClass('loading')
         $('form.edit_user_song_preference').submit()
 
 

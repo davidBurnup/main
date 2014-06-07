@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140607095024) do
+ActiveRecord::Schema.define(version: 20140607100920) do
 
   create_table "notes", force: true do |t|
     t.integer  "song_id"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20140607095024) do
     t.integer  "transpose_offset"
     t.string   "note"
     t.text     "clean_content"
+    t.string   "author"
   end
 
   create_table "user_song_preferences", force: true do |t|

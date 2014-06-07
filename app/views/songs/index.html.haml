@@ -1,0 +1,24 @@
+= content_for :headers do
+  %h1
+    Chants
+
+= content_for :left_column do
+
+  %table.table.table-striped.table-hover
+    %tr
+      %th
+        Titre
+      %th
+        Clé
+      %th
+        Auteur
+
+    - @songs.each do |song|
+      = link_to song do
+        %tr{'data-link-to' => song_path(song)}
+          %td
+            =song.title
+          %td
+            =song.key
+          %td
+            =song.author

@@ -1,0 +1,14 @@
+= content_for :headers do
+  #song_title
+    = @song.title
+
+= content_for :right_column do
+
+  = simple_form_for @song.user_song_preference(current_user), :remote => true do |sp|
+    = sp.input :prefered_key, :collection => @song.available_keys, :include_blank => false
+    = sp.input :prefered_capo, :collection => (0..12).to_a, :include_blank => false
+
+= content_for :left_column do
+
+  #song-container.loading
+    = render "song_container", :song => @song

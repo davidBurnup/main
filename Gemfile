@@ -16,7 +16,9 @@ gem 'mysql2'
 gem 'pundit'
 gem 'simple_form'
 gem 'autogrow-textarea-rails'
+gem "haml"
 group :development do
+  gem "haml-rails"
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :mri_21, :rbx]
   gem 'hub', :require=>nil

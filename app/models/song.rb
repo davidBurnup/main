@@ -269,8 +269,6 @@ class Song < ActiveRecord::Base
     full_index = initial_index
 
     while (full_index != (initial_index + offset)) do
-    print chord_index
-    print "\n"
 
       new_key = Song.chord_value(current_key_index, self.key)
       if final_chord = Song.chord_value(chord_index, new_key) and final_chord.present?

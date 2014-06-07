@@ -19,6 +19,7 @@ fr:
         key: Clé
         content: Paroles et Accords
       user_song_preference:
-        prefered_key: Ma Clé
+        prefered_key: Clé
+        prefered_capo: Capo
   leave_blank_to_not_modify: Laissez ces champs vides si vous ne voulez pas changer votre mot de passe
   fill_in_current_password_to_modify_anything: Vous devez entrer votre mot de passe actuel pour modifier votre profil
