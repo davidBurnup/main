@@ -1,0 +1,8 @@
+%ul.nav.nav-pills.nav-stacked.side-menu.col-lg-3.col-md-3.col-sm-3
+  %li{:class => current_page?(edit_user_registration_path) ? "active" : ""}
+    = link_to edit_user_registration_path, :class => "" do
+      Profil
+  %li{:class => ((request.path==update_current_password_path)) ? "active" : ""}
+    = link_to edit_password_path, :class => "" do
+      Mot de passe
+

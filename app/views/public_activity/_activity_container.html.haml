@@ -1,0 +1,17 @@
+- image_url ||= nil
+- image_link ||= "#"
+- media_link ||= ""
+- image_alt ||= ""
+- title ||= ""
+- content ||= ""
+
+%li.media
+  - if image_url
+    = link_to image_link, :class => "pull-left" do
+      = image_tag image_url, alt: image_alt, class: "img-circle"
+
+  .media-body
+    = link_to media_link do
+      %h4.media-heading
+        = title
+      = content

@@ -6,11 +6,19 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to 'WorshipLab!', root_path, class: 'navbar-brand' %>
+      <%= link_to raw(image_tag('/assets/logo_mini4.svg')), root_path, class: 'navbar-brand' %>
     </div>
     <div class="navbar-collapse collapse navbar-inverse-collapse">
-      <ul class="nav navbar-nav">
-      <%= render 'layouts/navigation_links' %>
+      <% if @enable_search.present? %>
+          <%= form_for :search, :html => {:class => "navbar-form navbar-left"}, :url => @enable_search[:path] do |f| %>
+              <div class="form-group">
+                <%= text_field_tag :search_term, @any_search_term || "", :class => "form-control", :placeholder => "Recherche ..." %>
+              </div>
+          <% end %>
+      <% end %>
+      <ul class="nav navbar-nav navbar-right">
+        <%= render 'layouts/navigation_links' %>
+        <%= render 'layouts/navigation_links_right' %>
       </ul>
     </div>
   </div>

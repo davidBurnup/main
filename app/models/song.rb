@@ -1,16 +1,29 @@
 class Song < ActiveRecord::Base
 
-  after_save :parse_notes
+  include PublicActivity::Model
+  tracked owner: Proc.new{ |controller, model| controller.current_user }
 
+
+  after_save :parse_notes
+  before_save :set_creator
 
   has_many :notes
   has_many :user_song_preferences
+  belongs_to :origin_church, :class_name => "Church", :foreign_key => "origin_church_id"
+  belongs_to :creator, :class_name => "User", :foreign_key => "created_by"
 
 
-  validates :key, :presence => true
+  validates :key, :title, :content, :presence => true
 
   def Song.match_note
     match_note = /\[([A-Za-z].*?)\]/
+  end
+
+  def set_creator
+    self.creator ||= User.current
+    if u = User.current and u.church.present?
+      self.origin_church ||= u.church
+    end
   end
 
   def user_song_preference(user)
@@ -91,13 +104,22 @@ class Song < ActiveRecord::Base
       end
 
       @disable_callback = true
+      Song.public_activity_off
       self.update_attribute('clean_content', self.content.gsub(Song.match_note,''))
+      Song.public_activity_on
       @disable_callback = false
     end
   end
 
   def clean_html_content
-    html_content = content.gsub("\n","<br/><br/>")
+    html_content = content
+    #html_content = html_content.gsub(/^(\s)*\n/,'')
+    html_content = html_content.gsub(" ","&nbsp;")
+    html_content = html_content.gsub(/(Couplet&nbsp;[1-9]:)/,'<span class="song-section-title">\1</span>')
+    html_content = html_content.gsub(/(Refrain:)/,'<span class="song-section-title">\1</span>')
+    html_content = html_content.gsub(/(Choeur:)/,'<span class="song-section-title">\1</span>')
+    #html_content = html_content.gsub(/^(\s)*\n/,'<span class="section-padder">&nbsp;</span><br/>')
+    html_content = html_content.gsub("\n","<br/><br/>")
 
     html_content = html_content.gsub(Song.match_note,'<span class="content-note" data-note="\1">&nbsp;</span>')
     html_content
@@ -152,14 +174,14 @@ class Song < ActiveRecord::Base
   def available_keys
     first_key = self.key.present? ? self.key : "C"
     available_keys = [first_key]
-    initial_key_index = Song.chord_index(first_key)
+    initial_key_index = Song.reverse_chord_index(first_key)
     key_index = initial_key_index + 1
 
     while key_index != initial_key_index
       key_value = Song.chord_value(key_index,first_key, {:reverse => true})
       available_keys << key_value
 
-      if key_index < (Song.chords.size - 2)
+      if key_index < (Song.chords.size - 1)
         key_index += 1
       else
         key_index = 0
@@ -198,7 +220,7 @@ class Song < ActiveRecord::Base
     chords = Song.chords
 
     if options[:reverse].present? and options[:reverse]
-      chords = chords.reverse
+      chords = notes
     end
 
     if chords[chord_index]
@@ -338,5 +360,12 @@ class Song < ActiveRecord::Base
 
   def transpose(chord, offset)
     capose(chord, offset * -1)
+  end
+
+
+  # RIGHTS
+
+  def can_be_updated_by?(user)
+
   end
 end

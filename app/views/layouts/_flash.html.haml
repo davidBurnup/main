@@ -1,0 +1,6 @@
+- msg ||= nil
+- key ||= nil
+- if msg and key
+  %div{:class => "alert #{((key == "alert" or key == "error") ? "alert-danger" : ((key == "success") ? "alert-success" : "alert-warning"))}"}
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
+    = msg

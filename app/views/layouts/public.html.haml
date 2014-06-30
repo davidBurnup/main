@@ -1,0 +1,32 @@
+!!!
+%html
+  %head
+    %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}/
+    %title= content_for?(:title) ? yield(:title) : "BURN UP"
+    %meta{content: content_for?(:description) ? yield(:description) : "Worship", name: "description"}/
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = stylesheet_link_tag "simplex", :media => "all"
+    = stylesheet_link_tag 'application-print', media: 'print'
+    = csrf_meta_tags
+  %body.public
+    %header= render 'layouts/navigation'
+    %main.container{role: "main"}
+      - if content_for? :headers
+        .row
+          #headers.col-lg-12
+            = yield :headers
+            = render 'layouts/messages'
+      .row
+
+        #public-left-pane.col-lg-8.col-md-8.hidden-sm.hidden-xs.text-center
+
+
+        #public-right-pane.col-lg-4.col-md-4.col-sm-12.col-sm-offset-0.col-xs-10.col-xs-offset-1
+          - if flash.present?
+            - flash.each do |key, msg|
+              = render "/layouts/flash", :msg => msg, :key => key
+          = yield
+
+    %footer
+      ©2014 - BURN UP

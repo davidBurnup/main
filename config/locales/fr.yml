@@ -1,4 +1,7 @@
 fr:
+  errors:
+    messages:
+      not_saved: "Erreur lors de la sauvegarde"
   activerecord:
     models:
       user:
@@ -7,10 +10,37 @@ fr:
       song:
         one: "Chanson"
         other: "Chansons"
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: "est obligatoire"
+            password:
+              blank: "est obligatoire"
+            email:
+              blank: "est obligatoire"
+              taken: "déjà pris !"
+            password_confirmation:
+              confirmation: "incorrect"
+            current_password:
+              blank: "incorrect"
+              invalid: "incorrect"
+        song:
+          attributes:
+            title:
+              blank: Titre obligatoire
+            content:
+              blank: Paroles obligatoires
     attributes:
       user:
-        name: Nom
-        email: Adresse email
+        avatar: Photo
+        first_name: Prénom
+        last_name: Nom
+        church: Église
+        name: Nom d'utilisateur
+        email: Email
+        remember_me: Se souvenir de moi
         password: Mot de passe
         password_confirmation: Mot de passe de confirmation
         current_password: Mot de passe actuel
@@ -21,5 +51,12 @@ fr:
       user_song_preference:
         prefered_key: Clé
         prefered_capo: Capo
+  church_roles:
+    member: Membre
+    moderator: Modérateur
+  user_roles:
+    admin: Administrateur
+    user: Utilisateur
+    worship_leader: Directeur de louange
   leave_blank_to_not_modify: Laissez ces champs vides si vous ne voulez pas changer votre mot de passe
-  fill_in_current_password_to_modify_anything: Vous devez entrer votre mot de passe actuel pour modifier votre profil
+  fill_in_current_password_to_modify_anything: Vous devez entrer votre mot de passe actuel pour modifier votre mot de passe

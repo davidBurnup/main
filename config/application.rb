@@ -14,6 +14,16 @@ module Worship
       
     end
 
+    config.to_prepare do
+
+      Devise::SessionsController.layout "public"
+      Devise::RegistrationsController.layout "public"
+      Devise::ConfirmationsController.layout "public"
+      Devise::UnlocksController.layout "public"
+      Devise::PasswordsController.layout "public"
+
+    end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

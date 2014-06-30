@@ -1,0 +1,70 @@
+// Place all the styles related to the songs controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "helpers";
+
+#song_title {
+  @include box-shadow-erase();
+  background: transparent;
+  border: 0px solid transparent;
+
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1.1;
+  font-size: 60px;
+  height: 75px;
+  overflow: hidden;
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 15px;
+}
+
+#song-key-padder {
+  padding-top: 20px;
+}
+
+#song_content {
+}
+
+#song-form {
+  margin-top: -10px;
+}
+#song-container {
+  padding-top: 20px;
+  font-size: 16px;
+  position: relative;
+  line-height: 25px;
+
+  .section-padder {
+    display: block;
+    height: 35px;
+    margin-bottom:-30px;
+    border-bottom:1px dashed $main_color;
+    width:100%;
+  }
+  .song-section-title {
+    font-weight: bold;
+  }
+  .content-note {
+    display: inline-block;
+    width:0;
+  }
+  #song-notes {
+    .note {
+
+      @include transition();
+      line-height: 20px;
+      position: absolute;
+    }
+  }
+
+  &.loading {
+    #song-notes {
+      .note {
+        opacity: 0;
+      }
+    }
+  }
+}

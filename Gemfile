@@ -16,7 +16,11 @@ gem 'mysql2'
 gem 'pundit'
 gem 'simple_form'
 gem 'autogrow-textarea-rails'
+gem 'paperclip', github: 'thoughtbot/paperclip'
+gem 'public_activity'
 gem "haml"
+gem "socialization"
+
 group :development do
   gem "haml-rails"
   gem 'better_errors'

@@ -1,38 +1,55 @@
 class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized
 
   # GET /songs
   # GET /songs.json
   def index
+
+    @enable_search = {
+        :search_domain => [:songs],
+        :path => songs_search_path
+    }
+    @any_search_term = ""
     @songs = Song.all
+    if params[:search_term].present?
+      @any_search_term = params[:search_term]
+      search_query = "%#{@any_search_term}%"
+      @songs = @songs.where('songs.title LIKE ? OR MATCH(clean_content) AGAINST (?)', search_query, search_query )
+    end
+
+    authorize @songs
   end
 
   # GET /songs/1
   # GET /songs/1.json
   def show
-
+    authorize @song
   end
 
   # GET /songs/new
   def new
     @song = Song.new
+    authorize @song
+    render :edit
   end
 
   # GET /songs/1/edit
   def edit
+    authorize @song
   end
 
   # POST /songs
   # POST /songs.json
   def create
     @song = Song.new(song_params)
-
+    authorize @song
     respond_to do |format|
       if @song.save
-        format.html { redirect_to @song, notice: 'Song was successfully created.' }
+        format.html { redirect_to @song, notice: 'Le chant a bien été enregistré.' }
         format.json { render :show, status: :created, location: @song }
       else
-        format.html { render :new }
+        format.html { render :edit }
         format.json { render json: @song.errors, status: :unprocessable_entity }
       end
     end
@@ -41,9 +58,10 @@ class SongsController < ApplicationController
   # PATCH/PUT /songs/1
   # PATCH/PUT /songs/1.json
   def update
+    authorize @song
     respond_to do |format|
       if @song.update(song_params)
-        format.html { redirect_to @song, notice: 'Song was successfully updated.' }
+        format.html { redirect_to @song, notice: 'Le chant a bien été enregistré.' }
         format.json { render :show, status: :ok, location: @song }
       else
         format.html { render :edit }
@@ -55,6 +73,7 @@ class SongsController < ApplicationController
   # DELETE /songs/1
   # DELETE /songs/1.json
   def destroy
+    authorize @song
     @song.destroy
     respond_to do |format|
       format.html { redirect_to songs_url }
@@ -70,6 +89,6 @@ class SongsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def song_params
-      params.require(:song).permit(:title, :content, :key)
+      params.require(:song).permit(:title, :content, :key, :author)
     end
 end

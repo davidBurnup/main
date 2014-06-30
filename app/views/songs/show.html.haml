@@ -1,13 +1,36 @@
+- usp = @song.user_song_preference(current_user)
 = content_for :headers do
-  #song_title
-    = @song.title
+  .row
+    .col-lg-8.col-md-8.col-sm-8
+      #song_title
+        = @song.title
+      %blockquote.song-info
+        - if @song.author.present?
+          .song-author
+            = @song.author
+        = "Clé : #{usp.prefered_key}"
+        - if usp.prefered_capo.present?
+          = " / Capo : #{usp.prefered_capo}"
+    #top-buttons.col-lg-4.col-md-4.col-sm-4.text-right
+      - if policy(@song).edit?
+        = link_to edit_song_path(@song), :class => "btn btn-primary btn-sm", :id => "edit_song" do
+          %i.glyphicon.glyphicon-edit
+          Modifier
+      = link_to "#", :class => "btn btn-primary btn-sm link_to_print", :id => "print_song" do
+        %i.glyphicon.glyphicon-file
+        Fichier PDF
 
 = content_for :right_column do
 
-  = simple_form_for @song.user_song_preference(current_user), :remote => true do |sp|
-    = sp.input :prefered_key, :collection => @song.available_keys, :include_blank => false
-    = sp.input :prefered_capo, :collection => (0..12).to_a, :include_blank => false
+  = simple_form_for usp, :remote => true do |sp|
+    = sp.input :prefered_key, :collection => @song.available_keys, :include_blank => false, :hint => "Clé initiale : #{@song.key}", :wrapper_html => {:class => "col-lg-6 col-md-6"}
+    = sp.input :prefered_capo, :collection => (0..12).to_a, :include_blank => false, :wrapper_html => { :class => "col-lg-6 col-md-6" }
 
+  .song-info-wrapper.clear
+    %blockquote.song-info
+      - if @song.author.present?
+        .song-author
+          = @song.author
 = content_for :left_column do
 
   #song-container.loading

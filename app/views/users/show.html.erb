@@ -1,2 +1,8 @@
-<h3>User</h3>
-<p>Email: <%= @user.email if @user.email %></p>
+<%= content_for :headers do %>
+    <h1>User</h1>
+
+<% end %>
+<%= content_for :left_column do %>
+
+    <p>Email: <%= @user.email if @user.email %></p>
+<% end %>

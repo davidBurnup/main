@@ -10,15 +10,108 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require framework_and_overrides
- *= require bootswatch_simplex
+ *= require ./all/framework_and_overrides
+ *= require ./all/bootswatch_simplex
  *= require_self
- *= require_tree .
+ *= require_directory ./all
  */
+
+@import "all/helpers";
 
 [data-link-to]:hover {
   cursor: pointer;
 }
+.navbar-brand {
+  img {
+    margin-top: -5px;
+  }
+}
 #headers {
   margin-bottom:20px;
+  .song-info {
+    display: none;
+  }
+}
+.clear{
+  clear:both;
+}
+body.public {
+  background:url('/assets/IMG_0201.jpg') no-repeat center transparent;
+  background-size:cover;
+  background-attachment: fixed;
+}
+#public-right-pane {
+  padding:10px 20px 20px 20px;
+  background:rgba(255,255,255,0.8);
+  @include rounded-corners(5px);
+}
+#public-left-pane {
+  h1,h2{
+    color:white;
+    text-transform: uppercase;
+    font-size:25px;
+    @include text-shadow(0,0,6px,$main_color);
+  }
+}
+footer {
+  background:rgba(255,255,255,0.2);
+  color:white;
+  @include text-shadow-dark(0,0,3px,1);
+  text-align: center;
+  margin:10px 0 0 0;
+  //border-top: 1px dashed $main_color;
+  padding:10px 0;
+}
+.navbar-inverse .navbar-nav > li {
+  border-bottom:4px solid transparent;
+  margin-bottom: -1px;
+  &.active,&:hover {
+    border-bottom:4px solid white;
+  }
+  &.active {
+    > a {
+      color:white;
+    }
+  }
+}
+#search_term {
+  padding: 5px;
+  height: 32px;
+  margin-top: 5px;
+  width: 240px;
+}
+.well {
+  background:white;
+  border: 1px solid $main-color;
+}
+#profile-form{
+  h1 {
+    font-size:19px;
+    margin-bottom: 40px;
+    margin-top:0px;
+  }
+  .profile-label {
+    text-align: right;
+    margin-top:10px;
+    label {
+      font-family: "Helvetica Neue";
+      color: rgb(64, 64, 64);
+      font-weight: normal;
+    }
+  }
+  #avatar-file-input{
+    margin-top:10px;
+  }
+  form > .form-group{
+    clear:both;
+    &.avatar {
+      min-height: 70px;
+    }
+    .alert {
+      padding: 7px;
+      font-size: 12px;
+      margin: 7px 0;
+    }
+    min-height: 35px;
+  }
 }

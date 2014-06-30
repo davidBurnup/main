@@ -2,11 +2,24 @@
   <%= link_to user.email, user %>
 </td>
 <td>
-  <%= form_for(user) do |f| %>
-    <%= f.select(:role, User.roles.keys.map {|role| [role,role]}) %>
-    <%= f.submit 'Changer le role', :class => 'btn btn-primary btn-xs' %>
+  <%= simple_form_for(user) do |f| %>
+      <%= f.input :role, :as => :select, :label => false, :hint => "Role pour l'application", :collection =>  User.roles.keys.map { |role| [I18n.t("user_roles.#{role}"), role] } %>
+      <%= f.submit 'Changer le role', :class => 'btn btn-primary btn-xs' %>
   <% end %>
 </td>
 <td>
-  <%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-xs btn-danger') unless user == current_user %>
+  <% if user.church.present? %>
+      <%= simple_form_for(user) do |f| %>
+          <%= f.simple_fields_for :church_role do |c| %>
+              <%= c.input :id, as: :hidden %>
+              <%= c.input :user_id, as: :hidden %>
+              <%= c.input :church_id, as: :hidden %>
+              <%= c.input :role, as: :select, :label => false, :hint => "Role pour l'église #{user and user.church ? user.church.name : ""}", :collection => ChurchRole.roles.keys.map { |role| [I18n.t("church_roles.#{role}"), role] } %>
+          <% end %>
+          <%= f.submit 'Changer le role', :class => 'btn btn-primary btn-xs' %>
+      <% end %>
+  <% end %>
+</td>
+<td>
+  <%= link_to("Delete user", user_path(user), :data => {:confirm => "Are you sure?"}, :method => :delete, :class => 'btn btn-xs btn-danger') unless user == current_user %>
 </td>

@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
+//= require bootstrap-filestyle.min
 //= require "jquery.autogrowtextarea"
 //= require main
 //= require songs
@@ -21,21 +22,5 @@
 
 jQuery(function(){
 
-    onResize();
-    jQuery(window).resize(function(){
-        onResize();
-    })
-
-    function onResize(){
-
-
-        var container = $('main');
-        if($(container).length > 0){
-            var window_height = $(window).outerHeight();
-            if($(container).outerHeight() < window_height){
-                $(container).height(window_height - 81);
-            }
-        }
-    }
 })
 
