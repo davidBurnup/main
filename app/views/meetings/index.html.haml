@@ -1,0 +1,19 @@
+%h1 Réunions
+
+%table
+  %tr
+    %th
+    %th
+    %th
+    %th
+
+  - @meetings.each do |meeting|
+    %tr
+      %td= meeting.label
+      %td= link_to 'Show', meeting
+      %td= link_to 'Edit', edit_meeting_path(meeting), :remote => true
+      %td= link_to 'Destroy', meeting, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Meeting', new_meeting_path, :remote => true

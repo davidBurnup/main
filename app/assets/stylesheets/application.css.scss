@@ -12,11 +12,13 @@
  *
  *= require ./all/framework_and_overrides
  *= require ./all/bootswatch_simplex
+ *= require bootstrap-datetimepicker
  *= require_self
  *= require_directory ./all
  */
 
 @import "all/helpers";
+
 
 [data-link-to]:hover {
   cursor: pointer;
@@ -35,10 +37,49 @@
 .clear{
   clear:both;
 }
+.btn[class*="btn-"] {
+  .glyphicon {
+    color:rgba(255,255,255,0.6);
+    @include transition(0.5s);
+  }
+  &:hover, &:focus {
+    .glyphicon {
+      color:rgba(255,255,255,1);
+    }
+  }
+}
+.btn {
+  .glyphicon {
+    color: rgba(212,39,0,0.6);
+    @include transition(0.5s);
+  }
+  &:hover, &:focus {
+    .glyphicon {
+      color:rgba(212,39,0,1);
+    }
+  }
+}
+.timepicker-picker {
+  tr {
+    td {
+      text-align: center;
+      span[data-action]{
+        text-align: center;
+        width: 100%;
+      }
+    }
+  }
+}
 body.public {
   background:url('/assets/IMG_0201.jpg') no-repeat center transparent;
   background-size:cover;
   background-attachment: fixed;
+
+  footer {
+    color:white;
+    @include text-shadow-dark(0,0,3px,1);
+    border-top:1px solid transparent;
+  }
 }
 #public-right-pane {
   padding:10px 20px 20px 20px;
@@ -54,14 +95,16 @@ body.public {
   }
 }
 footer {
+  border-top:1px dashed $main_color;
   background:rgba(255,255,255,0.2);
-  color:white;
-  @include text-shadow-dark(0,0,3px,1);
+  color:$main_color;
+  @include text-shadow-dark(0,0,3px,0.3);
   text-align: center;
   margin:10px 0 0 0;
   //border-top: 1px dashed $main_color;
   padding:10px 0;
 }
+
 .navbar-inverse .navbar-nav > li {
   border-bottom:4px solid transparent;
   margin-bottom: -1px;
@@ -83,6 +126,49 @@ footer {
 .well {
   background:white;
   border: 1px solid $main-color;
+}
+.red {
+  color:$main_color;
+}
+.instrument_fields {
+  textarea {
+    height: 38px;
+  }
+}
+
+.nested_form {
+  .nested_fields_wrapper {
+    .nested_model_fields:first-child, .nested-fields:first-child {
+      .close-btn {
+        display: none;
+      }
+    }
+
+  }
+  .nested_model_fields {
+
+
+    padding-top:10px;
+    min-height: 60px;
+
+    .fields-wrapper, .fields-wrapper-not-dashed {
+      padding: 15px 0px 0 0;
+      margin: -10px 10px 10px 10px;
+    }
+    &:not(:first-child){
+      .fields-wrapper {
+        border-top:1px dashed #999;
+      }
+    }
+
+    .links {
+      margin-bottom:30px;
+      text-align:center;
+      .btn {
+        width: 100%;
+      }
+    }
+  }
 }
 #profile-form{
   h1 {
@@ -114,4 +200,8 @@ footer {
     }
     min-height: 35px;
   }
+}
+
+.datepicker.dropdown-menu {
+  z-index: 10000 !important;
 }

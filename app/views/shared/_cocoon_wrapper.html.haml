@@ -1,0 +1,26 @@
+- with_submit ||= false
+- nested_resource_name ||= nil
+- f ||= nil
+- form_instance ||= nil
+- disable_auto_load_first_element ||= false
+
+- if f and nested_resource_name
+  - nested_resources_name = nested_resource_name.pluralize
+  .col-lg-12.nested_model_fields.nested_fields_wrapper{:class => nested_resource_name}
+    - index = 0
+    = f.simple_fields_for nested_resources_name.to_sym do |nested_resource|
+      = render "#{nested_resource_name}_fields", :f => nested_resource, :index => index
+      - index += 1
+    .links.col-lg-12
+      = link_to_add_association f, nested_resources_name.to_sym, :class => "btn btn-info btn-sm", :id => "add_#{nested_resource_name}" do
+        %i.glyphicon.glyphicon-plus
+    - if with_submit
+      = f.submit 'Modifier', :class => 'btn btn-primary pull-right'
+
+
+
+  - unless disable_auto_load_first_element or !form_instance or (form_instance and nested_resources = form_instance.send(nested_resources_name) and nested_resources.size > 0)
+    :coffee
+      @view_ready = ->
+        $('#add_#{nested_resource_name}').trigger('click')
+      auto_load(view_ready)

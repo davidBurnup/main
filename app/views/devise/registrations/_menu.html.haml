@@ -2,7 +2,10 @@
   %li{:class => current_page?(edit_user_registration_path) ? "active" : ""}
     = link_to edit_user_registration_path, :class => "" do
       Profil
-  %li{:class => ((request.path==update_current_password_path)) ? "active" : ""}
+  %li{:class => ((request.path == update_current_password_path)) ? "active" : ""}
     = link_to edit_password_path, :class => "" do
       Mot de passe
+  %li{:class => ((request.path == instruments_path)) ? "active" : ""}
+    = link_to instruments_path, :class => "" do
+      Instruments
 

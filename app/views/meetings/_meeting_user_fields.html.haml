@@ -1,0 +1,37 @@
+- f ||= nil
+- index ||= nil # Defines an incremental index of iterations
+
+- if f
+  - meeting_user_select_id = "meeting_user_select"
+  - meeting_user_instrument_select_id = "meeting_user_instrument_select"
+  - inputs = []
+  - inputs << f.input(:user_id, :as => :select, :collection => @users.map{|u| [u.name, u.id]}, :include_blank => false, :input_html => { :class => meeting_user_select_id}, :label => false  )
+  - inputs << (f.input :instrument, :as => :select, :include_blank => false, :label => false, :collection => ((u = f.object.user and u.instruments) || @instruments).map{|instrument| [I18n.t("instruments.#{instrument}"), instrument]}, :input_html => {:class => meeting_user_instrument_select_id})
+
+  - extra_class = ""
+  - extra_html = ""
+  - if index == 0
+    - inputs << f.input(:is_leader, :as => :hidden, :value => true)
+    - extra_class = "is_leader"
+    - extra_html = "<h5>Leader</h5>"
+
+  = render("shared/cocoon_fields_wrapper", f: f, :nested_fields => inputs, :extra_class => extra_class, extra_html: extra_html)
+
+  :coffee
+    view_ready = ->
+      $('.#{meeting_user_select_id}').change ->
+        selected_user_id = $(this).val()
+        this_select = this
+        $.getJSON "/utilisateurs/" + selected_user_id + "/instruments.json", ((instruments) ->
+          user_instrument_select = $(this_select).closest('.nested_model_fields').first().find('.#{meeting_user_instrument_select_id}')
+          if user_instrument_select.length > 0
+            $(user_instrument_select).html('')
+            $.each(instruments, ->
+              if(this.length > 0)
+                label = this[0]
+                key = this[1]
+                $(user_instrument_select).append("<option value='"+key+"'>" + label + "</option>")
+            )
+        )
+      #$('.#{meeting_user_select_id}').trigger('change')
+    auto_load(view_ready)

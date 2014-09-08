@@ -1,0 +1,41 @@
+<% css_id ||= nil %>
+<% css_class ||= nil %>
+<% title ||= nil %>
+<% content ||= nil %>
+<% footer ||= nil %>
+
+
+<div id="<%=css_id%>" class="modal fade <%=css_class%>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4><%= title %></h4>
+      </div>
+      <div class="modal-body">
+        <%= content %>
+      </div>
+      <% if footer %>
+          <div class="modal-footer">
+            <%= footer %>
+          </div>
+      <% end %>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div id="<%=css_id%>" class="<%=css_class%>modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3><%= title %></h3>
+  </div>
+  <div class="modal-body">
+    <%= content %>
+  </div>
+  <% if footer %>
+      <div class="modal-footer">
+        <%= footer %>
+      </div>
+  <% end %>
+</div>

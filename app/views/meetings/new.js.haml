@@ -1,0 +1,10 @@
+- content = render "form", :remote => true
+
+= render("shared/modal_append",
+    :modal_id => "new_meeting",
+    :title => "Nouvelle réunion",
+    :content => content)
+
+setTimeout(function(){
+auto_load(global_ready);
+},100)

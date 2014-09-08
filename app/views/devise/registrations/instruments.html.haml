@@ -1,0 +1,25 @@
+.row
+  = render "devise/registrations/menu"
+
+  .col-lg-6.col-md-6.col-sm-6.col-xs-12.well
+    .row#profile-form
+      %h1.col-lg-12
+        Modifier vos instruments
+      .clear.nested_form
+        = simple_form_for(resource, :as => resource_name, :url => update_instruments_path,  :multipart => true , :html => {:method => :put, :role => 'form'}) do |f|
+          .col-lg-12
+            = devise_error_messages!
+          = render "shared/cocoon_wrapper", {with_submit: true, nested_resource_name: "instrument_preference", f: f, form_instance: current_user}
+          -#.col-lg-12.instruments.nested_model_fields
+          -#  = f.simple_fields_for :instrument_preferences do |instrument_preference|
+          -#    = render 'instrument_preference_fields', :f => instrument_preference
+          -#  .links.col-lg-12
+          -#    = link_to_add_association f, :instrument_preferences, :class => "btn btn-info btn-sm pull-left", :id => "add_instrument" do
+          -#      %i.glyphicon.glyphicon-plus
+          -#    = f.submit 'Modifier', :class => 'btn btn-primary pull-right'
+
+- unless ip = current_user.instrument_preferences and ip.size > 0
+  :coffee
+    @view_ready = ->
+      $('#add_instrument').trigger('click')
+    auto_load(view_ready)

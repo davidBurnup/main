@@ -91,3 +91,16 @@ section {
 //  @extend .btn-primary;
 //  @extend .btn-xs;
 //}
+
+.bootstrap-datetimepicker-widget a[data-action] {
+  padding:0 !important;
+  &:active {
+    margin:-3px;
+  }
+  .glyphicon {
+    margin: 0;
+    &:hover {
+      background: rgba(238,238,238,0.5);
+    }
+  }
+}

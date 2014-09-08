@@ -13,9 +13,10 @@
       %th
         Auteur
       %th.text-right
-        = link_to new_song_path, :class => "btn btn-primary btn-sm" do
-          %i.glyphicon.glyphicon-plus
-          Ajouter
+        - if policy(@song).new?
+          = link_to new_song_path, :class => "btn btn-primary btn-sm" do
+            %i.glyphicon.glyphicon-plus
+            Ajouter
 
     - @songs.each do |song|
       = link_to song do
@@ -28,6 +29,5 @@
             =song.author
           %td
             - if policy(song).destroy?
-              = link_to song, method: :delete, :data => {:confirm => "Voulez-vous supprimer ce chant ?"}, :class => "btn btn-danger btn-sm" do
-                %i.glyphicon-remove.glyphicon
-                Supprimer
+              = link_to song, method: :delete, :data => {:confirm => "Voulez-vous supprimer ce chant ?"}, :class => "red pull-right" do
+                %i.glyphicon-trash.glyphicon

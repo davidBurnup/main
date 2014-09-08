@@ -16,6 +16,12 @@
 //= require bootstrap
 //= require bootstrap-filestyle.min
 //= require "jquery.autogrowtextarea"
+//= require cocoon
+//= require moment
+//= require bootstrap-datetimepicker
+//= require moment/fr
+//= require locales/bootstrap-datetimepicker.fr.js
+
 //= require main
 //= require songs
 

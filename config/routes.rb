@@ -18,6 +18,12 @@ Worship::Application.routes.draw do
   devise_scope :user do
     get 'utilisateurs/inscription/mot-de-passe' => "registrations#password", :as => "edit_password"
     put 'utilisateurs/inscription/mot-de-passe' => "registrations#update_password", :as => "update_current_password"
+
+    get 'utilisateurs/inscription/parametres-generaux' => "registrations#instruments", :as => "instruments"
+    put 'utilisateurs/inscription/parametres-generaux' => "registrations#update_instruments", :as => "update_instruments"
+
   end
-  resources :users
+  resources :users, :path => "utilisateurs"
+  get "utilisateurs/:id/instruments(/:target)" => "users#instruments"
+  resources :meetings
 end

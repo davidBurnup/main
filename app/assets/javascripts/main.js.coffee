@@ -1,4 +1,7 @@
-ready = ->
+@global_ready = ->
+  $('[data-behaviour~=datepicker]').datetimepicker({
+    language: "fr",
+  })
   $("#user_avatar").filestyle({
     size: "sm",
     input: false,
@@ -57,4 +60,4 @@ ready = ->
   $(document).ready(ready_var)
   $(document).on('page:load', ready_var)
 
-auto_load(ready)
+auto_load(global_ready)

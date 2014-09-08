@@ -15,11 +15,11 @@ class SongPolicy
   end
 
   def new?
-    true
+    church_atomic_authorization
   end
 
   def create?
-    true
+    church_atomic_authorization
   end
 
   def edit?

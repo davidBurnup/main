@@ -20,6 +20,9 @@ gem 'paperclip', github: 'thoughtbot/paperclip'
 gem 'public_activity'
 gem "haml"
 gem "socialization"
+gem 'cocoon'
+gem 'momentjs-rails', '~> 2.5.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 3.0.0.1'
 
 group :development do
   gem "haml-rails"

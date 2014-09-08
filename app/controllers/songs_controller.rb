@@ -12,6 +12,7 @@ class SongsController < ApplicationController
     }
     @any_search_term = ""
     @songs = Song.all
+    @song = @songs.first
     if params[:search_term].present?
       @any_search_term = params[:search_term]
       search_query = "%#{@any_search_term}%"
@@ -30,8 +31,8 @@ class SongsController < ApplicationController
   # GET /songs/new
   def new
     @song = Song.new
-    authorize @song
-    render :edit
+    is_authorized = authorize @song
+    render :edit if is_authorized
   end
 
   # GET /songs/1/edit

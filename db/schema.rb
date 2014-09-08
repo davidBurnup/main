@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140630103526) do
+ActiveRecord::Schema.define(version: 20140703105746) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -55,6 +55,14 @@ ActiveRecord::Schema.define(version: 20140630103526) do
   add_index "follows", ["followable_id", "followable_type"], name: "fk_followables", using: :btree
   add_index "follows", ["follower_id", "follower_type"], name: "fk_follows", using: :btree
 
+  create_table "instrument_preferences", force: true do |t|
+    t.integer  "instrument"
+    t.integer  "user_id"
+    t.text     "detail"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "likes", force: true do |t|
     t.string   "liker_type"
     t.integer  "liker_id"
@@ -65,6 +73,26 @@ ActiveRecord::Schema.define(version: 20140630103526) do
 
   add_index "likes", ["likeable_id", "likeable_type"], name: "fk_likeables", using: :btree
   add_index "likes", ["liker_id", "liker_type"], name: "fk_likes", using: :btree
+
+  create_table "meeting_users", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "meeting_id"
+    t.integer  "instrument"
+    t.boolean  "accepted"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_leader"
+    t.boolean  "is_co_leader"
+  end
+
+  create_table "meetings", force: true do |t|
+    t.string   "label"
+    t.datetime "start_at"
+    t.integer  "duration"
+    t.integer  "created_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "mentions", force: true do |t|
     t.string   "mentioner_type"
@@ -84,6 +112,24 @@ ActiveRecord::Schema.define(version: 20140630103526) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "note"
+  end
+
+  create_table "practice_users", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "practice_id"
+    t.boolean  "accepted"
+    t.boolean  "notified"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "practices", force: true do |t|
+    t.integer  "meeting_id"
+    t.datetime "start_at"
+    t.integer  "duration"
+    t.integer  "reminder"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "songs", force: true do |t|

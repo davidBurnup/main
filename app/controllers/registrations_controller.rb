@@ -5,7 +5,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def update_sanitized_params
     devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:name, :email, :password, :password_confirmation)}
-    devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:name, :email, :church_id, :password, :password_confirmation, :current_password, :avatar)}
+    devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:first_name, :last_name, :name, :email, :church_id, :password, :password_confirmation, :current_password, :avatar)}
   end
 
   def after_inactive_sign_up_path_for(resource)
@@ -52,11 +52,29 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def instruments
+    @user = User.find(current_user.id)
+  end
+
+  def update_instruments
+    @user = User.find(current_user.id)
+    respond_to do |f|
+      f.html {
+        if @user.update(instruments_params)
+          flash[:success] = "Votre mot de passe a bien été modifié."
+        else
+          #flash[:error] = "Une erreur s'est produite."
+        end
+        render :global_settings
+      }
+    end
+  end
+
   private
 
   def resolve_layout
     case action_name
-      when "edit", "update", "password", "update_password"
+      when "edit", "update", "password", "update_password", "instruments", "update_instruments"
         "application"
       else
         "public"
@@ -65,6 +83,10 @@ class RegistrationsController < Devise::RegistrationsController
 
   def user_params
     params.require(:user).permit(:current_password, :password, :password_confirmation)
+  end
+
+  def instruments_params
+    params.require(:user).permit(instrument_preferences_attributes: [:id, :instrument, :detail, :_destroy])
   end
 
 end

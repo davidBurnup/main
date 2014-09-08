@@ -1,0 +1,10 @@
+.nested-fields.instrument_fields
+  .fields-wrapper.row
+    = f.input :id, :as => :hidden
+    .col-lg-5.col-md-5.col-sm-5.col-xs-5
+      = f.input :instrument, :as => :select, :include_blank => false, :label => false, :collection => InstrumentPreference.instruments.keys.map{|instrument| [I18n.t("instruments.#{instrument}"), instrument]}
+    .col-lg-6.col-md-6.col-sm-6.col-xs-6
+      = f.input :detail, :label => false, :placeholder => I18n.t('activerecord.attributes.instrument_preferences.detail')
+    .col-lg-1.close-btn
+      = link_to_remove_association f, :class => "red pull-right" do
+        %i.glyphicon-remove.glyphicon

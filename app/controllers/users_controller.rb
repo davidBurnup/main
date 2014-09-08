@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  after_action :verify_authorized, except: [:show]
+  after_action :verify_authorized, except: [:show, :instruments]
 
   def index
     @users = User.all
@@ -9,10 +9,36 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    unless current_user.admin?
-      unless @user == current_user
-        redirect_to root_path, :alert => "Access denied."
+
+    any_filter = params[:filter]
+
+    if any_filter
+      case any_filter
+        when "instruments"
+          @user = @user.instruments
       end
+    end
+
+    respond_to do |f|
+      f.html
+      f.js {
+      }
+    end
+    #unless current_user.admin?
+    #  unless @user == current_user
+    #    redirect_to root_path, :alert => "Access denied."
+    #  end
+    #end
+  end
+
+  def instruments
+    user = User.find(params[:id])
+    @instruments = []
+    @instruments = user.instruments if user
+    respond_to do |f|
+      f.json {
+
+      }
     end
   end
 
@@ -40,7 +66,7 @@ class UsersController < ApplicationController
   private
 
   def secure_params
-    params.require(:user).permit(:role, :church, :church_role_attributes => [:id, :role, :user_id, :church_id ])
+    params.require(:user).permit(:first_name, :last_name, :role, :church, :church_role_attributes => [:id, :role, :user_id, :church_id ])
   end
 
 end

@@ -1,0 +1,19 @@
+- nested_fields ||= []
+- extra_class ||= ""
+- extra_html ||= ""
+
+- if nested_fields.present?
+  .nested-fields.nested_model_fields{:class => extra_class}
+    .fields-wrapper.row
+      .col-lg-12
+        = raw extra_html
+
+    .fields-wrapper-not-dashed.row
+      = f.input :id, :as => :hidden
+      .col-lg-11.col-md-11.col-sm-11.col-xs-11
+        - nested_fields.each do |nested_field|
+          = nested_field
+
+      .col-lg-1.close-btn
+        = link_to_remove_association f, :class => "red pull-right" do
+          %i.glyphicon-remove.glyphicon

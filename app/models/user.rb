@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
   enum role: [:user, :worship_leader, :admin]
+  enum instrument: [:electric_guitar, :drums, :keys,]
   belongs_to :church
 
   after_initialize :set_default_role, :if => :new_record?
@@ -14,11 +15,14 @@ class User < ActiveRecord::Base
 
 
   has_many :user_song_preferences
+  has_many :instrument_preferences
   has_one :church_role
   accepts_nested_attributes_for :church_role
+  accepts_nested_attributes_for :instrument_preferences, :reject_if => :all_blank, :allow_destroy => true
 
   validates :name, :email, :presence => true
   validates :password, :presence => true, :on => :create
+
   def set_default_role
     self.role ||= :user
   end
@@ -46,6 +50,15 @@ class User < ActiveRecord::Base
 
   def has_church_role?(church_role)
     self.church and self.church_role and self.church_role.church == self.church and self.church_role.role == church_role
+  end
+
+
+  def instruments
+    if self.instrument_preferences.present?
+      return self.instrument_preferences.map{|ip| ip.instrument}
+    else
+      return InstrumentPreference.instruments.keys
+    end
   end
 
 

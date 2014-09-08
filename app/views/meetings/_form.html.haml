@@ -1,0 +1,35 @@
+= simple_form_for(@meeting) do |f|
+  = f.error_notification
+
+  .row
+    .col-lg-4.col-md-4.col-sm-4.col-xs-4
+      = f.input :label
+    .col-lg-4.col-md-4.col-sm-4.col-xs-4
+      = f.input :start_at, :as => :string, :input_html => { "data-behaviour" => "datepicker", :value => @meeting.start_at}
+    .col-lg-4.col-md-4.col-sm-4.col-xs-4
+      = f.input :duration, :as => :select, :collection => (1..6).map{|numb| ["#{numb} heure#{numb > 1 ? "s" : ""}", numb.hours]}, :include_blank => false
+
+  .row
+    .col-lg-12
+      %h4
+        Répétition
+
+  .row
+    = f.simple_fields_for :practices do |practice|
+      .col-lg-4.col-md-4.col-sm-4.col-xs-4
+        = practice.input :start_at, :as => :string, :input_html => { "data-behaviour" => "datepicker", :value => @meeting.start_at}
+      .col-lg-4.col-md-4.col-sm-4.col-xs-4
+        = practice.input :duration, :as => :select, :collection => (1..6).map{|numb| ["#{numb} heure#{numb > 1 ? "s" : ""}", numb.hours]}, :include_blank => false
+      .col-lg-4.col-md-4.col-sm-4.col-xs-4
+        = practice.input :reminder, :as => :select, :collection => (1..10).map{|numb| ["#{numb} jour#{numb > 1 ? "s" : ""} avant", numb.days]}, :include_blank => false
+
+
+  .row.nested_form
+    .col-lg-12
+      %h4
+        Participants
+    = render "shared/cocoon_wrapper", nested_resource_name: "meeting_user", f: f, form_instance: @meeting, disable_auto_load_first_element: true
+
+  .row
+    .col-lg-12
+      = f.button :submit, class: "pull-right"
