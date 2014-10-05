@@ -13,8 +13,11 @@
  *= require ./all/framework_and_overrides
  *= require ./all/bootswatch_simplex
  *= require bootstrap-datetimepicker
+ *= require fullcalendar/fullcalendar.min
+ *= require font-awesome
  *= require_self
  *= require_directory ./all
+ *= require chosen
  */
 
 @import "all/helpers";
@@ -36,6 +39,11 @@
 }
 .clear{
   clear:both;
+}
+.modal-footer .btn + .btn {
+  margin-left: 5px;
+  margin-bottom: 0;
+  margin-right: 5px;
 }
 .btn[class*="btn-"] {
   .glyphicon {
@@ -68,6 +76,11 @@
         width: 100%;
       }
     }
+  }
+}
+#song-panes {
+  .tab-pane {
+    margin-top:20px;
   }
 }
 body.public {
@@ -114,6 +127,20 @@ footer {
   &.active {
     > a {
       color:white;
+    }
+  }
+}
+.left-margin {
+  margin-left:10px;  
+}
+#meetings {
+  .fc-toolbar {
+    .fc-left {
+      h2 {
+        text-transform: uppercase;
+        font-size: 20px;
+        margin-top: 8px;
+      }
     }
   }
 }

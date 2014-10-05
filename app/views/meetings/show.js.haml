@@ -1,0 +1,12 @@
+- content = render "detail", meeting: @meeting
+- footer = render "detail_footer", meeting: @meeting
+
+= render("shared/modal_append",
+    :modal_id => "show_meeting",
+    :title => "#{@meeting.label}",
+    :content => content,
+    :footer => footer)
+
+setTimeout(function(){
+auto_load(global_ready);
+},100)

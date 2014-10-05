@@ -25,5 +25,5 @@ Worship::Application.routes.draw do
   end
   resources :users, :path => "utilisateurs"
   get "utilisateurs/:id/instruments(/:target)" => "users#instruments"
-  resources :meetings
+  resources :meetings, :path => "reunions"
 end

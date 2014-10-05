@@ -1,35 +1,55 @@
 = simple_form_for(@meeting) do |f|
   = f.error_notification
 
-  .row
-    .col-lg-4.col-md-4.col-sm-4.col-xs-4
-      = f.input :label
-    .col-lg-4.col-md-4.col-sm-4.col-xs-4
-      = f.input :start_at, :as => :string, :input_html => { "data-behaviour" => "datepicker", :value => @meeting.start_at}
-    .col-lg-4.col-md-4.col-sm-4.col-xs-4
-      = f.input :duration, :as => :select, :collection => (1..6).map{|numb| ["#{numb} heure#{numb > 1 ? "s" : ""}", numb.hours]}, :include_blank => false
-
-  .row
-    .col-lg-12
-      %h4
+  %ul.nav.nav-tabs
+    %li.active
+      = link_to "#meeting", {"data-toggle" => "tab"} do
+        Réunion
+    %li
+      = link_to "#rehearsal", {"data-toggle" => "tab"} do
         Répétition
-
-  .row
-    = f.simple_fields_for :practices do |practice|
-      .col-lg-4.col-md-4.col-sm-4.col-xs-4
-        = practice.input :start_at, :as => :string, :input_html => { "data-behaviour" => "datepicker", :value => @meeting.start_at}
-      .col-lg-4.col-md-4.col-sm-4.col-xs-4
-        = practice.input :duration, :as => :select, :collection => (1..6).map{|numb| ["#{numb} heure#{numb > 1 ? "s" : ""}", numb.hours]}, :include_blank => false
-      .col-lg-4.col-md-4.col-sm-4.col-xs-4
-        = practice.input :reminder, :as => :select, :collection => (1..10).map{|numb| ["#{numb} jour#{numb > 1 ? "s" : ""} avant", numb.days]}, :include_blank => false
-
-
-  .row.nested_form
-    .col-lg-12
-      %h4
+    %li
+      = link_to "#meeting_users", {"data-toggle" => "tab"} do
         Participants
-    = render "shared/cocoon_wrapper", nested_resource_name: "meeting_user", f: f, form_instance: @meeting, disable_auto_load_first_element: true
+    %li
+      = link_to "#songs", {"data-toggle" => "tab"} do
+        Chants
 
+  .tab-content#song-panes
+    #meeting.tab-pane.active
+      .row.tab-pane
+        .col-lg-4.col-md-4.col-sm-4.col-xs-4
+          = f.input :label
+        .col-lg-4.col-md-4.col-sm-4.col-xs-4
+          = f.input :start_at, :as => :string, :input_html => { "data-behaviour" => "datepicker", :value => l(@meeting.start_at ? @meeting.start_at : Time.now + 2.day)}
+        .col-lg-4.col-md-4.col-sm-4.col-xs-4
+          = f.input :duration, :as => :select, :collection => (1..6).map{|numb| ["#{numb} heure#{numb > 1 ? "s" : ""}", numb.hours]}, :include_blank => false
+    #rehearsal.tab-pane
+      .row
+        .col-lg-12
+
+      .row
+        = f.simple_fields_for :practices do |practice|
+          .col-lg-4.col-md-4.col-sm-4.col-xs-4
+            = practice.input :start_at, :as => :string, :input_html => { "data-behaviour" => "datepicker", :value => l(@meeting.start_at ? @meeting.start_at : Time.now  + 1.day)}
+          .col-lg-4.col-md-4.col-sm-4.col-xs-4
+            = practice.input :duration, :as => :select, :collection => (1..6).map{|numb| ["#{numb} heure#{numb > 1 ? "s" : ""}", numb.hours]}, :include_blank => false
+          .col-lg-4.col-md-4.col-sm-4.col-xs-4
+            = practice.input :reminder, :as => :select, :collection => (1..10).map{|numb| ["#{numb} jour#{numb > 1 ? "s" : ""} avant", numb.days]}, :include_blank => false
+
+    #meeting_users.tab-pane
+      .row.nested_form
+        .col-lg-12
+        = render "shared/cocoon_wrapper", nested_resource_name: "meeting_user", f: f, form_instance: @meeting, disable_auto_load_first_element: true
+    #songs.tab-pane
+      .row
+        .col-lg-12
+          = f.input :songs, :as => :select, :collection => Song.all.map{|s| [s.title, s.id]}, :label => false, input_html: {class: "chosen", "data-placeholder" => "Liste de chants", multiple: true}
   .row
     .col-lg-12
       = f.button :submit, class: "pull-right"
+
+
+:coffee
+  auto_load ->
+    load_chosens()

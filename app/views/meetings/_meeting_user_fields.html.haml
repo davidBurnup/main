@@ -11,7 +11,7 @@
   - extra_class = ""
   - extra_html = ""
   - if index == 0
-    - inputs << f.input(:is_leader, :as => :hidden, :value => true)
+    - inputs << f.input(:is_leader, :as => :hidden, :input_html => {:value => true})
     - extra_class = "is_leader"
     - extra_html = "<h5>Leader</h5>"
 

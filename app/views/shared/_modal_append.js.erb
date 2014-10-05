@@ -6,6 +6,10 @@
 if ($('#modal_<%=modal_id%>').length > 0) {
     $('#modal_<%=modal_id%> .modal-body').html('<%=escape_javascript(content) %>');
     $('#modal_<%=modal_id%> .modal-header h4').html('<%= escape_javascript(title) %>');
+    if($('#modal_<%=modal_id%> .modal-footer').length == 0){
+    	$('#modal_<%=modal_id%> .modal_dialog').append("<div class=\"modal-footer\"></div>");	
+    }
+    $('#modal_<%=modal_id%> .modal-footer').html('<%= escape_javascript(footer) %>');
     $('#modal_<%=modal_id%>').modal('show');
 }
 else {

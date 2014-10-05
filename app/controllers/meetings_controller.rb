@@ -5,12 +5,38 @@ class MeetingsController < ApplicationController
   # GET /meetings
   # GET /meetings.json
   def index
-    @meetings = Meeting.all
+
+    respond_to do |f|
+      f.json {
+        @meetings = Meeting
+        start_p = Time.parse(params[:start])
+        end_p = Time.parse(params[:end])
+        @meetings = @meetings.where("start_at > ?", params[:start])
+        if start_p and end_p
+          duration = end_p - start_p
+          @meetings = @meetings.where("duration < ?", duration)
+        end
+
+        render :json => @meetings.map{|m|
+          {
+              :id => m.id,
+              :title => m.label,
+              :start => m.start_at,
+              :end => m.end_at,
+              :url => "/reunions/#{m.id}.js",
+              color: '#D42700',
+              textColor: 'white'
+          }
+        }
+      }
+      f.html
+    end
   end
 
   # GET /meetings/1
   # GET /meetings/1.json
   def show
+    @meeting = Meeting.find(params[:id])
   end
 
   # GET /meetings/new
@@ -21,7 +47,7 @@ class MeetingsController < ApplicationController
   end
 
   # GET /meetings/1/edit
-  def edit
+  def edit  
     @meeting.meeting_users.build if @meeting and @meeting.meeting_users.empty?
     @meeting.practices.build if @meeting and @meeting.practices.empty?
   end
@@ -30,10 +56,9 @@ class MeetingsController < ApplicationController
   # POST /meetings.json
   def create
     @meeting = Meeting.new(meeting_params)
-
     respond_to do |format|
       if @meeting.save
-        format.html { redirect_to meetings_path, notice: 'Meeting was successfully created.' }
+        format.html { redirect_to meetings_path, notice: 'La réunion a bien été ajoutée.' }
         format.json { render :show, status: :created, location: @meeting }
       else
         format.html { render :new }
@@ -47,7 +72,7 @@ class MeetingsController < ApplicationController
   def update
     respond_to do |format|
       if @meeting.update(meeting_params)
-        format.html { redirect_to meetings_path, notice: 'Meeting was successfully updated.' }
+        format.html { redirect_to meetings_path, notice: 'La réunion a bien été modifiée.' }
         format.json { render :show, status: :ok, location: @meeting }
       else
         format.html { render :edit }
@@ -61,7 +86,7 @@ class MeetingsController < ApplicationController
   def destroy
     @meeting.destroy
     respond_to do |format|
-      format.html { redirect_to meetings_url, notice: 'Meeting was successfully destroyed.' }
+      format.html { redirect_to meetings_url, notice: 'La réunion a bien été détruite.' }
       format.json { head :no_content }
     end
   end
@@ -85,6 +110,6 @@ class MeetingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def meeting_params
-      params.require(:meeting).permit([:start_at, :duration, :label, :practices_attributes => [:id, :start_at, :duration, :reminder, :_destroy], :meeting_users_attributes => [:id, :user_id, :instrument, :_destroy]])
+      params.require(:meeting).permit([:start_at, :duration, :label, songs: [], :practices_attributes => [:id, :start_at, :duration, :reminder, :_destroy], :meeting_users_attributes => [:id, :user_id, :is_leader, :instrument, :_destroy]])
     end
 end

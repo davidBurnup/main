@@ -21,9 +21,13 @@
 //= require bootstrap-datetimepicker
 //= require moment/fr
 //= require locales/bootstrap-datetimepicker.fr.js
+//= require fullcalendar/fullcalendar.min
+//= require fullcalendar/fr
+//= require chosen-jquery
 
 //= require main
 //= require songs
+//= require meetings
 
 
 jQuery(function(){

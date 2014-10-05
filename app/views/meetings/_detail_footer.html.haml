@@ -1,0 +1,9 @@
+- meeting ||= nil
+
+- if meeting
+	= link_to edit_meeting_path(meeting), remote: true, class: "btn btn-primary pull-right" do
+		%span.glyphicon-pencil.glyphicon
+		Modifier
+	= link_to meeting_path(meeting), method: :delete, class: "btn btn-primary pull-right" do
+		%span.glyphicon-trash.glyphicon
+		Supprimer
