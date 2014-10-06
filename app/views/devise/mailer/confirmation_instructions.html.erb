@@ -1,0 +1,5 @@
+<p>Bienvenue sur BURNUP <%= @email %>!</p>
+
+<p>Merci de confirmer votre compte en cliquant sur le lien ci-dessous pour commencer à utiliser nos services :</p>
+
+<p><%= link_to 'Confirmer mon compte BURNUP', confirmation_url(@resource, confirmation_token: @token) %></p>
