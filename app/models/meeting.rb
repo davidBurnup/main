@@ -10,7 +10,7 @@ class Meeting < ActiveRecord::Base
   validates :start_at, :presence => true
   validates :label, :presence => true
 
-  before_save :format_label
+  before_save :format_label, :plan_practice_notifications
 
   def end_at
     Time.at(start_at.to_i + duration) if start_at and start_at.to_i > 0
@@ -42,6 +42,13 @@ class Meeting < ActiveRecord::Base
 
   def practice
     practices.first if practices
+  end
+
+  def plan_practice_notifications
+    if practice
+      diff_in_seconds = practice.start_at.to_i - Time.now.to_i
+      MeetingWorker.perform_in(diff_in_seconds.seconds,self.id)
+    end
   end
 
 end
