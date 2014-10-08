@@ -2,6 +2,6 @@
 <% if user_signed_in? %>
   <li><%= navigation_link('ACCUEIL', [feeds_path,root_path], 'home') %></li>
   <li><%= navigation_link('CHANTS', songs_path, 'align-left') %></li>
-  <li><%= navigation_link('RÉUNIONS', meetings_path, 'align-left') %></li>
+  <li><%= navigation_link('RÉUNIONS', meetings_path, 'calendar') %></li>
 <% else %>
 <% end %>
