@@ -37,6 +37,16 @@ class User < ActiveRecord::Base
     "#{self.first_name.downcase.capitalize} #{self.last_name.downcase.capitalize}"
   end
 
+  def name
+    at_name = read_attribute(:name)
+
+    if at_name.present?
+      at_name = at_name.capitalize
+    end
+
+    at_name
+  end
+
   def self.current
     Thread.current[:user]
   end
