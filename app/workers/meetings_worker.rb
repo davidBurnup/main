@@ -1,4 +1,4 @@
-class MessagesWorker
+class MeetingsWorker
   include Sidekiq::Worker
 
   def perform(meeting_id)
