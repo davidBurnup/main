@@ -65,7 +65,7 @@ class RegistrationsController < Devise::RegistrationsController
         else
           #flash[:error] = "Une erreur s'est produite."
         end
-        render :global_settings
+        render :instruments
       }
     end
   end
