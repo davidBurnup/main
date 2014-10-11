@@ -35,7 +35,7 @@
 		- meeting.meeting_users.each do |m_user|
 			%tr
 				%td
-					= m_user.user.name
+					= m_user.user.name if m_user.user
 					- if m_user.is_leader?
 						(Leader)
 				%td

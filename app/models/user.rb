@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
 
   has_many :user_song_preferences
   has_many :instrument_preferences
+  has_many :meeting_users, :dependent => :destroy
+
   has_one :church_role
   accepts_nested_attributes_for :church_role
   accepts_nested_attributes_for :instrument_preferences, :reject_if => :all_blank, :allow_destroy => true
