@@ -61,7 +61,7 @@ class RegistrationsController < Devise::RegistrationsController
     respond_to do |f|
       f.html {
         if @user.update(instruments_params)
-          flash[:success] = "Votre mot de passe a bien été modifié."
+          flash[:success] = "La liste de vos instruments a bien été modifiée."
         else
           #flash[:error] = "Une erreur s'est produite."
         end
