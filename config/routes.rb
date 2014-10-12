@@ -26,4 +26,7 @@ Worship::Application.routes.draw do
   resources :users, :path => "utilisateurs"
   get "utilisateurs/:id/instruments(/:target)" => "users#instruments"
   resources :meetings, :path => "reunions"
+
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 end
