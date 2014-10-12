@@ -1,29 +1,29 @@
--# content = render "notify_practice"
-=# render("layout/mailer_layout", :content => content)
-!!!
-%html
-  %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-  %body
-    %h1
-      Salut #{@user.name} !
-    %p
-      Tu as été invité à participer à la réunion
-      = @meeting.label
-      qui aura lieu le
-      = @meeting.start_at.strftime("%d/%m/%Y à %H:%M")
-      \.
-    %p
-      Le leader
-      = @meeting.leader.user.name if @meeting.leader and @meeting.leader.user
-      propose de faire une répétition le
-      = @meeting.practice.start_at.strftime("%d/%m/%Y à %H:%M") if @meeting.practice
-      \.
-      %br/
-
-    %p
-      Pour plus d'information, rendez-vous sur
-      = link_to meetings_url do
-        burnup.ac-ac.fr
-      \.
-    %p À bientôt !
+- content = render "notify_practice"
+= render("layout/mailer_layout", :content => content)
+-#!!!
+-#%html
+-#  %head
+-#    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+-#  %body
+-#    %h1
+-#      Salut #{@user.name} !
+-#    %p
+-#      Tu as été invité à participer à la réunion
+-#      = @meeting.label
+-#      qui aura lieu le
+-#      = @meeting.start_at.strftime("%d/%m/%Y à %H:%M")
+-#      \.
+-#    %p
+-#      Le leader
+-#      = @meeting.leader.user.name if @meeting.leader and @meeting.leader.user
+-#      propose de faire une répétition le
+-#      = @meeting.practice.start_at.strftime("%d/%m/%Y à %H:%M") if @meeting.practice
+-#      \.
+-#      %br/
+-#
+-#    %p
+-#      Pour plus d'information, rendez-vous sur
+-#      = link_to meetings_url do
+-#        burnup.ac-ac.fr
+-#      \.
+-#    %p À bientôt !

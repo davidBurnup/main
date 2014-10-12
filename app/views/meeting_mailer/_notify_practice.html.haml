@@ -2,14 +2,17 @@
   %table{:bgcolor => ""}
     %tr
       %td.small{:style => "vertical-align: top; padding-right:10px;", :width => "20%"}
-        %img{:src => "http://placehold.it/75x75"}/
+        = image_tag(asset_url(@user.avatar))
       %td
         %h4
           = @user.name
           %small
-            leader pour la réunion
+            vous invite à participer à la réunion
             = @meeting.label
             du
             = @meeting.start_at.strftime("%d/%m/%Y à %H:%M")
-        %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        %a.btn Clickity Click »
+        %p
+          Une répétition est prévu le
+          = @meeting.practice.start_at.strftime("%d/%m/%Y à %H:%M") if @meeting.practice
+          \.
+        = link_to "Voir la réunion", meeting_url(@meeting)
