@@ -5,7 +5,6 @@ class MeetingMailer < ActionMailer::Base
     @user = meeting_user.user
     @meeting = meeting_user.meeting
     if @user and @user.email and @meeting
-      attachments.inline['logo_small.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'logo_small.png'))
       file_path = @user.avatar.path(:med_tiny)
       @user_pic = File.basename(file_path)
       attachments.inline[@user_pic] = File.read(file_path)
