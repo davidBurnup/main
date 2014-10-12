@@ -28,6 +28,7 @@ gem "chosen-rails"
 gem "sidekiq"
 gem "sidekiq-cron", "~> 0.2.0"
 gem "letter_opener", :group => :development
+gem 'sinatra', '~> 1.4.5'
 
 group :development do
   gem "haml-rails"
