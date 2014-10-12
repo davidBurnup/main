@@ -10,7 +10,7 @@ class Meeting < ActiveRecord::Base
   validates :start_at, :presence => true
   validates :label, :presence => true
 
-  before_save :format_label, :plan_practice_notifications
+  after_save :format_label, :plan_practice_notifications
 
   def end_at
     Time.at(start_at.to_i + duration) if start_at and start_at.to_i > 0
