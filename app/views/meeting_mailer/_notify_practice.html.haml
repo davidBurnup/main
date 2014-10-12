@@ -2,7 +2,7 @@
   %table{:bgcolor => ""}
     %tr
       %td.small{:style => "vertical-align: top; padding-right:10px;", :width => "20%"}
-        = image_tag(attachments['user_pic'].url)
+        = image_tag(attachments[@user_pic].url)
       %td
         %h4
           = @user.name
