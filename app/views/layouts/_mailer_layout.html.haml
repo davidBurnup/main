@@ -6,7 +6,7 @@
     %meta{:content => "width=device-width", :name => "viewport"}/
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title BURNUP
-    %link{:href => "stylesheets/email.css", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "http://burnup.ac-ac.fr/assets/email.css", :rel => "stylesheet", :type => "text/css"}/
   %body{:bgcolor => "#FFFFFF", :leftmargin => "0", :marginheight => "0", :marginwidth => "0", :topmargin => "0"}
     / HEADER
     %table.head-wrap{:bgcolor => "#D42700"}
@@ -18,7 +18,7 @@
             %table{:bgcolor => "#D42700"}
               %tr
                 %td
-                  %img{:src => "http://0.0.0.0:3000/assets/logo_mini4.svg"}/
+                  = image_tag(asset_url("logo_mini4.svg"))
                 %td{:align => "right"}
                   %h6.collapse
           / /content
