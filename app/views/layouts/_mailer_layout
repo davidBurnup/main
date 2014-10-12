@@ -1,0 +1,106 @@
+- content ||= ""
+!!!
+%html
+  %head
+    / If you delete this meta tag, the ground will open and swallow you.
+    %meta{:content => "width=device-width", :name => "viewport"}/
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title BURNUP
+    %link{:href => "http://burnup.ac-ac.fr/assets/email.css", :rel => "stylesheet", :type => "text/css"}/
+    :css
+
+  %body{:bgcolor => "#FFFFFF", :leftmargin => "0", :marginheight => "0", :marginwidth => "0", :topmargin => "0"}
+    / HEADER
+    %table.head-wrap{:bgcolor => "#D42700"}
+      %tr
+        %td
+        %td.header.container{:align => ""}
+          / /content
+          .content
+            %table{:bgcolor => "#D42700"}
+              %tr
+                %td
+                  = image_tag(attachments['logo_mini4.svg'].url)
+                %td{:align => "right"}
+                  %h6.collapse
+          / /content
+        %td
+    / /HEADER
+    / BODY
+    %table.body-wrap{:bgcolor => ""}
+      %tr
+        %td
+        %td.container{:align => "", :bgcolor => "#FFFFFF"}
+          / content
+
+          = content
+
+          / /content
+          / <!– content –>
+          / <div class="content">
+          / <table bgcolor="">
+          / <tr>
+          / <td>
+          /
+          / <!– social & contact –>
+          / <table bgcolor="" class="social" width="100%">
+          / <tr>
+          / <td>
+          /
+          / <!–- column 1 –>
+          / <div class="column">
+          / <table bgcolor="" cellpadding="" align="left">
+          / <tr>
+          / <td>
+          /
+          / <h5 class="">Connect with Us:</h5>
+          / <p class=""><a href="#" class="soc-btn fb">Facebook</a> <a href="#" class="soc-btn tw">Twitter</a> <a href="#" class="soc-btn gp">Google+</a></p>
+          /
+          /
+          / </td>
+          / </tr>
+          / </table><!– /column 1 –>
+          / </div>
+          /
+          / <!–- column 2 –>
+          / <div class="column">
+          / <table bgcolor="" cellpadding="" align="left">
+          / <tr>
+          / <td>
+          /
+          / <h5 class="">Contact Info:</h5>
+          / <p>Phone: <strong>408.341.0600</strong><br/>
+          / Email: <strong><a href="emailto:hseldon@trantor.com">hseldon@trantor.com</a></strong></p>
+          /
+          / </td>
+          / </tr>
+          / </table><!– /column 2 –>
+          / </div>
+          /
+          / <div class="clear"></div>
+          /
+          / </td>
+          / </tr>
+          / </table><!– /social & contact –>
+          /
+          / </td>
+          / </tr>
+          / </table>
+          / </div><!– /content –>
+        %td
+    / /BODY
+    / FOOTER
+    %table.footer-wrap
+      %tr
+        %td
+        %td.container
+          / content
+          .content
+            %table
+              %tr
+                %td{:align => "center"}
+                  %p
+                    %a{:href => "http://burnup.ac-ac.fr"} BURNUP - Propulsé par l'Assemblée Chrétienne d'Alès
+          / /content
+        %td
+    / /FOOTER
