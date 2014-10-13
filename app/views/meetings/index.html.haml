@@ -1,7 +1,14 @@
 %h1 Réunions
 
-= link_to new_meeting_path, :remote => true, class: "btn btn-primary btn-sm pull-right left-margin" do
-  = fa_icon "plus"
-  = "Nouvelle réunion"
+- if current_user.is_up_to_worship_leader?
+  = link_to new_meeting_path, :remote => true, class: "btn btn-primary btn-sm pull-right left-margin" do
+    = fa_icon "plus"
+    = "Nouvelle réunion"
 #meetings
 
+
+- if @meeting
+  :coffee
+    $ ->
+      $.ajax
+        url: "#{meeting_path(@meeting, format: "js")}"

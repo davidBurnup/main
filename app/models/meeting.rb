@@ -46,8 +46,13 @@ class Meeting < ActiveRecord::Base
 
   def plan_practice_notifications
     if practice
-      diff_in_seconds = practice.start_at.to_i - Time.now.to_i
-      MeetingsWorker.perform_in(diff_in_seconds.seconds,self.id)
+      if practice.reminder > 0
+        time_to_send = practice.start_at.to_i - practice.reminder
+        diff_in_seconds = time_to_send - Time.now.to_i
+        MeetingsWorker.perform_in(diff_in_seconds.seconds,self.id)
+      else
+        MeetingsWorker.perform_async(self.id)
+      end
     end
   end
 

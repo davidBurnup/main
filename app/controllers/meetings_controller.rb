@@ -6,6 +6,10 @@ class MeetingsController < ApplicationController
   # GET /meetings.json
   def index
 
+    if params[:meeting_id]
+      @meeting = Meeting.find(params[:meeting_id])
+    end
+
     respond_to do |f|
       f.json {
         @meetings = Meeting
@@ -36,8 +40,11 @@ class MeetingsController < ApplicationController
   # GET /meetings/1
   # GET /meetings/1.json
   def show
-    @meeting = Meeting.find(params[:id])
-
+    respond_to do |f|
+      f.html {redirect_to meetings_path(meeting_id: params[:id])}
+      f.js {}
+    end
+    #@meeting = Meeting.find(params[:id])
   end
 
   # GET /meetings/new

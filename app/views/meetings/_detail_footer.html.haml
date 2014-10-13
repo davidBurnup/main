@@ -1,6 +1,6 @@
 - meeting ||= nil
 
-- if meeting
+- if meeting and current_user.is_admin?
 	= link_to edit_meeting_path(meeting), remote: true, class: "btn btn-primary pull-right" do
 		%span.glyphicon-pencil.glyphicon
 		Modifier

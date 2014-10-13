@@ -60,6 +60,14 @@ class User < ActiveRecord::Base
     self.role == role
   end
 
+  def is_admin?
+    has_role?(:admin)
+  end
+
+  def is_up_to_worship_leader?
+    is_admin? or has_role?(:worship_leader)
+  end
+
   def has_church_role?(church_role)
     self.church and self.church_role and self.church_role.church == self.church and self.church_role.role == church_role
   end

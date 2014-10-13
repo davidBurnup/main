@@ -6,13 +6,14 @@
       %td
         %h4
           = @user.name
-          %small
-            vous invite à participer à la réunion
-            = @meeting.label
-            du
-            = @meeting.start_at.strftime("%d/%m/%Y à %H:%M")
+
+        %p
+          vous invite à participer à la réunion
+          = @meeting.label
+          du
+          = @meeting.start_at.strftime("%d/%m/%Y à %H:%M")
         %p
           Une répétition est prévu le
           = @meeting.practice.start_at.strftime("%d/%m/%Y à %H:%M") if @meeting.practice
           \.
-        = link_to "Voir la réunion", meetings_url
+        = link_to "Voir la réunion", meeting_url(@meeting), :class => "btn"

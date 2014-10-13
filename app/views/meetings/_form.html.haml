@@ -35,7 +35,7 @@
           .col-lg-4.col-md-4.col-sm-4.col-xs-4
             = practice.input :duration, :as => :select, :collection => (1..6).map{|numb| ["#{numb} heure#{numb > 1 ? "s" : ""}", numb.hours]}, :include_blank => false
           .col-lg-4.col-md-4.col-sm-4.col-xs-4
-            = practice.input :reminder, :as => :select, :collection => (1..10).map{|numb| ["#{numb} jour#{numb > 1 ? "s" : ""} avant", numb.days]}, :include_blank => false
+            = practice.input :reminder, :as => :select, :collection => ((0..10).map{|numb| [ (numb == 0 ? "Maintenant" : ("#{numb} jour#{numb > 1 ? "s" : ""} avant")), (numb > 0 ? numb.days : 0)]}), :include_blank => false
 
     #meeting_users.tab-pane
       .row.nested_form
