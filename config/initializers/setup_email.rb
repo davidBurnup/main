@@ -1,5 +1,5 @@
 if Rails.env.production?
-  ActionMailer::Base.default_url_options[:host] = "http://burnup.ac-ac.fr"
+  ActionMailer::Base.default_url_options[:host] = "ac-ac.fr"
   ActionMailer::Base.smtp_settings = {
     :address   => "smtp.mandrillapp.com",
     :port      => 25, # ports 587 and 2525 are also supported with STARTTLS
@@ -7,6 +7,6 @@ if Rails.env.production?
     :user_name => "dfabreguette@gmail.com",
     :password  => "uhpV0YrqtJ9Lz7oPShYj8A", # SMTP password is any valid API key
     :authentication => 'login', # Mandrill supports 'plain' or 'login'
-    :domain => 'http://burnup.ac-ac.fr', # your domain to identify your server when connecting
+    :domain => 'burnup.ac-ac.fr', # your domain to identify your server when connecting
   }
 end
