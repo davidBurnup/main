@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
   end
 
   def has_role?(role)
-    self.role == role
+    self.role == role.to_s
   end
 
   def is_admin?
