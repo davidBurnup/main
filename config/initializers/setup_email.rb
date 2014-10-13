@@ -7,6 +7,6 @@ if Rails.env.production?
     :user_name => "dfabreguette@gmail.com",
     :password  => "uhpV0YrqtJ9Lz7oPShYj8A", # SMTP password is any valid API key
     :authentication => 'login', # Mandrill supports 'plain' or 'login'
-    :domain => 'burnup.ac-ac.fr', # your domain to identify your server when connecting
+    :domain => 'ac-ac.fr', # your domain to identify your server when connecting
   }
 end
