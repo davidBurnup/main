@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
   enum role: [:user, :worship_leader, :admin]
-  enum instrument: [:electric_guitar, :drums, :keys,]
+  enum instrument: %w(voice violin trombone trumpet piano acoustic_bass acoustic_guitar electric_guitar electric_bass_guitar drums bongos flute saxophone oboe)
   belongs_to :church
 
   after_initialize :set_default_role, :if => :new_record?
