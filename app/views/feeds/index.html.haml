@@ -3,5 +3,9 @@
     Actualité
 
 = content_for :left_column do
-  %ul.media-list
+
+  %ul.media-list#feed-activities
     = render_activities(@activities)
+
+  #infinite-scrolling
+    = will_paginate @activities

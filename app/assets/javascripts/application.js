@@ -24,6 +24,7 @@
 //= require fullcalendar/fullcalendar.min
 //= require fullcalendar/fr
 //= require chosen-jquery
+//= require feeds
 
 //= require main
 //= require songs

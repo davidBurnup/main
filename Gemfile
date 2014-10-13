@@ -29,6 +29,8 @@ gem "sidekiq"
 gem "sidekiq-cron", "~> 0.2.0"
 gem "letter_opener", :group => :development
 gem 'sinatra', '~> 1.4.5'
+gem 'will_paginate', '~> 3.0.5'
+gem 'bootstrap-will_paginate', '~> 0.0.10'
 
 group :development do
   gem "haml-rails"
