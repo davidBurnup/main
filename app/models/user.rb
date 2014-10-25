@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
   validates :name, :email, :presence => true
   validates :password, :presence => true, :on => :create
 
+  scope :leaders, -> {
+      where('users.role = "worship_leader" or users.role = "admin"')
+  }
+
   def set_default_role
     self.role ||= :user
   end

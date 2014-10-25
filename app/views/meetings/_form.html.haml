@@ -42,12 +42,12 @@
         .col-lg-12
         = render "shared/cocoon_wrapper", nested_resource_name: "meeting_user", f: f, form_instance: @meeting, disable_auto_load_first_element: true
     #songs.tab-pane
-      .row
+      .row.nested_form
         .col-lg-12
-          = f.input :songs, :as => :select, :collection => Song.all.map{|s| [s.title, s.id]}, :label => false, input_html: {class: "chosen", "data-placeholder" => "Liste de chants", multiple: true}
+          = render "shared/cocoon_wrapper", nested_resource_name: "meeting_song", f:f, form_instance: @meeting, disable_auto_load_first_element: true
   .row
     .col-lg-12
-      = f.button :submit, class: "pull-right"
+      = f.button :submit, class: "pull-right real-submit hidden"
 
 
 :coffee

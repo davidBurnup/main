@@ -16,3 +16,8 @@ else {
     $('body').append('<%=escape_javascript render("shared/modal", :css_id => "modal_#{modal_id}", :title => title, :content => content, :footer => footer )%>');
     $('#modal_<%=modal_id%>').modal('show');
 }
+
+
+$('#modal_<%=modal_id%> [data-form-submit]').click(function(){
+    $('#modal_<%=modal_id%> .modal-body form').first().submit();
+})

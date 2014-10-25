@@ -4,11 +4,12 @@
 
 - if nested_fields.present?
   .nested-fields.nested_model_fields{:class => extra_class}
-    .fields-wrapper.row
-      .col-lg-12
-        = raw extra_html
+    - if extra_html.present?
+      .fields-wrapper.row
+        .col-lg-12
+          = raw extra_html
 
-    .fields-wrapper-not-dashed.row
+    .row{:class => extra_html.present? ? "fields-wrapper-not-dashed" : "fields-wrapper"}
       = f.input :id, :as => :hidden
       .col-lg-11.col-md-11.col-sm-11.col-xs-11
         - nested_fields.each do |nested_field|

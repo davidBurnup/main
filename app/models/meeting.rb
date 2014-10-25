@@ -2,10 +2,9 @@ class Meeting < ActiveRecord::Base
 
   has_many :meeting_users
   has_many :practices
+  has_many :meeting_songs
 
-  serialize :songs, Array
-
-  accepts_nested_attributes_for :meeting_users, :practices, allow_destroy: true
+  accepts_nested_attributes_for :meeting_users, :practices, :meeting_songs, allow_destroy: true
 
   validates :start_at, :presence => true
   validates :label, :presence => true

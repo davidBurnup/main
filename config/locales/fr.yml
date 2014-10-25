@@ -59,6 +59,9 @@ fr:
         duration: Durée
         label: Intitulé
         practices: Répétitions
+      meeting_song:
+        song_id: Chant
+        leader_id: Leader
       practice:
         start_at: Horaires de début
         duration: Durée

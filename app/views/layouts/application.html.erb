@@ -24,11 +24,13 @@
       </div>
   <% end %>
   <div class="row">
-    <% if flash.present? %>
+
+    <% if flash.present? and !@no_main_flash%>
         <% flash.each do |key, msg| %>
             <%= render "/layouts/flash", :msg => msg, :key => key %>
         <% end %>
     <% end %>
+
     <% if content_for? :left_column %>
         <div class="col-lg-8 col-md-8 col-sm-12" id="left-column">
           <%= yield :left_column %>

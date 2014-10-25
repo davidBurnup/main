@@ -1,0 +1,14 @@
+- f ||= nil
+- extra_class ||= ""
+- extra_html ||= ""
+
+- if f
+  - inputs = []
+  - inputs << f.input(:leader_id, :as => :select, :collection => @leader_users.map{|u| [u.name, u.id]}, :include_blank => false, :input_html => { :class => ""}  )
+  - inputs << f.input(:song_id, :as => :select, :include_blank => false, :collection => Song.all.map{|s| [s.title, s.id]}, :input_html => {:class => "chosen"})
+  = render("shared/cocoon_fields_wrapper", f: f, :nested_fields => inputs, :extra_class => extra_class, extra_html: extra_html)
+
+  :coffee
+      view_ready = ->
+        load_chosens()
+      auto_load(view_ready)

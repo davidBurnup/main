@@ -1,42 +1,72 @@
 - meeting ||= nil
 
 - if meeting
-	%table.table.table-striped
-		%tr
-			%th{"colspan" => "2"}
-				Réunion
-		%tr
-			%td
-				Date
-			%td
-				= l meeting.start_at
-		%tr
-			%td
-				Durée
-			%td
-				= duration_in_words(meeting)
-		- if meeting.practices.present? and practice = meeting.practices.first
-			%tr
-				%th{"colspan" => "2"}
-					Répétition
-			%tr
-				%td
-					Date
-				%td
-					= l practice.start_at
-			%tr
-				%td
-					Durée
-				%td
-					= duration_in_words(practice)
-		%tr
-			%th{"colspan" => "2"}
-				Participants
-		- meeting.meeting_users.each do |m_user|
-			%tr
-				%td
-					= m_user.user.name if m_user.user
-					- if m_user.is_leader?
-						(Leader)
-				%td
-					= I18n.t("instruments.#{m_user.instrument}")
+  / Nav tabs
+  %ul.nav.nav-tabs{:role => "tablist"}
+    %li.active
+      %a{"data-toggle" => "tab", :href => "#global-info", :role => "tab"} Information Générale
+    %li
+      %a{"data-toggle" => "tab", :href => "#songs", :role => "tab"} Chants
+
+  / Tab panes
+  .tab-content
+    #global-info.tab-pane.active
+      %table.table.table-striped
+        %tr
+          %th{"colspan" => "2"}
+            Réunion
+        %tr
+          %td
+            Date
+          %td
+            = l meeting.start_at
+        %tr
+          %td
+            Durée
+          %td
+            = duration_in_words(meeting)
+        - if meeting.practices.present? and practice = meeting.practices.first
+          %tr
+            %th{"colspan" => "2"}
+              Répétition
+            %tr
+              %td
+                Date
+              %td
+                = l practice.start_at
+            %tr
+              %td
+                Durée
+              %td
+                = duration_in_words(practice)
+        %tr
+          %th{"colspan" => "2"}
+            Participants
+        - meeting.meeting_users.each do |m_user|
+          %tr
+            %td
+              = m_user.user.name if m_user.user
+              - if m_user.is_leader?
+                (Leader)
+              %td
+                = I18n.t("instruments.#{m_user.instrument}")
+
+    #songs.tab-pane
+      %table.table.table-striped
+        %tr
+          %th
+            Chant
+          %th
+            Leader
+          %th
+            Clé
+        - meeting.meeting_songs.each do |m|
+          %tr
+            %td
+              = m.song.title if m.song
+            %td
+              = m.leader.name if m.leader
+            %td
+              = m.song.key if m.song
+
+
