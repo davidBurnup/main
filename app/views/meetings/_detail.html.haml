@@ -63,10 +63,10 @@
         - meeting.meeting_songs.each do |m|
           %tr
             %td
-              = link_to(m.song.title, song_path(m.song)) if m.song
+              = link_to(m.song.title, song_path(m.song), :target => "_blank") if m.song
             %td
               = m.leader.name if m.leader
             %td
-              = m.song.key if m.song
+              = m.song.prefered_key(m.leader) if m.song
 
 
