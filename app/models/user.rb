@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   validates :password, :presence => true, :on => :create
 
   scope :leaders, -> {
-      where('users.role = "worship_leader" or users.role = "admin"')
+      where('users.role IN (?) ', [:worship_leader,:admin].map{|r| User.roles[r]})
   }
 
   def set_default_role

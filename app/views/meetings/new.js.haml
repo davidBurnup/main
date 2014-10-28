@@ -3,7 +3,9 @@
 = render("shared/modal_append",
     :modal_id => "new_meeting",
     :title => "Nouvelle réunion",
-    :content => content)
+    :content => content,
+    :footer => link_to("Enregistrer", "#", "data-form-submit" => "true", :class => "btn btn-primary"))
+
 
 setTimeout(function(){
 auto_load(global_ready);
