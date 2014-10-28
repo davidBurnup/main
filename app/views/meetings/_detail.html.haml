@@ -63,7 +63,7 @@
         - meeting.meeting_songs.each do |m|
           %tr
             %td
-              = m.song.title if m.song
+              = link_to(m.song.title, song_path(m.song)) if m.song
             %td
               = m.leader.name if m.leader
             %td
