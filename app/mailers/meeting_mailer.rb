@@ -8,8 +8,10 @@ class MeetingMailer < ActionMailer::Base
     if @user and @user.email and @meeting and !meeting_user.was_notified
       attachments.inline['logo_small.png'] = File.read(Rails.root.join('app', 'assets', 'images', 'logo_small.png'))
       file_path = @user.avatar.path(:med_tiny)
-      @user_pic = File.basename(file_path)
-      attachments.inline[@user_pic] = File.read(file_path)
+      if file_path.present?
+        @user_pic = File.basename(file_path)
+        attachments.inline[@user_pic] = File.read(file_path)
+      end
       Rails.logger.debug "SENDING email to #{@user.email}"
       Rails.logger.debug meeting_user.inspect
       meeting_user.update({:was_notified => true})
