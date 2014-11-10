@@ -22,7 +22,9 @@ class Meeting < ActiveRecord::Base
   # Notify meeting users (include leader) of the coming prcatice
   def notify_practice
     meeting_users.each do |meeting_user|
-      MeetingMailer.notify_practice(meeting_user).deliver if meeting_user.user and meeting_user.user.email
+      if meeting_user.user and meeting_user.user.email and !meeting_user.was_notified?
+        MeetingMailer.notify_practice(meeting_user).deliver
+      end
     end
   end
 
