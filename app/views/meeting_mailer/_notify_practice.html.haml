@@ -20,12 +20,14 @@
           La liste des chants qui sont prévu est :
         %ul
           - @meeting.meeting_songs.each do |m|
-            %li
-              = m.song.title if m.song
-              dirigé par
-              = m.leader.name if m.leader
-              | Clé :
-              = m.song.key if m.song
-              |
-              = link_to song_url(m.song)
+            - if m.song
+              %li
+                = m.song.title if m.song
+                dirigé par
+                = m.leader.name if m.leader
+                | Clé :
+                = m.song.key if m.song
+                |
+                = link_to song_url(m.song) do
+                  = "Voir le chant"
         = link_to "Voir la réunion", meeting_url(@meeting), :class => "btn"
