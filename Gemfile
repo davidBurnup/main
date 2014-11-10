@@ -31,6 +31,7 @@ gem "letter_opener", :group => :development
 gem 'sinatra', '~> 1.4.5'
 gem 'will_paginate', '~> 3.0.5'
 gem 'bootstrap-will_paginate', '~> 0.0.10'
+gem 'mandrill-api'
 
 group :development do
   gem "haml-rails"

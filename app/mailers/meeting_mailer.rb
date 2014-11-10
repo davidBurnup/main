@@ -10,6 +10,8 @@ class MeetingMailer < ActionMailer::Base
       file_path = @user.avatar.path(:med_tiny)
       @user_pic = File.basename(file_path)
       attachments.inline[@user_pic] = File.read(file_path)
+      Rails.logger.debug "SENDING email to #{@user.email}"
+      Rails.logger.debug meeting_user.inspect
       meeting_user.update({:was_notified => true})
       mail(to: @user.email, subject: "Réunion \"#{@meeting.label}\" pour le #{@meeting.start_at.strftime("%d/%m/%Y à %H:%M")}" )
     end
