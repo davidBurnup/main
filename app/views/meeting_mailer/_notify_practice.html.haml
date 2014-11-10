@@ -19,7 +19,7 @@
         %p
           La liste des chants qui sont prévu est :
         %ul
-          - meeting.meeting_songs.each do |m|
+          - @meeting.meeting_songs.each do |m|
             %li
               = m.song.title if m.song
               dirigé par
