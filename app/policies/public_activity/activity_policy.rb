@@ -15,7 +15,7 @@ class PublicActivity::ActivityPolicy
   end
 
   def destroy?
-    @user.admin? or @record.user == @user
+    @user.admin? or @record.owner == @user
   end
 
 end
