@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :church_role
   accepts_nested_attributes_for :instrument_preferences, :reject_if => :all_blank, :allow_destroy => true
 
-  validates :name, :email, :presence => true
+  validates :first_name, :last_name, :email, :presence => true
   validates :password, :presence => true, :on => :create
 
   scope :leaders, -> {
