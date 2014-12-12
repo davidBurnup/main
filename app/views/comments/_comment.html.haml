@@ -8,7 +8,7 @@
         = link_to comment_path(comment), class: "destroy-comment pull-right", remote: true, method: :delete, confirm: "Voulez-vous vraiment supprimer ceci ?" do
           = fa_icon "trash"
       = comment.comment_html
-    .media-footer
+    .media-footer.clear
       = time_ago_in_words(comment.created_at)
       \-
       = render "socializables/like", likable: comment
