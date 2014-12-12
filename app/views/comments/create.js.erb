@@ -1,0 +1,4 @@
+<% if @comment and @comment.commentable %>
+    $('#activity-<%= @comment.commentable.id %> .comment-form').html("<%= j render("comments/form", comment: Comment.new, commentable: @comment.commentable)%>")
+    $('#activity-<%= @comment.commentable.id %> .comments-list').append("<%= j render("/comments/comment", comment: @comment) %>")
+<% end %>

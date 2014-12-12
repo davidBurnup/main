@@ -1,8 +1,15 @@
 Worship::Application.routes.draw do
 
+  resources :posts
+
+  resources :activities, only: [:destroy], controller: "socializables"
+
   resources :churches
 
-  get 'fil' => "feeds#index", :as => "feeds"
+  resources :comments
+
+  get 'fil' => "socializables#index", :as => "feeds"
+  get 'aime(/:likable_type/:likable_id)' => "socializables#like", :as => "like"
 
   resources :teams
 
@@ -12,7 +19,7 @@ Worship::Application.routes.draw do
 
   resources :user_song_preferences
 
-  root :to => "feeds#index"
+  root :to => "socializables#index"
 
   devise_for :users, :path => "utilisateurs", :path_names => {:sign_in => 'se-connecter', :sign_out => 'se-deconnecter', password: 'mot-de-passe', confirmation: 'confirmation', unlock: 'deverrouillage', registration: 'inscription', sign_up: 'nouvelle' }, :controllers => {:registrations => "registrations"}
   devise_scope :user do

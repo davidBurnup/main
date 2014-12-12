@@ -1,0 +1,18 @@
+- likable ||= nil
+
+- if likable
+  = link_to like_path(likable.class.name, likable.id), remote: true do
+    - if current_user.likes?(likable)
+      = fa_icon "heart"
+    - else
+      = fa_icon "heart-o"
+  - likers = likable.likers(User)
+  - if likers.count > 0
+    - likers.each_with_index do |user, index|
+      = user.name
+      - if index < (likers.count - 1) and index < 2
+        = ", "
+      - elsif index >= 2
+        = "et #{likers.count - 2} autres personnes "
+
+    = "aime#{likers.count > 1 ? "ent" : ""} ceci."

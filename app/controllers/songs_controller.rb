@@ -11,7 +11,7 @@ class SongsController < ApplicationController
         :path => songs_search_path
     }
     @any_search_term = ""
-    @songs = Song.all
+    @songs = Song.order(:title => :asc)
     @song = @songs.first
     if params[:search_term].present?
       @any_search_term = params[:search_term]

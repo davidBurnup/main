@@ -2,32 +2,34 @@
   %h1
     Chants
 
-= content_for :left_column do
+.container
+  .row
+    .col-sm-12
+      %table.table.table-striped.table-hover
+        %tr
+          %th.col-sm-7
+            Titre
+          %th.col-sm-1
+            Clé
+          %th.col-sm-3
+            Auteur
+          %th.text-right.col-sm-1
+            - if policy(@song).new?
+              = link_to new_song_path, :class => "btn btn-primary btn-sm" do
+                %i.glyphicon.glyphicon-plus
+                Ajouter
 
-  %table.table.table-striped.table-hover
-    %tr
-      %th
-        Titre
-      %th
-        Clé
-      %th
-        Auteur
-      %th.text-right
-        - if policy(@song).new?
-          = link_to new_song_path, :class => "btn btn-primary btn-sm" do
-            %i.glyphicon.glyphicon-plus
-            Ajouter
-
-    - @songs.each do |song|
-      = link_to song do
-        %tr{'data-link-to' => song_path(song)}
-          %td
-            =song.title
-          %td
-            =song.key
-          %td
-            =song.author
-          %td
-            - if policy(song).destroy?
-              = link_to song, method: :delete, :data => {:confirm => "Voulez-vous supprimer ce chant ?"}, :class => "red pull-right" do
-                %i.glyphicon-trash.glyphicon
+        - @songs.each do |song|
+          = link_to song do
+            %tr{'data-link-to' => song_path(song)}
+              %td
+                =song.title
+              %td
+                =song.key
+              %td
+                - if song.author
+                  =song.author.truncate(30)
+              %td
+                - if policy(song).destroy?
+                  = link_to song, method: :delete, :data => {:confirm => "Voulez-vous supprimer ce chant ?"}, :class => "red pull-right" do
+                    %i.glyphicon-trash.glyphicon

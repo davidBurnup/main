@@ -10,9 +10,8 @@ class User < ActiveRecord::Base
   after_initialize :set_default_role, :if => :new_record?
   after_initialize :set_default_church_role
 
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#", :med_tiny => "75x75#", :tiny => "50x50#" }, :default_url => "/images/:style/missing.png"
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#", :med_tiny => "75x75#", :tiny => "50x50#", :mini => "39x39#" }, :default_url => "/images/:style/missing.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
-
 
   has_many :user_song_preferences
   has_many :instrument_preferences
@@ -28,6 +27,8 @@ class User < ActiveRecord::Base
   scope :leaders, -> {
       where('users.role IN (?) ', [:worship_leader,:admin].map{|r| User.roles[r]})
   }
+
+  acts_as_liker
 
   def set_default_role
     self.role ||= :user

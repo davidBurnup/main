@@ -1,0 +1,7 @@
+<% if @was_destroyed and @destroyed_id %>
+    $('#activity-<%= @destroyed_id%>').animate({
+        height:0
+    }, 300, function(){
+        $(this).remove();
+    })
+<% end %>

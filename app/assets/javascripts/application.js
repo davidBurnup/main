@@ -24,9 +24,10 @@
 //= require fullcalendar/fullcalendar.min
 //= require fullcalendar/fr
 //= require chosen-jquery
-//= require feeds
+//= require jquery-hotkeys
 
 //= require main
+//= require feeds
 //= require songs
 //= require meetings
 

@@ -1,0 +1,10 @@
+- commentable ||= nil
+- comment ||= nil
+
+- if commentable and comment
+  - comment.commentable = commentable
+  = simple_form_for comment, url: comments_path, remote: true do |f|
+    = f.input :commentable_id, as: :hidden
+    = f.input :commentable_type, as: :hidden
+    = f.input :comment, as: :string, label: false, input_html: { class: "activity_comment"}, placeholder: "Commentez cette publication ..."
+    = f.button :submit, class: "hidden"

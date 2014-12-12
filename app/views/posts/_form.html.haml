@@ -1,0 +1,26 @@
+- post ||= nil
+
+- if post
+  - post.user = current_user
+  = simple_form_for(post, :remote => true) do |f|
+    %li.media.post-form
+      %span.pull-left
+        = image_tag current_user.avatar.url(:tiny), class: "img-circle"
+      .media-body
+        = f.input :content, :placeholder => "Partagez un statut, une video youtube, un lien interessant, une image ...", :label => false, input_html: { class: "autogrow post_content" }, "autocomplete" => "off"
+        = f.input :user_id, as: :hidden
+      .media-footer
+        = f.button :submit, "Partager", { :class => "btn btn-primary btn-sm pull-right", id: "post-submit" }
+
+
+    :coffee
+      $ ->
+        $("#post_content").focus ->
+          $('.post-form').addClass("opened")
+        $("#post_content").blur ->
+          if $(this).val().length == 0
+            $('.post-form').removeClass("opened")
+
+        $("#post_content").bind 'keyup', 'ctrl+return', ->
+          if $('#post_content').val().length > 0
+            $('#post-submit').trigger('click')

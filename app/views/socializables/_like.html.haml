@@ -1,0 +1,5 @@
+- likable ||= nil
+
+- if likable
+  %span{id: "like-#{likable.class.name.downcase.gsub(":","_")}-#{likable.id}"}
+    = render "socializables/inner_like", likable: likable

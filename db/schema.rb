@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141028211134) do
+ActiveRecord::Schema.define(version: 20141212202748) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -43,6 +43,21 @@ ActiveRecord::Schema.define(version: 20141028211134) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "comments", force: true do |t|
+    t.string   "title",            limit: 50, default: ""
+    t.text     "comment"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.integer  "user_id"
+    t.string   "role",                        default: "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
+  add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "follows", force: true do |t|
     t.string   "follower_type"
@@ -123,6 +138,15 @@ ActiveRecord::Schema.define(version: 20141028211134) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "note"
+  end
+
+  create_table "posts", force: true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "song_id"
+    t.string   "external_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "practice_users", force: true do |t|

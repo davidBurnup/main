@@ -16,17 +16,26 @@
       link_to = $(this).attr('data-link-to')
       $(this).click ->
         window.location = link_to
-  main_container()
+
+  window.is_public = $('body').hasClass("public")
+
+  if is_public
+    main_container()
+  else
+    $('body > main.container').css('height', '')
 #  public_background()
   ref_el = $('body > main.container')
   verticalAlign($('#public-right-pane'),ref_el)
   verticalAlign($('#public-left-pane'),ref_el)
 
   $(window).resize ->
-    public_background()
-    verticalAlign($('#public-right-pane'))
-    verticalAlign($('#public-left-pane'))
-    main_container()
+    if is_public
+      public_background()
+      verticalAlign($('#public-right-pane'))
+      verticalAlign($('#public-left-pane'))
+      main_container()
+    else
+      $('body > main.container').css('height', '')
 
   parallax()
   $(window).scroll (e) ->

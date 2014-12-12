@@ -67,6 +67,9 @@
     }
   }
 }
+.media-heading {
+  margin-bottom:0;
+}
 .timepicker-picker {
   tr {
     td {
@@ -231,4 +234,54 @@ footer {
 
 .datepicker.dropdown-menu {
   z-index: 10000 !important;
+}
+.clearboth {
+  clear:both;
+}
+.destroy-post, .destroy-comment {
+  color: rgb(81, 81, 81);
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  padding: 4px 9px 6px 10px;
+  position: relative;
+  margin: 10px;
+}
+
+.content-body {
+  img, .video {
+    float: left;
+    padding: 10px 10px 10px 0;
+  }
+}
+.post-form {
+  margin-bottom: 30px;
+  border-bottom: 1px solid black;
+  padding-bottom: 30px;
+
+  .post_content {
+    resize:none;
+    max-height: 38px;
+  }
+  .media-footer {
+    @include transition(0.5s);
+    height: 0;
+    overflow: hidden;
+  }
+  &.opened {
+    .post_content {
+      max-height: 10000px;
+    }
+    .media-footer {
+      height:30px;
+    }
+  }
+}
+.hidden {
+  display: none;
+}
+.activity_comment {
+  resize:none;
+}
+.activity-footer {
+  margin-bottom: 10px;
 }

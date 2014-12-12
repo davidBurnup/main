@@ -156,7 +156,7 @@ fr:
   datetime:
     distance_in_words:
       about_x_hours:
-        one:   "environ une heure"
+        one:   "environ 1 h"
         other: "environ %{count} heures"
       about_x_months:
         one:   "environ un mois"
@@ -180,17 +180,17 @@ fr:
         one:   "plus d'un an"
         other: "plus de %{count} ans"
       x_days:
-        one:   "1 jour"
-        other: "%{count} jours"
+        one:   "1 j"
+        other: "%{count} j"
       x_minutes:
-        one:   "1 minute"
-        other: "%{count} minutes"
+        one:   "1 m"
+        other: "%{count} m"
       x_months:
         one:   "1 mois"
         other: "%{count} mois"
       x_seconds:
-        one:   "1 seconde"
-        other: "%{count} secondes"
+        one:   "1 s"
+        other: "%{count} s"
     prompts:
       day:    "Jour"
       hour:   "Heure"

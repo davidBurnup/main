@@ -1,0 +1,25 @@
+%h1 Listing posts
+
+%table
+  %tr
+    %th Content
+    %th User
+    %th Song
+    %th External url
+    %th
+    %th
+    %th
+
+  - @posts.each do |post|
+    %tr
+      %td= post.content
+      %td= post.user_id
+      %td= post.song_id
+      %td= post.external_url
+      %td= link_to 'Show', post
+      %td= link_to 'Edit', edit_post_path(post)
+      %td= link_to 'Destroy', post, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Post', new_post_path

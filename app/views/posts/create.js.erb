@@ -1,0 +1,4 @@
+$('#post-form').html("<%= j render("posts/form", :post => Post.new)%>")
+<% if @post_activity %>
+    $('#feed-activities').prepend("<%= j render("/public_activity/post/create", a: @post_activity) %>")
+<% end %>

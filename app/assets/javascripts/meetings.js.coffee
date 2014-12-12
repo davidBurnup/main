@@ -1,27 +1,28 @@
 auto_load ->
-  $('#meetings').fullCalendar({
-    lang : "fr",
-    height: cal_height(),
-    eventSources: [
-      url: '/reunions.json',
-      type: 'GET',
-      data: {
-      },
-      error: ->
-        alert "Une erreur s'est produite"
+  if $('#meetings').length > 0
+    $('#meetings').fullCalendar({
+      lang : "fr",
+      height: cal_height(),
+      eventSources: [
+        url: '/reunions.json',
+        type: 'GET',
+        data: {
+        },
+        error: ->
+          alert "Une erreur s'est produite"
+        ,
+      ],
+      eventClick: (calEvent, jsEvent, view) ->
+        $.ajax
+          url: calEvent.url
+        jsEvent.preventDefault()
       ,
-    ],
-    eventClick: (calEvent, jsEvent, view) ->
-      $.ajax
-        url: calEvent.url
-      jsEvent.preventDefault()
-    ,
-    handleWindowResize:true
-  })
+      handleWindowResize:true
+    })
 
-  load_chosens()
-  $(window).resize ->
-    resize_cal()
+    load_chosens()
+    $(window).resize ->
+      resize_cal()
 
 @resize_cal = ->
   $('#meetings').fullCalendar('option', 'height', cal_height())

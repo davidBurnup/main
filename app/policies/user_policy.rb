@@ -15,7 +15,7 @@ class UserPolicy
   end
 
   def destroy?
-    @user.admin?
+    @user.admin? or @record.user == @user
   end
 
 end

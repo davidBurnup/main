@@ -3,7 +3,6 @@ class Song < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
-
   after_save :parse_notes
   before_save :set_creator
 

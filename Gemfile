@@ -19,7 +19,7 @@ gem 'autogrow-textarea-rails'
 gem 'paperclip', github: 'thoughtbot/paperclip'
 gem 'public_activity'
 gem "haml"
-gem "socialization"
+gem "socialization", github: 'davidfabreguette/socialization'
 gem 'cocoon'
 gem 'momentjs-rails', '~> 2.5.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 3.0.0.1'
@@ -32,6 +32,10 @@ gem 'sinatra', '~> 1.4.5'
 gem 'will_paginate', '~> 3.0.5'
 gem 'bootstrap-will_paginate', '~> 0.0.10'
 gem 'mandrill-api'
+gem 'jquery-hotkeys-rails'
+gem 'acts_as_commentable'
+gem 'rails_autolink'
+gem "auto_html"
 
 group :development do
   gem "haml-rails"

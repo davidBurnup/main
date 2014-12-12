@@ -1,0 +1,6 @@
+<% if @likable.present? %>
+  if($('#like-<%= @likable.class.name.downcase.gsub(":","_") %>-<%=@likable.id.to_s%>').length > 0) {
+      likable = $('#like-<%= @likable.class.name.downcase.gsub(":","_") %>-<%=@likable.id.to_s%>')
+      $(likable).html("<%= escape_javascript(render("socializables/inner_like", likable: @likable)) %>")
+  }
+<% end %>
