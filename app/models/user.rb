@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :church_role
   accepts_nested_attributes_for :instrument_preferences, :reject_if => :all_blank, :allow_destroy => true
 
-  validates :name, :email, :presence => true
+  validates :first_name, :last_name, :email, :presence => true
   validates :password, :presence => true, :on => :create
 
   scope :leaders, -> {
@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
   end
 
   def full_name
-    "#{self.first_name.downcase.capitalize} #{self.last_name.downcase.capitalize}"
+    "#{self.first_name ? self.first_name.downcase.capitalize : ""} #{self.last_name ? self.last_name.downcase.capitalize : ""}"
   end
 
   def name
