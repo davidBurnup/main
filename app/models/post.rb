@@ -9,7 +9,7 @@ class Post < ActiveRecord::Base
   auto_html_for :content do
     html_escape
     image
-    youtube(:width => 550, :height => 350, :autoplay => false)
+    youtube(:autoplay => false)
     link :target => "_blank", :rel => "nofollow"
     simple_format
   end
