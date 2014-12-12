@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
   end
 
   def full_name
-    "#{self.first_name.downcase.capitalize} #{self.last_name.downcase.capitalize}"
+    "#{self.first_name ? self.first_name.downcase.capitalize : ""} #{self.last_name ? self.last_name.downcase.capitalize : ""}"
   end
 
   def name
