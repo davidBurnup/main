@@ -11,7 +11,7 @@ class Comment < ActiveRecord::Base
   auto_html_for :comment do
     html_escape
     image
-    youtube(:autoplay => false)
+    youtube(:width => 300, :height => 200, :autoplay => false)
     link :target => "_blank", :rel => "nofollow"
     simple_format
   end
