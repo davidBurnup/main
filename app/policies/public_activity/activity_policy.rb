@@ -7,11 +7,11 @@ class PublicActivity::ActivityPolicy
   end
 
   def index?
-    @user.admin?
+    true
   end
 
   def update?
-    @user.admin?
+    true
   end
 
   def destroy?
