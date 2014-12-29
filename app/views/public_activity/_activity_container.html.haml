@@ -5,6 +5,7 @@
 - image_alt ||= ""
 - title ||= ""
 - content ||= ""
+- not_linkable ||= false
 
 - if activity
   %li.media{id: "activity-#{activity.id}"}
@@ -16,7 +17,7 @@
       - if policy(activity).destroy?
         = link_to activity_path(activity), class: "destroy-post pull-right", remote: true, method: :delete, confirm: "Voulez-vous vraiment supprimer ceci ?" do
           = fa_icon "trash"
-      - if trackable.class.name != "Post"
+      - if !not_linkable
         = link_to trackable do
           %h4.media-heading
             = title

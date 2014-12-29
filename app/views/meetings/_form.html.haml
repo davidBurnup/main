@@ -29,7 +29,7 @@
         .col-lg-12
 
       .row
-        = f.simple_fields_for :practices do |practice|
+        = f.simple_fields_for :practice do |practice|
           .col-lg-4.col-md-4.col-sm-4.col-xs-4
             = practice.input :start_at, :as => :string, :input_html => { "data-behaviour" => "datepicker", :value => l(@meeting.start_at ? @meeting.start_at : Time.now  + 1.day)}
           .col-lg-4.col-md-4.col-sm-4.col-xs-4

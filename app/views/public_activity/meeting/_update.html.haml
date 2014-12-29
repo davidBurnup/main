@@ -1,0 +1,11 @@
+- if a.trackable and a.owner
+  - content = render "public_activity/meeting/meeting", meeting: a.trackable, is_update: true
+  = render "/public_activity/activity_container",
+    :activity => a,
+    :title => a.owner.full_name,
+    :image_link => edit_user_registration_path,
+    :image_url => a.owner.avatar.url(:tiny),
+    :image_alt => "Photo de #{a.owner.full_name}",
+    :content => content,
+    :trackable =>  a.trackable,
+    :not_linkable => true

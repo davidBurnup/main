@@ -1,0 +1,18 @@
+- meeting ||= nil
+- is_update ||= false
+
+- if meeting
+  %p
+    = " a #{!is_update ? "ajouté une nouvelle réunion" : "modifié la réunion"}"
+    = link_to meeting_path(meeting) do
+      = "\"#{meeting.label}\" prévu le #{l meeting.start_at}"
+  %p
+    - if !is_update
+      La liste des chants est :
+    - else
+      La nouvelle liste des chants est :
+    %ul
+      - meeting.meeting_songs.each do |m|
+        - if m.song
+          %li
+            = link_to("#{m.song.title} (#{m.song.prefered_key(m.leader)}) - #{m.leader ? " dirigé par #{m.leader.name}" : ""}", song_path(m.song), :target => "_blank")

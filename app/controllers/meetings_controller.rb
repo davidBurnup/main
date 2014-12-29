@@ -52,14 +52,14 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.new
     @meeting.meeting_users.build if @meeting and @meeting.meeting_users.empty?
     @meeting.meeting_songs.build if @meeting and @meeting.meeting_songs.empty?
-    @meeting.practices.build if @meeting and @meeting.practices.empty?
+    @meeting.practice = Practice.new if @meeting and !@meeting.practice
   end
 
   # GET /meetings/1/edit
   def edit
     @meeting.meeting_users.build if @meeting and @meeting.meeting_users.empty?
     @meeting.meeting_songs.build if @meeting and @meeting.meeting_songs.empty?
-    @meeting.practices.build if @meeting and @meeting.practices.empty?
+    @meeting.practice = Practice.new if @meeting and !@meeting.practice
   end
 
   # POST /meetings
@@ -122,6 +122,6 @@ class MeetingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def meeting_params
-      params.require(:meeting).permit([:start_at, :duration, :label, songs: [], :practices_attributes => [:id, :start_at, :duration, :reminder, :_destroy], :meeting_users_attributes => [:id, :user_id, :is_leader, :instrument, :_destroy], :meeting_songs_attributes => [:id, :leader_id, :song_id, :_destroy]])
+      params.require(:meeting).permit([:start_at, :duration, :label, songs: [], :practice_attributes => [:id, :start_at, :duration, :reminder, :_destroy], :meeting_users_attributes => [:id, :user_id, :is_leader, :instrument, :_destroy], :meeting_songs_attributes => [:id, :leader_id, :song_id, :_destroy]])
     end
 end
