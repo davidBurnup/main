@@ -1,15 +1,19 @@
 class Meeting < ActiveRecord::Base
 
   has_many :meeting_users
-  has_many :practices
+  has_one :practice
   has_many :meeting_songs
 
-  accepts_nested_attributes_for :meeting_users, :practices, :meeting_songs, allow_destroy: true
+  accepts_nested_attributes_for :meeting_users, :practice, :meeting_songs, allow_destroy: true
 
   validates :start_at, :presence => true
   validates :label, :presence => true
 
   after_save :format_label, :plan_practice_notifications
+
+  include PublicActivity::Model
+  tracked owner: Proc.new{ |controller, model| controller.current_user }, only: [:create, :update]
+  acts_as_commentable
 
   def end_at
     Time.at(start_at.to_i + duration) if start_at and start_at.to_i > 0
@@ -39,10 +43,6 @@ class Meeting < ActiveRecord::Base
       lds = lds.first
     end
     lds
-  end
-
-  def practice
-    practices.first if practices
   end
 
   def plan_practice_notifications

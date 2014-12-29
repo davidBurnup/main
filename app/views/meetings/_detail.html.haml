@@ -25,7 +25,7 @@
             Durée
           %td
             = duration_in_words(meeting)
-        - if meeting.practices.present? and practice = meeting.practices.first
+        - if meeting.practice.present? and practice = meeting.practice
           %tr
             %th{"colspan" => "2"}
               Répétition
@@ -68,5 +68,3 @@
               = m.leader.name if m.leader
             %td
               = m.song.prefered_key(m.leader) if m.song
-
-

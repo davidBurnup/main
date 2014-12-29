@@ -6,4 +6,5 @@
       :image_url => a.owner.avatar.url(:tiny),
       :image_alt => "Photo de #{a.owner.full_name}",
       :content => a.trackable.content_html,
-      :trackable =>  a.trackable
+      :trackable =>  a.trackable,
+      :not_linkable => true
