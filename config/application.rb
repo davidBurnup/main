@@ -10,8 +10,8 @@ module Worship
   class Application < Rails::Application
 
     config.generators do |g|
-      
-      
+
+
     end
 
     config.to_prepare do
@@ -22,6 +22,8 @@ module Worship
       Devise::UnlocksController.layout "public"
       Devise::PasswordsController.layout "public"
 
+      Dir[File.join(Rails.root, "lib", "auto_html", "filters", "*.rb")].each {|l| require l }
+      
     end
 
     # Settings in config/environments/* take precedence over those specified here.

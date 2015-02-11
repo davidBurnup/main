@@ -11,8 +11,8 @@ Sidekiq.configure_client do |config|
 end
 
 
-if File.exists?(schedule_file)
-  Sidekiq::Cron::Job.load_from_hash YAML.load_file(schedule_file)
+if File.exists?(schedule_file) and file_content = YAML.load_file(schedule_file)
+  Sidekiq::Cron::Job.load_from_hash file_content
 end
 
 if defined?(PhusionPassenger)
