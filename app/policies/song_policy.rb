@@ -43,7 +43,7 @@ class SongPolicy
     end
 
     # User is moderator of the origin church of the song
-    if @user.church and @user.church == @song.origin_church and @user.has_church_role?("moderator")
+    if @user.church and (@user.church == @song.origin_church or @song.new_record?) and @user.has_church_role?("moderator")
       can = true
     end
 
