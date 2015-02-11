@@ -29,6 +29,8 @@ fr:
               invalid: "incorrect"
         song:
           attributes:
+            bpm:
+              blank: BPM
             title:
               blank: Titre obligatoire
             content:

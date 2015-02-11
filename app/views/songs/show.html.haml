@@ -8,6 +8,9 @@
         - if @song.author.present?
           .song-author
             = @song.author
+        - if @song.bpm.present?
+          .song-bpm
+            = "#{@song.bpm} BPM"
         = "Clé : #{usp.prefered_key}"
         - if usp.prefered_capo.present?
           = " / Capo : #{usp.prefered_capo}"
@@ -31,6 +34,9 @@
       - if @song.author.present?
         .song-author
           = @song.author
+      - if @song.bpm.present?
+        .song-bpm
+          = "#{@song.bpm} BPM"
 = content_for :left_column do
 
   #song-container.loading

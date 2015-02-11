@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141212202748) do
+ActiveRecord::Schema.define(version: 20150211122351) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -180,6 +180,7 @@ ActiveRecord::Schema.define(version: 20141212202748) do
     t.string   "author"
     t.integer  "created_by"
     t.integer  "origin_church_id"
+    t.integer  "bpm"
   end
 
   add_index "songs", ["clean_content"], name: "clean_content_full_text", type: :fulltext

@@ -65,12 +65,7 @@ class Song < ActiveRecord::Base
 
     unless @disable_callback
       rows = self.content.split(/\r?\n/)
-
-
-
       notes = []
-
-
       rows.each_with_index do |row, row_index|
 
         notes[row_index] = {}
