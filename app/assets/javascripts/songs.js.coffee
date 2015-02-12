@@ -29,6 +29,12 @@
         if $('#song-container .song-line')[line_num - 1]
           $($('#song-container .song-line')[line_num - 1]).addClass('no-chord')
 
+      # Add empty class for empty lines
+      $('.song-line').each ->
+        line = $(this).text().trim()
+        if line == ""
+          $(this).addClass('empty-song-line')
+
       content_notes = $('#song-container .content-note')
       $('#song-notes > div.note').each ->
         offset = $(this).attr('data-offset')

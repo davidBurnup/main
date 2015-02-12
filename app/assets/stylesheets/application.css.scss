@@ -292,4 +292,8 @@ footer {
   &.no-chord {
     margin:0px 0;
   }
+  &.empty-song-line {
+    height: 0;
+    margin: 25px 0 0 0;
+  }
 }
