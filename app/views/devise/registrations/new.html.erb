@@ -16,5 +16,8 @@
     <div class="form-group">
       <%= f.input :password_confirmation, class: 'form-control' %>
     </div>
+    <div class="form-group">
+      <%= f.input :church_id, as: :select, collection: Church.all.map{|c| [c.name, c.id]}, class: 'form-control', include_blank: false %>
+    </div>
     <%= f.submit "S'INSCRIRE", :class => 'btn btn-primary right'%>
 <% end %>
