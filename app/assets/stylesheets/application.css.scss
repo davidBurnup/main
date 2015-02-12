@@ -287,13 +287,3 @@ footer {
   margin-bottom: 10px;
   clear:both;
 }
-.song-line {
-  margin:30px 0;
-  &.no-chord {
-    margin:0px 0;
-  }
-  &.empty-song-line {
-    height: 0;
-    margin: 25px 0 0 0;
-  }
-}
