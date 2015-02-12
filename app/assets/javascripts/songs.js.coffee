@@ -10,9 +10,26 @@
       line_height = 80
       offset_width = 5.6
 
-      content_notes = $('#song-container .content-note')
 
       note_index = 0
+
+
+      lines_count = $('#song-container .song-line').length
+      available_lines = []
+      i = 1
+      while i <= lines_count
+        available_lines.push i
+        i++
+      lines_with_notes = $.unique($.map($('#song-notes > div.note'), (val, i) ->
+        parseInt($(val).attr('data-line'));
+      ))
+
+      lines_with_no_chords = arr_diff(available_lines,lines_with_notes)
+      for line_num in lines_with_no_chords
+        if $('#song-container .song-line')[line_num - 1]
+          $($('#song-container .song-line')[line_num - 1]).addClass('no-chord')
+
+      content_notes = $('#song-container .content-note')
       $('#song-notes > div.note').each ->
         offset = $(this).attr('data-offset')
         line = $(this).attr('data-line')
@@ -46,3 +63,22 @@ ready = ->
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
+
+@arr_diff = (a1, a2) ->
+  a = []
+  diff = []
+  i = 0
+  while i < a1.length
+    a[a1[i]] = true
+    i++
+
+  i = 0
+  while i < a2.length
+    if a[a2[i]]
+      delete a[a2[i]]
+    else
+      a[a2[i]] = true
+    i++
+  for k of a
+    diff.push k
+  diff

@@ -64,7 +64,8 @@ class Song < ActiveRecord::Base
   def parse_notes
 
     unless @disable_callback
-      rows = self.content.split(/\r?\n/)
+      rows = self.content.split(/\n/)
+      rows = rows.map{|line| line.gsub(/\r\n|\r|\n/, '')}.reject{|line| line.blank?}.compact
       notes = []
       rows.each_with_index do |row, row_index|
 
@@ -112,8 +113,15 @@ class Song < ActiveRecord::Base
     html_content = html_content.gsub(/(Couplet&nbsp;[1-9]:)/,'<span class="song-section-title">\1</span>')
     html_content = html_content.gsub(/(Refrain:)/,'<span class="song-section-title">\1</span>')
     html_content = html_content.gsub(/(Choeur:)/,'<span class="song-section-title">\1</span>')
+    html_content = html_content.gsub(/(Pont:)/,'<span class="song-section-title">\1</span>')
     #html_content = html_content.gsub(/^(\s)*\n/,'<span class="section-padder">&nbsp;</span><br/>')
-    html_content = html_content.gsub("\n","<br/><br/>")
+
+    # Remove empty lines
+    html_content = html_content.split("\n")
+    html_content = html_content.map{|line| line.gsub(/\r\n|\r|\n/, '')}.reject{|line| line.blank?}.compact
+
+    html_content = html_content.map{|line| "<div class=\'song-line\'>#{line}</div>"}.join("")
+    # html_content = html_content.gsub("\n","<br/><br/>")
 
     html_content = html_content.gsub(Song.match_note,'<span class="content-note" data-note="\1">&nbsp;</span>')
     html_content
