@@ -7,4 +7,6 @@
       :image_alt => "Photo de #{a.owner.full_name}",
       :content => a.trackable.content_html,
       :trackable =>  a.trackable,
+      :trackable_file_key_name => :attachment,
+      :trackable_files => a.trackable.music_medias,
       :not_linkable => true

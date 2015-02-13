@@ -28,13 +28,14 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html { redirect_to feeds_path }
         format.json { render :show, status: :created, location: @post }
         format.js {
           @post_activity = @post.latest_activity
         }
 
       else
+    raise @post.errors.inspect
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
         format.js {}
@@ -74,6 +75,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:content, :user_id, :song_id, :external_url)
+      params.require(:post).permit(:content, :user_id, :song_id, :external_url, :music_medias_attributes => [:attachment])
     end
 end

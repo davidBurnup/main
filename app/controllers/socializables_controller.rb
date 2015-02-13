@@ -5,6 +5,9 @@ class SocializablesController < ApplicationController
   def index
     @activities = PublicActivity::Activity.all.paginate(page: params[:page], per_page: 15).order('created_at DESC')
     authorize @activities
+    @post = Post.new
+    @post.music_medias.build
+
     respond_to do |f|
       f.html
       f.js

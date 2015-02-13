@@ -36,6 +36,7 @@ gem 'jquery-hotkeys-rails'
 gem 'acts_as_commentable'
 gem 'rails_autolink'
 gem "auto_html"
+gem "mediaelement_rails"
 
 group :development do
   gem "haml-rails"
