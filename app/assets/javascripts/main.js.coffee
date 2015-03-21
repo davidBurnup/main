@@ -1,3 +1,13 @@
+@load_media_element_player = ->
+  $('video,audio').mediaelementplayer()
+@load_filestyle = ->
+  $(".filestyle").each ->
+    $(this).filestyle({
+      size: $(this).attr('data-size'),
+      input: false,
+      iconName: $(this).attr('data-iconName'),
+      buttonText: $(this).attr('data-buttonText')
+    })
 @global_ready = ->
   $('[data-behaviour~=datepicker]').datetimepicker({
     language: "fr",
@@ -8,6 +18,8 @@
     iconName: "glyphicon-camera",
     buttonText: "Changer la photo"
   })
+  load_media_element_player();
+  load_filestyle();
   $('.link_to_print').click ->
     window.print()
   $('.autogrow').autoGrow()

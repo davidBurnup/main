@@ -25,6 +25,7 @@
 //= require fullcalendar/fr
 //= require chosen-jquery
 //= require jquery-hotkeys
+//= require mediaelement_rails
 
 //= require main
 //= require feeds
@@ -35,4 +36,3 @@
 jQuery(function(){
 
 })
-

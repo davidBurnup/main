@@ -3,7 +3,7 @@
   .row
     .col-sm-12
       #post-form
-        = render "posts/form", :post => Post.new
+        = render "posts/form", :post => @post
   .row
     .col-sm-12
       %ul.media-list#feed-activities

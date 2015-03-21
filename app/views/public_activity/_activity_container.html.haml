@@ -6,6 +6,8 @@
 - title ||= ""
 - content ||= ""
 - not_linkable ||= false
+- trackable_files ||= []
+- trackable_file_key_name ||= nil
 
 - if activity
   %li.media{id: "activity-#{activity.id}"}
@@ -27,7 +29,10 @@
           = title
         = content
 
-
+        - if trackable_files.present?
+          - trackable_files.each do |trackable_file|
+            - trackable_attachment = trackable_file.send(trackable_file_key_name)
+            %audio{src: trackable_attachment.url, width: "100%"}
       .media-footer.activity-footer
         = time_ago_in_words(activity.created_at)
         \-

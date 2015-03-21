@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211122351) do
+ActiveRecord::Schema.define(version: 20150213211802) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -88,6 +88,16 @@ ActiveRecord::Schema.define(version: 20150211122351) do
 
   add_index "likes", ["likeable_id", "likeable_type"], name: "fk_likeables", using: :btree
   add_index "likes", ["liker_id", "liker_type"], name: "fk_likes", using: :btree
+
+  create_table "media", force: true do |t|
+    t.integer  "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+  end
 
   create_table "meeting_songs", force: true do |t|
     t.integer  "song_id"

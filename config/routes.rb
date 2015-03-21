@@ -23,7 +23,7 @@ Worship::Application.routes.draw do
 
   devise_for :users, :path => "utilisateurs", :path_names => {:sign_in => 'se-connecter', :sign_out => 'se-deconnecter', password: 'mot-de-passe', confirmation: 'confirmation', unlock: 'deverrouillage', registration: 'inscription', sign_up: 'nouvelle' }, :controllers => {:registrations => "registrations"}
   devise_scope :user do
-    get 'utilisateurs/inscription/mot-de-passe' => "registrations#password", :as => "edit_password"
+    get 'utilisateurs/inscription/mot-de-passe' => "registrations#password", :as => "edit_current_password"
     put 'utilisateurs/inscription/mot-de-passe' => "registrations#update_password", :as => "update_current_password"
 
     get 'utilisateurs/inscription/parametres-generaux' => "registrations#instruments", :as => "instruments"
