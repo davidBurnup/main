@@ -28,15 +28,26 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to feeds_path }
+        format.html {
+          if @post.song.present?
+            redirect_to song_path(@song)
+          else
+            redirect_to feeds_path
+          end
+        }
         format.json { render :show, status: :created, location: @post }
         format.js {
           @post_activity = @post.latest_activity
         }
 
       else
-    raise @post.errors.inspect
-        format.html { render :new }
+        format.html {
+          if @post.song.present?
+            redirect_to song_path(@song)
+          else
+            redirect_to feeds_path
+          end
+        }
         format.json { render json: @post.errors, status: :unprocessable_entity }
         format.js {}
       end

@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
 
   belongs_to :user
+  belongs_to :song
   has_many :music_medias
   # has_many :medias
 

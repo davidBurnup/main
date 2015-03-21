@@ -25,6 +25,12 @@ class SongsController < ApplicationController
   # GET /songs/1
   # GET /songs/1.json
   def show
+
+    song_posts = @song.posts
+    @activities = PublicActivity::Activity.where(:trackable_type => "Post", :trackable_id => song_posts.collect(&:id)).paginate(page: params[:page], per_page: 15).order('created_at DESC')
+    @post = Post.new
+    @post.music_medias.build
+
     authorize @song
   end
 

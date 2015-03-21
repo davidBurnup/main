@@ -7,6 +7,7 @@ class Song < ActiveRecord::Base
   before_save :set_creator
 
   has_many :notes
+  has_many :posts
   has_many :user_song_preferences
   belongs_to :origin_church, :class_name => "Church", :foreign_key => "origin_church_id"
   belongs_to :creator, :class_name => "User", :foreign_key => "created_by"

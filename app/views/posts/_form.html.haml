@@ -1,5 +1,5 @@
 - post ||= nil
-
+- song ||= nil
 - if post
   - post.user = current_user
   = simple_form_for(post, :remote => true, :multipart => true) do |f|
@@ -9,6 +9,7 @@
       .media-body
         = f.input :content, :placeholder => "Partagez un statut, une video youtube, un lien interessant, une image ...", :label => false, input_html: { class: "autogrow post_content" }, "autocomplete" => "off"
         = f.input :user_id, as: :hidden
+        = f.input :song_id, as: :hidden
         = f.simple_fields_for :music_medias do |m|
           = m.input :id, as: :hidden
           = m.input :attachment, as: :file, :label => false, :input_html => {:class => "filestyle", :'data-size' => 'sm', :'data-input' => false, :'data-iconName' => 'glyphicon-music', :'data-buttonText' => "Fichier MP3"}
