@@ -1,9 +1,9 @@
 %p#notice= notice
 
 %p
-  %b Name:
+  %b Nom:
   = @church.name
 
-= link_to 'Edit', edit_church_path(@church)
+= link_to 'Modifier', edit_church_path(@church), class: "btn-xs btn btn-primary"
 \|
-= link_to 'Back', churches_path
+= link_to 'Retour', churches_path, class: "btn-xs btn btn-primary"

@@ -4,6 +4,7 @@ fr:
       not_saved: "Erreur lors de la sauvegarde"
   activerecord:
     models:
+      church: "Église"
       user:
         one: "Utilisateur"
         other: "Utilisateurs"
@@ -36,6 +37,8 @@ fr:
             content:
               blank: Paroles obligatoires
     attributes:
+      church:
+        name: Nom
       user:
         avatar: Photo
         first_name: Prénom
