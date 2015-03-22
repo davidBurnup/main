@@ -1,4 +1,5 @@
-$('#post-form').html("<%= j render("posts/form", :post => Post.new)%>")
+$('#post-form').html("<%= j render("posts/form", :post => @new_post)%>")
 <% if @post_activity %>
     $('#feed-activities').prepend("<%= j render("/public_activity/post/create", a: @post_activity) %>")
 <% end %>
+load_post_form_features()

@@ -24,13 +24,23 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+
     @post = Post.new(post_params)
+    @post.remove_blank_music_medias
+
+    # The new post that will populate the form
+    @new_post = Post.new
+    @new_post.music_medias.build
 
     respond_to do |format|
       if @post.save
+        if @post.song.present?
+          @new_post.song = @post.song
+        end
+
         format.html {
           if @post.song.present?
-            redirect_to song_path(@song)
+            redirect_to song_path(@post.song)
           else
             redirect_to feeds_path
           end
@@ -41,9 +51,10 @@ class PostsController < ApplicationController
         }
 
       else
+        flash[:alert] = @post.errors.messages
         format.html {
           if @post.song.present?
-            redirect_to song_path(@song)
+            redirect_to song_path(@post.song)
           else
             redirect_to feeds_path
           end

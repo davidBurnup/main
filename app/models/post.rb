@@ -24,4 +24,16 @@ class Post < ActiveRecord::Base
     self.activities.order(:created_at => :desc).first
   end
 
+  def remove_blank_music_medias
+    new_music_medias = []
+
+    self.music_medias.each do |indeterminate_music_media|
+      if indeterminate_music_media.attachment.present?
+        new_music_medias << indeterminate_music_media
+      end
+    end
+
+    self.music_medias = new_music_medias
+  end
+
 end
