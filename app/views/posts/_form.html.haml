@@ -1,5 +1,6 @@
 - post ||= nil
 - song ||= nil
+- form_in_tab ||= false
 - if post
   - post.user = current_user
   = simple_form_for(post, :remote => true, :multipart => true) do |f|
@@ -7,18 +8,21 @@
       %span.pull-left
         = image_tag current_user.avatar.url(:tiny), class: "img-circle"
       .media-body
-        = f.input :content, :placeholder => "Partagez un statut, une video youtube, un lien interessant, une image ...", :label => false, input_html: { class: "autogrow post_content" }, "autocomplete" => "off"
+        = f.input :content, :placeholder => "Partagez un statut, une video youtube, un lien soundcloud, un lien interessant, une image ...", :label => false, input_html: { class: "autogrow post_content" }, "autocomplete" => "off"
         = f.input :user_id, as: :hidden
         = f.input :song_id, as: :hidden
+      .media-footer
         = f.simple_fields_for :music_medias do |m|
           = m.input :id, as: :hidden
           = m.input :attachment, as: :file, :label => false, :input_html => {:class => "filestyle", :'data-size' => 'sm', :'data-input' => false, :'data-iconName' => 'glyphicon-music', :'data-buttonText' => "Fichier MP3"}
-      .media-footer
         = f.button :submit, "Partager", { :class => "btn btn-primary btn-sm pull-right", id: "post-submit" }
 
 
     :coffee
-      $ ->
+      @load_post_form_features = ->
+        loadAutoGrow()
+        load_media_element_player()
+        load_filestyle()
         $("#post_content").focus ->
           $('.post-form').addClass("opened")
         $("#post_content").blur ->
@@ -28,3 +32,16 @@
         $("#post_content").bind 'keyup', 'ctrl+return', ->
           if $('#post_content').val().length > 0
             $('#post-submit').trigger('click')
+
+    - if form_in_tab
+      :coffee
+        $ ->
+          if $("a#post-form-tab").parent().hasClass('active')
+            load_post_form_features()
+          else
+            $('ul.nav-tabs > li > a#post-form-tab').on 'shown.bs.tab', (e) ->
+              load_post_form_features()
+    - else
+      :coffee
+        $ ->
+          load_post_form_features()

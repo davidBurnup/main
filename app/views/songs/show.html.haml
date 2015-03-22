@@ -45,7 +45,7 @@
       %a{"aria-controls" => "lyrics", "data-toggle" => "tab", :href => "#lyrics", :role => "tab"}
         Paroles
     %li{:role => "presentation"}
-      %a{"aria-controls" => "social", "data-toggle" => "tab", :href => "#social", :role => "tab"}
+      %a{"aria-controls" => "social", "data-toggle" => "tab", :href => "#social", :role => "tab", :id => "post-form-tab"}
         Commentaires
 
   / Tab panes
@@ -57,11 +57,11 @@
       .row
         .col-sm-12
           #post-form
-            = render "posts/form", :post => @post, :song => @song
+            = render "posts/form", :post => @post, :song => @song, :form_in_tab => true
       .row
         .col-sm-12
           %ul.media-list#feed-activities
-            = render_activities(@activities)
+            = render_activities(@post_activities)
 
           #infinite-scrolling
-            = will_paginate @activities
+            = will_paginate @post_activities

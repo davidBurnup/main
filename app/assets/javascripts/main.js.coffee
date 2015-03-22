@@ -8,7 +8,10 @@
       iconName: $(this).attr('data-iconName'),
       buttonText: $(this).attr('data-buttonText')
     })
+@loadAutoGrow = ->
+  $('.autogrow').autoGrow()
 @global_ready = ->
+  tabs_auto_load()
   $('[data-behaviour~=datepicker]').datetimepicker({
     language: "fr",
   })
@@ -18,11 +21,11 @@
     iconName: "glyphicon-camera",
     buttonText: "Changer la photo"
   })
-  load_media_element_player();
-  load_filestyle();
+  # load_media_element_player();
+  # load_filestyle();
   $('.link_to_print').click ->
     window.print()
-  $('.autogrow').autoGrow()
+  # loadAutoGrow()
   if($('[data-link-to]').length > 0)
     $('[data-link-to]').each ->
       link_to = $(this).attr('data-link-to')
@@ -80,5 +83,23 @@
 @auto_load = (ready_var) ->
   $(document).ready(ready_var)
   $(document).on('page:load', ready_var)
+
+@tabs_auto_load = ->
+
+  $('ul.nav-tabs > li > a').click (e) ->
+    $(this).tab 'show'
+    e.preventDefault()
+
+  # store the currently selected tab in the hash value
+  $('ul.nav-tabs > li > a').on 'shown.bs.tab', (e) ->
+    id = $(e.target).attr('href').substr(1)
+    scrollmem = $('html,body').scrollTop()
+    window.location.hash = id
+    $('html,body').scrollTop(scrollmem)
+    return
+
+  # on load of the page: switch to the currently selected tab
+  hash = window.location.hash
+  $('ul.nav-tabs > li > a[href="' + hash + '"]').tab 'show'
 
 auto_load(global_ready)
