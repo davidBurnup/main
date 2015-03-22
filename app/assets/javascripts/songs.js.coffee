@@ -7,6 +7,13 @@
   setTimeout (->
     if $("#song-container").length > 0
 
+      # Add empty class for empty lines
+      $('.song-line').each ->
+        line = $(this).text().trim()
+        if line == ""
+          $(this).addClass('empty-song-line')
+          # $(this).remove()
+
       line_height = 80
       offset_width = 5.6
 
@@ -14,27 +21,23 @@
       note_index = 0
 
 
-      lines_count = $('#song-container .song-line').length
+      lines_count = $('#song-container .song-line:not(.empty-song-line)').length
       available_lines = []
 
       i = 1
       while i <= lines_count
         available_lines.push i
         i++
+
       lines_with_notes = $.unique($.map($('#song-notes > div.note'), (val, i) ->
         parseInt($(val).attr('data-line'));
       ))
 
       lines_with_no_chords = arr_diff(available_lines,lines_with_notes)
       for line_num in lines_with_no_chords
-        if $('#song-container .song-line')[line_num - 1]
-          $($('#song-container .song-line')[line_num - 1]).addClass('no-chord')
+        if $('#song-container .song-line:not(.empty-song-line)')[line_num - 1]
+          $($('#song-container .song-line:not(.empty-song-line)')[line_num - 1]).addClass('no-chord')
 
-      # Add empty class for empty lines
-      $('.song-line').each ->
-        line = $(this).text().trim()
-        if line == ""
-          $(this).addClass('empty-song-line')
 
       content_notes = $('#song-container .content-note')
       $('#song-notes > div.note').each ->
