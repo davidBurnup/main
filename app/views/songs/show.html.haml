@@ -37,12 +37,13 @@
       - if @song.bpm.present?
         .song-bpm
           = "#{@song.bpm} BPM"
+
 = content_for :left_column do
 
   / Nav tabs
   %ul.nav.nav-tabs{:role => "tablist"}
     %li.active{:role => "presentation"}
-      %a{"aria-controls" => "lyrics", "data-toggle" => "tab", :href => "#lyrics", :role => "tab"}
+      %a{"aria-controls" => "lyrics", "data-toggle" => "tab", :href => "#lyrics", :role => "tab", :id => "lyrics-tab"}
         Paroles
     %li{:role => "presentation"}
       %a{"aria-controls" => "social", "data-toggle" => "tab", :href => "#social", :role => "tab", :id => "post-form-tab"}
@@ -53,6 +54,14 @@
     #lyrics.tab-pane.active{:role => "tabpanel"}
       #song-container.loading
         = render "song_container", :song => @song
+
+      :coffee
+        $ ->
+          if $("a#lyrics-tab").parent().hasClass('active')
+            load_chords()
+          else
+            $('ul.nav-tabs > li > a#lyrics-tab').on 'shown.bs.tab', (e) ->
+              load_chords()
     #social.tab-pane{:role => "tabpanel"}
       .row
         .col-sm-12
