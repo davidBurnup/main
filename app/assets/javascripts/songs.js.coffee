@@ -36,8 +36,9 @@
 
       lines_with_no_chords = arr_diff(available_lines,lines_with_notes)
       for line_num in lines_with_no_chords
-        if $('#song-container .song-line:not(.empty-song-line)')[line_num - 1]
-          $($('#song-container .song-line:not(.empty-song-line)')[line_num - 1]).addClass('no-chord')
+        lines_to_consider = $('#song-container .song-line:not(.empty-song-line.no-chord)')
+        if lines_to_consider[line_num - 1]
+          $(lines_to_consider[line_num - 1]).addClass('no-chord')
 
 
       content_notes = $('#song-container .content-note')
