@@ -32,7 +32,7 @@
       lines_with_notes = $.unique($.map($('#song-notes > div.note'), (val, i) ->
         parseInt($(val).attr('data-line'));
       ))
-      console.log(postFormInit)
+      console.log(lines_with_notes)
 
       lines_with_no_chords = arr_diff(available_lines,lines_with_notes)
       for line_num in lines_with_no_chords
