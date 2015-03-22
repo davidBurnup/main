@@ -25,9 +25,9 @@
         load_filestyle()
         $("#post_content").focus ->
           $('.post-form').addClass("opened")
-        $("#post_content").blur ->
-          if $(this).val().length == 0
-            $('.post-form').removeClass("opened")
+        # $("#post_content").blur ->
+        #   if $(this).val().length == 0
+        #     $('.post-form').removeClass("opened")
 
         $("#post_content").bind 'keyup', 'ctrl+return', ->
           if $('#post_content').val().length > 0
@@ -35,13 +35,15 @@
 
     - if form_in_tab
       :coffee
-        $ ->
+        postFormInit = ->
           if $("a#post-form-tab").parent().hasClass('active')
             load_post_form_features()
           else
             $('ul.nav-tabs > li > a#post-form-tab').on 'shown.bs.tab', (e) ->
               load_post_form_features()
+        auto_load(postFormInit)
     - else
       :coffee
-        $ ->
+        postFormInit = ->
           load_post_form_features()
+        auto_load(postFormInit)
