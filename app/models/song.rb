@@ -113,6 +113,8 @@ class Song < ActiveRecord::Base
     html_content = html_content.gsub(" ","&nbsp;")
     html_content = html_content.gsub(/(Couplet&nbsp;[1-9]:)/,'<span class="song-section-title">\1</span>')
     html_content = html_content.gsub(/(Refrain:)/,'<span class="song-section-title">\1</span>')
+    html_content = html_content.gsub(/(Pre-refrain:)/,'<span class="song-section-title">\1</span>')
+    html_content = html_content.gsub(/(Pre-Refrain:)/,'<span class="song-section-title">\1</span>')
     html_content = html_content.gsub(/(Choeur:)/,'<span class="song-section-title">\1</span>')
     html_content = html_content.gsub(/(Pont:)/,'<span class="song-section-title">\1</span>')
     #html_content = html_content.gsub(/^(\s)*\n/,'<span class="section-padder">&nbsp;</span><br/>')
