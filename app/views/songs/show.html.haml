@@ -56,12 +56,13 @@
         = render "song_container", :song => @song
 
       :coffee
-        $ ->
+        toLoad = ->
           if $("a#lyrics-tab").parent().hasClass('active')
             load_chords()
           else
             $('ul.nav-tabs > li > a#lyrics-tab').on 'shown.bs.tab', (e) ->
               load_chords()
+        auto_load(toLoad)
     #social.tab-pane{:role => "tabpanel"}
       .row
         .col-sm-12
