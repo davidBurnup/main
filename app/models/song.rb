@@ -65,8 +65,11 @@ class Song < ActiveRecord::Base
   def parse_notes
 
     unless @disable_callback
-      rows = self.content.split(/\n/)
+      theContent = self.content
+
+      rows = theContent.split("\n")
       rows = rows.map{|line| line.gsub(/\r\n|\r|\n/, '')}.reject{|line| line.blank?}.compact
+
       notes = []
       rows.each_with_index do |row, row_index|
 
