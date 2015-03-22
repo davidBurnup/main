@@ -16,8 +16,9 @@
 
       lines_count = $('#song-container .song-line').length
       available_lines = []
+
       i = 1
-      while i <= lines_count
+      while i < lines_count
         available_lines.push i
         i++
       lines_with_notes = $.unique($.map($('#song-notes > div.note'), (val, i) ->
@@ -26,8 +27,8 @@
 
       lines_with_no_chords = arr_diff(available_lines,lines_with_notes)
       for line_num in lines_with_no_chords
-        if $('#song-container .song-line')[line_num - 1]
-          $($('#song-container .song-line')[line_num - 1]).addClass('no-chord')
+        if $('#song-container .song-line')[line_num]
+          $($('#song-container .song-line')[line_num]).addClass('no-chord')
 
       # Add empty class for empty lines
       $('.song-line').each ->
