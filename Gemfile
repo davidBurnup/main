@@ -34,6 +34,7 @@ gem 'bootstrap-will_paginate', '~> 0.0.10'
 gem 'mandrill-api'
 gem 'jquery-hotkeys-rails'
 gem 'acts_as_commentable'
+gem 'therubyracer'
 gem 'rails_autolink'
 gem "auto_html"
 gem "mediaelement_rails"
