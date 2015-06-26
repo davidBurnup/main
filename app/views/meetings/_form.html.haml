@@ -31,7 +31,7 @@
       .row
         = f.simple_fields_for :practice do |practice|
           .col-lg-4.col-md-4.col-sm-4.col-xs-4
-            = practice.input :start_at, :as => :string, :input_html => { "data-behaviour" => "datepicker", :value => l(@meeting.start_at ? @meeting.start_at : Time.now  + 1.day)}
+            = practice.input :start_at, :as => :string, :input_html => { "data-behaviour" => "datepicker", :value => l(practice.object.start_at ? practice.object.start_at : Time.now  + 1.day)}
           .col-lg-4.col-md-4.col-sm-4.col-xs-4
             = practice.input :duration, :as => :select, :collection => (1..6).map{|numb| ["#{numb} heure#{numb > 1 ? "s" : ""}", numb.hours]}, :include_blank => false
           .col-lg-4.col-md-4.col-sm-4.col-xs-4

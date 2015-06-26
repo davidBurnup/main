@@ -59,7 +59,11 @@ class MeetingsController < ApplicationController
   def edit
     @meeting.meeting_users.build if @meeting and @meeting.meeting_users.empty?
     @meeting.meeting_songs.build if @meeting and @meeting.meeting_songs.empty?
-    @meeting.practice = Practice.new if @meeting and !@meeting.practice
+
+    if @meeting and !@meeting.practice
+      raise "Iin".inspect
+      @meeting.practice = Practice.new
+    end
   end
 
   # POST /meetings
