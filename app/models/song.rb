@@ -111,6 +111,7 @@ class Song < ActiveRecord::Base
   end
 
   def onsong_clean_content(usp=nil)
+    # raise content.inspect
     onsong_content = "{t:#{self.title}}\n"
     onsong_content += "{a:#{self.author} | extrait de burnup.fr}\n"
     if usp
