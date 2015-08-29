@@ -122,7 +122,6 @@ class Song < ActiveRecord::Base
     onsong_content += "{tempo:#{self.bpm}}\n"
     onsong_content += content
     #onsong_content = onsong_content.gsub(/^(\s)*\n/,'')
-    onsong_content = onsong_content.gsub(" ","&nbsp;")
     onsong_content = onsong_content.gsub(/(Couplet&nbsp;[1-9]:)/,'{c:\1}')
     onsong_content = onsong_content.gsub(/(Refrain:)/,'{c:\1}')
     onsong_content = onsong_content.gsub(/(Pre-refrain:)/,'{c:\1}')
