@@ -116,6 +116,8 @@ class Song < ActiveRecord::Base
     if usp
       onsong_content += "{k:#{usp.prefered_key}}\n"
       onsong_content += "{capo:#{usp.prefered_capo}}\n"
+    else
+      onsong_content += "{k:#{self.key}}\n"
     end
     onsong_content += "{tempo:#{self.bpm}}\n"
     onsong_content += content
