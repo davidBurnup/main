@@ -14,7 +14,7 @@
         = "Clé : #{usp.prefered_key}"
         - if usp.prefered_capo.present?
           = " / Capo : #{usp.prefered_capo}"
-    #top-buttons.col-lg-4.col-md-4.col-sm-4.text-right.btn-toolbar
+    #top-buttons.col-lg-4.col-md-4.col-sm-12.text-right.btn-toolbar
       - if policy(@song).edit?
         = link_to edit_song_path(@song), :class => "btn btn-primary btn-sm", :id => "edit_song" do
           %i.glyphicon.glyphicon-edit
