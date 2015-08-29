@@ -110,6 +110,36 @@ class Song < ActiveRecord::Base
     end
   end
 
+  def onsong_clean_content(usp=nil)
+    onsong_content = "{t:#{self.title}}\n"
+    onsong_content += "{a:#{self.author} | extrait de burnup.fr}\n"
+    if usp
+      onsong_content += "{k:#{usp.prefered_key}}\n"
+      onsong_content += "{capo:#{usp.prefered_capo}}\n"
+    end
+    onsong_content += "{tempo:#{self.bpm}}\n"
+    onsong_content += content
+    #onsong_content = onsong_content.gsub(/^(\s)*\n/,'')
+    onsong_content = onsong_content.gsub(" ","&nbsp;")
+    onsong_content = onsong_content.gsub(/(Couplet&nbsp;[1-9]:)/,'{c:\1}')
+    onsong_content = onsong_content.gsub(/(Refrain:)/,'{c:\1}')
+    onsong_content = onsong_content.gsub(/(Pre-refrain:)/,'{c:\1}')
+    onsong_content = onsong_content.gsub(/(Pre-Refrain:)/,'{c:\1}')
+    onsong_content = onsong_content.gsub(/(Choeur:)/,'{c:\1}')
+    onsong_content = onsong_content.gsub(/(Pont:)/,'{c:\1}')
+    #onsong_content = onsong_content.gsub(/^(\s)*\n/,'<span class="section-padder">&nbsp;</span><br/>')
+
+    # # Remove empty lines
+    # onsong_content = onsong_content.split("\n")
+    # onsong_content = onsong_content.map{|line| line.gsub(/\r\n|\r|\n/, '')}.reject{|line| line.blank?}.compact
+    #
+    # onsong_content = onsong_content.map{|line| "<div class=\'song-line\'>#{line}</div>"}.join("")
+    # # onsong_content = onsong_content.gsub("\n","<br/><br/>")
+    #
+    # onsong_content = onsong_content.gsub(Song.match_note,'<span class="content-note" data-note="\1">&nbsp;</span>')
+    onsong_content
+  end
+
   def clean_html_content
     html_content = content
     #html_content = html_content.gsub(/^(\s)*\n/,'')
