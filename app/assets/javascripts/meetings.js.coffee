@@ -17,7 +17,16 @@ auto_load ->
           url: calEvent.url
         jsEvent.preventDefault()
       ,
-      handleWindowResize:true
+      handleWindowResize:true,
+      dayClick: (date, jsEvent, view) ->
+        date.set('minute',0)
+        date.set('hour', 10)
+        console.log date
+        $.ajax
+          url: "reunions/new.js"
+          data:
+            date: date.format("DD/MM/YYYY HH:mm")
+        return
     })
 
     load_chosens()

@@ -50,15 +50,18 @@ class MeetingsController < ApplicationController
   # GET /meetings/new
   def new
     @meeting = Meeting.new
-    @meeting.meeting_users.build if @meeting and @meeting.meeting_users.empty?
-    @meeting.meeting_songs.build if @meeting and @meeting.meeting_songs.empty?
+    if params[:date]
+      @meeting.start_at = Time.parse(params[:date])
+    end
+    # @meeting.meeting_users.build if @meeting and @meeting.meeting_users.empty?
+    # @meeting.meeting_songs.build if @meeting and @meeting.meeting_songs.empty?
     @meeting.practice = Practice.new if @meeting and !@meeting.practice
   end
 
   # GET /meetings/1/edit
   def edit
-    @meeting.meeting_users.build if @meeting and @meeting.meeting_users.empty?
-    @meeting.meeting_songs.build if @meeting and @meeting.meeting_songs.empty?
+    # @meeting.meeting_users.build if @meeting and @meeting.meeting_users.empty?
+    # @meeting.meeting_songs.build if @meeting and @meeting.meeting_songs.empty?
 
     if @meeting and !@meeting.practice
       raise "Iin".inspect

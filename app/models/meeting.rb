@@ -4,7 +4,7 @@ class Meeting < ActiveRecord::Base
   has_one :practice
   has_many :meeting_songs
 
-  accepts_nested_attributes_for :meeting_users, :practice, :meeting_songs, allow_destroy: true
+  accepts_nested_attributes_for :meeting_users, :practice, :meeting_songs, reject_if: :all_blank, allow_destroy: true
 
   validates :start_at, :presence => true
   validates :label, :presence => true

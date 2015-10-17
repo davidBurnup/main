@@ -5,8 +5,9 @@
   %ul.nav.nav-tabs{:role => "tablist"}
     %li.active
       %a{"data-toggle" => "tab", :href => "#global-info", :role => "tab"} Information Générale
-    %li
-      %a{"data-toggle" => "tab", :href => "#songs", :role => "tab"} Chants
+    - if meeting.meeting_songs.present?
+      %li
+        %a{"data-toggle" => "tab", :href => "#songs", :role => "tab"} Chants
 
   / Tab panes
   .tab-content
@@ -25,7 +26,7 @@
             Durée
           %td
             = duration_in_words(meeting)
-        - if meeting.practice.present? and practice = meeting.practice
+        - if meeting.practice.present? and practice = meeting.practice and practice.start_at
           %tr
             %th{"colspan" => "2"}
               Répétition
@@ -39,17 +40,18 @@
                 Durée
               %td
                 = duration_in_words(practice)
-        %tr
-          %th{"colspan" => "2"}
-            Participants
-        - meeting.meeting_users.each do |m_user|
+        - if meeting.meeting_users.present?
           %tr
-            %td
-              = m_user.user.name if m_user.user
-              - if m_user.is_leader?
-                (Leader)
+            %th{"colspan" => "2"}
+              Participants
+          - meeting.meeting_users.each do |m_user|
+            %tr
               %td
-                = I18n.t("instruments.#{m_user.instrument}")
+                = m_user.user.name if m_user.user
+                - if m_user.is_leader?
+                  (Leader)
+                %td
+                  = I18n.t("instruments.#{m_user.instrument}")
 
     #songs.tab-pane
       %table.table.table-striped

@@ -32,6 +32,7 @@ Worship::Application.routes.draw do
   end
   resources :users, :path => "utilisateurs"
   get "utilisateurs/:id/instruments(/:target)" => "users#instruments"
+  post "reunions/new" => "meetings#new"
   resources :meetings, :path => "reunions"
 
   require 'sidekiq/web'
