@@ -25,7 +25,7 @@ gem 'momentjs-rails', '~> 2.5.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 3.0.0.1'
 gem "font-awesome-rails"
 gem "chosen-rails"
-gem "sidekiq"
+gem "sidekiq", "3.1.0"
 gem "sidekiq-cron", "~> 0.2.0"
 gem "letter_opener", :group => :development
 gem 'sinatra', '~> 1.4.5'
