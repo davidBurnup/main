@@ -288,6 +288,14 @@ footer {
 .activity-footer {
   margin-bottom: 10px;
   clear:both;
+  .comments-list {
+    .media {
+      > .img-circle {
+        padding-right: 0;
+        margin-right: 20px;
+      }
+    }
+  }
 }
 .post_music_medias_attachment {
   float: left;
