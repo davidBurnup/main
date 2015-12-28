@@ -57,4 +57,8 @@ class Meeting < ActiveRecord::Base
     end
   end
 
+  def notifiable_content
+    self.content.truncate(30)
+  end
+
 end

@@ -1,0 +1,34 @@
+@import "helpers";
+
+#notifications-dropdown {
+  width: 400px;
+  padding-top: 0;
+  padding-bottom: 0;
+  > li {
+    > .notification {
+      border-bottom: 1px solid #eee;
+      padding: 8px;
+      .user-avatar-mini {
+        @include rounded-corners(50px);
+        float: left;
+        margin-right: 8px;
+      }
+      .notification-content {
+        white-space: normal;
+        padding-right: 20px;
+        position: relative;
+        .seen-notification {
+          position: absolute;
+          right: 8px;
+          top: 50%;
+          height:14px;
+          margin-top:-7px;
+        }
+      }
+      .notification-notifiable-content {
+        font-style: italic;
+        margin: 10px 0 0 0;
+      }
+    }
+  }
+}

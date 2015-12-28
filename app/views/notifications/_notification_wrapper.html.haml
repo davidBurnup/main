@@ -1,0 +1,9 @@
+- notification ||= nil
+
+- if notification and notification.notifier and notification.notifiable
+  = image_tag notification.notifier.avatar.url(:mini), class: 'user-avatar-mini'
+  .notification-content
+    = render "notifications/#{notification.notifiable_type.underscore}_notification", notification: notification
+
+    = link_to "#", class: 'seen-notification' do
+      = fa_icon "dot-circle-o"

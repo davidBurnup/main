@@ -36,4 +36,8 @@ class Post < ActiveRecord::Base
     self.music_medias = new_music_medias
   end
 
+  def notifiable_content
+    self.content.truncate(30)
+  end
+
 end

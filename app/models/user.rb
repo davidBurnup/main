@@ -10,12 +10,14 @@ class User < ActiveRecord::Base
   after_initialize :set_default_role, :if => :new_record?
   after_initialize :set_default_church_role
 
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#", :med_tiny => "75x75#", :tiny => "50x50#", :mini => "39x39#" }, :default_url => "/images/:style/user.png"
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#", :med_tiny => "75x75#", :tiny => "50x50#", :mini => "39x39#", :micro => "30x30#" }, :default_url => "/images/:style/user.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   has_many :user_song_preferences
   has_many :instrument_preferences
   has_many :meeting_users, :dependent => :destroy
+  has_many :received_notifications, foreign_key: :notified_id, class_name: "Notification"
+  has_many :sent_notifications, foreign_key: :notifier_id, class_name: "Notification"
 
   has_one :church_role
   accepts_nested_attributes_for :church_role
@@ -25,7 +27,7 @@ class User < ActiveRecord::Base
   validates :password, :presence => true, :on => :create
 
   scope :leaders, -> {
-      where('users.role IN (?) ', [:worship_leader,:admin].map{|r| User.roles[r]})
+    where('users.role IN (?) ', [:worship_leader,:admin].map{|r| User.roles[r]})
   }
 
   acts_as_liker

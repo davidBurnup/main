@@ -1,0 +1,9 @@
+- notification ||= nil
+
+- if notification and notification.notifiable_type == "Comment" and comment = notification.notifiable
+  .notification-header
+    %b
+      = notification.notifier.full_name
+    = render "notifications/commentables/#{comment.notification_commentable.class.name.underscore}", notification: notification, commentable: comment.notification_commentable
+  .notification-notifiable-content
+    = notification.notifiable.notifiable_content

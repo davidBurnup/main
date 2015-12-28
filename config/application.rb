@@ -24,7 +24,11 @@ module Worship
 
       Dir[File.join(Rails.root, "lib", "auto_html", "filters", "*.rb")].each {|l| require l }
 
+
+      # Load PublicActivity concerns
+      PublicActivity::ORM::ActiveRecord::Activity.send :include, ActivityExtension
     end
+
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -39,5 +43,6 @@ module Worship
     # config.i18n.default_locale = :de
 
     I18n.config.enforce_available_locales = false
+
   end
 end
