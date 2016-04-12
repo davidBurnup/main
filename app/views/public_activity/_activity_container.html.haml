@@ -43,7 +43,7 @@
         - activity.comments.each do |comment|
           = render "comments/comment", comment: comment
       .media.comment-form
-        = image_tag current_user.avatar.url(:mini), class: "img-circle pull-left"
+        = image_tag current_user.avatar.url(:mini), class: "img-circle pull-left no-right-padding"
         .media-body
           %span.comment-form
             = render "comments/form", comment: Comment.new, commentable: activity
