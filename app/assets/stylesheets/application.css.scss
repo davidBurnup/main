@@ -300,3 +300,8 @@ footer {
 .post_music_medias_attachment {
   float: left;
 }
+.media {
+  .img-circle.no-right-padding {
+    padding-right: 0px !important;
+  }
+}
