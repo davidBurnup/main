@@ -88,7 +88,7 @@ class Song < ActiveRecord::Base
 
 
       # Destroy previous notes
-      self.notes.delete_all
+      Note.where('song_id IN ?', self.id).delete_all
 
       notes.each_with_index do |row_notes, row_index|
         row_notes.each do |note_offset, note|
