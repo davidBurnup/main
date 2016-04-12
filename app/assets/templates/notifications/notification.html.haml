@@ -1,0 +1,15 @@
+
+%li
+  .notification
+    %img.user-avatar-mini{"src" => "{{notification.notifier.avatar.url.mini}}"}
+    .notification-content
+      .notification-header
+        %b
+          {{notification.notifier.full_name}}
+        {{notification.header_content}}
+      .notification-notifiable-content
+        {{notification.notifiable_content}}
+      -# = render "notifications/#{notification.notifiable_type.underscore}_notification", notification: notification
+
+      = link_to "#", class: 'seen-notification' do
+        = fa_icon "dot-circle-o"

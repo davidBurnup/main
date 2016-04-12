@@ -89,5 +89,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # config.autoload_paths << Rails.root.join('lib')
+  
+  config.ng_annotate.process = true
 
 end

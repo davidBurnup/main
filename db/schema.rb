@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151228075202) do
+ActiveRecord::Schema.define(version: 20151228143928) do
 
-  create_table "activities", force: true do |t|
-    t.integer  "trackable_id"
-    t.string   "trackable_type"
-    t.integer  "owner_id"
-    t.string   "owner_type"
-    t.string   "key"
-    t.text     "parameters"
-    t.integer  "recipient_id"
-    t.string   "recipient_type"
+  create_table "activities", force: :cascade do |t|
+    t.integer  "trackable_id",   limit: 4
+    t.string   "trackable_type", limit: 255
+    t.integer  "owner_id",       limit: 4
+    t.string   "owner_type",     limit: 255
+    t.string   "key",            limit: 255
+    t.text     "parameters",     limit: 65535
+    t.integer  "recipient_id",   limit: 4
+    t.string   "recipient_type", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -30,27 +30,27 @@ ActiveRecord::Schema.define(version: 20151228075202) do
   add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
-  create_table "church_roles", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "role"
-    t.integer  "church_id"
+  create_table "church_roles", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "role",       limit: 4
+    t.integer  "church_id",  limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "churches", force: true do |t|
-    t.string   "name"
+  create_table "churches", force: :cascade do |t|
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "comments", force: true do |t|
-    t.string   "title",            limit: 50, default: ""
-    t.text     "comment"
-    t.integer  "commentable_id"
-    t.string   "commentable_type"
-    t.integer  "user_id"
-    t.string   "role",                        default: "comments"
+  create_table "comments", force: :cascade do |t|
+    t.string   "title",            limit: 50,    default: ""
+    t.text     "comment",          limit: 65535
+    t.integer  "commentable_id",   limit: 4
+    t.string   "commentable_type", limit: 255
+    t.integer  "user_id",          limit: 4
+    t.string   "role",             limit: 255,   default: "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -59,195 +59,201 @@ ActiveRecord::Schema.define(version: 20151228075202) do
   add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
-  create_table "follows", force: true do |t|
-    t.string   "follower_type"
-    t.integer  "follower_id"
-    t.string   "followable_type"
-    t.integer  "followable_id"
+  create_table "follows", force: :cascade do |t|
+    t.string   "follower_type",   limit: 255
+    t.integer  "follower_id",     limit: 4
+    t.string   "followable_type", limit: 255
+    t.integer  "followable_id",   limit: 4
     t.datetime "created_at"
   end
 
   add_index "follows", ["followable_id", "followable_type"], name: "fk_followables", using: :btree
   add_index "follows", ["follower_id", "follower_type"], name: "fk_follows", using: :btree
 
-  create_table "instrument_preferences", force: true do |t|
-    t.integer  "instrument"
-    t.integer  "user_id"
-    t.text     "detail"
+  create_table "instrument_preferences", force: :cascade do |t|
+    t.integer  "instrument", limit: 4
+    t.integer  "user_id",    limit: 4
+    t.text     "detail",     limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "likes", force: true do |t|
-    t.string   "liker_type"
-    t.integer  "liker_id"
-    t.string   "likeable_type"
-    t.integer  "likeable_id"
+  create_table "likes", force: :cascade do |t|
+    t.string   "liker_type",    limit: 255
+    t.integer  "liker_id",      limit: 4
+    t.string   "likeable_type", limit: 255
+    t.integer  "likeable_id",   limit: 4
     t.datetime "created_at"
   end
 
   add_index "likes", ["likeable_id", "likeable_type"], name: "fk_likeables", using: :btree
   add_index "likes", ["liker_id", "liker_type"], name: "fk_likes", using: :btree
 
-  create_table "media", force: true do |t|
-    t.integer  "post_id"
+  create_table "media", force: :cascade do |t|
+    t.integer  "post_id",                 limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "attachment_file_name"
-    t.string   "attachment_content_type"
-    t.integer  "attachment_file_size"
+    t.string   "attachment_file_name",    limit: 255
+    t.string   "attachment_content_type", limit: 255
+    t.integer  "attachment_file_size",    limit: 4
     t.datetime "attachment_updated_at"
   end
 
-  create_table "meeting_songs", force: true do |t|
-    t.integer  "song_id"
-    t.integer  "meeting_id"
-    t.integer  "leader_id"
-    t.string   "key"
+  create_table "meeting_songs", force: :cascade do |t|
+    t.integer  "song_id",    limit: 4
+    t.integer  "meeting_id", limit: 4
+    t.integer  "leader_id",  limit: 4
+    t.string   "key",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "meeting_users", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "meeting_id"
-    t.integer  "instrument"
-    t.boolean  "accepted"
+  create_table "meeting_users", force: :cascade do |t|
+    t.integer  "user_id",      limit: 4
+    t.integer  "meeting_id",   limit: 4
+    t.integer  "instrument",   limit: 4
+    t.boolean  "accepted",     limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_leader"
-    t.boolean  "is_co_leader"
-    t.boolean  "was_notified"
+    t.boolean  "is_leader",    limit: 1
+    t.boolean  "is_co_leader", limit: 1
+    t.boolean  "was_notified", limit: 1
   end
 
-  create_table "meetings", force: true do |t|
-    t.string   "label"
+  create_table "meetings", force: :cascade do |t|
+    t.string   "label",      limit: 255
     t.datetime "start_at"
-    t.integer  "duration"
-    t.integer  "created_by"
+    t.integer  "duration",   limit: 4
+    t.integer  "created_by", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "songs"
+    t.text     "songs",      limit: 65535
+    t.integer  "creator_id", limit: 4
+    t.integer  "updater_id", limit: 4
   end
 
-  create_table "mentions", force: true do |t|
-    t.string   "mentioner_type"
-    t.integer  "mentioner_id"
-    t.string   "mentionable_type"
-    t.integer  "mentionable_id"
+  create_table "mentions", force: :cascade do |t|
+    t.string   "mentioner_type",   limit: 255
+    t.integer  "mentioner_id",     limit: 4
+    t.string   "mentionable_type", limit: 255
+    t.integer  "mentionable_id",   limit: 4
     t.datetime "created_at"
   end
 
   add_index "mentions", ["mentionable_id", "mentionable_type"], name: "fk_mentionables", using: :btree
   add_index "mentions", ["mentioner_id", "mentioner_type"], name: "fk_mentions", using: :btree
 
-  create_table "notes", force: true do |t|
-    t.integer  "song_id"
-    t.integer  "line"
-    t.integer  "offset"
+  create_table "notes", force: :cascade do |t|
+    t.integer  "song_id",    limit: 4
+    t.integer  "line",       limit: 4
+    t.integer  "offset",     limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "note"
+    t.string   "note",       limit: 255
   end
 
-  create_table "notifications", force: true do |t|
-    t.string   "notifiable_type"
-    t.integer  "notifiable_id"
-    t.integer  "notifier_id"
-    t.integer  "notified_id"
+  create_table "notifications", force: :cascade do |t|
+    t.string   "notifiable_type", limit: 255
+    t.integer  "notifiable_id",   limit: 4
+    t.integer  "notifier_id",     limit: 4
+    t.integer  "notified_id",     limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_seen"
+    t.boolean  "is_seen",         limit: 1
   end
 
-  create_table "posts", force: true do |t|
-    t.text     "content"
-    t.integer  "user_id"
-    t.integer  "song_id"
-    t.string   "external_url"
+  create_table "posts", force: :cascade do |t|
+    t.text     "content",      limit: 65535
+    t.integer  "user_id",      limit: 4
+    t.integer  "song_id",      limit: 4
+    t.string   "external_url", limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "creator_id",   limit: 4
+    t.integer  "updater_id",   limit: 4
+  end
+
+  create_table "practice_users", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.integer  "practice_id", limit: 4
+    t.boolean  "accepted",    limit: 1
+    t.boolean  "notified",    limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "practice_users", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "practice_id"
-    t.boolean  "accepted"
-    t.boolean  "notified"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "practices", force: true do |t|
-    t.integer  "meeting_id"
+  create_table "practices", force: :cascade do |t|
+    t.integer  "meeting_id", limit: 4
     t.datetime "start_at"
-    t.integer  "duration"
-    t.integer  "reminder"
+    t.integer  "duration",   limit: 4
+    t.integer  "reminder",   limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "songs", force: true do |t|
-    t.string   "title"
-    t.text     "content"
-    t.string   "key"
+  create_table "songs", force: :cascade do |t|
+    t.string   "title",            limit: 255
+    t.text     "content",          limit: 65535
+    t.string   "key",              limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "transposed_key"
-    t.integer  "transpose_offset"
-    t.string   "note"
-    t.text     "clean_content"
-    t.string   "author"
-    t.integer  "created_by"
-    t.integer  "origin_church_id"
-    t.integer  "bpm"
+    t.string   "transposed_key",   limit: 255
+    t.integer  "transpose_offset", limit: 4
+    t.string   "note",             limit: 255
+    t.text     "clean_content",    limit: 65535
+    t.string   "author",           limit: 255
+    t.integer  "created_by",       limit: 4
+    t.integer  "origin_church_id", limit: 4
+    t.integer  "bpm",              limit: 4
+    t.integer  "creator_id",       limit: 4
+    t.integer  "updater_id",       limit: 4
   end
 
   add_index "songs", ["clean_content"], name: "clean_content_full_text", type: :fulltext
 
-  create_table "user_song_preferences", force: true do |t|
-    t.integer  "song_id"
-    t.integer  "user_id"
-    t.string   "prefered_key"
+  create_table "user_song_preferences", force: :cascade do |t|
+    t.integer  "song_id",       limit: 4
+    t.integer  "user_id",       limit: 4
+    t.string   "prefered_key",  limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "prefered_capo"
+    t.integer  "prefered_capo", limit: 4
   end
 
-  create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: ""
-    t.string   "reset_password_token"
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: ""
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
-    t.string   "confirmation_token"
+    t.string   "name",                   limit: 255
+    t.string   "confirmation_token",     limit: 255
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
-    t.integer  "role"
-    t.string   "invitation_token"
+    t.string   "unconfirmed_email",      limit: 255
+    t.integer  "role",                   limit: 4
+    t.string   "invitation_token",       limit: 255
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
-    t.integer  "invitation_limit"
-    t.integer  "invited_by_id"
-    t.string   "invited_by_type"
-    t.integer  "invitations_count",      default: 0
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
+    t.integer  "invitation_limit",       limit: 4
+    t.integer  "invited_by_id",          limit: 4
+    t.string   "invited_by_type",        limit: 255
+    t.integer  "invitations_count",      limit: 4,   default: 0
+    t.string   "avatar_file_name",       limit: 255
+    t.string   "avatar_content_type",    limit: 255
+    t.integer  "avatar_file_size",       limit: 4
     t.datetime "avatar_updated_at"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.integer  "church_id"
+    t.string   "first_name",             limit: 255
+    t.string   "last_name",              limit: 255
+    t.integer  "church_id",              limit: 4
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

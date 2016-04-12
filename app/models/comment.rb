@@ -39,7 +39,7 @@ class Comment < ActiveRecord::Base
     comment
   end
 
-  def notification_commentable
+  def notifiable_through
     r_commentable = commentable
     if commentable_type.underscore == "public_activity/orm/active_record/activity"
       r_commentable = commentable.trackable

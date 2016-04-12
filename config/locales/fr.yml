@@ -4,14 +4,22 @@ fr:
       not_saved: "Erreur lors de la sauvegarde"
   activerecord:
     models:
-      church: "Église"
+      church:
+        one: "Église"
+        other: "Églises"
+        gender: 'F'
       user:
         one: "Utilisateur"
         other: "Utilisateurs"
+        gender: 'M'
       song:
         one: "Chanson"
         other: "Chansons"
-      meeting: Réunion
+        gender: 'F'
+      meeting:
+        one: "Réunion"
+        other: "Réunions"
+        gender: 'F'
     errors:
       models:
         user:
@@ -311,3 +319,9 @@ fr:
       long: "%A %d %B %Y %H:%M"
       short: "%d %b %H:%M"
     pm: 'pm'
+
+
+  notification:
+    verbs:
+      comment:
+        header: "a commenté"

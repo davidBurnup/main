@@ -1,5 +1,5 @@
 class Meeting < ActiveRecord::Base
-
+  include ActsAsFeedable
   has_many :meeting_users
   has_one :practice
   has_many :meeting_songs
@@ -11,8 +11,6 @@ class Meeting < ActiveRecord::Base
 
   after_save :format_label, :plan_practice_notifications
 
-  include PublicActivity::Model
-  tracked owner: Proc.new{ |controller, model| controller.current_user }, only: [:create, :update]
   acts_as_commentable
 
   def end_at
@@ -59,6 +57,10 @@ class Meeting < ActiveRecord::Base
 
   def notifiable_content
     self.content.truncate(30)
+  end
+
+  def notification_editor
+    created_by
   end
 
 end

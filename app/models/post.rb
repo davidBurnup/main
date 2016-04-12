@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-
+  include ActsAsFeedable
   belongs_to :user
   belongs_to :song
   has_many :music_medias
@@ -7,8 +7,10 @@ class Post < ActiveRecord::Base
 
   accepts_nested_attributes_for :music_medias#, allow_destroy: true
 
-  include PublicActivity::Model
-  tracked owner: Proc.new{ |controller, model| controller.current_user }, only: :create
+  stampable
+
+  # include PublicActivity::Model
+  # tracked owner: Proc.new{ |controller, model| controller.current_user }, only: :create
   acts_as_commentable
 
   auto_html_for :content do
@@ -34,6 +36,14 @@ class Post < ActiveRecord::Base
     end
 
     self.music_medias = new_music_medias
+  end
+
+  def notifiable_users
+    [user]
+  end
+
+  def notification_editor
+    activity ? activity.owner : nil
   end
 
   def notifiable_content

@@ -1,5 +1,7 @@
 Worship::Application.routes.draw do
 
+  resources :notifications, only: [:index, :show, :destroy]
+
   resources :posts
 
   resources :activities, only: [:destroy], controller: "socializables"
@@ -9,6 +11,9 @@ Worship::Application.routes.draw do
   resources :comments
 
   get 'fil' => "socializables#index", :as => "feeds"
+
+  get 'action' => "socializables#action", :as => "my_action"
+
   get 'aime(/:likable_type/:likable_id)' => "socializables#like", :as => "like"
 
   resources :teams
@@ -30,6 +35,8 @@ Worship::Application.routes.draw do
     put 'utilisateurs/inscription/parametres-generaux' => "registrations#update_instruments", :as => "update_instruments"
 
   end
+
+  get "utilisateurs/en-cours" => "users#show", :as => "current_user"
   resources :users, :path => "utilisateurs"
   get "utilisateurs/:id/instruments(/:target)" => "users#instruments"
   post "reunions/new" => "meetings#new"

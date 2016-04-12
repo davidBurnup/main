@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require bootstrap
 //= require bootstrap-filestyle.min
+//= require cable
 //= require "jquery.autogrowtextarea"
 //= require cocoon
 //= require moment
@@ -26,6 +27,22 @@
 //= require chosen-jquery
 //= require jquery-hotkeys
 //= require mediaelement_rails
+
+//= require angular
+//= require angular-animate
+//= require angular-resource
+//= require angular-rails-templates
+//= require_tree ../templates
+
+// Order matters ! load first deps (controllers, directives, filters)
+//= require_tree ./angular/models
+//= require_tree ./angular/services
+//= require_tree ./angular/controllers
+//= require_tree ./angular/filters
+//= require_tree ./angular/directives
+
+// Then init the app !
+//= require ./angular/app
 
 //= require main
 //= require feeds

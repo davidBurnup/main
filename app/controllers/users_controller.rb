@@ -8,8 +8,13 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
 
+    if params[:id]
+      @user = User.where(id: params[:id]).first
+    else
+      @user = current_user
+    end
+    
     any_filter = params[:filter]
 
     if any_filter
@@ -22,6 +27,16 @@ class UsersController < ApplicationController
     respond_to do |f|
       f.html
       f.js {
+      }
+      f.json {
+        if @user
+          render json: {
+            id: @user.id,
+            email: @user.email
+          }.to_json
+        else
+          render json: {}
+        end
       }
     end
     #unless current_user.admin?

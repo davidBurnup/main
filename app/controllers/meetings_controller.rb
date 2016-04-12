@@ -64,14 +64,14 @@ class MeetingsController < ApplicationController
     # @meeting.meeting_songs.build if @meeting and @meeting.meeting_songs.empty?
 
     if @meeting and !@meeting.practice
-      raise "Iin".inspect
       @meeting.practice = Practice.new
     end
   end
-
+  
   # POST /meetings
   # POST /meetings.json
   def create
+
     @meeting = Meeting.new(meeting_params)
     respond_to do |format|
       if @meeting.save

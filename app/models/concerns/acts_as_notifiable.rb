@@ -4,7 +4,7 @@ module ActsAsNotifiable
 
   included do
 
-    has_many :notifications
+    has_many :notifications, dependent: :destroy, as: :notifiable
 
     after_save :create_notifications
 

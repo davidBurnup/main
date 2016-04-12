@@ -5,6 +5,18 @@
   padding-top: 0;
   padding-bottom: 0;
   > li {
+    &.no-result {
+      text-align: center;
+      padding: 20px;
+      > .fa {
+        font-size: 30px;
+        line-height: 0;
+        position: relative;
+        top: 5px;
+      }
+    }
+  }
+  > notification > li {
     > .notification {
       border-bottom: 1px solid #eee;
       padding: 8px;

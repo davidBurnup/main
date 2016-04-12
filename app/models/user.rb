@@ -32,6 +32,8 @@ class User < ActiveRecord::Base
 
   acts_as_liker
 
+  model_stamper
+
   def set_default_role
     self.role ||= :user
   end

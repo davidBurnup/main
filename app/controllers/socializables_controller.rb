@@ -1,6 +1,6 @@
 class SocializablesController < ApplicationController
 
-  after_action :verify_authorized, :except => :like
+  after_action :verify_authorized, :except => [:like, :action]
 
   def index
     @activities = PublicActivity::Activity.all.paginate(page: params[:page], per_page: 15).order('created_at DESC')
@@ -27,6 +27,10 @@ class SocializablesController < ApplicationController
         end
       end
     end
+  end
+
+  def action
+
   end
 
   def destroy
