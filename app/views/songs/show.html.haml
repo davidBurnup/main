@@ -11,7 +11,7 @@
         - if @song.bpm.present?
           .song-bpm
             = "#{@song.bpm} BPM"
-        = "Clé : #{usp.prefered_key}"
+        = "Clé : #{usp ? usp.prefered_key : nil}"
         - if usp.prefered_capo.present?
           = " / Capo : #{usp.prefered_capo}"
     #top-buttons.col-lg-4.col-md-4.col-sm-12.text-right.btn-toolbar
