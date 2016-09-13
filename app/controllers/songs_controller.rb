@@ -18,7 +18,8 @@ class SongsController < ApplicationController
     if params[:search_term].present?
       @any_search_term = params[:search_term]
       search_query = "%#{@any_search_term}%"
-      @songs = @songs.where('songs.title LIKE ? OR MATCH(clean_content) AGAINST (?)', search_query, search_query )
+      # OR MATCH(clean_content) AGAINST (?)
+      @songs = @songs.where('songs.title LIKE ?', search_query)
     end
 
     authorize @songs
