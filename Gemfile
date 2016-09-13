@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.2.1'
-gem 'rails', '4.1.0'
+gem 'rails', '4.2.7.1'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -36,7 +36,7 @@ gem 'jquery-hotkeys-rails'
 gem 'acts_as_commentable'
 gem 'therubyracer'
 gem 'rails_autolink'
-gem "auto_html"
+gem "auto_html", "~> 1.6.4"
 gem "mediaelement_rails"
 
 group :development do
@@ -46,7 +46,9 @@ group :development do
   gem 'hub', :require=>nil
   gem 'quiet_assets'
   gem 'rails_layout'
+  gem 'web-console', '~> 2.0'
 end
+
 group :development, :test do
   gem 'pry-rails'
   gem 'pry-rescue'
