@@ -24,6 +24,7 @@
           = f.input :start_at, :as => :string, :input_html => { "data-behaviour" => "datepicker", :value => l(@meeting.start_at ? @meeting.start_at : Time.now + 2.day)}
         .col-lg-4.col-md-4.col-sm-4.col-xs-4
           = f.input :duration, :as => :select, :collection => (1..6).map{|numb| ["#{numb} heure#{numb > 1 ? "s" : ""}", numb.hours]}, :include_blank => false
+
     #rehearsal.tab-pane
       .row
         .col-lg-12
@@ -40,7 +41,7 @@
     #meeting_users.tab-pane
       .row.nested_form
         .col-lg-12
-        = render "shared/cocoon_wrapper", nested_resource_name: "meeting_user", f: f, form_instance: @meeting, disable_auto_load_first_element: true
+          = render "shared/cocoon_wrapper", nested_resource_name: "meeting_user", f: f, form_instance: @meeting, disable_auto_load_first_element: true
     #songs.tab-pane
       .row.nested_form
         .col-lg-12
