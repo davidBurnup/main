@@ -4,8 +4,8 @@ class RegistrationsController < Devise::RegistrationsController
 
 
   def update_sanitized_params
-    devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:first_name, :last_name, :email, :password, :password_confirmation, :church_id)}
-    devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:first_name, :last_name, :name, :email, :church_id, :password, :password_confirmation, :current_password, :avatar)}
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :email, :password, :password_confirmation, :church_id])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :name, :email, :church_id, :password, :password_confirmation, :current_password, :avatar])
   end
 
   def after_inactive_sign_up_path_for(resource)
