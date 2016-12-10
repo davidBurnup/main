@@ -1,7 +1,9 @@
 class SongsController < ApplicationController
+
   before_action :set_song, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized
-  skip_before_action :authorize_user, only: [:show]
+  # skip_before_action :authorize_user, only: [:show]
+
   # GET /songs
   # GET /songs.json
   def index
@@ -16,7 +18,8 @@ class SongsController < ApplicationController
     if params[:search_term].present?
       @any_search_term = params[:search_term]
       search_query = "%#{@any_search_term}%"
-      @songs = @songs.where('songs.title LIKE ? OR MATCH(clean_content) AGAINST (?)', search_query, search_query )
+      # OR MATCH(clean_content) AGAINST (?)
+      @songs = @songs.where('songs.title LIKE ?', search_query)
     end
 
     authorize @songs

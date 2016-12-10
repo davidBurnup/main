@@ -19,14 +19,17 @@
             = render 'layouts/messages'
       .row
 
-        #public-left-pane.col-lg-8.col-md-8.hidden-sm.hidden-xs.text-center
+        -# #public-left-pane.col-lg-8.col-md-8.hidden-sm.hidden-xs.text-center
+        -#   %h1
+        -#
 
-
-        #public-right-pane.col-lg-4.col-md-4.col-sm-12.col-sm-offset-0.col-xs-10.col-xs-offset-1
-          - if flash.present?
-            - flash.each do |key, msg|
-              = render "/layouts/flash", :msg => msg, :key => key
-          = yield
+        -# #public-right-pane.col-lg-4.col-md-4.col-sm-12.col-sm-offset-0.col-xs-10.col-xs-offset-1
+        .col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2.col-xs-12.col-xs-offset-0
+          #public-right-pane
+            - if flash.present?
+              - flash.each do |key, msg|
+                = render "/layouts/flash", :msg => msg, :key => key
+            = yield
 
     %footer
-      ©2014 - BURN UP
+      = "©#{Time.now.year} - BURN UP"

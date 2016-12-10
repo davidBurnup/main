@@ -11,9 +11,13 @@ class Notification < ActiveRecord::Base
   }
 
   def send_push_notification
-    ActionCable.server.broadcast "notifications-for-user-#{self.notified_id}", {
-      id: self.id
-    }
+    notification_json = ApplicationController.new.view_context.render(
+      partial: 'api/notifications/notification',
+      locals: { self.class.model_name.to_s.underscore.to_sym => self },
+      formats: [:json],
+      handlers: [:jbuilder]
+    )
+    ActionCable.server.broadcast "notifications-for-user-#{self.notified_id}", notification_json
   end
 
 end

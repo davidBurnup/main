@@ -1,7 +1,6 @@
 class Comment < ActiveRecord::Base
 
   include ActsAsCommentable::Comment
-  include ActsAsNotifiable
 
   acts_as_likeable
 
@@ -17,6 +16,7 @@ class Comment < ActiveRecord::Base
     link :target => "_blank", :rel => "nofollow"
     simple_format
   end
+
 
   # NOTE: install the acts_as_votable plugin if you
   # want user to vote on the quality of comments.

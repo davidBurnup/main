@@ -4,6 +4,6 @@ class Practice < ActiveRecord::Base
 
   def duration_in_hours
   	duration / 3600
-  end	
+  end
 
 end

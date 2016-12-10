@@ -1,20 +1,6 @@
 - if user_signed_in?
-  -# %li= navigation_link('ACCUEIL', [feeds_path,root_path], 'home')
-  %li= navigation_link('CHANTS', songs_path, 'align-left')
+  %li= navigation_link('ACCUEIL', [feeds_path,root_path], 'align-left')
+  %li= navigation_link('CHANTS', songs_path, 'music')
   %li= navigation_link('RÉUNIONS', meetings_path, 'calendar')
-  %li.dropdown{"ng-controller" => "Notifications"}
-    = link_to "#", class: "dropdown-toggle", "data-toggle" => "dropdown" do
-      = fa_icon "bell-o"
-      %span.badge.notification-count
-        {{notifications.length}}
-      %span.caret
-    %ul.dropdown-menu#notifications-dropdown
-      %notification{"ng-repeat" => "notification in notifications", "notification" => "notification"}
-      %li.no-result{"ng-if" => "!notifications || (notifications && notifications.length == 0)"}
-        = fa_icon "bell-slash-o"
-        Aucune notification pour l'instant !
-      -# - current_user.received_notifications.unseen.limit(15).each do |notification|
-      -#   %li
-      -#     .notification
-      -#       = render "notifications/notification_wrapper", notification: notification
+  %li.dropdown{"notifications" => true}
 - else

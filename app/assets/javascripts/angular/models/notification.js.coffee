@@ -1,26 +1,29 @@
-angular.module('Burnup.models.Notification', ['ngResource'])
+angular.module('Burnup.models.Notification', ['ngResource', 'rails'])
 
-.factory 'Notification', ($resource, $http) ->
+.factory 'Notification', ($resource, RailsResource, railsSerializer) ->
 
-  class Notification
-    @data = {}
-    @service = null
+  class Notification extends RailsResource
+    @configure
 
+      url: (context) ->
+        defaultUrl = '/api/notifications'
 
-    constructor: (id) ->
-      @id = id
-      @service = $resource('/notifications/:id.json', {
-          id: id
-        })
+        if context.id
+          defaultUrl += "/#{context.id}"
 
-    all: (callback) ->
-      @service.query(callback)
+        if context.page
+          defaultUrl += "/page/#{context.page}"
 
-    # destroy: ->
-    #   @service.$delete((response) ->
-    #     response
-    #   )
+        defaultUrl += ".json"
 
+        defaultUrl
 
+      , name: 'notification'
+
+    @intercept 'response', (result, resourceConstructor, context) ->
+      if angular.isDefined(result.originalData.count)
+        result.data = result.originalData.items
+        result.data.$count = result.originalData.count
+      result
 
   return Notification

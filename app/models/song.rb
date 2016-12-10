@@ -81,7 +81,6 @@ class Song < ActiveRecord::Base
 
         row.scan(Song.match_note) do
           if $1
-
             positions = $~.offset(1)[0] - previous_to_remove_caracters_length
             notes[row_index][positions] = $1
             previous_to_remove_caracters_length += $1.size + 2
@@ -91,7 +90,7 @@ class Song < ActiveRecord::Base
 
 
       # Destroy previous notes
-      self.notes.destroy_all
+      Note.where(song_id: self.id).delete_all
 
       notes.each_with_index do |row_notes, row_index|
         row_notes.each do |note_offset, note|

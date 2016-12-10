@@ -6,7 +6,7 @@
 
 - if f and nested_resource_name
   - nested_resources_name = nested_resource_name.pluralize
-  .col-lg-12.nested_model_fields.nested_fields_wrapper{:class => nested_resource_name}
+  .nested_model_fields.nested_fields_wrapper{:class => nested_resource_name}
     - index = 0
     = f.simple_fields_for nested_resources_name.to_sym do |nested_resource|
       = render "#{nested_resource_name}_fields", :f => nested_resource, :index => index

@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
   include ActsAsFeedable
+  include ActsAsNotifiable
   belongs_to :user
   belongs_to :song
   has_many :music_medias
@@ -21,6 +22,24 @@ class Post < ActiveRecord::Base
     link :target => "_blank", :rel => "nofollow"
     simple_format
   end
+
+
+  notifiable({
+    content: :comment,
+    trigger: :after_save,
+    notifier: :user,
+    notifieds: lambda{|p|
+      n_users = []
+
+      # Send a notification to all users from the same church
+      if p.user and p.user.church
+        n_users = p.user.church.users.where('users.id != ?', p.user.id)
+      end
+
+      n_users
+    },
+    icon: 'newspaper-o'
+  })
 
   def latest_activity
     self.activities.order(:created_at => :desc).first

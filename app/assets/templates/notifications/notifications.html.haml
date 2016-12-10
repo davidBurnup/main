@@ -1,0 +1,37 @@
+%span{"uib-dropdown" => true, "auto-close" => "outsideClick", "is-open" => "status.isOpen"}
+  = link_to "#", "uib-dropdown-toggle" => true do
+    = fa_icon "bell-o"
+    %span.badge.notification-count{"ng-show" => "ready"}
+      {{notificationsCount}}
+    %span.caret
+
+  %ul.dropdown-menu#notifications-dropdown{"uib-dropdown-menu" => true, "infinite-scroll" => "getNotifications({nextPage: true})", "infinite-scroll-container" => "'#notifications-dropdown'"}
+
+    %li{"ng-repeat" => "notification in notifications"}
+      .notification
+        %img.user-avatar-mini{"src" => "{{notification.notifier.avatar.url.mini}}"}
+        .notification-content
+          .notification-header
+            %b
+              {{notification.notifier.full_name}}
+            {{notification.header_content}}
+          .notified-at{"am-time-ago" => "notification.notified_at | amParse: 'DD/MM/YYYY HH:mm'"}
+          .notification-notifiable-content
+            {{notification.notifiable_content}}
+          -# = render "notifications/#{notification.notifiable_type.underscore}_notification", notification: notification
+
+          = link_to "#", class: 'seen-notification' do
+            = fa_icon "dot-circle-o"
+
+    %li.loading.text-center{"ng-if" => "!ready"}
+      %i.fa.fa-cog.fa-spin
+    -# .text-center
+    -#   %ul.pagination-sm{"ng-model" => "notificationPage", :rotate => "false", "total-items" => "notificationsCount", "uib-pagination" => ""}
+
+    %li.no-result{"ng-if" => "!notifications || (notifications && notifications.length == 0)"}
+      = fa_icon "bell-slash-o"
+      Aucune notification pour l'instant !
+    -# - current_user.received_notifications.unseen.limit(15).each do |notification|
+    -#   %li
+    -#     .notification
+    -#       = render "notifications/notification_wrapper", notification: notification

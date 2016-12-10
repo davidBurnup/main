@@ -1,20 +1,22 @@
 @app = angular.module('Burnup', [
 
   # Angular Deps.
-  "templates",
+  "templates"
+  "angularMoment"
+  "ui.bootstrap"
+  "infinite-scroll"
 
   # Models
-  "Burnup.models.Notification",
+  "Burnup.models.Notification"
 
   # Services
-  "Burnup.services.Auth",
+  "Burnup.services.Auth"
 
   # Directives
-  "Burnup.directives.notification",
+  "Burnup.directives.notifications"
 
   # Controllers
-  "Burnup.controllers.Main",
-  "Burnup.controllers.Notifications"
+  "Burnup.controllers.Main"
 
 ])
 
@@ -22,10 +24,11 @@
 @app.config(() ->
 )
 
-@app.run(($rootScope, Auth) ->
+@app.run(($rootScope, Auth, amMoment) ->
   @App = {}
   App.cable = Cable.createConsumer 'ws://127.0.0.1:28080'
   Auth.login()
+  amMoment.changeLocale('fr')
 )
 
 

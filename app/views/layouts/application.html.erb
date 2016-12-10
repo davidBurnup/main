@@ -5,12 +5,12 @@
   <title><%= content_for?(:title) ? yield(:title) : "BURN UP" %></title>
   <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Worship" %>">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-eval': false %>
   <%#= stylesheet_link_tag "simplex", :media => "all" %>
   <%= stylesheet_link_tag 'application-print', media: 'print'%>
   <%= csrf_meta_tags %>
 </head>
-<body ng-app="Burnup" ng-controller="Main">
+<body ng-app="Burnup" ng-controller="Main" ng-class="$root.pageIsUnscrollable ? 'unscrollable' : ''">
 <header>
   <%= render 'layouts/navigation' %>
 </header>
@@ -46,7 +46,7 @@
 
 </main>
 <footer>
-    ©2015 - BURN UP
+    ©<%=Time.now.year%> - BURN UP - Tous droits réservés
 </footer>
 <script>
 // Include the UserVoice JavaScript SDK (only needed once on a page)

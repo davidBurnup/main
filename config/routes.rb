@@ -1,7 +1,5 @@
 Worship::Application.routes.draw do
 
-  resources :notifications, only: [:index, :show, :destroy]
-
   resources :posts
 
   resources :activities, only: [:destroy], controller: "socializables"
@@ -42,6 +40,13 @@ Worship::Application.routes.draw do
   post "reunions/new" => "meetings#new"
   resources :meetings, :path => "reunions"
 
+  namespace :api do
+    resources :notifications, only: [:index, :show, :destroy] do
+      collection do
+        get "/page/:page" => "notifications#index"
+      end
+    end
+  end
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 end
