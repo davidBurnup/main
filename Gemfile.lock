@@ -78,7 +78,7 @@ GEM
       sprockets (~> 2)
       tilt
     angularjs-rails (1.4.8)
-    angularjs-rails-resource (2.0.0)
+    angularjs-rails-resource (2.2.2)
     arel (6.0.3)
     auto_html (1.6.4)
       redcarpet (~> 3.1)
@@ -238,6 +238,8 @@ GEM
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
+    paranoia (2.2.0)
+      activerecord (>= 4.0, < 5.1)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -379,7 +381,7 @@ DEPENDENCIES
   acts_as_commentable
   angular-rails-templates
   angularjs-rails
-  angularjs-rails-resource (~> 2.0.0)
+  angularjs-rails-resource (~> 2.2.2)
   auto_html (~> 1.6.4)
   autogrow-textarea-rails
   better_errors
@@ -410,6 +412,7 @@ DEPENDENCIES
   mysql2 (~> 0.3.18)
   ngannotate-rails
   paperclip!
+  paranoia (~> 2.2)
   pry-rails
   pry-rescue
   public_activity

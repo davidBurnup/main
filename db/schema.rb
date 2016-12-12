@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151228143928) do
+ActiveRecord::Schema.define(version: 20161212212633) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -112,12 +112,12 @@ ActiveRecord::Schema.define(version: 20151228143928) do
     t.integer  "user_id",      limit: 4
     t.integer  "meeting_id",   limit: 4
     t.integer  "instrument",   limit: 4
-    t.boolean  "accepted",     limit: 1
+    t.boolean  "accepted"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_leader",    limit: 1
-    t.boolean  "is_co_leader", limit: 1
-    t.boolean  "was_notified", limit: 1
+    t.boolean  "is_leader"
+    t.boolean  "is_co_leader"
+    t.boolean  "was_notified"
   end
 
   create_table "meetings", force: :cascade do |t|
@@ -159,8 +159,11 @@ ActiveRecord::Schema.define(version: 20151228143928) do
     t.integer  "notified_id",     limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_seen",         limit: 1
+    t.boolean  "is_seen"
+    t.datetime "deleted_at"
   end
+
+  add_index "notifications", ["deleted_at"], name: "index_notifications_on_deleted_at", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.text     "content",      limit: 65535
@@ -176,8 +179,8 @@ ActiveRecord::Schema.define(version: 20151228143928) do
   create_table "practice_users", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
     t.integer  "practice_id", limit: 4
-    t.boolean  "accepted",    limit: 1
-    t.boolean  "notified",    limit: 1
+    t.boolean  "accepted"
+    t.boolean  "notified"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

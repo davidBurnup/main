@@ -44,9 +44,11 @@ angular.module('Burnup.directives.notifications', [])
           $scope.ready = false
           Notification.query(page: $scope.notificationPage)
           .then (notifications) ->
-            $scope.notifications = $scope.notifications.concat(notifications)
-            $scope.notificationsCount = notifications.$count
-            $scope.lastPage = parseInt($scope.notificationsCount / 4)
+            if notifications
+              $scope.notifications = $scope.notifications.concat(notifications)
+              console.log "ooo", notifications
+              $scope.notificationsCount = notifications.$count
+              $scope.lastPage = parseInt($scope.notificationsCount / 4)
             $scope.ready = true
 
       # $scope.$watch "notificationPage", (notificationPage) ->
@@ -60,4 +62,10 @@ angular.module('Burnup.directives.notifications', [])
         $rootScope.pageIsUnscrollable = isOpen
         console.log "isUn", isOpen
       # $scope.getNotifications()
+
+      $scope.destroy = (notificationToDestroy) ->
+        (new Notification(notificationToDestroy)).delete().then ->
+          $scope.notifications = $scope.notifications.filter (notification) ->
+            notification.id isnt notificationToDestroy.id
+
   }

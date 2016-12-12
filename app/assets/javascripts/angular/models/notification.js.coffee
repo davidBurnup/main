@@ -20,7 +20,7 @@ angular.module('Burnup.models.Notification', ['ngResource', 'rails'])
 
       , name: 'notification'
 
-    @intercept 'response', (result, resourceConstructor, context) ->
+    @intercept 'response', (result, resourceConstructor) ->
       if angular.isDefined(result.originalData.count)
         result.data = result.originalData.items
         result.data.$count = result.originalData.count

@@ -20,8 +20,8 @@
             {{notification.notifiable_content}}
           -# = render "notifications/#{notification.notifiable_type.underscore}_notification", notification: notification
 
-          = link_to "#", class: 'seen-notification' do
-            = fa_icon "dot-circle-o"
+          = link_to "#", class: 'seen-notification', "ng-click" => "destroy(notification)" do
+            = fa_icon "times"
 
     %li.loading.text-center{"ng-if" => "!ready"}
       %i.fa.fa-cog.fa-spin

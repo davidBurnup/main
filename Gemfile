@@ -40,11 +40,12 @@ gem "mediaelement_rails"
 gem 'angularjs-rails'
 gem 'ngannotate-rails'
 gem 'angular-rails-templates'
-gem 'angularjs-rails-resource', '~> 2.0.0'
+gem 'angularjs-rails-resource', '~> 2.2.2'
 gem 'activerecord-userstamp'
 gem 'actioncable', github: 'rails/actioncable'
 gem 'puma'
 gem "bower-rails", "~> 0.11.0"
+gem "paranoia", "~> 2.2"
 
 group :development do
   gem "haml-rails"
