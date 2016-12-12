@@ -2,7 +2,6 @@ class RegistrationsController < Devise::RegistrationsController
   before_filter :update_sanitized_params, if: :devise_controller?
   layout :resolve_layout
 
-
   def update_sanitized_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :email, :password, :password_confirmation, :church_id])
     devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :name, :email, :church_id, :password, :password_confirmation, :current_password, :avatar])

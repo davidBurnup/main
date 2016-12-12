@@ -408,7 +408,31 @@ footer {
     padding-right: 0 !important;
   }
 }
+
+.post_music_medias_attachment .form-control.file {
+  width: 100px;
+}
 @media (max-width: 768px) {
+  .navbar-inverse .navbar-nav > li.active,
+  .navbar-inverse .navbar-nav > li:hover {
+    border-bottom: 0 solid transparent;
+  }
+
+  .navbar {
+    li[notifications] {
+      padding: 0 15px;
+
+      > span {
+        width: 100%;
+
+        #notifications-dropdown.dropdown-menu {
+          background: white;
+          width: 100%;
+        }
+      }
+    }
+  }
+
   .navbar-brand {
     img {
       margin-top: -9px;

@@ -3,7 +3,7 @@
 <% end %>
 <%= content_for :left_column do %>
     <div class="row">
-      <div class="authform col-lg-6 col-md-6 col-sm-6 col-xs-12">
+      <div class="authform col-lg-6 col-md-9 col-sm-9 col-xs-12">
         <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name),  :multipart => true , :html => {:method => :put, :role => 'form'}) do |f| %>
             <%= devise_error_messages! %>
 
