@@ -65,7 +65,7 @@ angular.module('Burnup.directives.notifications', [])
 
       $scope.destroy = (notificationToDestroy) ->
         (new Notification(notificationToDestroy)).delete().then ->
+          isDestroying = false
           $scope.notifications = $scope.notifications.filter (notification) ->
             notification.id isnt notificationToDestroy.id
-
   }

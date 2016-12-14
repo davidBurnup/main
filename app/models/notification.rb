@@ -14,7 +14,7 @@ class Notification < ActiveRecord::Base
   def send_push_notification
     notification_json = ApplicationController.new.view_context.render(
       partial: 'api/notifications/notification',
-      locals: { self.class.model_name.to_s.underscore.to_sym => self },
+      locals: { self.class.model_name.to_s.underscore.to_sym => self, current_user: User.current },
       formats: [:json],
       handlers: [:jbuilder]
     )

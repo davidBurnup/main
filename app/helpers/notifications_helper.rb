@@ -1,9 +1,11 @@
 module NotificationsHelper
 
-  def build_notification_header(notification)
+  def build_notification_header(notification, any_current_user = nil)
+
+    current_user ||= any_current_user
     header_label = ""
 
-    if notification and notification.notifiable_type
+    if notification and notification.notifiable_type and current_user
       header_label += I18n.t("notification.verbs.#{notification.notifiable_type.underscore}.header", default: "vous notifie de :")
 
       if notification.notifiable and notification.notifiable.respond_to? :notifiable_through and nt = notification.notifiable.notifiable_through

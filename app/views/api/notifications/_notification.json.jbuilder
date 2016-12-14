@@ -1,6 +1,7 @@
 notification ||= nil
+pre_loaded_current_user ||= current_user
 
-if notification
+if notification and pre_loaded_current_user
   json.id notification.id
   json.notifier do
     json.full_name notification.notifier.full_name
@@ -12,7 +13,7 @@ if notification
     end
   end
 
-  json.header_content build_notification_header(notification)
+  json.header_content build_notification_header(notification, pre_loaded_current_user)
   json.notifiable_content notification.notifiable.notifiable_content
   json.notified_at l(notification.updated_at)
 end

@@ -10,9 +10,9 @@ class Post < ActiveRecord::Base
 
   stampable
 
+  validates :user, presence: true
   # include PublicActivity::Model
   # tracked owner: Proc.new{ |controller, model| controller.current_user }, only: :create
-  acts_as_commentable
 
   auto_html_for :content do
     html_escape
@@ -25,21 +25,53 @@ class Post < ActiveRecord::Base
 
 
   notifiable({
-    content: :comment,
+    content: :content,
     trigger: :after_save,
     notifier: :user,
     notifieds: lambda{|p|
-      n_users = []
-
-      # Send a notification to all users from the same church
-      if p.user and p.user.church
-        n_users = p.user.church.users.where('users.id != ?', p.user.id)
-      end
-
-      n_users
+      p.notifiable_users
     },
     icon: 'newspaper-o'
   })
+
+  # => only_self : gets notifiable users only for the current object
+  def notifiable_users(only_self: false, origin_notifiable_resolver: nil)
+    n_users_ids = []
+
+    # Owner of the post
+    if self.user
+      n_users_ids << self.user.id
+
+      # all users from the same church
+      # if post was just created
+      if self.id_changed? and self.user.church
+        n_users_ids += self.user.church.users.collect(&:id)
+      end
+    end
+
+    if a = self.activity
+      # Any user who liked the post
+      if likers = a.likers(User) and likers.count > 0
+        n_users_ids << likers.collect(&:id)
+      end
+
+      unless only_self
+        # And user who commented the post
+        if comments = a.comments and comments.count > 0
+          comments_notifiable_users_ids = comments.map do |c|
+            if c != origin_notifiable_resolver
+              c.notifiable_users(only_self: true, origin_notifiable_resolver: self).collect(&:user_id)
+            else
+              nil
+            end
+          end
+          n_users_ids << comments_notifiable_users_ids.flatten.compact.uniq
+        end
+      end
+    end
+
+    User.where('users.id IN (?)', n_users_ids.flatten.compact.uniq)
+  end
 
   def latest_activity
     self.activities.order(:created_at => :desc).first

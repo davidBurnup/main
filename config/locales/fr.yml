@@ -323,5 +323,9 @@ fr:
 
   notification:
     verbs:
+      like:
+        header: "a aimé"
+      post:
+        header: "a écrit"
       comment:
         header: "a commenté"

@@ -1,5 +1,32 @@
 class Like < Socialization::ActiveRecordStores::Like
 
+  include ActsAsNotifiable
+
+  notifiable({
+    content: lambda{|l|
+      c = ""
+
+      # Alias to #notifiable_content
+      if l.likeable and l.likeable.respond_to? :notifiable_content
+        c = l.likeable.notifiable_content
+      end
+
+      c
+    },
+    trigger: :after_save,
+    notifier: :liker,
+    notifieds: lambda{|l|
+      n_users_ids = []
+
+      if l.likeable and l.likeable.notifiable_users.present?
+        n_users_ids = l.likeable.notifiable_users.collect(&:id)
+      end
+
+      User.where("users.id IN (?)", n_users_ids)
+    },
+    icon: 'heart-o'
+  })
+
   def like!(liker, likeable)
     unless likes?(liker, likeable)
       self.create! do |like|
@@ -12,6 +39,10 @@ class Like < Socialization::ActiveRecordStores::Like
     else
       false
     end
+  end
+
+  def likeable_notification_content
+
   end
 
 end

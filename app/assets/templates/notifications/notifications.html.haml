@@ -21,7 +21,10 @@
           -# = render "notifications/#{notification.notifiable_type.underscore}_notification", notification: notification
 
           = link_to "#", class: 'seen-notification', "ng-click" => "destroy(notification)" do
-            = fa_icon "times"
+            %span{"ng-if" => "isDestroying"}
+              = fa_icon "cog", class:"fa-spin"
+            %span{"ng-if" => "!isDestroying"}
+              = fa_icon "times"
 
     %li.loading.text-center{"ng-if" => "!ready"}
       %i.fa.fa-cog.fa-spin

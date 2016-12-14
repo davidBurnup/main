@@ -1,5 +1,6 @@
 class Comment < ActiveRecord::Base
 
+  include ActsAsNotifiable
   include ActsAsCommentable::Comment
 
   acts_as_likeable
@@ -8,6 +9,15 @@ class Comment < ActiveRecord::Base
 
   default_scope -> { order('created_at ASC') }
 
+  notifiable({
+    content: :comment,
+    trigger: :after_save,
+    notifier: :user,
+    notifieds: lambda{|c|
+      c.notifiable_users
+    },
+    icon: 'comment-o'
+  })
 
   auto_html_for :comment do
     html_escape
@@ -18,17 +28,26 @@ class Comment < ActiveRecord::Base
   end
 
 
-  # NOTE: install the acts_as_votable plugin if you
-  # want user to vote on the quality of comments.
-  #acts_as_voteable
-
-  # NOTE: Comments belong to a user
   belongs_to :user
 
-  def notifiable_users
-    if commentable and commentable.respond_to? :notifiable_users
-      commentable.notifiable_users
+  def notifiable_users(only_self: false, origin_notifiable_resolver: nil)
+
+    n_users_ids = []
+
+    n_users_ids << self.user.id
+
+    # Likers of the comment
+    n_users_ids += likers(User).collect(&:id)
+
+    if !only_self and commentable
+      n_users_ids += commentable.notifiable_users(origin_notifiable_resolver: self)
     end
+
+    User.where("users.id IN (?)", n_users_ids)
+  end
+
+  def liked_notifiable_users
+
   end
 
   def notifing_user
