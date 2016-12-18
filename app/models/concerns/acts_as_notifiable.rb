@@ -102,7 +102,7 @@ module ActsAsNotifiable
       notifieds: nil,
       icon: 'bolt',
       locale_key: nil,
-      trigger: nil, # Defines if notify! method should be triggered on callbacks
+      trigger: :after_save, # Defines if notify! method should be triggered on callbacks
       enable_self_notification: false # Allows user to notify himself about a task
     }
 

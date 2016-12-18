@@ -30,9 +30,8 @@
 
 .navbar-brand {
   img {
-    height: 39px;
-    max-width: 270px;
-    margin-top: -7px;
+    height: 35px;
+    margin-top: -5px;
   }
 }
 
@@ -322,8 +321,8 @@ footer {
 }
 
 .content-body {
-   > p > .video,
-  > p > img {
+   > p > img,
+  > p > .video {
     float: left;
     padding: 10px 10px 10px 0;
   }
@@ -435,7 +434,7 @@ footer {
 
   .navbar-brand {
     img {
-      margin-top: -9px;
+      margin-top: -7.5px;
     }
   }
 }

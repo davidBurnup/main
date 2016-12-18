@@ -8,7 +8,11 @@ Worship::Application.routes.draw do
 
   resources :comments
 
+  get 'notifications/:id' => "notifications#show", as: 'notification'
+
   get 'fil' => "socializables#index", :as => "feeds"
+
+  get 'fil/:id' => "socializables#show", as: "show_activity"
 
   get 'action' => "socializables#action", :as => "my_action"
 

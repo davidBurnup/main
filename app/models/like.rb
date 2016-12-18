@@ -27,6 +27,8 @@ class Like < Socialization::ActiveRecordStores::Like
     icon: 'heart-o'
   })
 
+  before_save :fix_public_activity_path
+
   def like!(liker, likeable)
     unless likes?(liker, likeable)
       self.create! do |like|
@@ -43,6 +45,16 @@ class Like < Socialization::ActiveRecordStores::Like
 
   def likeable_notification_content
 
+  end
+
+  def root_activity
+    likeable.root_activity
+  end
+
+  def fix_public_activity_path
+    if likeable_type and likeable_type == "Activity"
+      self.likeable_type = "PublicActivity::Activity"
+    end
   end
 
 end

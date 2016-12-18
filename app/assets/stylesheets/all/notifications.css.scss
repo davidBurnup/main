@@ -27,9 +27,43 @@
   }
 
   > li {
+    &.is-unseen {
+      background: #fff5e8;
+    }
+
     > .notification {
       border-bottom: 1px solid #eee;
       padding: 8px;
+      position: relative;
+
+      .inner-wrapper {
+        width: 360px;
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      .seen-notification {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 30px;
+        height: 100%;
+        background: #D92322;
+
+        i {
+          position: absolute;
+          top: 50%;
+          margin-top: -6px;
+          color: white;
+          border-radius: 10px;
+          width: 18px;
+          height: 12px;
+          font-size: 14px;
+          left: 50%;
+          margin-left: -9px;
+          text-align: center;
+        }
+      }
 
       .user-avatar-mini {
         @include rounded-corners(50px);
@@ -41,18 +75,6 @@
         white-space: normal;
         padding-right: 20px;
         position: relative;
-
-        .seen-notification {
-          position: absolute;
-          right: 8px;
-          top: 50%;
-          height: 14px;
-          margin-top: -7px;
-
-          i {
-            vertical-align: top;
-          }
-        }
 
         .notified-at {
           font-size: 12px;

@@ -14,6 +14,19 @@ class SocializablesController < ApplicationController
     end
   end
 
+  def show
+    @activity = PublicActivity::Activity.find(params[:id])
+    authorize @activity, :show?
+    respond_to do |f|
+      f.html {
+        unless @activity
+          flash[:error] = "Ce actualité n'existe pas !"
+          redirect_to root_path
+        end
+      }
+    end
+  end
+
   def like
     likable_type = params[:likable_type]
     likable_id = params[:likable_id]

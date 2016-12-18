@@ -7,6 +7,7 @@ angular.module('Burnup.directives.notifications', [])
     scope:
       notification: "="
     controller: ($scope) ->
+      $scope.unseenNotificationsCount = 0
       $scope.notificationsCount = 0
       $scope.notifications = []
       $scope.ready = false
@@ -24,13 +25,14 @@ angular.module('Burnup.directives.notifications', [])
 
             $timeout ->
               $scope.notifications.splice(0, 0, notification)
+              unless notification.is_seen?
+                $scope.unseenNotificationsCount += 1
               $scope.notificationsCount += 1
-              console.log "new notifications", $scope.notifications
+              # console.log "new notifications", $scope.notifications
 
           connected: ->
             # FIXME: While we wait for cable subscriptions to always be finalized before sending messages
             setTimeout =>
-              console.log "subscribing to #{currentUser.id}"
               @perform 'notification_subscribed', user_id: currentUser.id
               , 1000
       )
@@ -46,7 +48,7 @@ angular.module('Burnup.directives.notifications', [])
           .then (notifications) ->
             if notifications
               $scope.notifications = $scope.notifications.concat(notifications)
-              console.log "ooo", notifications
+              $scope.unseenNotificationsCount = notifications.$unseenCount
               $scope.notificationsCount = notifications.$count
               $scope.lastPage = parseInt($scope.notificationsCount / 4)
             $scope.ready = true
@@ -60,12 +62,6 @@ angular.module('Burnup.directives.notifications', [])
 
       $scope.$watch "status.isOpen", (isOpen) ->
         $rootScope.pageIsUnscrollable = isOpen
-        console.log "isUn", isOpen
       # $scope.getNotifications()
 
-      $scope.destroy = (notificationToDestroy) ->
-        (new Notification(notificationToDestroy)).delete().then ->
-          isDestroying = false
-          $scope.notifications = $scope.notifications.filter (notification) ->
-            notification.id isnt notificationToDestroy.id
   }

@@ -1,0 +1,8 @@
+- @activity ||= nil
+
+- if @activity
+  = content_for :left_column do
+    .row
+      .col-sm-12
+        %ul.media-list#feed-activities
+          = render_activity(@activity)

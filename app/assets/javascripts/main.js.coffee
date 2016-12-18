@@ -83,6 +83,7 @@
 @auto_load = (ready_var) ->
   $(document).ready(ready_var)
   $(document).on('turbolinks:load', ready_var)
+  $(document).on('page:load', ready_var);
 
 @tabs_auto_load = ->
 

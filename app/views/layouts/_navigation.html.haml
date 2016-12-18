@@ -5,7 +5,7 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      = link_to raw(image_tag('logo_mini4.svg')), root_path, class: 'navbar-brand'
+      = link_to raw(image_tag('logo-square.svg')), root_path, class: 'navbar-brand'
     .navbar-collapse.collapse.navbar-inverse-collapse
       - if @enable_search.present?
         = form_for :search, :html => {:class => "navbar-form navbar-left hidden-sm hidden-xs"}, :url => @enable_search[:path] do |f|

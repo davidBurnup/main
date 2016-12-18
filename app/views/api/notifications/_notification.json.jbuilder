@@ -3,6 +3,7 @@ pre_loaded_current_user ||= current_user
 
 if notification and pre_loaded_current_user
   json.id notification.id
+  json.is_seen notification.is_seen?
   json.notifier do
     json.full_name notification.notifier.full_name
     json.avatar do

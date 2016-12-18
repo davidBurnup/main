@@ -10,6 +10,10 @@ class PublicActivity::ActivityPolicy
     true
   end
 
+  def show?
+    true
+  end
+
   def update?
     true
   end

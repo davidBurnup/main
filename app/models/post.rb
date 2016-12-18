@@ -50,11 +50,6 @@ class Post < ActiveRecord::Base
     end
 
     if a = self.activity
-      # Any user who liked the post
-      if likers = a.likers(User) and likers.count > 0
-        n_users_ids << likers.collect(&:id)
-      end
-
       unless only_self
         # And user who commented the post
         if comments = a.comments and comments.count > 0
@@ -89,16 +84,16 @@ class Post < ActiveRecord::Base
     self.music_medias = new_music_medias
   end
 
-  def notifiable_users
-    [user]
-  end
-
   def notification_editor
     activity ? activity.owner : nil
   end
 
   def notifiable_content
     self.content.truncate(30)
+  end
+
+  def root_activity
+    activity
   end
 
 end

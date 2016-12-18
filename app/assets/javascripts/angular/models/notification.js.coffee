@@ -24,6 +24,7 @@ angular.module('Burnup.models.Notification', ['ngResource', 'rails'])
       if angular.isDefined(result.originalData.count)
         result.data = result.originalData.items
         result.data.$count = result.originalData.count
+        result.data.$unseenCount = result.originalData.unseen_count
       result
 
   return Notification

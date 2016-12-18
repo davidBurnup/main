@@ -1,5 +1,6 @@
 class Meeting < ActiveRecord::Base
   include ActsAsFeedable
+  include ActsAsNotifiable
   has_many :meeting_users
   has_one :practice
   has_many :meeting_songs
@@ -12,6 +13,16 @@ class Meeting < ActiveRecord::Base
   after_save :format_label, :plan_practice_notifications
 
   acts_as_commentable
+
+  notifiable({
+    content: :label,
+    trigger: :after_save,
+    notifier: :creator,
+    notifieds: lambda{|m|
+      m.notifiable_users
+    },
+    icon: 'calendar-check-o'
+  })
 
   def end_at
     Time.at(start_at.to_i + duration) if start_at and start_at.to_i > 0
@@ -28,6 +39,45 @@ class Meeting < ActiveRecord::Base
         MeetingMailer.notify_practice(meeting_user).deliver
       end
     end
+  end
+
+  # => only_self : gets notifiable users only for the current object
+  def notifiable_users(only_self: false, origin_notifiable_resolver: nil)
+    n_users_ids = []
+
+    # Owner of the meeting
+    if self.creator
+      n_users_ids << self.creator.id
+
+      # all users from the same church
+      # if post was just created
+      if self.id_changed? and self.creator.church
+        n_users_ids += self.creator.church.users.collect(&:id)
+      end
+    end
+
+    # Invited users
+    if self.meeting_users.present?
+      n_users_ids += self.meeting_users.collect(&:id)
+    end
+
+    if a = self.activity
+      unless only_self
+        # And user who commented the post
+        if comments = a.comments and comments.count > 0
+          comments_notifiable_users_ids = comments.map do |c|
+            if c != origin_notifiable_resolver
+              c.notifiable_users(only_self: true, origin_notifiable_resolver: self).collect(&:user_id)
+            else
+              nil
+            end
+          end
+          n_users_ids << comments_notifiable_users_ids.flatten.compact.uniq
+        end
+      end
+    end
+
+    User.where('users.id IN (?)', n_users_ids.flatten.compact.uniq)
   end
 
   def format_label
@@ -60,7 +110,11 @@ class Meeting < ActiveRecord::Base
   end
 
   def notification_editor
-    created_by
+    creator
+  end
+
+  def root_activity
+    activity
   end
 
 end

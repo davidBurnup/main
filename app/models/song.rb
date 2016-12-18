@@ -1,10 +1,11 @@
 class Song < ActiveRecord::Base
   #
-  # include PublicActivity::Model
+  include PublicActivity::Model
+  include ActsAsNotifiable
   # tracked owner: Proc.new{ |controller, model| controller.current_user }, only: :create
-
+  # include PublicActivity::Common
   include ActsAsFeedable
-  
+
   after_save :parse_notes
   before_save :set_creator
 
@@ -14,6 +15,16 @@ class Song < ActiveRecord::Base
   belongs_to :origin_church, :class_name => "Church", :foreign_key => "origin_church_id"
   belongs_to :creator, :class_name => "User", :foreign_key => "created_by"
 
+
+  notifiable({
+    content: :title,
+    trigger: :after_save,
+    notifier: :creator,
+    notifieds: lambda{|s|
+      s.notifiable_users
+    },
+    icon: 'music'
+  })
 
   validates :key, :title, :content, :presence => true
 
@@ -406,6 +417,45 @@ class Song < ActiveRecord::Base
   # RIGHTS
 
   def can_be_updated_by?(user)
-
+    # FIXME : implement this ...
   end
+
+  # => only_self : gets notifiable users only for the current object
+  def notifiable_users(only_self: false, origin_notifiable_resolver: nil)
+    n_users_ids = []
+
+    # Creator of the song
+    if self.creator
+      n_users_ids << self.creator.id
+
+      # all users from the same church
+      # if post was just created
+      if self.id_changed? and self.creator.church
+        n_users_ids += self.creator.church.users.collect(&:id)
+      end
+    end
+
+    if a = self.activity
+      unless only_self
+        # And user who commented the post
+        if comments = a.comments and comments.count > 0
+          comments_notifiable_users_ids = comments.map do |c|
+            if c != origin_notifiable_resolver
+              c.notifiable_users(only_self: true, origin_notifiable_resolver: self).collect(&:user_id)
+            else
+              nil
+            end
+          end
+          n_users_ids << comments_notifiable_users_ids.flatten.compact.uniq
+        end
+      end
+    end
+
+    User.where('users.id IN (?)', n_users_ids.flatten.compact.uniq)
+  end
+
+  def root_activity
+    activity
+  end
+
 end

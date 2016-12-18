@@ -36,9 +36,6 @@ class Comment < ActiveRecord::Base
 
     n_users_ids << self.user.id
 
-    # Likers of the comment
-    n_users_ids += likers(User).collect(&:id)
-
     if !only_self and commentable
       n_users_ids += commentable.notifiable_users(origin_notifiable_resolver: self)
     end
@@ -64,6 +61,10 @@ class Comment < ActiveRecord::Base
       r_commentable = commentable.trackable
     end
     r_commentable
+  end
+
+  def root_activity
+    commentable.root_activity
   end
 
 end

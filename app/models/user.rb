@@ -11,8 +11,7 @@ class User < ActiveRecord::Base
   after_initialize :set_default_church_role
 
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#", :med_tiny => "75x75#", :tiny => "50x50#", :mini => "39x39#", :micro => "30x30#" }, :default_url => "/images/:style/user.png"
-  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
-
+  validates_attachment_content_type :avatar, content_type: /\Aimage/
   has_many :user_song_preferences
   has_many :instrument_preferences
   has_many :meeting_users, :dependent => :destroy
@@ -42,6 +41,17 @@ class User < ActiveRecord::Base
     if church.present? and !self.church_role
       self.build_church_role(:role => :member, :user_id => self.id, :church_id => self.church.id)
     end
+  end
+
+  def short_name
+    full_name = ""
+    if name.present?
+      full_name = name
+    else
+      full_name = "#{self.first_name ? self.first_name.downcase.capitalize : ""} #{self.last_name ? "#{self.last_name.first.upcase}." : ""}"
+    end
+
+    full_name
   end
 
   def full_name

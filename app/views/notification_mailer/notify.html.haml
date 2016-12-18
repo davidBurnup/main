@@ -1,0 +1,132 @@
+%table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-spacing: 0;border-collapse: collapse;vertical-align: top", :width => "100%"}
+  %tbody
+    %tr{:style => "vertical-align: top"}
+      %td{:style => "word-break: break-word;border-collapse: collapse !important;vertical-align: top;background-color: #F0F0F0", :width => "100%"}
+        /[if gte mso 9]
+          <table id="outlookholder" border="0" cellspacing="0" cellpadding="0" align="center"><tr><td>
+        /[if (IE)]
+          <table width="500" align="center" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+          <td>
+        %table.container{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-spacing: 0;border-collapse: collapse;vertical-align: top;max-width: 500px;margin: 0 auto;text-align: inherit", :width => "100%"}
+          %tbody
+            %tr{:style => "vertical-align: top"}
+              %td{:style => "word-break: break-word;border-collapse: collapse !important;vertical-align: top", :width => "100%"}
+                %table.block-grid.mixed-two-up{:bgcolor => "transparent", :cellpadding => "0", :cellspacing => "0", :style => "border-spacing: 0;border-collapse: collapse;vertical-align: top;width: 100%;max-width: 500px;color: #333;background-color: transparent", :width => "100%"}
+                  %tbody
+                    %tr{:style => "vertical-align: top"}
+                      %td{:style => "word-break: break-word;border-collapse: collapse !important;vertical-align: top;background-color: transparent;text-align: center;font-size: 0"}
+                        /[if (gte mso 9)|(IE)] <table width="100%" align="center" bgcolor="transparent" cellpadding="0" cellspacing="0" border="0"><tr>
+                        /[if (gte mso 9)|(IE)] <td valign="top" width="167" style="width:167px;">
+                        .col.num4{:style => "display: inline-block;vertical-align: top;text-align: center;width: 167px"}
+                          %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-spacing: 0;border-collapse: collapse;vertical-align: top", :width => "100%"}
+                            %tbody
+                              %tr{:style => "vertical-align: top"}
+                                %td{:style => "word-break: break-word;border-collapse: collapse !important;vertical-align: top;background-color: transparent;padding-top: 30px;padding-right: 10px;padding-bottom: 20px;padding-left: 10px;border-top: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-left: 0px solid transparent"}
+                                  %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-spacing: 0;border-collapse: collapse;vertical-align: top", :width => "100%"}
+                                    %tbody
+                                      %tr{:style => "vertical-align: top"}
+                                        %td{:align => "center", :style => "word-break: break-word;border-collapse: collapse !important;vertical-align: top;width: 100%"}
+                                          %div{:align => "center", :style => "font-size:12px"}
+                                            %img.center{:align => "center", :alt => "Image", :border => "0", :src => email_image_tag("notifier_avatar"), :style => "outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block;border: none;height: auto;line-height: 100%;margin: 0 auto;float: none;width: 100% !important;max-width: 130px;border-radius: 100px; -webkit-border-radius: 100px; -moz-border-radius: 100px;overflow:hidden;", :title => "Image", :width => "130"}/
+                        /[if (gte mso 9)|(IE)] </td>
+                        /[if (gte mso 9)|(IE)] <td valign="top" width="333" style="width:333px;">
+                        .col.num8{:style => "display: inline-block;vertical-align: top;text-align: center;width: 333px"}
+                          %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-spacing: 0;border-collapse: collapse;vertical-align: top", :width => "100%"}
+                            %tbody
+                              %tr{:style => "vertical-align: top"}
+                                %td{:style => "word-break: break-word;border-collapse: collapse !important;vertical-align: top;background-color: transparent;padding-top: 30px;padding-right: 0px;padding-bottom: 5px;padding-left: 0px;border-top: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-left: 0px solid transparent"}
+                                  %table{:cellpadding => "0", :cellspacing => "0", :style => "border-spacing: 0;border-collapse: collapse;vertical-align: top", :width => "100%"}
+                                    %tbody
+                                      %tr{:style => "vertical-align: top"}
+                                        %td{:style => "word-break: break-word;border-collapse: collapse !important;vertical-align: top;padding-top: 10px;padding-right: 10px;padding-bottom: 0px;padding-left: 20px"}
+                                          %div{:style => "color:#61626F;line-height:120%;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;"}
+                                            %div{:style => "font-size:12px;line-height:14px;color:#61626F;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;text-align:left;"}
+                                              %p{:style => "margin: 0;font-size: 18px;line-height: 22px"}
+                                                %span{:style => "font-size: 24px; line-height: 28px;"}
+                                                  %strong
+                                                    = @notifier.full_name
+                                                %span{:style => "font-size: 18px; line-height: 28px;"}
+                                                  = build_notification_header(@notification, @notified)
+                                  %table{:cellpadding => "0", :cellspacing => "0", :style => "border-spacing: 0;border-collapse: collapse;vertical-align: top", :width => "100%"}
+                                    %tbody
+                                      %tr{:style => "vertical-align: top"}
+                                        %td{:style => "word-break: break-word;border-collapse: collapse !important;vertical-align: top;padding-top: 10px;padding-right: 0px;padding-bottom: 10px;padding-left: 20px"}
+                                          %div{:style => "color:#9D9DA1;line-height:120%;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;"}
+                                            %div{:style => "font-size:14px;line-height:17px;color:#9D9DA1;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;text-align:left;"}
+                                              %p{:style => "margin: 0;font-size: 14px;line-height: 17px"}
+                                                = @notification.notifiable.notifiable_content
+                        /[if (gte mso 9)|(IE)] </td>
+                        /[if (gte mso 9)|(IE)] </td></tr></table>
+        /[if mso]
+          </td></tr></table>
+        /[if (IE)]
+          </td></tr></table>
+
+%table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-spacing: 0;border-collapse: collapse;vertical-align: top", :width => "100%"}
+  %tbody
+    %tr{:style => "vertical-align: top"}
+      %td{:style => "word-break: break-word;border-collapse: collapse !important;vertical-align: top;background-color: #f0f0f0", :width => "100%"}
+        /[if gte mso 9]
+          <table id="outlookholder" border="0" cellspacing="0" cellpadding="0" align="center"><tr><td>
+        /[if (IE)]
+          <table width="500" align="center" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+          <td>
+        %table.container{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-spacing: 0;border-collapse: collapse;vertical-align: top;max-width: 500px;margin: 0 auto;text-align: inherit", :width => "100%"}
+          %tbody
+            %tr{:style => "vertical-align: top"}
+              %td{:style => "word-break: break-word;border-collapse: collapse !important;vertical-align: top", :width => "100%"}
+                %table.block-grid{:bgcolor => "transparent", :cellpadding => "0", :cellspacing => "0", :style => "border-spacing: 0;border-collapse: collapse;vertical-align: top;width: 100%;max-width: 500px;color: #000000;background-color: transparent", :width => "100%"}
+                  %tbody
+                    %tr{:style => "vertical-align: top"}
+                      %td{:style => "word-break: break-word;border-collapse: collapse !important;vertical-align: top;background-color: transparent;text-align: center;font-size: 0"}
+                        /[if (gte mso 9)|(IE)] <table width="100%" align="center" bgcolor="transparent" cellpadding="0" cellspacing="0" border="0"><tr>
+                        /[if (gte mso 9)|(IE)] <td valign="top" width="500" style="width:500px;">
+                        .col.num12{:style => "display: inline-block;vertical-align: top;width: 100%"}
+                          %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-spacing: 0;border-collapse: collapse;vertical-align: top", :width => "100%"}
+                            %tbody
+                              %tr{:style => "vertical-align: top"}
+                                %td{:style => "word-break: break-word;border-collapse: collapse !important;vertical-align: top;background-color: transparent;padding-top: 5px;padding-right: 0px;padding-bottom: 5px;padding-left: 0px;border-top: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-left: 0px solid transparent"}
+                                  %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-spacing: 0;border-collapse: collapse;vertical-align: top", :width => "100%"}
+                                    %tbody
+                                      %tr{:style => "vertical-align: top"}
+                                        %td.button-container{:align => "center", :style => "word-break: break-word;border-collapse: collapse !important;vertical-align: top;padding-top: 15px;padding-right: 10px;padding-bottom: 20px;padding-left: 10px"}
+                                          %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-spacing: 0;border-collapse: collapse;vertical-align: top", :width => "100%"}
+                                            %tbody
+                                              %tr{:style => "vertical-align: top"}
+                                                %td.button{:align => "center", :style => "word-break: break-word;border-collapse: collapse !important;vertical-align: top", :valign => "middle", :width => "100%"}
+                                                  /[if mso]
+                                                    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="" style="height:42px;   v-text-anchor:middle; width:410px;" arcsize="60%"   strokecolor="#DA351C"   fillcolor="#DA351C" >
+                                                    <w:anchorlock/>
+                                                    <center style="color:#ffffff; font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px;">
+                                                  / [if !mso]><!--
+                                                  %div{:align => "center", :style => "display: inline-block; border-radius: 25px; -webkit-border-radius: 25px; -moz-border-radius: 25px; max-width: 80%; width: 100%; border-top: 0px solid transparent; border-right: 0px solid transparent; border-bottom: 0px solid transparent; border-left: 0px solid transparent;"}
+                                                    %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-spacing: 0;border-collapse: collapse;vertical-align: top;height: 42", :width => "100%"}
+                                                      %tbody
+                                                        %tr{:style => "vertical-align: top"}
+                                                          %td{:style => "word-break: break-word;border-collapse: collapse !important;vertical-align: top;border-radius: 25px; -webkit-border-radius: 25px; -moz-border-radius: 25px; color: #ffffff; background-color: #DA351C; padding-top: 5px; padding-right: 20px; padding-bottom: 5px; padding-left: 20px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;text-align: center", :valign => "middle"}
+                                                            / <![endif]
+                                                            %a{:href => notification_url(@notification), :style => "display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;background-color: #DA351C;color: #ffffff", :target => "_blank"}
+                                                              %span{:style => "font-size:16px;line-height:32px;"}
+                                                                %span{"data-mce-style" => "font-size: 14px;", :style => "font-size: 14px; line-height: 28px;"} VOIR SUR BURNUP
+                                                            / [if !mso]><!--
+                                                  / <![endif]
+                                                  /[if mso]
+                                                    </center>
+                                                    </v:roundrect>
+                                  %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-spacing: 0;border-collapse: collapse;vertical-align: top", :width => "100%"}
+                                    %tbody
+                                      %tr{:style => "vertical-align: top"}
+                                        %td{:align => "center", :style => "word-break: break-word;border-collapse: collapse !important;vertical-align: top;padding-top: 20px;padding-right: 10px;padding-bottom: 20px;padding-left: 10px"}
+                                          %div{:style => "height: 1px;"}
+                                            %table{:align => "center", :border => "0", :cellspacing => "0", :style => "border-spacing: 0;border-collapse: collapse;vertical-align: top;border-top: 1px solid #DADADA;width: 100%"}
+                                              %tbody
+                                                %tr{:style => "vertical-align: top"}
+                                                  %td{:align => "center", :style => "word-break: break-word;border-collapse: collapse !important;vertical-align: top"}
+                        /[if (gte mso 9)|(IE)] </td>
+                        /[if (gte mso 9)|(IE)] </td></tr></table>
+        /[if mso]
+          </td></tr></table>
+        /[if (IE)]
+          </td></tr></table>

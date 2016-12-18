@@ -28,5 +28,9 @@ module ActivityExtension
         trackable.notifiable_content
       end
     end
+
+    def root_activity
+      self
+    end
   end
 end

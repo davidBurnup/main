@@ -329,3 +329,5 @@ fr:
         header: "a écrit"
       comment:
         header: "a commenté"
+      song:
+        header: "a ajouté le chant"
