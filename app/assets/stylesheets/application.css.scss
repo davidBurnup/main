@@ -321,8 +321,8 @@ footer {
 }
 
 .content-body {
-   > p > img,
-  > p > .video {
+   > p > .video,
+  > p > img {
     float: left;
     padding: 10px 10px 10px 0;
   }
@@ -330,7 +330,7 @@ footer {
 
 .post-form {
   margin-bottom: 30px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #eee;
   padding-bottom: 30px;
   list-style: none;
 

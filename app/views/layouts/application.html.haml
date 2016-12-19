@@ -1,0 +1,72 @@
+!!!
+%html
+  %head
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %title= content_for?(:title) ? yield(:title) : "BURN UP"
+    %meta{:content => content_for?(:description) ? yield(:description) : "Worship", :name => "description"}/
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-eval': false
+    = stylesheet_link_tag 'application-print', media: 'print'
+    = csrf_meta_tags
+  %body{"ng-app" => "Burnup", "ng-class" => "$root.pageIsUnscrollable ? 'unscrollable' : ''", "ng-controller" => "Main"}
+    %header= render 'layouts/navigation'
+    %main.container{:role => "main"}
+      - if content_for? :headers
+        .row
+          #headers.col-lg-12
+            = yield :headers
+      .row
+        - if flash.present? and !@no_main_flash
+          - flash.each do |key, msg|
+            = render "/layouts/flash", :msg => msg, :key => key
+        - if content_for? :left_column
+          #left-column.col-lg-8.col-md-8.col-sm-12
+            = yield :left_column
+        - if content_for? :right_column
+          #right-column.col-lg-4.col-md-4.col-sm-12
+            = yield :right_column
+        = yield
+    %footer
+      ©#{Time.now.year} - BURN UP - Tous droits réservés
+    :javascript
+      // Include the UserVoice JavaScript SDK (only needed once on a page)
+      UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/mics4Ui9vsJQFfV6EckeYw.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
+
+      //
+      // UserVoice Javascript SDK developer documentation:
+      // https://www.uservoice.com/o/javascript-sdk
+      //
+
+      // Set colors
+      UserVoice.push(['set', {
+        accent_color: '#e23a39',
+        trigger_color: 'white',
+        trigger_background_color: '#e23a39'
+      }]);
+
+      // Identify the user and pass traits
+      // To enable, replace sample data with actual user traits and uncomment the line
+      UserVoice.push(['identify', {
+        //email:      'john.doe@example.com', // User’s email address
+        //name:       'John Doe', // User’s real name
+        //created_at: 1364406966, // Unix timestamp for the date the user signed up
+        //id:         123, // Optional: Unique id of the user (if set, this should not change)
+        //type:       'Owner', // Optional: segment your users by type
+        //account: {
+        //  id:           123, // Optional: associate multiple users with a single account
+        //  name:         'Acme, Co.', // Account name
+        //  created_at:   1364406966, // Unix timestamp for the date the account was created
+        //  monthly_rate: 9.99, // Decimal; monthly rate of the account
+        //  ltv:          1495.00, // Decimal; lifetime value of the account
+        //  plan:         'Enhanced' // Plan name for the account
+        //}
+      }]);
+
+      // Add default trigger to the bottom-right corner of the window:
+      UserVoice.push(['addTrigger', { mode: 'contact', trigger_position: 'bottom-right' }]);
+
+      // Or, use your own custom trigger:
+      //UserVoice.push(['addTrigger', '#id', { mode: 'contact' }]);
+
+      // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
+      UserVoice.push(['autoprompt', {}]);

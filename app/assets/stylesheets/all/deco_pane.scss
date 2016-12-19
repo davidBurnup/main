@@ -1,0 +1,13 @@
+@import "helpers";
+
+bu-deco-pane {
+  display: none;
+  background-size: cover;
+  position: fixed;
+  width: 0;
+  border-radius: 20px;
+
+  &.active {
+    display: block;
+  }
+}

@@ -10,7 +10,7 @@
 - trackable_file_key_name ||= nil
 
 - if activity
-  %li.media{id: "activity-#{activity.id}"}
+  %li.media.activity{id: "activity-#{activity.id}"}
     - if image_url
       = link_to image_link, :class => "pull-left" do
         = image_tag image_url, alt: image_alt, class: "img-circle"

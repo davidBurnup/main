@@ -14,6 +14,7 @@
 
   # Directives
   "Burnup.directives.notifications"
+  "Burnup.directives.buDecoPane"
 
   # Controllers
   "Burnup.controllers.Main"
