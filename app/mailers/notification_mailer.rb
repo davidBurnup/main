@@ -5,7 +5,7 @@ class NotificationMailer < ApplicationMailer
     @notification = notification
     if @notification and @notified = @notification.notified and @notifier = @notification.notifier
 
-      inline_images = %w( logov2.jpg facebook.png googleplus.png twitter.png blurb_01.png )
+      inline_images = %w( logov2.jpg facebook.png googleplus.png twitter.png )
       prepare_inline_static_images(inline_images)
 
       attachments.inline['notifier_avatar'] = File.read( @notifier.avatar.path(:thumb))
