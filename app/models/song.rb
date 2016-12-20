@@ -441,7 +441,7 @@ class Song < ActiveRecord::Base
         if comments = a.comments and comments.count > 0
           comments_notifiable_users_ids = comments.map do |c|
             if c != origin_notifiable_resolver
-              c.notifiable_users(only_self: true, origin_notifiable_resolver: self).collect(&:user_id)
+              c.notifiable_users(only_self: true, origin_notifiable_resolver: self).collect(&:id)
             else
               nil
             end
