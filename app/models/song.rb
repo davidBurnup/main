@@ -458,4 +458,12 @@ class Song < ActiveRecord::Base
     activity
   end
 
+  def notification_editor
+    self.creator
+  end
+
+  def notifiable_content
+    self.title
+  end
+
 end
