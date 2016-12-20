@@ -56,6 +56,12 @@ group :development do
   gem 'rails_layout'
   gem 'web-console', '~> 2.0'
   gem "capistrano", "~> 3.7"
+  gem 'capistrano-rvm'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-chruby'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-passenger'
 end
 
 group :development, :test do
