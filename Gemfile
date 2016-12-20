@@ -55,6 +55,7 @@ group :development do
   gem 'quiet_assets'
   gem 'rails_layout'
   gem 'web-console', '~> 2.0'
+  gem "capistrano", "~> 3.7"
 end
 
 group :development, :test do
