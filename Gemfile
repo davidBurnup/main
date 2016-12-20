@@ -46,6 +46,7 @@ gem 'actioncable', github: 'rails/actioncable'
 gem 'puma'
 gem "bower-rails", "~> 0.11.0"
 gem "paranoia", "~> 2.2"
+gem 'exception_notification'
 
 group :development do
   gem "haml-rails"
