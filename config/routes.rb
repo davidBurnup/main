@@ -45,7 +45,7 @@ Worship::Application.routes.draw do
   resources :meetings, :path => "reunions"
 
   namespace :api do
-    resources :notifications, only: [:index, :show, :destroy] do
+    resources :notifications, only: [:index, :destroy, :update] do
       collection do
         get "/page/:page" => "notifications#index"
       end

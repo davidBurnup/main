@@ -27,4 +27,9 @@ angular.module('Burnup.models.Notification', ['ngResource', 'rails'])
         result.data.$unseenCount = result.originalData.unseen_count
       result
 
+    setAsSeen: ->
+      @.isSeen = true
+      @.update()
+
+
   return Notification

@@ -29,12 +29,29 @@
   > li {
     &.is-unseen {
       background: #fff5e8;
+
+      > .notification {
+        border-left: 3px solid #fff5e8;
+      }
     }
 
     > .notification {
       border-bottom: 1px solid #eee;
       padding: 8px;
       position: relative;
+      border-left: 3px solid #fff;
+
+      &:hover {
+        border-left: 3px solid #d9230f;
+      }
+
+      > a {
+        color: #444;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
 
       .inner-wrapper {
         width: 360px;

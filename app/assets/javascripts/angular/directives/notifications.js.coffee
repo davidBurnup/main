@@ -16,7 +16,6 @@ angular.module('Burnup.directives.notifications', [])
       $scope.status =
         isOpen: false
 
-
       Auth.currentUser((currentUser) ->
         if currentUser and currentUser.id
           App.notifications = App.cable.subscriptions.create 'NotificationsChannel',
@@ -25,8 +24,7 @@ angular.module('Burnup.directives.notifications', [])
 
             $timeout ->
               $scope.notifications.splice(0, 0, notification)
-              unless notification.is_seen?
-                $scope.unseenNotificationsCount += 1
+              $scope.unseenNotificationsCount += 1
               $scope.notificationsCount += 1
               # console.log "new notifications", $scope.notifications
 
@@ -52,6 +50,18 @@ angular.module('Burnup.directives.notifications', [])
               $scope.notificationsCount = notifications.$count
               $scope.lastPage = parseInt($scope.notificationsCount / 4)
             $scope.ready = true
+
+      $scope.setAsSeen = (notification) ->
+        refNotification = null
+        angular.forEach $scope.notifications, (arNotification) ->
+          if arNotification.id == notification.id
+            refNotification = arNotification
+
+        refNotification.updating = true
+        new Notification(notification).setAsSeen().then ->
+          $scope.unseenNotificationsCount -= 1
+          refNotification.updating = false
+          refNotification.is_seen = true
 
       # $scope.$watch "notificationPage", (notificationPage) ->
       #   $scope.getNotifications()
