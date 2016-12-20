@@ -1,6 +1,7 @@
 class NotificationMailer < ApplicationMailer
   helper MailerHelper
   helper NotificationsHelper
+  default from: "burnup@ac-ac.fr"
   def notify(notification)
     @notification = notification
     if @notification and @notified = @notification.notified and @notifier = @notification.notifier
