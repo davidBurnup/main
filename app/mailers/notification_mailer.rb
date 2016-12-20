@@ -8,7 +8,12 @@ class NotificationMailer < ApplicationMailer
       inline_images = %w( logov2.jpg facebook.png googleplus.png twitter.png )
       prepare_inline_static_images(inline_images)
 
-      attachments.inline['notifier_avatar'] = File.read( @notifier.avatar.path(:thumb))
+      if @notifier.avatar.present?
+        attachments.inline['notifier_avatar'] = File.read( @notifier.avatar.path(:thumb))
+      else
+        attachments.inline['notifier_avatar'] = File.read( Rails.root.join('public', 'images', 'thumb', 'user.png'))
+      end
+
       mail(to: @notified.email, subject: "Vous avez une nouvelle notification de #{@notified.full_name} sur Burnup !")
     end
   end

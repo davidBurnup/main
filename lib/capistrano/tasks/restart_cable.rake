@@ -4,7 +4,7 @@ namespace :cable do
     on roles(:app) do
       within "#{current_path}" do
         with rails_env: "#{fetch(:stage)}" do
-          execute :rake, "db:create"
+          execute "pkill -2 cable && ./bin/cable"
         end
       end
     end
