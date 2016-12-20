@@ -27,7 +27,7 @@
 
 @app.run(($rootScope, Auth, amMoment) ->
   @App = {}
-  App.cable = Cable.createConsumer "ws://#{ENV['CABLE_HOST'] ? ENV['CABLE_HOST'] : '127.0.0.1'}:28080"
+  App.cable = Cable.createConsumer "ws://#{ENV['CABLE_HOST']}:28080"
   Auth.login()
   amMoment.changeLocale('fr')
 )
