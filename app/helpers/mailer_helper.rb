@@ -1,5 +1,5 @@
 module MailerHelper
   def email_image_tag(image_name)
-    attachments[image_name].url
+    asset_url("email/#{image_name}")
   end
 end

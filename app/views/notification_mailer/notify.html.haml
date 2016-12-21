@@ -28,7 +28,7 @@
                                       %tr{:style => "vertical-align: top"}
                                         %td{:align => "center", :style => "word-break: break-word;border-collapse: collapse !important;vertical-align: top;width: 100%"}
                                           %div{:align => "center", :style => "font-size:12px"}
-                                            %img.center{:align => "center", :alt => "Image", :border => "0", :src => email_image_tag("notifier_avatar"), :style => "outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block;border: none;height: auto;line-height: 100%;margin: 0 auto;float: none;width: 100% !important;max-width: 100px;border-radius: 100px; -webkit-border-radius: 100px; -moz-border-radius: 100px;overflow:hidden;", :title => "Avatar de #{@notifier.full_name}", :width => "100"}/
+                                            %img.center{:align => "center", :alt => "Image", :border => "0", :src => "http://#{ActionMailer::Base.default_url_options[:host]}/#{@notifier.avatar.url(:thumb)}", :style => "outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block;border: none;height: auto;line-height: 100%;margin: 0 auto;float: none;width: 100% !important;max-width: 100px;border-radius: 100px; -webkit-border-radius: 100px; -moz-border-radius: 100px;overflow:hidden;", :title => "Avatar de #{@notifier.full_name}", :width => "100"}/
                         /[if (gte mso 9)|(IE)] </td>
                         /[if (gte mso 9)|(IE)] <td valign="top" width="390" style="width:390px;">
                         .col.num8{:style => "display: inline-block;vertical-align: top;text-align: center;width: 390px"}

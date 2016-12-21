@@ -12,7 +12,7 @@ gem 'spring',        group: :development
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'devise_invitable'
-gem 'mysql2', '~> 0.3.18'
+gem 'mysql2'
 gem 'pundit'
 gem 'simple_form'
 gem 'autogrow-textarea-rails'
