@@ -27,7 +27,7 @@ class Notification < ActiveRecord::Base
 
   def notify!
     notify_through_ac
-    NotificationMailer.notify(self).deliver_now if Rails.env.development?
+    NotificationMailer.notify(self).deliver_now# if Rails.env.development?
   end
 
 
