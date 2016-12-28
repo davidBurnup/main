@@ -107,6 +107,9 @@ class User < ActiveRecord::Base
     end
   end
 
+  def like(likeable)
+    Like.where(liker_id: self.id, likeable_type: "PublicActivity::Activity", likeable_id: likeable.id).first
+  end
 
 
 end

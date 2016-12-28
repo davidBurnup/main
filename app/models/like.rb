@@ -1,3 +1,5 @@
+
+require "public_activity/activity"
 class Like < Socialization::ActiveRecordStores::Like
 
   include ActsAsNotifiable
@@ -27,8 +29,6 @@ class Like < Socialization::ActiveRecordStores::Like
     icon: 'heart-o'
   })
 
-  before_save :fix_public_activity_path
-
   def like!(liker, likeable)
     unless likes?(liker, likeable)
       self.create! do |like|
@@ -51,10 +51,15 @@ class Like < Socialization::ActiveRecordStores::Like
     likeable.root_activity
   end
 
-  def fix_public_activity_path
-    if likeable_type and likeable_type == "Activity"
-      self.likeable_type = "PublicActivity::Activity"
+  def likeable
+    l = nil
+    if likeable_type and likeable_id
+      lt = likeable_type
+      lt = "PublicActivity::#{lt}" if lt == "Activity"
+      lt = lt.safe_constantize
+      l = lt.where(id: likeable_id).first
     end
+    l
   end
 
 end
