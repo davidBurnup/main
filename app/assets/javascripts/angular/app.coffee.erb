@@ -5,6 +5,7 @@
   "angularMoment"
   "ui.bootstrap"
   "infinite-scroll"
+  "selectize"
 
   # Models
   "Burnup.models.Notification"
@@ -15,9 +16,11 @@
   # Directives
   "Burnup.directives.notifications"
   "Burnup.directives.buDecoPane"
+  "Burnup.directives.buUsersNew"
 
   # Controllers
   "Burnup.controllers.Main"
+  "Burnup.controllers.UserTou"
 
 ])
 
@@ -34,7 +37,6 @@
 
 
 $(document).on 'page:load', ->
-  console.log "kokoko"
   $('[ng-app]').each ->
     module = $(this).attr('ng-app')
     angular.bootstrap(this, [module])

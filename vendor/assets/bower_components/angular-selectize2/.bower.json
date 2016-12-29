@@ -1,0 +1,20 @@
+{
+  "name": "angular-selectize2",
+  "version": "3.0.2",
+  "main": [
+    "./dist/angular-selectize.js"
+  ],
+  "dependencies": {
+    "selectize": ">=0.12.1"
+  },
+  "homepage": "https://github.com/dfabreguette-ap/angular-selectize",
+  "_release": "3.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v3.0.2",
+    "commit": "947a446811af82a2962343dff9d0795446b42194"
+  },
+  "_source": "https://github.com/dfabreguette-ap/angular-selectize.git",
+  "_target": "v3.0.2",
+  "_originalSource": "https://github.com/dfabreguette-ap/angular-selectize.git"
+}

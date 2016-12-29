@@ -9,7 +9,7 @@
     =# stylesheet_link_tag "simplex", :media => "all"
     = stylesheet_link_tag 'application-print', media: 'print'
     = csrf_meta_tags
-  %body.public
+  %body.public{"ng-app" => "Burnup", "ng-class" => "$root.pageIsUnscrollable ? 'unscrollable' : ''", "ng-controller" => "Main"}
     %header= render 'layouts/navigation'
     %main.container{role: "main"}
       - if content_for? :headers

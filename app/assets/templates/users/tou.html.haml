@@ -1,0 +1,19 @@
+
+%span.modal-wrapper.modal-tou{"ng-class" => "active ? 'active' : ''"}
+  .modal-header
+    %a.btn.btn-default.pull-right.close-modal{type: "button", "ng-click" => "closeModal()"}
+      = fa_icon "close"
+    %h2.modal-heading
+      Conditions d'Utilisation Burnup
+
+  .modal-body
+    test
+
+  .modal-footer.text-left
+    %a.btn.btn-primary.pull-right{"ng-click" => "resolveModal()"}
+      %i.fa.fa-check
+      J'ACCEPTE
+
+    %a.btn.btn-default{"ng-click" => "closeModal()"}
+      %i.fa.fa-times
+      JE REFUSE

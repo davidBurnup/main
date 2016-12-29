@@ -28,7 +28,7 @@ module ActsAsNotifiable
     def notify!
       if (usrs_to_notify = self.notifiable_option(:notifieds)).present? and (notifier = self.notifiable_option(:notifier)).present?
         usrs_to_notify.each do |u|
-          if (u != notifier or notifiable_option(:enable_self_notification))
+          if (u.id != notifier.id or notifiable_option(:enable_self_notification))
             notify_user!(u)
           end
         end

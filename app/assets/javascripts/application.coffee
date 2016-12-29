@@ -32,6 +32,8 @@
 #= require angular-resource
 #= require angular-rails-templates
 #= require_tree ../templates
+#= require selectize/dist/js/standalone/selectize.min
+#= require angular-selectize2/dist/angular-selectize.js.coffee
 #= require angularjs/rails/resource
 #= require angular-moment/angular-moment.min
 #= require angular-bootstrap/ui-bootstrap-tpls.min

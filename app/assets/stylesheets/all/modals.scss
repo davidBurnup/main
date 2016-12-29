@@ -1,0 +1,26 @@
+.modal-wrapper {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+
+  .modal-header {
+    h1,
+    h2,
+    h3 {
+      margin: 10px 0;
+    }
+
+    .close-modal {
+      font-size: 16px;
+      padding: 1px 5px;
+    }
+  }
+
+  .modal-footer {
+    &.text-left {
+      text-align: left;
+    }
+  }
+}

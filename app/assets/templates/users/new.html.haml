@@ -1,0 +1,65 @@
+%form.container-fluid{"ng-submit" => "submit()", name: "signUpForm"}
+  .row
+    .col-xs-6.col-xxs-12{"ng-class" => "{'has-error': (signUpForm['user[first_name]'].$dirty && signUpForm['user[first_name]'].$invalid)}"}
+      .form-group
+        %label
+          Prénom
+        %input.form-control{type: :text, "ng-model" => "user.firstName", name: "user[first_name]", required: true}
+
+        %span.help-block{"ng-if" => "signUpForm['user[first_name]'].$dirty && signUpForm['user[first_name]'].$invalid"}
+          %i.fa.fa-warning
+          %span{"ng-if" => "signUpForm['user[first_name]'].$error.required"}
+            Le prénom est obligatoire !
+
+    .col-xs-6.col-xxs-12{"ng-class" => "{'has-error': (signUpForm['user[last_name]'].$dirty && signUpForm['user[last_name]'].$invalid)}"}
+      .form-group
+        %label
+          Nom
+        %input.form-control{type: :text, "ng-model" => "user.lastName", name: "user[last_name]", required: true}
+
+        %span.help-block{"ng-if" => "signUpForm['user[last_name]'].$dirty && signUpForm['user[last_name]'].$invalid"}
+          %i.fa.fa-warning
+          %span{"ng-if" => "signUpForm['user[last_name]'].$error.required"}
+            Le nom est obligatoire !
+  .row
+    .col-md-12
+      .form-group{"ng-class" => "{'has-error': (signUpForm['user[email]'].$dirty && signUpForm['user[email]'].$invalid)}"}
+        %label
+          Email
+        %input.form-control{type: :email, "ng-model" => "user.email", required: true, name: "user[email]", autocomplete: :off}
+
+        %span.help-block{"ng-if" => "signUpForm['user[email]'].$dirty && signUpForm['user[email]'].$invalid"}
+          %i.fa.fa-warning
+          %span{"ng-if" => "signUpForm['user[email]'].$error.required"}
+            L'adresse email est obligatoire !
+          %span{"ng-if" => "signUpForm['user[email]'].$error.email"}
+            L'adresse email doit être valide !
+
+    .col-md-12
+      .form-group{"ng-class" => "{'has-error': (signUpForm['user[password]'].$dirty && signUpForm['user[password]'].$invalid)}"}
+        %label
+          Mot de passe
+        %input.form-control{type: :password, "ng-model" => "user.password", "ng-minlength" => "8", required: true, name: "user[password]", autocomplete: :off}
+
+        %span.help-block{"ng-if" => "signUpForm['user[password]'].$dirty && signUpForm['user[password]'].$invalid"}
+          %i.fa.fa-warning
+          %span{"ng-if" => "signUpForm['user[password]'].$error.required"}
+            Le mot de passe est obligatoire !
+          %span{"ng-if" => "signUpForm['user[password]'].$error.minlength"}
+            Le mot de passe doit comporter au moins 8 caractères.
+
+    .col-md-12
+      .form-group
+        %label.checkbox
+          %input{type: :checkbox, name: 'user[tou]', "ng-model" => "user.tou", required: true}
+          J'accepte les conditions d'utilisation de Burnup.
+
+    .col-md-12
+      %pre
+        {{user}}
+
+    .col-md-12
+      .form-group.text-right
+        %button.btn.btn-primary{type: :submit, "ng-disabled" => "signUpForm.$invalid"}
+          %i.fa.fa-plus
+          S'INSCRIRE

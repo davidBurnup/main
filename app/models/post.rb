@@ -44,7 +44,7 @@ class Post < ActiveRecord::Base
 
       # all users from the same church
       # if post was just created
-      if self.id_changed? and self.user.church
+      if self.id_changed? and self.user.church and only_self
         n_users_ids += self.user.church.users.collect(&:id)
       end
     end
@@ -55,7 +55,7 @@ class Post < ActiveRecord::Base
         if comments = a.comments and comments.count > 0
           comments_notifiable_users_ids = comments.map do |c|
             if c != origin_notifiable_resolver
-              c.notifiable_users(only_self: true, origin_notifiable_resolver: self).collect(&:user_id)
+              c.notifiable_users(only_self: true, origin_notifiable_resolver: self).collect(&:id)
             else
               nil
             end
