@@ -1,4 +1,4 @@
-%form.container-fluid{"ng-submit" => "submit()", name: "signUpForm"}
+%form.container-fluid{"ng-submit" => "submit()", name: "signUpForm", "ng-if" => "!submitted"}
   .row
     .col-xs-6.col-xxs-12{"ng-class" => "{'has-error': (signUpForm['user[first_name]'].$dirty && signUpForm['user[first_name]'].$invalid)}"}
       .form-group
@@ -23,17 +23,19 @@
             Le nom est obligatoire !
   .row
     .col-md-12
-      .form-group{"ng-class" => "{'has-error': (signUpForm['user[email]'].$dirty && signUpForm['user[email]'].$invalid)}"}
+      .form-group{"ng-class" => "{'has-error': (signUpForm['user[email]'].$dirty && signUpForm['user[email]'].$invalid) || errors['email']}"}
         %label
           Email
         %input.form-control{type: :email, "ng-model" => "user.email", required: true, name: "user[email]", autocomplete: :off}
 
-        %span.help-block{"ng-if" => "signUpForm['user[email]'].$dirty && signUpForm['user[email]'].$invalid"}
+        %span.help-block{"ng-if" => "signUpForm['user[email]'].$dirty && signUpForm['user[email]'].$invalid || errors['email']"}
           %i.fa.fa-warning
           %span{"ng-if" => "signUpForm['user[email]'].$error.required"}
             L'adresse email est obligatoire !
           %span{"ng-if" => "signUpForm['user[email]'].$error.email"}
             L'adresse email doit être valide !
+          %span{"ng-if" => "errors['email']"}
+            {{errors['email']}}
 
     .col-md-12
       .form-group{"ng-class" => "{'has-error': (signUpForm['user[password]'].$dirty && signUpForm['user[password]'].$invalid)}"}
@@ -55,11 +57,20 @@
           J'accepte les conditions d'utilisation de Burnup.
 
     .col-md-12
-      %pre
-        {{user}}
-
-    .col-md-12
       .form-group.text-right
-        %button.btn.btn-primary{type: :submit, "ng-disabled" => "signUpForm.$invalid"}
-          %i.fa.fa-plus
-          S'INSCRIRE
+        %button.btn.btn-primary{type: :submit, "ng-disabled" => "signUpForm.$invalid || submitting"}
+          %span{"ng-if" => "!submitting"}
+            %i.fa.fa-plus
+            S'INSCRIRE
+
+          %span{"ng-if" => "submitting"}
+            %i.fa.fa-cog.fa-spin
+
+%div{"ng-if" => "submitted"}
+  .alert.alert-success.text-center.user-saved
+    %h2
+      %i.fa.fa-check-circle
+      Votre compte a bien été créé !
+
+    %p
+      Vous allez recevoir un email afin de confirmer votre compte.

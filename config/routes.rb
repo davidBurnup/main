@@ -50,6 +50,7 @@ Worship::Application.routes.draw do
         get "/page/:page" => "notifications#index"
       end
     end
+    resources :users, only: [:create], path: 'utilisateurs'
   end
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'

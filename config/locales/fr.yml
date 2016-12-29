@@ -30,7 +30,7 @@ fr:
               blank: "est obligatoire"
             email:
               blank: "est obligatoire"
-              taken: "déjà pris !"
+              taken: "Cet email est déjà pris !"
             password_confirmation:
               confirmation: "incorrect"
             current_password:

@@ -1,6 +1,6 @@
 angular.module('Burnup.directives.buUsersNew', [])
 
-.directive 'buUsersNew', ->
+.directive 'buUsersNew', (User) ->
   {
     restrict: 'E'
     templateUrl: 'users/new.html'
@@ -10,10 +10,25 @@ angular.module('Burnup.directives.buUsersNew', [])
     controller: ($scope, $uibModal, $timeout) ->
 
       $scope.user = {} unless $scope.user
+      $scope.submitting = false
+      $scope.submitted = false
+      $scope.errors = {}
       touLock = false
 
       $scope.submit = ->
-        console.log "submit now !"
+
+        $scope.submitting = true
+
+        new User($scope.user).save().then (data) ->
+          if data.errors
+            $scope.errors = data.errors
+          else
+            $scope.submitted = true
+
+          $scope.submitting = false
+
+        , (errors) ->
+          $scope.submitting = false
 
       $scope.$watch "user.tou", (tou) ->
         if tou and !touLock
