@@ -5,6 +5,7 @@
 //= depend_on_asset "bootstrap/glyphicons-halflings-regular.woff"
 // import the CSS framework
 @import "bootstrap"; // make all images responsive by default
+@import "helpers";
 
 img {
   @extend .img-responsive;
@@ -41,6 +42,13 @@ img {
 
 .form-group .form-control {
   font-size: 18px;
+
+  &.boolean {
+    height: 18px;
+    border: 0 solid transparent !important;
+    margin-top: 2px;
+    @include box-shadow-erase();
+  }
 }
 // apply styles to HTML elements
 // to make views framework-neutral

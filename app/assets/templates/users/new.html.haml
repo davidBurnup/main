@@ -50,6 +50,24 @@
           %span{"ng-if" => "signUpForm['user[password]'].$error.minlength"}
             Le mot de passe doit comporter au moins 8 caractères.
 
+    -# .col-md-12
+    -#   .form-group{"ng-class" => "{'has-error': (signUpForm['user[church_id]'].$dirty && signUpForm['user[church_id]'].$invalid)}"}
+    -#     %label
+    -#       Église ou Association
+    -#
+    -#     .selectize-container
+    -#       %div.creating-sign{"ng-if" => "creatingChurch"}
+    -#         %i.fa.fa-cog.fa-spin
+    -#         Création en cours ...
+    -#       %div.searching-churches{"ng-if" => "searchingChurches"}
+    -#         %i.fa.fa-cog.fa-spin
+    -#       %selectize{config: "selectizeConfig", "ng-model" => "user.church_id", options: "churches", required: true, name: "user[church_id]", "ng-disabled" => "creatingChurch"}
+    -#
+    -#     %span.help-block{"ng-if" => "signUpForm['user[church_id]'].$dirty && signUpForm['user[church_id]'].$invalid"}
+    -#       %i.fa.fa-warning
+    -#       %span{"ng-if" => "signUpForm['user[church_id]'].$error.required"}
+    -#         L'église est obligatoire !
+
     .col-md-12
       .form-group
         %label.checkbox

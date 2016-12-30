@@ -8,6 +8,7 @@ fr:
         one: "Église"
         other: "Églises"
         gender: 'F'
+        is_valid: "Organisme authentique"
       user:
         one: "Utilisateur"
         other: "Utilisateurs"

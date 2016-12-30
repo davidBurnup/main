@@ -160,7 +160,6 @@ body.public {
 
 footer {
   border-top: 1px solid #eee;
-  background: rgba(255,255,255,0.2);
   color: $main_color;
   // @include text-shadow-dark(0,0,3px,0.3);
   text-align: center;
@@ -323,8 +322,8 @@ footer {
 }
 
 .content-body {
-   > p > .video,
-  > p > img {
+   > p > img,
+  > p > .video {
     float: left;
     padding: 10px 10px 10px 0;
   }

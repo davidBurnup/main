@@ -5,3 +5,24 @@
     margin: 10px 0;
   }
 }
+
+bu-users-new {
+  .selectize-container {
+    position: relative;
+
+    .searching-churches {
+      position: absolute;
+      z-index: 2;
+      color: #444;
+      top: 7px;
+      right: 37px;
+    }
+
+    .creating-sign {
+      position: absolute;
+      top: 7px;
+      left: 11px;
+      z-index: 2;
+    }
+  }
+}

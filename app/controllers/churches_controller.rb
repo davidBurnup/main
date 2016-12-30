@@ -1,6 +1,10 @@
 class ChurchesController < ApplicationController
   before_action :set_church, only: [:show, :edit, :update, :destroy]
-  after_action :verify_authorized, :except => :show
+  after_action :verify_authorized, :except => [:show, :attach]
+
+  def attach
+    
+  end
 
   # GET /churches
   # GET /churches.json
@@ -76,6 +80,6 @@ class ChurchesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def church_params
-      params.require(:church).permit(:name)
+      params.require(:church).permit(:name, :is_valid)
     end
 end
