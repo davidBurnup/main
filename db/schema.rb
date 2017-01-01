@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161230105119) do
+ActiveRecord::Schema.define(version: 20170101201616) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -39,10 +39,19 @@ ActiveRecord::Schema.define(version: 20161230105119) do
   end
 
   create_table "churches", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name",              limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_valid"
+    t.string   "logo_file_name",    limit: 255
+    t.string   "logo_content_type", limit: 255
+    t.integer  "logo_file_size",    limit: 4
+    t.datetime "logo_updated_at"
+    t.string   "address",           limit: 255
+    t.float    "latitude",          limit: 24
+    t.float    "longitude",         limit: 24
+    t.integer  "creator_id",        limit: 4
+    t.integer  "updater_id",        limit: 4
   end
 
   create_table "comments", force: :cascade do |t|

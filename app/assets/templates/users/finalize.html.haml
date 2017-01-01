@@ -20,7 +20,7 @@
             .step-sublabel
               ou votre commaunauté
 
-        %label
+        %label{"ng-if" => "currentUser.church_id == null"}
           Recherchez une église ...
 
         %form{"ng-submit" => "chooseChurch()", name: "chooseChurch", "ng-if" => "!submitted"}
@@ -29,7 +29,7 @@
             %div.searching-churches{"ng-if" => "searchingChurches"}
               %i.fa.fa-cog.fa-spin
 
-            %input.form-control{type: :text, "ng-model" => "church.name", "ng-model-options" => "{ updateOn: 'default blur', debounce: {'default': 800, 'blur': 0} }"}
+            %input.form-control{type: :text, "ng-model" => "church.name", "ng-model-options" => "{ updateOn: 'default blur', debounce: {'default': 800, 'blur': 0} }", "ng-if" => "currentUser.church_id == null"}
 
             .churches-results{"ng-if" => "!searchingChurches"}
               %bu-churches-show{"ng-repeat" => "church in churches", church: "church"}

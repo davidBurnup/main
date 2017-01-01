@@ -10,7 +10,7 @@ module Api
       if params[:search]
         search_query = params[:search]
       end
-      @churches = Church.where('churches.name LIKE ?', "%#{search_query}%").limit(3)
+      @churches = Church.where('churches.name LIKE ?', "%#{search_query}%").valid_for(current_user).limit(3)
     end
 
     def create

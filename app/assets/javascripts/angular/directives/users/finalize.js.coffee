@@ -7,7 +7,7 @@ angular.module('Burnup.directives.buUsersFinalize', [])
     # scope:
     #   user: "="
 
-    controller: ($scope, $uibModal, $timeout) ->
+    controller: ($scope, $uibModal, $timeout, User) ->
 
       $scope.currentUser = Auth.currentUser()
       $scope.churches = []
@@ -15,15 +15,21 @@ angular.module('Burnup.directives.buUsersFinalize', [])
 
       $scope.$watch "church.name", (churchName) ->
         console.log "churchName", churchName
-        if churchName?
-          $scope.churches = []
-          $scope.searchingChurches = true
-          Church.query(search: churchName).then (churches) ->
-            $scope.churches = churches
-            $scope.searchingChurches = false
+        $scope.churches = []
+        $scope.searchingChurches = true
+        Church.query(search: churchName).then (churches) ->
+          $scope.churches = churches
+          $scope.searchingChurches = false
+
+      $scope.$on "church:unselect", (e, church) ->
+        $scope.currentUser.church_id = null
+        new User($scope.currentUser).save().then ->
+          Auth.setCurrentUser($scope.currentUser)
 
       $scope.$on "church:select", (e, church) ->
-        console.log "chosen", church
+        $scope.currentUser.church_id = church.id
+        new User($scope.currentUser).save().then ->
+          Auth.setCurrentUser($scope.currentUser)
 
       # $scope.selectizeConfig =
       #   persist: false,

@@ -7,8 +7,37 @@ bu-churches-show {
       }
     }
 
+    .panel-body {
+      display: flex;
+      align-items: center;
+
+      .church-logo {
+        min-width: 110px;
+        border-radius: 100px;
+        border: 5px solid #eee;
+        overflow: hidden;
+
+        > img {
+          min-width: 100px;
+        }
+      }
+
+      .church-detail {
+        margin-left: 15px;
+      }
+    }
+
     .panel-footer {
       padding: 10px;
+
+      button {
+        i.fa {
+          font-size: 18px;
+          line-height: 0;
+          position: relative;
+          top: 2px;
+        }
+      }
     }
   }
 }

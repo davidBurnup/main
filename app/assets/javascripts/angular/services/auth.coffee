@@ -1,6 +1,6 @@
 angular.module('Burnup.services.Auth', [])
 
-.factory 'Auth', ($http) ->
+.factory 'Auth', ($http, $rootScope) ->
   currentUserData = {}
   timeFormat = "DD/MM/YYYY HH:mm:ss"
   expirationLimit = 10
@@ -10,6 +10,10 @@ angular.module('Burnup.services.Auth', [])
     if sessionStorage.getItem('currentUser')
       currentUserData = JSON.parse(unescape(sessionStorage.getItem('currentUser')))
     return currentUserData
+
+  setCurrentUser = (user) ->
+    window.sessionStorage.setItem('currentUser', escape(JSON.stringify(user)))
+    $rootScope.$broadcast "currentUser:updated", currentUser()
 
   isSessionExpired = ->
     lastLoginTime = sessionStorage.getItem('lastLoginTime')
@@ -23,4 +27,5 @@ angular.module('Burnup.services.Auth', [])
 
   {
     currentUser: currentUser
+    setCurrentUser: setCurrentUser
   }

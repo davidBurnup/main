@@ -54,7 +54,7 @@ Worship::Application.routes.draw do
         get "/page/:page" => "notifications#index"
       end
     end
-    resources :users, only: [:create], path: 'utilisateurs'
+    resources :users, only: [:create, :update], path: 'utilisateurs'
     resources :churches, only: [:index, :create], path: 'eglises' do
       collection do
         get "/recherche/:search" => "churches#index"

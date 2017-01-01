@@ -3,6 +3,14 @@
 %p
   %b Nom:
   = @church.name
+%p
+  = image_tag @church.logo.url(:medium)
+%p
+  Adresse :
+  = @church.address
+%p
+  Coordonées :
+  = "[#{@church.latitude}, #{@church.longitude}]"
 
 = link_to 'Modifier', edit_church_path(@church), class: "btn-xs btn btn-primary"
 \|

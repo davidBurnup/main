@@ -7,11 +7,18 @@ angular.module('Burnup.directives.buChurchesShow', [])
     scope:
       church: "="
 
-    controller: ($scope, $uibModal, $timeout) ->
+    controller: ($scope, $uibModal, $timeout, Auth, $rootScope) ->
+
+      $scope.currentUser = Auth.currentUser()
 
       $scope.select = ->
         $scope.$emit "church:select", $scope.church
 
+      $scope.unselect = ->
+        $scope.$emit "church:unselect", $scope.church
+
+      $rootScope.$on "currentUser:updated", (e, currentUser) ->
+        $scope.currentUser = currentUser
 
 
 

@@ -47,6 +47,7 @@ gem 'puma'
 gem "bower-rails", "~> 0.11.0"
 gem "paranoia", "~> 2.2"
 gem 'exception_notification'
+gem 'geocoder'
 
 group :development do
   gem "haml-rails"
