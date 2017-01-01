@@ -6,7 +6,44 @@
   }
 }
 
+.step-container {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+
+  .step-number {
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    background: #444;
+    border-radius: 100px;
+    color: white;
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  .step-label-container {
+    margin-left: 10px;
+
+    > div {
+      margin: -7px 0;
+    }
+
+    .step-label {
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 17px;
+    }
+  }
+}
+
+bu-users-finalize,
 bu-users-new {
+  p {
+    font-size: 15px;
+  }
+
   .selectize-container {
     position: relative;
 

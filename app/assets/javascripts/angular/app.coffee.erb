@@ -20,6 +20,9 @@
   "Burnup.directives.notifications"
   "Burnup.directives.buDecoPane"
   "Burnup.directives.buUsersNew"
+  "Burnup.directives.buUsersFinalize"
+  "Burnup.directives.buBootstrapFile"
+  "Burnup.directives.buChurchesShow"
 
   # Controllers
   "Burnup.controllers.Main"
@@ -31,10 +34,9 @@
 @app.config(() ->
 )
 
-@app.run(($rootScope, Auth, amMoment) ->
+@app.run(($rootScope, amMoment) ->
   @App = {}
   App.cable = Cable.createConsumer "ws://<%=Rails.application.secrets.CABLE_HOST%>:<%=Rails.application.secrets.CABLE_PORT%>"
-  Auth.login()
   amMoment.changeLocale('fr')
 )
 

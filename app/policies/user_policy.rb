@@ -18,4 +18,8 @@ class UserPolicy
     @user.admin? or @record.user == @user
   end
 
+  def unfinalized?
+    @user.present?
+  end
+
 end

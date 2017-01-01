@@ -9,9 +9,8 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :null_session
 
   before_action :authorize_user
-
+  # before_action :unfinalized_callback
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-
 
   def after_sign_out_path(resource)
     new_user_session_path
@@ -27,9 +26,16 @@ class ApplicationController < ActionController::Base
     authenticate_user!
     self.set_current_user
   end
+
   def user_not_authorized
     flash[:alert] = "Vous n'êtes pas autorisé à faire cette action."
     redirect_to (request.referrer || root_path)
+  end
+
+  def unfinalized_callback
+    if current_user and !current_user.is_finalized?
+      redirect_to unfinalized_user_path(current_user)
+    end
   end
 
 

@@ -1,0 +1,59 @@
+.panel
+  .panel-heading
+    .col-md-12
+      %h1
+        Finalisez votre compte !
+  .panel-body
+    %form{"ng-submit" => "submit()", name: "finalizeForm", "ng-if" => "!submitted"}
+      .col-md-12
+        %p
+          Renseignez les informations complémentaires suivantes afin de terminer votre compte.
+
+      .col-md-4
+
+        .step-container
+          .step-number
+            1
+          .step-label-container
+            .step-label
+              VOTRE ÉGLISE
+            .step-sublabel
+              ou votre commaunauté
+
+        %label
+          Recherchez une église ...
+
+        %form{"ng-submit" => "chooseChurch()", name: "chooseChurch", "ng-if" => "!submitted"}
+          .church-chooser.form-group
+
+            %div.searching-churches{"ng-if" => "searchingChurches"}
+              %i.fa.fa-cog.fa-spin
+
+            %input.form-control{type: :text, "ng-model" => "church.name", "ng-model-options" => "{ updateOn: 'default blur', debounce: {'default': 800, 'blur': 0} }"}
+
+            .churches-results{"ng-if" => "!searchingChurches"}
+              %bu-churches-show{"ng-repeat" => "church in churches", church: "church"}
+
+      .col-md-4
+        .step-container
+          .step-number
+            2
+          .step-label-container
+            .step-label
+              VOTRE PHOTO
+            .step-sublabel
+              de profil
+
+        .form-group
+
+          %input.avatar-pic-input.form-control{type: :file, name: "user[avatar]", "bu-bootstrap-file" => true}
+
+      .col-md-4
+        .step-container
+          .step-number
+            3
+          .step-label-container
+            .step-label
+              LES INSTRUMENTS
+            .step-sublabel
+              que vous pratiquez

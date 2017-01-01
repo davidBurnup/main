@@ -2,10 +2,6 @@ class ChurchesController < ApplicationController
   before_action :set_church, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized, :except => [:show, :attach]
 
-  def attach
-    
-  end
-
   # GET /churches
   # GET /churches.json
   def index

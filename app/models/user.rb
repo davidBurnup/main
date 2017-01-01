@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include Jbuildable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable, :confirmable,
@@ -10,7 +11,14 @@ class User < ActiveRecord::Base
   after_initialize :set_default_role, :if => :new_record?
   after_initialize :set_default_church_role
 
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#", :med_tiny => "75x75#", :tiny => "50x50#", :mini => "39x39#", :micro => "30x30#" }, :default_url => "/images/:style/user.png"
+  has_attached_file :avatar, :styles => {
+    :medium => "300x300>",
+    :thumb => "100x100#",
+    :med_tiny => "75x75#",
+    :tiny => "50x50#",
+    :mini => "39x39#",
+    :micro => "30x30#" },
+  :default_url => "/images/user.svg"
   validates_attachment_content_type :avatar, content_type: /\Aimage/
   has_many :user_song_preferences
   has_many :instrument_preferences
@@ -109,6 +117,10 @@ class User < ActiveRecord::Base
 
   def like(likeable)
     Like.where(liker_id: self.id, likeable_type: "PublicActivity::Activity", likeable_id: likeable.id).first
+  end
+
+  def finalize!
+    self.update(is_finalized: true)
   end
 
 

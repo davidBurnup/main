@@ -120,6 +120,16 @@ section {
   padding-left: 15px;
 }
 
+.nav {
+  > li {
+    > a {
+      img.user-avatar-micro {
+        max-width: 30px;
+      }
+    }
+  }
+}
+
 .bootstrap-datetimepicker-widget a[data-action] {
   padding: 0 !important;
 

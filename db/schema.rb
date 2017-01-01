@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161229170636) do
+ActiveRecord::Schema.define(version: 20161230105119) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -258,6 +258,7 @@ ActiveRecord::Schema.define(version: 20161229170636) do
     t.string   "first_name",             limit: 255
     t.string   "last_name",              limit: 255
     t.integer  "church_id",              limit: 4
+    t.boolean  "is_finalized"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

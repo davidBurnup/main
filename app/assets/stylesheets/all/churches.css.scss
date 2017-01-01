@@ -1,0 +1,28 @@
+bu-churches-show {
+  .panel {
+    .panel-heading {
+      h3 {
+        margin: 0;
+        color: white;
+      }
+    }
+
+    .panel-footer {
+      padding: 10px;
+    }
+  }
+}
+
+.churches-results {
+  margin: 20px 0;
+}
+
+.church-chooser {
+  position: relative;
+
+  .searching-churches {
+    position: absolute;
+    right: 12px;
+    top: 9px;
+  }
+}

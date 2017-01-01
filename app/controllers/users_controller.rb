@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :set_user, only: [:show, :instruments, :update, :destroy, :unfinalized]
   after_action :verify_authorized, except: [:show, :instruments]
-
+  skip_before_action :unfinalized_callback, only: :unfinalized
   def index
     @users = User.all
     authorize @users
@@ -9,12 +9,8 @@ class UsersController < ApplicationController
 
   def show
 
-    if params[:id]
-      @user = User.where(id: params[:id]).first
-    else
-      @user = current_user
-    end
-    
+    @user ||= current_user
+
     any_filter = params[:filter]
 
     if any_filter
@@ -47,9 +43,8 @@ class UsersController < ApplicationController
   end
 
   def instruments
-    user = User.find(params[:id])
     @instruments = []
-    @instruments = user.instruments if user
+    @instruments = @user.instruments if user
     respond_to do |f|
       f.json {
 
@@ -58,7 +53,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
+
     authorize @user
     @user.attributes = secure_params
     if @user.save(validate: false)
@@ -69,17 +64,24 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    user = User.find(params[:id])
-    authorize user
-    unless user == current_user
-      user.destroy
+    authorize @user
+    unless @user == current_user
+      @user.destroy
       redirect_to users_path, :notice => "User deleted."
     else
       redirect_to users_path, :notice => "Can't delete yourself."
     end
   end
 
+  def unfinalized
+    authorize @user
+  end
+
   private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
 
   def secure_params
     params.require(:user).permit(:first_name, :last_name, :role, :church, :church_role_attributes => [:id, :role, :user_id, :church_id ])
