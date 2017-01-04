@@ -38,7 +38,7 @@
 #= require angular-moment/angular-moment.min
 #= require angular-bootstrap/ui-bootstrap-tpls.min
 #= require ngInfiniteScroll/build/ng-infinite-scroll.min
-
+#= require ng-img-crop-full-extended/compile/minified/ng-img-crop
 # Order matters ! load first deps (controllers, directives, filters)
 #= require_tree ./angular/models
 #= require_tree ./angular/services

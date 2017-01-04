@@ -44,9 +44,26 @@
             .step-sublabel
               de profil
 
-        .form-group
+        .form-group.avatar-cropper
 
-          %input.avatar-pic-input.form-control{type: :file, name: "user[avatar]", "bu-bootstrap-file" => true}
+          %div.file-input-wrapper{"ng-hide" => "avatarImage"}
+            .file-input-button.btn.btn-primary
+              %i.fa.fa-camera
+              %i.fa.fa-plus
+            %input.avatar-pic-input.form-control#avatarFileInput{type: :file, name: "user[avatar]"}
+            -# %input#fileInput{:type => "file"}/
+
+          .crop-area{"ng-show" => "avatarImage && !avatarValidated"}
+            .cancel-btn.btn-xs.btn.btn-primary{"ng-click" => "avatarImage = null; avatarValidated = false"}
+              %i.fa.fa-arrow-circle-o-left
+              CHANGER
+            .valid-btn.btn-xs.btn.btn-success{"ng-click" => "avatarValidated = true"}
+              %i.fa.fa-check-circle
+              OK
+            %img-crop.text-center{"area-type" => "circle", "canvas-scalemode" => "true", :chargement => "'Chargement ...'", :image => "avatarImage", "result-image" => "croppedAvatarImage", "result-image-size" => "{w:350,h:350}"}
+
+          %div{"ng-if" => "avatarValidated"}
+            %img.cropped-image{"ng-src" => "{{croppedAvatarImage}}"}/
 
       .col-md-4
         .step-container

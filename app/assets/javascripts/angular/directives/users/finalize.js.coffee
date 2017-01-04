@@ -1,4 +1,4 @@
-angular.module('Burnup.directives.buUsersFinalize', [])
+angular.module('Burnup.directives.buUsersFinalize', ['ngImgCrop'])
 
 .directive 'buUsersFinalize', (User, SelectizeTemplator, $filter, Auth, Church) ->
   {
@@ -30,6 +30,24 @@ angular.module('Burnup.directives.buUsersFinalize', [])
         $scope.currentUser.church_id = church.id
         new User($scope.currentUser).save().then ->
           Auth.setCurrentUser($scope.currentUser)
+
+      $scope.myImage = ''
+      $scope.myCroppedImage = ''
+
+      handleFileSelect = (evt) ->
+        file = evt.currentTarget.files[0]
+        reader = new FileReader()
+
+        reader.onload = (evt) ->
+          $scope.$apply ($scope) ->
+            $scope.avatarImage = evt.target.result
+            return
+          return
+
+        reader.readAsDataURL file
+        return
+
+      angular.element(document.querySelector('#avatarFileInput')).on 'change', handleFileSelect
 
       # $scope.selectizeConfig =
       #   persist: false,
