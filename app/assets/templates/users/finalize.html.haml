@@ -47,9 +47,10 @@
         .form-group.avatar-cropper
 
           %div.file-input-wrapper{"ng-hide" => "avatarImage"}
-            .file-input-button.btn.btn-primary
-              %i.fa.fa-camera
-              %i.fa.fa-plus
+            .file-input-button{"ng-if" => "currentUser.avatar"}
+              %i.fa.fa-pencil
+              %img.avatar{"ng-src" => "{{currentUser.avatar.original}}"}
+
             %input.avatar-pic-input.form-control#avatarFileInput{type: :file, name: "user[avatar]"}
             -# %input#fileInput{:type => "file"}/
 
@@ -62,9 +63,14 @@
               OK
             %img-crop.text-center{"area-type" => "circle", "canvas-scalemode" => "true", :chargement => "'Chargement ...'", :image => "avatarImage", "result-image" => "croppedAvatarImage", "result-image-size" => "{w:350,h:350}"}
 
-          %div{"ng-if" => "avatarValidated"}
-            %img.cropped-image{"ng-src" => "{{croppedAvatarImage}}"}/
+          %div.avatar-validated{"ng-if" => "avatarValidated", "ng-class" => "avatarUploaded ? 'uploaded' : ''"}
+            %img.cropped-image{"ng-src" => "{{croppedAvatarImage}}", "ng-class" => "avatarUploaded ? 'uploaded' : ''"}/
+            .progress-count{"ng-class" => "avatarUploading ? 'active' : ''"}
+              {{progress}}%
+            .progress-success{"ng-class" => "avatarUploaded ? 'active' : ''"}
+              %i.fa.fa-check-circle
 
+            %round-progress{:animation => "easeInOutQuart", "animation-delay" => "1000", :bgcolor => "#eaeaea", :clockwise => "true", :color => "#e72510", :current => "progress", :duration => "800", :max => "max", :radius => "100", :responsive => "true", :rounded => "true", :stroke => "5"}
       .col-md-4
         .step-container
           .step-number

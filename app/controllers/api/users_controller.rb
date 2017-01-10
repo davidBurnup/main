@@ -31,7 +31,7 @@ module Api
     end
 
     def update_user_params
-      params.require(:user).permit(:church_id)
+      params.require(:user).permit(:church_id, :avatar)
     end
   end
 end

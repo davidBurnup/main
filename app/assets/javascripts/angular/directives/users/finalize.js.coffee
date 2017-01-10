@@ -1,6 +1,6 @@
-angular.module('Burnup.directives.buUsersFinalize', ['ngImgCrop'])
+angular.module('Burnup.directives.buUsersFinalize', ['ngImgCrop', 'ngFileUpload', 'angular-svg-round-progressbar'])
 
-.directive 'buUsersFinalize', (User, SelectizeTemplator, $filter, Auth, Church) ->
+.directive 'buUsersFinalize', (User, SelectizeTemplator, $filter, Auth, Church, Upload) ->
   {
     restrict: 'E'
     templateUrl: 'users/finalize.html'
@@ -49,6 +49,33 @@ angular.module('Burnup.directives.buUsersFinalize', ['ngImgCrop'])
 
       angular.element(document.querySelector('#avatarFileInput')).on 'change', handleFileSelect
 
+      $scope.$watch "avatarValidated", (avatarValidated) ->
+        if avatarValidated and $scope.avatarImage and $scope.croppedAvatarImage
+          $scope.avatarUploading = true
+          Upload.upload(
+            url: "/api/utilisateurs/#{$scope.currentUser.id}.json"
+            method: 'PUT'
+            data:
+              "user[avatar]": Upload.dataUrltoBlob($scope.croppedAvatarImage, $scope.avatarImage.name))
+
+          .then ((response) ->
+            $scope.avatarUploading = false
+            $timeout ->
+              $scope.result = response.data
+              $scope.avatarUploaded = true
+              return
+            return
+
+          ), ((response) ->
+            $scope.avatarUploading = false
+            if response.status > 0
+              $scope.errorMsg = response.status + ': ' + response.data
+            return
+
+          ), (evt) ->
+            $scope.progress = parseInt(100.0 * evt.loaded / evt.total)
+            return
+          return
       # $scope.selectizeConfig =
       #   persist: false,
       #   maxItems: 1,

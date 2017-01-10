@@ -35,10 +35,16 @@
 #= require selectize/dist/js/standalone/selectize.min
 #= require angular-selectize2/dist/angular-selectize.js.coffee
 #= require angularjs/rails/resource
+
+# POST ANGULAR MODULES
 #= require angular-moment/angular-moment.min
 #= require angular-bootstrap/ui-bootstrap-tpls.min
 #= require ngInfiniteScroll/build/ng-infinite-scroll.min
 #= require ng-img-crop-full-extended/compile/minified/ng-img-crop
+#= require ng-file-upload/ng-file-upload.min
+#= require angular-svg-round-progressbar/build/roundProgress.min
+
+
 # Order matters ! load first deps (controllers, directives, filters)
 #= require_tree ./angular/models
 #= require_tree ./angular/services

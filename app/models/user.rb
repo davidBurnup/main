@@ -12,7 +12,6 @@ class User < ActiveRecord::Base
   after_initialize :set_default_church_role
 
   has_attached_file :avatar, :styles => {
-    :medium => "300x300>",
     :thumb => "100x100#",
     :med_tiny => "75x75#",
     :tiny => "50x50#",
