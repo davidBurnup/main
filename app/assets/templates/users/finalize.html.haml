@@ -9,7 +9,7 @@
         %p
           Renseignez les informations complémentaires suivantes afin de terminer votre compte.
 
-      .col-md-4
+      .col-md-4.step-wrapper
 
         .step-container
           .step-number
@@ -34,7 +34,7 @@
             .churches-results{"ng-if" => "!searchingChurches"}
               %bu-churches-show{"ng-repeat" => "church in churches", church: "church"}
 
-      .col-md-4
+      .col-md-4.step-wrapper
         .step-container
           .step-number
             2
@@ -71,7 +71,7 @@
               %i.fa.fa-check-circle
 
             %round-progress{:animation => "easeInOutQuart", "animation-delay" => "1000", :bgcolor => "#eaeaea", :clockwise => "true", :color => "#e72510", :current => "progress", :duration => "800", :max => "max", :radius => "100", :responsive => "true", :rounded => "true", :stroke => "5"}
-      .col-md-4
+      .col-md-4.step-wrapper
         .step-container
           .step-number
             3
@@ -80,3 +80,5 @@
               LES INSTRUMENTS
             .step-sublabel
               que vous pratiquez
+
+        %bu-instrument-preferences-index

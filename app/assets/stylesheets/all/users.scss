@@ -172,9 +172,13 @@
     }
   }
 }
-
 bu-users-finalize,
 bu-users-new {
+
+  .step-wrapper {
+    min-height: 330px;
+  }
+
   p {
     font-size: 15px;
   }

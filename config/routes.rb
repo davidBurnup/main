@@ -60,6 +60,8 @@ Worship::Application.routes.draw do
         get "/recherche/:search" => "churches#index"
       end
     end
+
+    resources :instrument_preferences, path: "instruments"
   end
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'

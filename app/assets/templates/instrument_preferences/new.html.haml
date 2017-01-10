@@ -1,0 +1,7 @@
+.row
+  .col-xs-5
+    %input{type: :text, "ng-model" => "instrument.instrument"}
+  .col-xs-5
+    %input{type: :text, "ng-model" => "instrument.detail"}
+  .col-xs-2.text-center{"ng-click" => "create()"}
+    %i.fa.fa-check-circle

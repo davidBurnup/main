@@ -44,5 +44,7 @@ module Worship
 
     I18n.config.enforce_available_locales = false
 
+    config.active_record.raise_in_transactional_callbacks = true
+
   end
 end
