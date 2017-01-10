@@ -330,11 +330,10 @@ footer {
     padding: 10px 10px 10px 0;
   }
 }
-
+#infinite-scrolling {
+  display:none;
+}
 .post-form {
-  margin-bottom: 30px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 30px;
   list-style: none;
 
   .post_content {

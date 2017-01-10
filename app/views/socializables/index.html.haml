@@ -1,16 +1,21 @@
 = content_for :left_column do
-
   .row
-    .col-sm-12
-      #post-form
-        = render "posts/form", :post => @post
+    .panel
+      .panel-body
+        .row
+          .col-sm-12
+            #post-form
+              = render "posts/form", :post => @post
   .row
-    .col-sm-12
-      %ul.media-list#feed-activities
-        = render_activities(@activities)
+    .panel
+      .panel-body
+        .row
+          .col-sm-12
+            %ul.media-list#feed-activities
+              = render_activities(@activities)
 
-      #infinite-scrolling
-        = will_paginate @activities
+            #infinite-scrolling
+              = will_paginate @activities
 
 = content_for :right_column do
   %bu-deco-pane{image: asset_path('mountains.jpg')}
