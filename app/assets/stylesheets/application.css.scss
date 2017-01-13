@@ -21,7 +21,7 @@
  *= require mediaelement_rails
  *= require mediaelement_rails/mejs-skins
  *= require angular-bootstrap/ui-bootstrap-csp
- *= require selectize/dist/css/selectize
+ *= require selectize/dist/css/selectize.default
  *= require selectize/dist/css/selectize.bootstrap3
  *= require ng-img-crop-full-extended/compile/minified/ng-img-crop
  */
@@ -338,7 +338,12 @@ footer {
 
   .post_content {
     resize: none;
-    max-height: 38px;
+    // max-height: 38px;
+    max-height: 50px;
+    textarea {
+      max-height: 50px;
+      padding: 12px 10px;
+    }
   }
 
   .media-footer {

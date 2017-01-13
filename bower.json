@@ -15,6 +15,7 @@
     }
   },
   "dependencies": {
-    "angular-svg-round-progressbar": "0.4.8"
+    "angular-svg-round-progressbar": "0.4.8",
+    "angular-sanitize": "^1.6.1"
   }
 }

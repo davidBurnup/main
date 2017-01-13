@@ -1,7 +1,10 @@
-.row
-  .col-xs-5
-    %input{type: :text, "ng-model" => "instrument.instrument"}
-  .col-xs-5
-    %input{type: :text, "ng-model" => "instrument.detail"}
-  .col-xs-2.text-center{"ng-click" => "create()"}
-    %i.fa.fa-check-circle
+.row{"ng-if" => "ready"}
+  .col-xs-12
+    -# %input{type: :text, "ng-model" => "instrument.instrument"}
+    %selectize{config: "instrumentConfig", "ng-model" => "instrument.instrument", options: "instrumentOptions"}
+  .col-xs-12.flexed
+    .item.form-group
+      %input.form-control{type: :text, "ng-model" => "instrument.detail", placeholder: "Marque, Modèle, ..."}
+    %button.item.btn.btn-primary.new-submit{type: :button, "ng-click" => "create()", "ng-disabled" => "!instrument.instrument"}
+      %i.fa.fa-plus-circle
+      AJOUTER

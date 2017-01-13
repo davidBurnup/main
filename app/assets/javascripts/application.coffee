@@ -28,12 +28,13 @@
 #= require jquery-hotkeys
 #= require mediaelement_rails
 #= require angular
+#= require angular-sanitize
 #= require angular-animate
 #= require angular-resource
+#= require selectize/dist/js/standalone/selectize.min
+#= require angular-selectize2/dist/angular-selectize
 #= require angular-rails-templates
 #= require_tree ../templates
-#= require selectize/dist/js/standalone/selectize.min
-#= require angular-selectize2/dist/angular-selectize.js.coffee
 #= require angularjs/rails/resource
 
 # POST ANGULAR MODULES

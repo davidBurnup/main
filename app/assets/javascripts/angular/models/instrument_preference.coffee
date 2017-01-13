@@ -1,10 +1,9 @@
 angular.module('Burnup.models.InstrumentPreference', ['ngResource', 'rails'])
 
-.factory 'InstrumentPreference', ($resource, RailsResource, railsSerializer) ->
+.factory 'InstrumentPreference', ($resource, RailsResource, railsSerializer, $rootScope) ->
 
   class InstrumentPreference extends RailsResource
     @configure
-
       url: (context) ->
         defaultUrl = '/api/instruments'
 
@@ -16,6 +15,8 @@ angular.module('Burnup.models.InstrumentPreference', ['ngResource', 'rails'])
         defaultUrl
 
       , name: 'instrument_preference'
+
+    @instrumentKeys: $rootScope.instrumentKeys
 
 
   return InstrumentPreference

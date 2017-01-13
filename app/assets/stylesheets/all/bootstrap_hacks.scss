@@ -218,3 +218,23 @@
     margin-left: 91.66666666666666%;
   }
 }
+.flexed {
+  display: flex;
+  flex-wrap: wrap;
+  > .item {
+    flex-grow: 1;
+  }
+}
+.equal-padding {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.hover {
+  cursor: pointer;
+}
+.list-group.no-bottom-marge {
+  margin-bottom: 0;
+}
+.panel-heading.no-top-padding {
+  padding-top: 0;
+}

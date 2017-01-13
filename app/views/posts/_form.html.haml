@@ -8,7 +8,7 @@
       %span.pull-left
         = image_tag current_user.avatar.url(:tiny), class: "img-circle"
       .media-body
-        = f.input :content, :placeholder => "Partagez un statut, une video youtube, un lien soundcloud, un lien interessant, une image ...", :label => false, input_html: { class: "autogrow post_content" }, "autocomplete" => "off"
+        = f.input :content, placeholder: "Partagez du contenu avec vos amis ...", :label => false, input_html: { class: "autogrow post_content" }, "autocomplete" => "off"
         = f.input :user_id, as: :hidden
         = f.input :song_id, as: :hidden
       .media-footer

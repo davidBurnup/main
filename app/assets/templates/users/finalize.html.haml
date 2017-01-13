@@ -1,10 +1,11 @@
 .panel
-  .panel-heading
-    .col-md-12
-      %h1
-        Finalisez votre compte !
+  .panel-heading.no-top-padding
+    .row
+      .col-md-12
+        %h1
+          Finalisez votre compte !
   .panel-body
-    %form{"ng-submit" => "submit()", name: "finalizeForm", "ng-if" => "!submitted"}
+    .row
       .col-md-12
         %p
           Renseignez les informations complémentaires suivantes afin de terminer votre compte.
@@ -20,20 +21,25 @@
             .step-sublabel
               ou votre commaunauté
 
-        %label{"ng-if" => "currentUser.church_id == null"}
-          Recherchez une église ...
-
         %form{"ng-submit" => "chooseChurch()", name: "chooseChurch", "ng-if" => "!submitted"}
           .church-chooser.form-group
 
             %div.searching-churches{"ng-if" => "searchingChurches"}
               %i.fa.fa-cog.fa-spin
 
-            %input.form-control{type: :text, "ng-model" => "church.name", "ng-model-options" => "{ updateOn: 'default blur', debounce: {'default': 800, 'blur': 0} }", "ng-if" => "currentUser.church_id == null"}
+            %input.form-control{placeholder: 'Nom ...', type: :text, name: 'name', "ng-model" => "church.name", "ng-model-options" => "{ updateOn: 'default blur', debounce: {'default': 800, 'blur': 0} }", "ng-if" => "currentUser.church_id == null"}
 
             .churches-results{"ng-if" => "!searchingChurches"}
               %bu-churches-show{"ng-repeat" => "church in churches", church: "church"}
 
+            .no-church-found{"ng-if" => "chooseChurch.name.$dirty && !searchingChurches && churches.length == 0"}
+              %h3
+                AUCUNE RÉSULTAT
+              %p
+                Vous souhaitez ajoutez votre communauté sur Burnup ?
+              %p
+                %a.btn.btn-xs.btn-primary{:href => "mailto:communaute@burnup.fr?Subject=Demande%20d%27ajout%20de%20communaut%E9&Body=Nom%20de%20la%20communaut%E9%20%3A%0AVotre%20nom%20/%20pr%E9nom%20%3A%0AR%F4le%20%3A%20%28Pasteur%2C%20Responsable%2C%20Membre%2C%20...%29%0ARaison%20%3A"}
+                  Contactez-nous !
       .col-md-4.step-wrapper
         .step-container
           .step-number
@@ -82,3 +88,8 @@
               que vous pratiquez
 
         %bu-instrument-preferences-index
+
+  .panel-footer.text-right.equal-padding
+    %button.btn.btn-primary{type: :button, "ng-click" => "finalize()", "ng-disabled" => "finalizing"}
+      CONTINUER
+      %i.fa.fa-arrow-right

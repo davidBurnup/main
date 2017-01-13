@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :null_session
 
   before_action :authorize_user
-  # before_action :unfinalized_callback
+  before_action :unfinalized_callback
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def after_sign_out_path(resource)

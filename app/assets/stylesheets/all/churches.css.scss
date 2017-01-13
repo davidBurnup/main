@@ -1,4 +1,9 @@
 bu-churches-show {
+  &:last-child {
+    .panel {
+      margin-bottom: 0;
+    }
+  }
   .panel {
     .panel-heading {
       h3 {
@@ -43,12 +48,12 @@ bu-churches-show {
 }
 
 .churches-results {
-  margin: 20px 0;
+  margin: 20px 0 0 0;
 }
 
 .church-chooser {
   position: relative;
-
+  margin-bottom: 0;
   .searching-churches {
     position: absolute;
     right: 12px;
