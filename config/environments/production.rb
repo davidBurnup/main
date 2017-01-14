@@ -102,4 +102,6 @@ Rails.application.configure do
     :exception_recipients => %w{dfabreguette@gmail.com}
   }
 
+  config.action_cable.disable_request_forgery_protection = true
+
 end
