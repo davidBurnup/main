@@ -48,7 +48,8 @@
       font-size: 70px;
       background: white;
       color: #d9230f;
-      > i.fa.fa-pencil {
+      cursor: pointer;
+      > i.fa {
         position: absolute;
         z-index: 1;
         color: #FFF;
@@ -59,12 +60,20 @@
         border-radius: 100px;
         font-size: 50px;
         padding: 11px;
+        &.fa-plus {
+          top: 120px;
+          padding-top: 13px;
+          padding-left: 12px;
+        }
       }
       > img.avatar {
         max-width: 100%;
         position: absolute;
         max-height: 100%;
         border-radius: 100%;
+        &.default {
+          width: 210px;
+        }
       }
     }
     #avatarFileInput {
@@ -74,6 +83,7 @@
       width: 100%;
       height: 245px;
       opacity: 0;
+      cursor: pointer;
     }
   }
   .avatar-validated {
@@ -211,4 +221,7 @@ bu-users-new {
       z-index: 2;
     }
   }
+}
+.comment-avatar {
+  max-height: 39px;
 }

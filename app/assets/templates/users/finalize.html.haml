@@ -51,11 +51,11 @@
               de profil
 
         .form-group.avatar-cropper
-
           %div.file-input-wrapper{"ng-hide" => "avatarImage"}
             .file-input-button{"ng-if" => "currentUser.avatar"}
-              %i.fa.fa-pencil
-              %img.avatar{"ng-src" => "{{currentUser.avatar.original}}"}
+              %i.fa.fa-pencil{"ng-if" => "!currentUser.no_avatar"}
+              %i.fa.fa-plus{"ng-if" => "currentUser.no_avatar"}
+              %img.avatar{"ng-src" => "{{currentUser.avatar.original}}", "ng-class" => "currentUser.no_avatar ? 'default' : ''"}
 
             %input.avatar-pic-input.form-control#avatarFileInput{type: :file, name: "user[avatar]"}
             -# %input#fileInput{:type => "file"}/

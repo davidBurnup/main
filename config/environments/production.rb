@@ -102,6 +102,8 @@ Rails.application.configure do
     :exception_recipients => %w{dfabreguette@gmail.com}
   }
 
+  # FIXME : QUICLY
+  # Websocket has been closed .... error :'(
   config.action_cable.disable_request_forgery_protection = true
 
 end
