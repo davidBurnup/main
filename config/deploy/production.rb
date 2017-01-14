@@ -17,7 +17,7 @@ server "79.137.38.19", user: "deploy", roles: %w{app}
 # property set. Specify the username and a domain or IP for the server.
 # Don't use `:all`, it's a meta role.
 
-role :app, %w{BURNUP}
+role :app, %w{79.137.38.19}
 # role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
 # role :db,  %w{deploy@example.com}
 
