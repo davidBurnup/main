@@ -17,22 +17,22 @@ angular.module('Burnup.directives.notifications', [])
         isOpen: false
 
       currentUser = Auth.currentUser()
-      # if currentUser and currentUser.id
-      #   App.notifications = App.cable.subscriptions.create 'NotificationsChannel',
-      #   received: (notification) ->
-      #     notification = JSON.parse(notification)
-      #
-      #     $timeout ->
-      #       $scope.notifications.splice(0, 0, notification)
-      #       $scope.unseenNotificationsCount += 1
-      #       $scope.notificationsCount += 1
-      #       # console.log "new notifications", $scope.notifications
-      #
-      #   connected: ->
-      #     # FIXME: While we wait for cable subscriptions to always be finalized before sending messages
-      #     setTimeout =>
-      #       @perform 'notification_subscribed', user_id: currentUser.id
-      #       , 1000
+      if currentUser and currentUser.id
+        App.notifications = App.cable.subscriptions.create 'NotificationsChannel',
+        received: (notification) ->
+          notification = JSON.parse(notification)
+
+          $timeout ->
+            $scope.notifications.splice(0, 0, notification)
+            $scope.unseenNotificationsCount += 1
+            $scope.notificationsCount += 1
+            # console.log "new notifications", $scope.notifications
+
+        connected: ->
+          # FIXME: While we wait for cable subscriptions to always be finalized before sending messages
+          setTimeout =>
+            @perform 'notification_subscribed', user_id: currentUser.id
+            , 1000
 
       $scope.getNotifications = (opts)->
 
