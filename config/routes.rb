@@ -65,4 +65,6 @@ Worship::Application.routes.draw do
   end
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
+  # Serve websocket cable requests in-process
+  mount ActionCable.server => '/cable'
 end
