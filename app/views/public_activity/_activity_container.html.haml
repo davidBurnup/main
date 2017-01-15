@@ -13,7 +13,7 @@
   %li.media.activity{id: "activity-#{activity.id}"}
     - if image_url
       = link_to image_link, :class => "pull-left" do
-        = image_tag image_url, alt: image_alt, class: "img-circle"
+        = image_tag image_url, alt: image_alt, class: "img-circle user-avatar tiny"
 
     .media-body.content-body
       - if policy(activity).destroy?
