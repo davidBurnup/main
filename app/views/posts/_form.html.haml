@@ -6,7 +6,7 @@
   = simple_form_for(post, :remote => true, :multipart => true) do |f|
     %li.media.post-form
       %span.pull-left
-        = image_tag current_user.avatar.url(:tiny), class: "img-circle"
+        = image_tag current_user.avatar.url(:tiny), class: "img-circle user-avatar tiny"
       .media-body
         = f.input :content, placeholder: "Partagez du contenu avec vos amis ...", :label => false, input_html: { class: "autogrow post_content" }, "autocomplete" => "off"
         = f.input :user_id, as: :hidden

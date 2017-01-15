@@ -7,7 +7,14 @@
     margin: 10px 0;
   }
 }
-
+.user-avatar {
+  &.tiny {
+    max-width: 50px;
+  }
+  &.mini {
+    max-width: 39px;
+  }
+}
 .avatar-cropper {
   .file-input-wrapper {
     position: relative;
