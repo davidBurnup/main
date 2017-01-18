@@ -58,8 +58,8 @@
 
 
 @parallax = ->
-  scrolled = $(window).scrollTop()
-  $("body").css "background-position", "0 " + -(scrolled * 0.15) + "px"
+  # scrolled = $(window).scrollTop()
+  # $("body").css "background-position", "0 " + -(scrolled * 0.15) + "px"
 @public_background = ->
   window_height = $(window).height() - $('header > .navbar').height() - $('footer').height()
   $('body.public').height(window_height)

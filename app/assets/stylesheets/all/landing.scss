@@ -1,0 +1,29 @@
+@import "helpers";
+body.landing {
+  header {
+    position: relative;
+    z-index: 1;
+    background: asset-url('top-bar.svg') no-repeat bottom transparent;
+    background-size: cover;
+    text-align: center;
+    .logo {
+      padding: 20px 0 40px 0;
+    }
+  }
+
+  .lanterns-top {
+    position: relative;
+    top: -40px;
+    z-index: 0;
+    background: asset-url('lanterns-top.jpg') no-repeat top transparent;
+    background-size: cover;
+    height: 250px;
+  }
+
+
+  footer {
+    color: white;
+    @include text-shadow-dark(0,0,3px,1);
+    border-top: 1px solid transparent;
+  }
+}
