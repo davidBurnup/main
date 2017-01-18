@@ -14,10 +14,66 @@ body.landing {
   .lanterns-top {
     position: relative;
     top: -40px;
+    margin-bottom: -40px;
     z-index: 0;
     background: asset-url('lanterns-top.jpg') no-repeat top transparent;
     background-size: cover;
     height: 250px;
+  }
+
+  .top-content {
+    position: relative;
+    top: -60px;
+    margin-bottom: -60px;
+    z-index: 1;
+    background: asset-url('middle-bar.svg') no-repeat top transparent;
+    background-size: cover;
+    height: 400px;
+    display: flex;
+    padding: 0 150px;
+    > img {
+      margin: auto;
+    }
+  }
+
+  .lanterns-bottom {
+    position: relative;
+    top: -40px;
+    margin-bottom: -40px;
+    z-index: 0;
+    background: asset-url('lanterns-bottom.jpg') no-repeat top transparent;
+    background-size: cover;
+    height: 250px;
+  }
+
+  .middle-content {
+    position: relative;
+    z-index: 1;
+    background: #000;
+    padding-top: 0px;
+    padding-bottom: 20px;
+    font-family: "sansationlight", arial;
+    color: white;
+    h3 {
+      color: white;
+      font-family: "sansationlight", arial;
+      font-size: 23px;
+      font-weight: 100;
+      -webkit-font-smoothing: antialiased;
+    }
+    h4 {
+      font-size: 17px;
+      color: white;
+      -webkit-font-smoothing: antialiased;
+    }
+    .heart {
+      width: 150px;
+      padding: 20px 0;
+    }
+    .arts {
+      width: 350px;
+      padding: 20px 0;
+    }
   }
 
 
@@ -25,5 +81,29 @@ body.landing {
     color: white;
     @include text-shadow-dark(0,0,3px,1);
     border-top: 1px solid transparent;
+  }
+}
+
+@media (max-width: 991px) {
+  body.landing {
+    .top-content {
+      padding: 0 20px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  body.landing {
+    .top-content {
+      padding: 75px 20px;
+      display: block;
+      height: 730px;
+      > img {
+        &.implies {
+          @include rotate(90deg);
+          padding: 5px 0;
+        }
+      }
+    }
   }
 }

@@ -1,0 +1,18 @@
+@font-face {
+  font-family: 'sansationregular';
+  src: url('/fonts/sansation_regular-webfont.woff2') format('woff2'),
+       url('/fonts/sansation_regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'sansationlight';
+  src: url('/fonts/Sansation-Light-webfont.eot');
+  src: url('/fonts/Sansation-Light-webfont.eot?#iefix') format('embedded-opentype'),
+       url('/fonts/Sansation-Light-webfont.woff') format('woff'),
+       url('/fonts/Sansation-Light-webfont.ttf') format('truetype'),
+       url('/fonts/Sansation-Light-webfont.svg#sansation_lightlight') format('svg');
+  font-weight: normal;
+  font-style: normal;
+
+}
