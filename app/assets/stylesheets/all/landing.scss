@@ -1,5 +1,37 @@
 @import "helpers";
 body.landing {
+  .landing-wrapper {
+    font-family: "sansationlight", arial;
+    color: white;
+    -webkit-font-smoothing: antialiased;
+
+
+    h1,h2,h3,h4 {
+      font-family: "sansationlight", arial;
+      color: white;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h2 {
+      font-size: 42px;
+    }
+    h3 {
+      font-size: 23px;
+    }
+    h4 {
+      font-size: 19px;
+    }
+    p, ul, li {
+      font-size: 16px;
+    }
+    li {
+      list-style: none;
+      padding: 2px 0;
+    }
+    ul {
+      padding-left: 15px;
+    }
+  }
   header {
     position: relative;
     z-index: 1;
@@ -8,17 +40,18 @@ body.landing {
     text-align: center;
     .logo {
       padding: 20px 0 40px 0;
+      height: 210px;
     }
   }
 
   .lanterns-top {
     position: relative;
-    top: -40px;
-    margin-bottom: -40px;
+    top: -50px;
+    margin-bottom: -50px;
     z-index: 0;
     background: asset-url('lanterns-top.jpg') no-repeat top transparent;
     background-size: cover;
-    height: 250px;
+    height: 220px;
   }
 
   .top-content {
@@ -45,7 +78,6 @@ body.landing {
     background-size: cover;
     height: 250px;
   }
-
   .middle-content {
     position: relative;
     z-index: 1;
@@ -58,7 +90,6 @@ body.landing {
       color: white;
       font-family: "sansationlight", arial;
       font-size: 23px;
-      font-weight: 100;
       -webkit-font-smoothing: antialiased;
     }
     h4 {
@@ -74,6 +105,31 @@ body.landing {
       width: 350px;
       padding: 20px 0;
     }
+  }
+
+
+  .bottom-separator {
+    position: relative;
+    top: -30px;
+    margin-bottom: -100px;
+    z-index: 0;
+    background: asset-url('bottom-bar.svg') no-repeat top transparent;
+    background-size: cover;
+    height: 120px;
+  }
+  .bottom-content {
+    background-color: #DA351C;
+    h2 {
+      margin-bottom: 4px;
+    }
+    h3 {
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+    .session-new-wrapper {
+      margin: 30px 0;
+    }
+
   }
 
 

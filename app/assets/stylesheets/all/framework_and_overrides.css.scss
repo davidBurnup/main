@@ -4,8 +4,20 @@
 //= depend_on_asset "bootstrap/glyphicons-halflings-regular.ttf"
 //= depend_on_asset "bootstrap/glyphicons-halflings-regular.woff"
 // import the CSS framework
-@import "bootstrap"; // make all images responsive by default
+
+// Custom Variables
+$brand-primary: #DA351C;
+$navbar-height: 50px;
+$badge-bg: #FFF;
+$badge-color: $brand-primary;
+@import "bootstrap-sprockets";
+@import "bootswatch/paper/variables";
+
+
+@import "bootstrap";
+@import "bootswatch/paper/bootswatch";
 @import "helpers";
+
 
 img {
   @extend .img-responsive;
@@ -59,7 +71,7 @@ main {
   //padding-bottom: 40px;
   //width: 100%;
   padding-top: 20px;
-  margin-top: 41px; // accommodate the navbar
+  margin-top: $navbar-height + 10px;
 }
 
 section {

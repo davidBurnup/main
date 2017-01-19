@@ -1,4 +1,4 @@
-%form.container-fluid{"ng-submit" => "submit()", name: "signUpForm", "ng-if" => "!submitted"}
+%form{"ng-submit" => "submit()", name: "signUpForm", "ng-if" => "!submitted"}
   .row
     .col-xs-6.col-xxs-12{"ng-class" => "{'has-error': (signUpForm['user[first_name]'].$dirty && signUpForm['user[first_name]'].$invalid)}"}
       .form-group
@@ -70,12 +70,13 @@
 
     .col-md-12
       .form-group
-        %label.checkbox
-          %input{type: :checkbox, name: 'user[tou]', "ng-model" => "user.tou", required: true}
-          J'accepte les conditions d'utilisation de Burnup.
+        .checkbox
+          %label
+            %input{type: :checkbox, name: 'user[tou]', "ng-model" => "user.tou", required: true}
+            J'accepte les conditions d'utilisation de Burnup.
 
     .col-md-12
-      .form-group.text-right
+      .text-right
         %button.btn.btn-primary{type: :submit, "ng-disabled" => "signUpForm.$invalid || submitting"}
           %span{"ng-if" => "!submitting"}
             %i.fa.fa-plus

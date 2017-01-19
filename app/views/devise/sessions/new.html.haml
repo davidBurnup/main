@@ -7,8 +7,8 @@
 
 .lanterns-bottom
 
-.middle-content
-  .container-fluid
+.middle-content.landing-wrapper
+  .container
     .row
       .col-md-6.text-center
         %h3
@@ -29,23 +29,58 @@
           (musique, vidéos, peintures, dessins, … autre ?)
         %img.img-responsive.arts.visible-xs.visible-sm{src: asset_path("arts.svg")}
 
+.bottom-separator
+.bottom-content
+  .container
+    .row
+      .col-md-6.landing-wrapper
+        %h2
+          Créez votre compte
+        %h3
+          C'est simple, rapide et gratuit !
 
--# %div
--#   = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f|
--#     %h3 Connexion
--#     = devise_error_messages!
--#     .form-group
--#       /
--#         <haml_silent> if devise_mapping.registerable? </haml_silent><haml_block>
--#         <haml_loud> link_to &quot;S&#39;inscrire&quot;, new_registration_path(resource_name), class: &#39;pull-right&#39;  </haml_loud>
--#         </haml_block>
--#       = f.input :email, :autofocus => true, class: 'form-control'
--#     .form-group
--#       - if devise_mapping.recoverable?
--#         = link_to "Oublié le votre ?", new_password_path(resource_name), class: 'pull-right'
--#       = f.input :password, class: 'form-control'
--#     = f.submit 'SE CONNECTER', :class => 'btn btn-primary right'
--#     - if devise_mapping.rememberable?
--#       .checkbox
--#         = f.check_box :remember_me
--#         = f.label :remember_me
+        %p
+          Burnup vous permettra simplement de :
+
+        %ul
+          %li
+            + Partager ce qui brule dans vos coeurs au travers de
+            %b
+              messages, photos et vidéos
+          %li
+            + Gérer
+            %b
+              vos partitions d’accord et resources audio / vidéo
+            pour vous, votre équipe de louange, tout ceux qui sont autours de vous
+          %li
+            + Planifier
+            %b
+              vos réunions et listes de chants
+          %li
+            + Partager vos propres réalisations artistiques
+        %p
+          De nombreuses fonctionnalités sont en préparation !
+
+      .col-md-6
+        .panel.session-new-wrapper
+          .panel-body
+            %bu-users-new
+
+      -# = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f|
+      -#   %h3 Connexion
+      -#   = devise_error_messages!
+      -#   .form-group
+      -#     /
+      -#       <haml_silent> if devise_mapping.registerable? </haml_silent><haml_block>
+      -#       <haml_loud> link_to &quot;S&#39;inscrire&quot;, new_registration_path(resource_name), class: &#39;pull-right&#39;  </haml_loud>
+      -#       </haml_block>
+      -#     = f.input :email, :autofocus => true, class: 'form-control'
+      -#   .form-group
+      -#     - if devise_mapping.recoverable?
+      -#       = link_to "Oublié le votre ?", new_password_path(resource_name), class: 'pull-right'
+      -#     = f.input :password, class: 'form-control'
+      -#   = f.submit 'SE CONNECTER', :class => 'btn btn-primary right'
+      -#   - if devise_mapping.rememberable?
+      -#     .checkbox
+      -#       = f.check_box :remember_me
+      -#       = f.label :remember_me

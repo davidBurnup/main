@@ -11,7 +11,7 @@
  * file per style scope.
  *
  *= require ./all/framework_and_overrides
- *= require ./all/bootswatch_simplex
+ * require ./all/bootswatch_simplex
  *= require bootstrap-datetimepicker
  *= require fullcalendar/fullcalendar.min
  *= require font-awesome
@@ -56,33 +56,33 @@
   margin-right: 5px;
 }
 
-.btn[class*="btn-"] {
-  .glyphicon {
-    color: rgba(255,255,255,0.6);
-    @include transition(0.5s);
-  }
-
-  &:focus,
-  &:hover {
-    .glyphicon {
-      color: rgba(255,255,255,1);
-    }
-  }
-}
-
-.btn {
-  .glyphicon {
-    color: rgba(212,39,0,0.6);
-    @include transition(0.5s);
-  }
-
-  &:focus,
-  &:hover {
-    .glyphicon {
-      color: rgba(212,39,0,1);
-    }
-  }
-}
+// .btn[class*="btn-"] {
+//   .glyphicon {
+//     color: rgba(255,255,255,0.6);
+//     @include transition(0.5s);
+//   }
+//
+//   &:focus,
+//   &:hover {
+//     .glyphicon {
+//       color: rgba(255,255,255,1);
+//     }
+//   }
+// }
+//
+// .btn {
+//   .glyphicon {
+//     color: rgba(212,39,0,0.6);
+//     @include transition(0.5s);
+//   }
+//
+//   &:focus,
+//   &:hover {
+//     .glyphicon {
+//       color: rgba(212,39,0,1);
+//     }
+//   }
+// }
 
 .media-heading {
   margin-bottom: 0;
@@ -356,14 +356,18 @@ footer {
 
 .navbar-nav > li > span {
   display: inline-block;
-  padding-top: 10px;
-  padding-bottom: 10px;
-
+  padding: 12px 10px 15px 10px;
   > a {
     color: white;
     background: transparent !important;
     text-decoration: none !important;
     padding: 10px 0;
+    > i.fa.fa-bell-o {
+      font-size: 18px;
+      margin-top: 4px;
+      float: left;
+      margin-right: 7px;
+    }
   }
 }
 
