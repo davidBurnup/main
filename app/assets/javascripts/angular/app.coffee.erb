@@ -31,15 +31,21 @@
   "Burnup.directives.buInstrumentPreferencesIndex"
   "Burnup.directives.buInstrumentPreferencesShow"
   "Burnup.directives.buInstrumentPreferencesNew"
+  "Burnup.directives.buUsersLogin"
 
   # Controllers
   "Burnup.controllers.Main"
   "Burnup.controllers.UserTou"
+  "Burnup.controllers.UsersLogin"
+
+  # Utils
+  "utils.autofocus"
 
 ])
 
 
-@app.config(() ->
+@app.config(($httpProvider) ->
+   $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
 )
 
 @app.run(($rootScope, amMoment) ->

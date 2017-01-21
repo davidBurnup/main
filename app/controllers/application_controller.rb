@@ -8,8 +8,9 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
   # protect_from_forgery with: :null_session
 
-  before_action :authorize_user
-  before_action :unfinalized_callback
+  before_action :authorize_user, except: [:main_fallback]
+  before_action :unfinalized_callback, except: [:main_fallback]
+  layout "public", only: [:main_fallback]
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def after_sign_out_path(resource)
@@ -18,6 +19,12 @@ class ApplicationController < ActionController::Base
 
   def set_current_user
     User.current = current_user
+  end
+
+  def main_fallback
+    if current_user
+      redirect_to socializables_path
+    end
   end
 
   private
@@ -37,7 +44,6 @@ class ApplicationController < ActionController::Base
       redirect_to unfinalized_user_path(current_user)
     end
   end
-
 
 
 end

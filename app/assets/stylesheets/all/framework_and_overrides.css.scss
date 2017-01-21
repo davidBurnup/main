@@ -157,3 +157,12 @@ section {
     }
   }
 }
+
+.btn.btn-primary-bordered {
+  background: #e51c23;
+  border: 2px solid white;
+  color: white;
+  font-size: 15px;
+  padding: 3px 9px;
+  outline: none !important;
+}

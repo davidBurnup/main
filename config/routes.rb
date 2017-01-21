@@ -1,6 +1,6 @@
 Worship::Application.routes.draw do
 
-  root :to => "socializables#index"
+  root :to => "application#main_fallback"
   
   resources :posts
 

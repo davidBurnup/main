@@ -1,5 +1,11 @@
 @import "helpers";
 body.landing {
+  .sign-in-btn {
+    z-index: 2;
+    position: fixed;
+    right: 20px;
+    top: 20px;
+  }
   .landing-wrapper {
     font-family: "sansationlight", arial;
     color: white;
