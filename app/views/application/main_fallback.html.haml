@@ -1,69 +1,68 @@
-.lanterns-top
+= content_for :full_width do
+  .lanterns-top
 
-.top-content
-  %img.ignition{src: asset_path("ignition.png")}
-  %img.implies{src: asset_path("implies.svg")}
-  %img.burning{src: asset_path("burning.png")}
+  .top-content
+    %img.ignition{src: asset_path("ignition.png")}
+    %img.implies{src: asset_path("implies.svg")}
+    %img.burning{src: asset_path("burning.png")}
 
-.lanterns-bottom
+  .lanterns-bottom
 
-.middle-content.landing-wrapper
-  .container
-    .row
-      .col-md-6.text-center
-        %h3
-          Découvrez l’amour et la bonté de Dieu
-        %h4
-          au travers de resources (musique, vidéos, peintures, dessins)
-          %br
-          produites par une communauté de personnes se sachant aimées
-        %img.img-responsive.heart{src: asset_path("heart.svg")}
+  .middle-content.landing-wrapper
+    .container
+      .row
+        .col-md-6.text-center
+          %h3
+            Découvrez l’amour et la bonté de Dieu
+          %h4
+            au travers de resources (musique, vidéos, peintures, dessins)
+            %br
+            produites par une communauté de personnes se sachant aimées
+          %img.img-responsive.heart{src: asset_path("heart.svg")}
 
-      .col-md-6.text-center
-        %img.img-responsive.arts.hidden-xs.hidden-sm{src: asset_path("arts.svg")}
-        %h3
-          Partagez votre propre et unique expression
-        %h4
-          de l’amour et de la bonté de Dieu
-          %br
-          (musique, vidéos, peintures, dessins, … autre ?)
-        %img.img-responsive.arts.visible-xs.visible-sm{src: asset_path("arts.svg")}
+        .col-md-6.text-center
+          %img.img-responsive.arts.hidden-xs.hidden-sm{src: asset_path("arts.svg")}
+          %h3
+            Partagez votre propre et unique expression
+          %h4
+            de l’amour et de la bonté de Dieu
+            %br
+            (musique, vidéos, peintures, dessins, … autre ?)
+          %img.img-responsive.arts.visible-xs.visible-sm{src: asset_path("arts.svg")}
 
-.bottom-separator
-.bottom-content
-  .container
-    .row
-      .col-md-6.landing-wrapper
-        %h2
-          Créez votre compte
-        %h3
-          C'est simple, rapide et gratuit !
+  .bottom-separator
+  .bottom-content
+    .container
+      .row
+        .col-md-6.landing-wrapper
+          %h2
+            Créez votre compte
+          %h3
+            C'est simple, rapide et gratuit !
 
-        %p
-          Burnup vous permettra simplement de :
+          %p
+            Burnup vous permettra simplement de :
 
-        %ul
-          %li
-            + Partager ce qui brule dans vos coeurs au travers de
-            %b
-              messages, photos et vidéos
-          %li
-            + Gérer
-            %b
-              vos partitions d’accord et resources audio / vidéo
-            pour vous, votre équipe de louange, tout ceux qui sont autours de vous
-          %li
-            + Planifier
-            %b
-              vos réunions et listes de chants
-          %li
-            + Partager vos propres réalisations artistiques
-        %p
-          De nombreuses fonctionnalités sont en préparation !
+          %ul
+            %li
+              + Partager ce qui brule dans vos coeurs au travers de
+              %b
+                messages, photos et vidéos
+            %li
+              + Gérer
+              %b
+                vos partitions d’accord et resources audio / vidéo
+              pour vous, votre équipe de louange, tout ceux qui sont autours de vous
+            %li
+              + Planifier
+              %b
+                vos réunions et listes de chants
+            %li
+              + Partager vos propres réalisations artistiques
+          %p
+            De nombreuses fonctionnalités sont en préparation !
 
-      .col-md-6
-        .panel.session-new-wrapper
-          .panel-body
-            %bu-users-new
-
-      
+        .col-md-6
+          .panel.session-new-wrapper
+            .panel-body
+              %bu-users-new

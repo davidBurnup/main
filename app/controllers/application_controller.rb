@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :null_session
 
   before_action :authorize_user, except: [:main_fallback]
-  before_action :unfinalized_callback, except: [:main_fallback]
+  before_action :unfinalized_callback, except: [:main_fallback], if: :current_user
   layout "public", only: [:main_fallback]
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 

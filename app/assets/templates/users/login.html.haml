@@ -6,29 +6,36 @@
       Connexion
 
   .modal-body
-    %form#new_user.new_user{"accept-charset" => "UTF-8", :action => "/utilisateurs/se-connecter", :method => "post", :role => "form"}
+    %form#new_user.new_user{"accept-charset" => "UTF-8", "ng-submit" => "login()"}
       %input{:name => "utf8", :type => "hidden", :value => "✓"}/
       .form-group
         /
           <haml_silent> if devise_mapping.registerable? </haml_silent><haml_block>
           <haml_loud> link_to &quot;S&#39;inscrire&quot;, new_registration_path(resource_name), class: &#39;pull-right&#39;  </haml_loud>
           </haml_block>
-        .form-group.email.required.user_email
+        .form-group.email.required.user_email{"ng-class" => "unauthorized ? 'has-error' : ''"}
           %label.email.required.control-label{:for => "user_email"}
             %abbr{:title => "requis"} *
             Email
-          %input#user_email.form-control{autofocus: true, :maxlength => "255", :name => "user[email]", :size => "255", :type => "email", :value => ""}/
+          %input#user_email.form-control{autofocus: true, :maxlength => "255", :name => "user[email]", :size => "255", :type => "email", "ng-model" => "user.email", "ng-model-options" => "{ updateOn: 'default blur', debounce: {'default': 2000, 'blur': 0} }"}/
+          %span.help-block{"ng-if" => "unauthorized"}
+            Email ou mot de passe incorrect. Veuillez réessayer.
       .form-group
         %a.pull-right{:href => "/utilisateurs/mot-de-passe/new"} Oublié le votre ?
-        .form-group.password.required.user_password
+        .form-group.password.required.user_password{"ng-class" => "unauthorized ? 'has-error' : ''"}
           %label.password.required.control-label{:for => "user_password"}
             %abbr{:title => "requis"} *
             Mot de passe
-          %input#user_password.password.required.form-control{:maxlength => "128", :name => "user[password]", :size => "128", :type => "password"}/
+          %input#user_password.password.required.form-control{:maxlength => "128", :name => "user[password]", :size => "128", :type => "password", "ng-model" => "user.password"}/
 
       .checkbox
         %label
-          %input#user_remember_me{:name => "user[remember_me]", :type => "checkbox", :value => "1", checked: true}/
+          %input#user_remember_me{:name => "user[remember_me]", :type => "checkbox", :value => "1", checked: true, "ng-model" => "user.remember_me"}/
           Se souvenir de moi
       .text-right
-        %input.btn.btn-primary.right{:name => "commit", :type => "submit", :value => "SE CONNECTER"}/
+        %button.btn.btn-primary{type: :submit}
+          %span{"ng-if" => "!loading"}
+            SE CONNECTER
+          %span{"ng-if" => "loading"}
+            %i.fa.fa-cog.fa-spin
+            CONNEXION EN COURS

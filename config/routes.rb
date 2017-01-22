@@ -1,7 +1,7 @@
 Worship::Application.routes.draw do
 
   root :to => "application#main_fallback"
-  
+
   resources :posts
 
   resources :activities, only: [:destroy], controller: "socializables"
@@ -55,6 +55,11 @@ Worship::Application.routes.draw do
       end
     end
     resources :users, only: [:create, :update], path: 'utilisateurs'
+
+    devise_scope :user do
+      post "sessions/se-connecter" => "sessions#create", as: "sessions"
+    end
+
     resources :churches, only: [:index, :create], path: 'eglises' do
       collection do
         get "/recherche/:search" => "churches#index"
