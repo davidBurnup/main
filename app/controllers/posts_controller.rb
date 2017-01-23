@@ -42,7 +42,7 @@ class PostsController < ApplicationController
           if @post.song.present?
             redirect_to song_path(@post.song)
           else
-            redirect_to feeds_path
+            redirect_to activities_path
           end
         }
         format.json { render :show, status: :created, location: @post }
@@ -56,7 +56,7 @@ class PostsController < ApplicationController
           if @post.song.present?
             redirect_to song_path(@post.song)
           else
-            redirect_to feeds_path
+            redirect_to activities_path
           end
         }
         format.json { render json: @post.errors, status: :unprocessable_entity }

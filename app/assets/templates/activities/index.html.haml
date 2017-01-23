@@ -1,0 +1,40 @@
+%li.media.activity{"ng-repeat" => "activity in activities"}
+
+  -# = link_to "", :class => "pull-left" do
+  -#   = image_tag image_url, alt: image_alt, class: "img-circle user-avatar tiny"
+
+  %a.pull-left{href: "#"}
+    %img{"ng-src" => "{{activity.owner.avatar.tiny}}"}
+
+  -# .media-body.content-body
+  -#   - if policy(activity).destroy?
+  -#     = link_to activity_path(activity), class: "destroy-post pull-right", remote: true, method: :delete, confirm: "Voulez-vous vraiment supprimer ceci ?" do
+  -#       = fa_icon "trash"
+  -#   - if !not_linkable
+  -#     = link_to trackable do
+  -#       .media-heading
+  -#         = title
+  -#       = content
+  -#   - else
+  -#     .media-heading
+  -#       = title
+  -#     = content
+  -#
+  -#     - if trackable_files.present?
+  -#       - trackable_files.each do |trackable_file|
+  -#         - trackable_attachment = trackable_file.send(trackable_file_key_name)
+  -#         %audio{src: trackable_attachment.url, width: "100%"}
+  -#   .media-footer.activity-footer
+  -#     = time_ago_in_words(activity.created_at)
+  -#     \-
+  -#     - if trackable
+  -#       = render "socializables/like", likable: activity
+  -#
+  -#   %span.comments-list
+  -#     - activity.comments.each do |comment|
+  -#       = render "comments/comment", comment: comment
+  -#   .media.comment-form
+  -#     = image_tag current_user.avatar.url(:mini), class: "img-circle pull-left   user-avatar mini"
+  -#     .media-body
+  -#       %span.comment-form
+  -#         = render "comments/form", comment: Comment.new, commentable: activity

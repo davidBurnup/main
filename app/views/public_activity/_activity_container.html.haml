@@ -21,11 +21,11 @@
           = fa_icon "trash"
       - if !not_linkable
         = link_to trackable do
-          %h4.media-heading
+          .media-heading
             = title
           = content
       - else
-        %h4.media-heading
+        .media-heading
           = title
         = content
 
@@ -43,7 +43,7 @@
         - activity.comments.each do |comment|
           = render "comments/comment", comment: comment
       .media.comment-form
-        = image_tag current_user.avatar.url(:mini), class: "img-circle pull-left no-right-padding user-avatar mini"
+        = image_tag current_user.avatar.url(:mini), class: "img-circle pull-left   user-avatar mini"
         .media-body
           %span.comment-form
             = render "comments/form", comment: Comment.new, commentable: activity

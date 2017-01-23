@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 
   def main_fallback
     if current_user
-      redirect_to feeds_path
+      redirect_to activities_path
     end
   end
 

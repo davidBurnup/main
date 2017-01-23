@@ -4,7 +4,7 @@ Worship::Application.routes.draw do
 
   resources :posts
 
-  resources :activities, only: [:destroy], controller: "socializables"
+  resources :activities, only: [:index], path: "fil"#, only: [:destroy], controller: "socializables"
 
   resources :churches
 
@@ -12,9 +12,9 @@ Worship::Application.routes.draw do
 
   get 'notifications/:id' => "notifications#show", as: 'notification'
 
-  get 'fil' => "socializables#index", :as => "feeds"
-
-  get 'fil/:id' => "socializables#show", as: "show_activity"
+  # get 'fil' => "socializables#index", :as => "feeds"
+  #
+  # get 'fil/:id' => "socializables#show", as: "show_activity"
 
   get 'action' => "socializables#action", :as => "my_action"
 
@@ -67,6 +67,7 @@ Worship::Application.routes.draw do
     end
 
     resources :instrument_preferences, path: "instruments"
+    resources :activities, path: "activites"
   end
 
   require 'sidekiq/web'

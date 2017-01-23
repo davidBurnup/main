@@ -16,11 +16,12 @@
           #headers.col-lg-12
             = yield :headers
       .row
-        - if flash.present? and !@no_main_flash
-          - flash.each do |key, msg|
-            = render "/layouts/flash", :msg => msg, :key => key
         - if content_for? :left_column
           #left-column.col-lg-8.col-md-8.col-sm-12
+            - if flash.present? and !@no_main_flash
+              - flash.each do |key, msg|
+                .row
+                  = render "/layouts/flash", :msg => msg, :key => key
             = yield :left_column
         - if content_for? :right_column
           #right-column.col-lg-4.col-md-4.col-sm-12

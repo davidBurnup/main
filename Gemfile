@@ -70,6 +70,10 @@ end
 group :development, :test do
   gem 'pry-rails'
   gem 'pry-rescue'
+  gem 'rspec-rails', '~> 3.5'
+  gem 'factory_girl'
+  gem "spork-rails"
+  gem 'spork', github: 'sporkrb/spork', branch: 'master'
 end
 group :test do
   gem 'capybara'
