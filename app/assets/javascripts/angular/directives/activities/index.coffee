@@ -1,6 +1,6 @@
 angular.module('Burnup.directives.buActivitiesIndex', [])
 
-.directive 'buActivitiesIndex', (Activity) ->
+.directive 'buActivitiesIndex', (Activity, $sce) ->
   {
     restrict: 'E'
     templateUrl: 'activities/index.html'
@@ -11,7 +11,9 @@ angular.module('Burnup.directives.buActivitiesIndex', [])
       $scope.activities = []
 
       Activity.get().then (activities) ->
-        $scope.activities = activities
+        angular.forEach activities, (activity) ->
+          activity.safeContent = $sce.trustAsHtml(activity.content)
+          $scope.activities.push activity
 
 
 

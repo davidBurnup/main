@@ -61,5 +61,55 @@ module ActsAsFeedable
      activities.destroy_all
    end
 
+   def feedable_option(key)
+     feedable_option_key = self.class.feedable_options[key.to_sym]
+     if feedable_option_key
+       if feedable_option_key.is_a? Proc
+         option = feedable_option_key.(self)
+       else
+         # Check for static options (like icon)
+         if self.class.static_options.include?(key.to_sym)
+           option = feedable_option_key
+         else
+           option = send(feedable_option_key)
+         end
+       end
+     end
+     option
+   end
+
+  end
+
+  module ClassMethods
+
+    @@default_feedable_options = {
+      title: nil,
+      content: nil, # Defines the body of the activity
+      image: nil,
+      image_link: nil,
+      activity_link: nil
+    }
+
+    # Defines options that will not be sent to instance using ruby send method but used as static variable
+    @@static_options = []
+
+    @@required_options = [:title, :image]
+
+    def feedable(options = {})
+
+      # create a reader on the class to access the options from the feedable instance
+      class << self; attr_reader :feedable_options; end
+
+      if missing_options = (@@required_options - options.keys) and missing_options.present?
+        raise "Missing Options #{missing_options} ! Please define those options to use this concern !"
+      end
+
+      @feedable_options = @@default_feedable_options.merge options
+
+    end
+
+    def static_options
+      @@static_options
+    end
   end
 end

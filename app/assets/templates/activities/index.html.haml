@@ -1,31 +1,36 @@
-%li.media.activity{"ng-repeat" => "activity in activities"}
+%ul.media-list#feed-activities
+  %li.media.activity{"ng-repeat" => "activity in activities"}
 
-  -# = link_to "", :class => "pull-left" do
-  -#   = image_tag image_url, alt: image_alt, class: "img-circle user-avatar tiny"
+    -# = link_to "", :class => "pull-left" do
+    -#   = image_tag image_url, alt: image_alt, class: "img-circle user-avatar tiny"
 
-  %a.pull-left{href: "#"}
-    %img{"ng-src" => "{{activity.owner.avatar.tiny}}"}
+    %a.pull-left{href: "#"}
+      %img{"ng-src" => "{{activity.owner.avatar.tiny}}"}
 
-  -# .media-body.content-body
-  -#   - if policy(activity).destroy?
-  -#     = link_to activity_path(activity), class: "destroy-post pull-right", remote: true, method: :delete, confirm: "Voulez-vous vraiment supprimer ceci ?" do
-  -#       = fa_icon "trash"
-  -#   - if !not_linkable
-  -#     = link_to trackable do
-  -#       .media-heading
-  -#         = title
-  -#       = content
-  -#   - else
-  -#     .media-heading
-  -#       = title
-  -#     = content
-  -#
-  -#     - if trackable_files.present?
-  -#       - trackable_files.each do |trackable_file|
-  -#         - trackable_attachment = trackable_file.send(trackable_file_key_name)
-  -#         %audio{src: trackable_attachment.url, width: "100%"}
-  -#   .media-footer.activity-footer
-  -#     = time_ago_in_words(activity.created_at)
+    .media-body.content-body
+      %a.destroy-post.pull-right{"ng-if" => "activity.policity.destroy", "ng-click" => "destroy(activity)"}
+        %i.fa.fa-trash-o
+
+    -# LINKED ACTIVITY
+    %a{"ng-if" => "activity.activityLink", href: "activity.activityLink"}
+      .media-heading
+        {{activity.title}}
+      %span.content{"ng-bind-html" => "activity.content"}
+
+    -# UNLINKED ACTIVITY
+    .media-heading{"ng-if" => "!activity.activityLink"}
+      {{activity.title}}
+
+    %span.content{"ng-if" => "!activity.activityLink", "ng-bind-html" => "activity.safeContent"}
+
+
+    -#   - if trackable_files.present?
+    -#     - trackable_files.each do |trackable_file|
+    -#       - trackable_attachment = trackable_file.send(trackable_file_key_name)
+    -#       %audio{src: trackable_attachment.url, width: "100%"}
+
+    .media-footer.activity-footer{"am-time-ago" => "activity.createdAt | amParse:'DD/MM/YYYY HH:mm'"}
+
   -#     \-
   -#     - if trackable
   -#       = render "socializables/like", likable: activity

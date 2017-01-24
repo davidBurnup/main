@@ -34,6 +34,32 @@ class Post < ActiveRecord::Base
     icon: 'newspaper-o'
   })
 
+  feedable({
+    title: lambda{|p|
+      title = ""
+
+      if p.creator
+        title = "#{p.creator.short_name} a publié "
+        if p.song and p.song.title.present?
+          title += "à propos du chant #{p.song.title}"
+        end
+      end
+
+      title
+    },
+    content: lambda{|p|
+      p.content_html
+    },
+    image: lambda{|p|
+      p.creator ? p.creator.avatar.url(:tiny) : "/images/user.svg"
+    },
+    image_link: lambda{|p|
+      if p.song
+        Rails.application.routes.url_helpers.song_path(p.song)
+      end
+    }
+  })
+
   # => only_self : gets notifiable users only for the current object
   def notifiable_users(only_self: false, origin_notifiable_resolver: nil)
     n_users_ids = []

@@ -24,6 +24,21 @@ class Meeting < ActiveRecord::Base
     icon: 'calendar-check-o'
   })
 
+  feedable({
+    title: lambda{|m|
+      title = ""
+
+      if m.creator
+        title = "#{m.creator.full_name} a publié "
+      end
+
+      title
+    },
+    image: lambda{|m|
+      m.creator ? m.avatar.url(:tiny) : "/images/user.svg"
+    }
+  })
+
   def end_at
     Time.at(start_at.to_i + duration) if start_at and start_at.to_i > 0
   end
