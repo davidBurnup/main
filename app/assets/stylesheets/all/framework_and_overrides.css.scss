@@ -1,8 +1,8 @@
 // Temporary workaround for Rails 4.1.2 pending releaase of bootstrap-sass 3.1.2
-//= depend_on_asset "bootstrap/glyphicons-halflings-regular.eot"
-//= depend_on_asset "bootstrap/glyphicons-halflings-regular.svg"
-//= depend_on_asset "bootstrap/glyphicons-halflings-regular.ttf"
-//= depend_on_asset "bootstrap/glyphicons-halflings-regular.woff"
+// = depend_on_asset "bootstrap/glyphicons-halflings-regular.eot"
+// = depend_on_asset "bootstrap/glyphicons-halflings-regular.svg"
+// = depend_on_asset "bootstrap/glyphicons-halflings-regular.ttf"
+// = depend_on_asset "bootstrap/glyphicons-halflings-regular.woff"
 // import the CSS framework
 
 // Custom Variables
@@ -12,7 +12,7 @@ $badge-bg: #FFF;
 $badge-color: $brand-primary;
 @import "bootstrap-sprockets";
 @import "bootswatch/paper/variables";
-
+@import "http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css";
 
 @import "bootstrap";
 @import "bootswatch/paper/bootswatch";

@@ -4,6 +4,23 @@
     > li {
       > a {
         font-size: 15px;
+        padding: 16px 15px 10px 15px;
+      }
+      > span {
+        display: inline-block;
+        padding: 12px 10px 15px 10px;
+        > a {
+          color: white;
+          background: transparent !important;
+          text-decoration: none !important;
+          padding: 10px 0;
+          > i.fa.fa-bell-o {
+            font-size: 18px;
+            margin-top: 4px;
+            float: left;
+            margin-right: 7px;
+          }
+        }
       }
     }
   }

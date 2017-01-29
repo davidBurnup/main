@@ -14,8 +14,9 @@
     max-width: 50px;
   }
   &.mini {
-    max-width: 39px;
+    max-width: 49px;
   }
+  border-radius: 100px !important;
 }
 .avatar-cropper {
   .file-input-wrapper {
@@ -233,6 +234,7 @@ bu-users-new {
 }
 .comment-avatar {
   max-height: 39px;
+  border-radius: 100px !important;
 }
 .modal-tou {
   h2 {

@@ -2,7 +2,7 @@
 
 - if comment
   .media{id: "comment-#{comment.id}"}
-    = image_tag comment.user.avatar.url(:mini), class: "img-circle pull-left no-right-padding comment-avatar"
+    = image_tag comment.user.avatar.url(:mini), class: "img-circle pull-left comment-avatar"
     .media-body.content-body
       - if policy(comment).destroy?
         = link_to comment_path(comment), class: "destroy-comment pull-right", remote: true, method: :delete, confirm: "Voulez-vous vraiment supprimer ceci ?" do

@@ -134,7 +134,7 @@ footer {
 
   &.active,
   &:hover {
-    border-bottom: 4px solid white;
+    border-bottom: 4px solid white !important;
   }
 
   &.active {
@@ -274,9 +274,9 @@ footer {
 .destroy-comment,
 .destroy-post {
   color: rgb(81, 81, 81);
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: #eee;
   border-radius: 20px;
-  padding: 4px 9px 6px 10px;
+  padding: 3px 9px 4px 10px;
   position: relative;
   margin: 10px;
 }
@@ -354,22 +354,6 @@ footer {
   margin-top: -21px;
 }
 
-.navbar-nav > li > span {
-  display: inline-block;
-  padding: 12px 10px 15px 10px;
-  > a {
-    color: white;
-    background: transparent !important;
-    text-decoration: none !important;
-    padding: 10px 0;
-    > i.fa.fa-bell-o {
-      font-size: 18px;
-      margin-top: 4px;
-      float: left;
-      margin-right: 7px;
-    }
-  }
-}
 
 .media {
   .img-circle.no-right-padding {
