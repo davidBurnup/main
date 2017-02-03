@@ -56,6 +56,8 @@ module Api
       else
         head :bad_request
       end
+
+      head :ok
     end
 
     private

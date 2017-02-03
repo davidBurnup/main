@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170129203648) do
+ActiveRecord::Schema.define(version: 20170203232451) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -226,10 +226,9 @@ ActiveRecord::Schema.define(version: 20170129203648) do
 
   create_table "user_devices", force: :cascade do |t|
     t.integer  "user_id",       limit: 4
-    t.string   "end_point",     limit: 255
+    t.string   "endpoint",      limit: 255
     t.string   "auth",          limit: 255
     t.string   "p256dh",        limit: 255
-    t.boolean  "expired"
     t.boolean  "vapid_enabled"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false

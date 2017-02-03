@@ -36,8 +36,7 @@
     %footer
       ©#{Time.now.year} - BURN UP - Tous droits réservés
 
-    :coffee
-      window.sessionStorage.setItem('currentUser', escape('#{current_user.to_builder}'))
+    %span{"bu-users-session" => "#{current_user.to_builder}"}
 
     :javascript
       // Include the UserVoice JavaScript SDK (only needed once on a page)
