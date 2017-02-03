@@ -2,7 +2,8 @@
 lock "3.7.1"
 
 set :application, "burnup"
-set :repo_url, "git@github.com:davidfabreguette/burnup.git"
+# set :repo_url, "git@github.com:davidfabreguette/burnup.git"
+set :repo_url, "git@gitlab.bu:root/burnup.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
