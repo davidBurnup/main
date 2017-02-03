@@ -2,16 +2,14 @@
 
 one:
   user_id: 1
-  end_point: MyString
+  endpoint: MyString
   auth: MyString
   p256dh: MyString
-  expired: false
   vapid_enabled: false
 
 two:
   user_id: 1
-  end_point: MyString
+  endpoint: MyString
   auth: MyString
   p256dh: MyString
-  expired: false
   vapid_enabled: false

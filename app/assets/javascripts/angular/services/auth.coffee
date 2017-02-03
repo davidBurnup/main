@@ -24,8 +24,14 @@ angular.module('Burnup.services.Auth', [])
 
     return isExpired
 
+  setSessionUserData = (data) ->
+    if data?
+      sessionStorage.setItem('currentUser', escape(JSON.stringify(data)))
+      sessionStorage.setItem('lastLoginTime', moment().format(timeFormat))
+
 
   {
     currentUser: currentUser
     setCurrentUser: setCurrentUser
+    setSessionUserData: setSessionUserData
   }

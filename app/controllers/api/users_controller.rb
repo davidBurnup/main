@@ -4,7 +4,7 @@ module Api
 
     skip_before_filter :authorize_user, only: [:create]
 
-    before_action :set_user, only: [:update]
+    before_action :set_user, only: [:update, :push_subscribe, :push_unsubscribe]
 
     def create
       @user = User.create(create_user_params)
