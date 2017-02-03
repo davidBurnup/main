@@ -54,7 +54,13 @@ Worship::Application.routes.draw do
         get "/page/:page" => "notifications#index"
       end
     end
-    resources :users, only: [:create, :update], path: 'utilisateurs'
+    resources :users, only: [:create, :update], path: 'utilisateurs' do
+      member do
+        post "push" => "users#push_subscribe"
+        # FIXME : change post for delete method once we found a way to send endpoint (which is an URL) via the URL param
+        post "push/unsubscribe" => "users#push_unsubscribe"
+      end
+    end
 
     devise_scope :user do
       post "sessions/se-connecter" => "sessions#create", as: "sessions"

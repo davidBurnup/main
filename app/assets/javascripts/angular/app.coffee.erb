@@ -20,6 +20,7 @@
   # Services
   "Burnup.services.Auth"
   "Burnup.services.SelectizeTemplator"
+  "Burnup.services.PushManager"
 
   # Directives
   "Burnup.directives.notifications"
@@ -37,9 +38,11 @@
   "Burnup.controllers.Main"
   "Burnup.controllers.UserTou"
   "Burnup.controllers.UsersLogin"
+  "Burnup.controllers.UsersAccount"
 
   # Utils
   "utils.autofocus"
+  "utils.Browser"
 
 ])
 
@@ -48,12 +51,18 @@
    $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
 )
 
-@app.run(($rootScope, amMoment) ->
+@app.run(($rootScope, amMoment, PushManager) ->
   @App = {}
   App.cable = Cable.createConsumer "wss://<%=Rails.application.secrets.CABLE_HOST%>:<%=Rails.application.secrets.CABLE_PORT%>"
   amMoment.changeLocale('fr')
   $rootScope.instrumentKeys = [<%= instrument_keys_labels.collect(&:to_json).join(",") %>]
 
+  if navigator.serviceWorker
+    navigator.serviceWorker.register('/serviceworker.js').then (reg) ->
+      console.log '[Companion]', 'Service worker registered!'
+      return
+
+  PushManager.initialize()
 )
 
 

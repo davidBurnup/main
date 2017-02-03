@@ -235,6 +235,12 @@ bu-users-new {
 .comment-avatar {
   max-height: 39px;
   border-radius: 100px !important;
+  padding-right: 0 !important;
+  margin-right: 10px;
+}
+.comment-form-avatar {
+  margin-right: 10px;
+  padding-right: 0px !important;
 }
 .modal-tou {
   h2 {

@@ -7,3 +7,4 @@ Rails.application.assets.context_class.class_eval do
   include Rails.application.routes.url_helpers
   include FontAwesome::Rails::IconHelper
 end
+Rails.configuration.assets.precompile += %w[serviceworker.js manifest.json]

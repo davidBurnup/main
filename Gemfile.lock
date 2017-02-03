@@ -349,6 +349,8 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    serviceworker-rails (0.5.3)
+      railties (>= 3.1)
     sexp_processor (4.6.0)
     sidekiq (3.1.0)
       celluloid (>= 0.15.2)
@@ -472,6 +474,7 @@ DEPENDENCIES
   rails_layout
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
+  serviceworker-rails
   sidekiq (= 3.1.0)
   sidekiq-cron (~> 0.2.0)
   simple_form
