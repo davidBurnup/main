@@ -45,5 +45,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def onsong?
+    self.request.format == :chordpro and self.request.protocol == :onsong
+  end
+
 
 end

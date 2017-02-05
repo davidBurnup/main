@@ -22,7 +22,7 @@
       = link_to "#", :class => "btn btn-primary btn-sm link_to_print", :id => "print_song" do
         %i.glyphicon.glyphicon-file
         Fichier PDF
-      = link_to song_url(@song, format: :chordpro), :class => "btn btn-primary btn-sm", target: :_blank, download: true do
+      = link_to song_url(@song, format: :chordpro, protocol: :onsong), :class => "btn btn-primary btn-sm", target: :_blank do
         %i.glyphicon.glyphicon-file
         Fichier OnSong
 

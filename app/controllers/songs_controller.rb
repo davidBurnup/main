@@ -2,7 +2,7 @@ class SongsController < ApplicationController
 
   before_action :set_song, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized
-  # skip_before_action :authorize_user, only: [:show]
+  skip_before_action :authorize_user, if: :onsong?
 
   # GET /songs
   # GET /songs.json
