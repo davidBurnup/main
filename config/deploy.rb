@@ -36,4 +36,4 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 # Restart Passenger using touch tmp/restart.txt
 set :passenger_restart_with_touch, true
 
-set :assets_roles, [:web, :app] 
+set :assets_roles, [:web, :app]

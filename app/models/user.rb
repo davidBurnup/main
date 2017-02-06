@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   after_initialize :set_default_church_role
 
   has_attached_file :avatar, :styles => {
+    :medium => "200x200#",
     :thumb => "100x100#",
     :med_tiny => "75x75#",
     :tiny => "50x50#",
@@ -24,6 +25,7 @@ class User < ActiveRecord::Base
   has_many :meeting_users, :dependent => :destroy
   has_many :received_notifications, foreign_key: :notified_id, class_name: "Notification"
   has_many :sent_notifications, foreign_key: :notifier_id, class_name: "Notification"
+  has_many :user_devices
 
   has_one :church_role
   accepts_nested_attributes_for :church_role

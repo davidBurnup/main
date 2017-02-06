@@ -1,6 +1,7 @@
 !!!
 %html
   %head
+    %link{:href => "/manifest.json", :rel => "manifest"}/
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     %title= content_for?(:title) ? yield(:title) : "BURN UP"
     %meta{:content => content_for?(:description) ? yield(:description) : "Worship", :name => "description"}/
@@ -8,6 +9,12 @@
     = javascript_include_tag 'application', 'data-turbolinks-eval': false
     = stylesheet_link_tag 'application-print', media: 'print'
     = csrf_meta_tags
+    %link{:href => "/apple-touch-icon.png", :rel => "apple-touch-icon", :sizes => "180x180"}/
+    %link{:href => "/favicon-32x32.png", :rel => "icon", :sizes => "32x32", :type => "image/png"}/
+    %link{:href => "/favicon-16x16.png", :rel => "icon", :sizes => "16x16", :type => "image/png"}/
+    %link{:color => "#da351c", :href => "/safari-pinned-tab.svg", :rel => "mask-icon"}/
+    %meta{:content => "#ff0000", :name => "theme-color"}/
+
   %body{"ng-app" => "Burnup", "ng-class" => "$root.pageIsUnscrollable ? 'unscrollable' : ''", "ng-controller" => "Main"}
     %header= render 'layouts/navigation'
     %main.container{:role => "main"}
@@ -29,8 +36,7 @@
     %footer
       ©#{Time.now.year} - BURN UP - Tous droits réservés
 
-    :coffee
-      window.sessionStorage.setItem('currentUser', escape('#{current_user.to_builder}'))
+    %span{"bu-users-session" => "#{current_user.to_builder}"}
 
     :javascript
       // Include the UserVoice JavaScript SDK (only needed once on a page)

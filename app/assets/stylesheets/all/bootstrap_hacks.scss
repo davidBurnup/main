@@ -238,3 +238,11 @@
 .panel-heading.no-top-padding {
   padding-top: 0;
 }
+.inline-visible-xs {
+  display: none;
+}
+@media (max-width: 768px){
+  .inline-visible-xs {
+    display: inline-block !important;
+  }
+}

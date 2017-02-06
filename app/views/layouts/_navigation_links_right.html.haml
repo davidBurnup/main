@@ -1,7 +1,9 @@
 - if user_signed_in?
-  %li.dropdown
+  %li.dropdown.user-profile-dropdown
     %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-      = image_tag current_user.avatar.url(:micro), class: 'user-avatar-micro'
+      .inline-visible-xs
+        MON COMPTE
+      = image_tag current_user.avatar.url(:micro), class: 'user-avatar-micro hidden-xs'
       %b.caret
     %ul.dropdown-menu
       - if current_user.admin?

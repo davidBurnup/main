@@ -34,7 +34,7 @@
 .navbar-brand {
   img {
     height: 35px;
-    margin-top: -5px;
+    margin-top: -6px;
   }
 }
 
@@ -126,28 +126,6 @@ footer {
   margin: 10px 0 0;
   //border-top: 1px dashed $main_color;
   padding: 10px 0;
-}
-
-.navbar-inverse .navbar-nav > li {
-  border-bottom: 4px solid transparent;
-  margin-bottom: -1px;
-
-  &.active,
-  &:hover {
-    border-bottom: 4px solid white !important;
-  }
-
-  &.active {
-    > a {
-      color: white;
-    }
-  }
-
-  &.dropdown {
-    .dropdown-menu {
-      margin-top: 3px;
-    }
-  }
 }
 
 .left-margin {
@@ -368,26 +346,5 @@ footer {
   .navbar-inverse .navbar-nav > li.active,
   .navbar-inverse .navbar-nav > li:hover {
     border-bottom: 0 solid transparent;
-  }
-
-  .navbar {
-    li[notifications] {
-      padding: 0 15px;
-
-      > span {
-        width: 100%;
-
-        #notifications-dropdown.dropdown-menu {
-          background: white;
-          width: 100%;
-        }
-      }
-    }
-  }
-
-  .navbar-brand {
-    img {
-      margin-top: -7.5px;
-    }
   }
 }

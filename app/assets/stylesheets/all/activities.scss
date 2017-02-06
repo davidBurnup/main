@@ -1,5 +1,11 @@
 #feed-activities {
   .activity {
     border-bottom: 1px solid #eee;
+    .media-heading {
+      font-size: 17px;
+    }
+    .activity_comment {
+      font-size: 15px;
+    }
   }
 }

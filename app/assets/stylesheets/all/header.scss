@@ -1,14 +1,37 @@
 .burnup-navbar {
-
   .navbar-nav {
     > li {
+      border-bottom: 4px solid transparent;
+      margin-bottom: -1px;
+
+      &.active,
+      &:hover, &:focus, &:active, &:visited, &.open {
+        border-bottom: 4px solid white !important;
+      }
+
+      &.active {
+        > a {
+          color: white;
+        }
+      }
+
+      &.dropdown {
+        > ul.dropdown-menu {
+          margin-top:4px;
+        }
+      }
+      &.user-profile-dropdown {
+        > a {
+          padding: 12px 15px 11px 15px;
+        }
+      }
       > a {
         font-size: 15px;
-        padding: 16px 15px 10px 15px;
+        padding: 15px 15px 8px 15px;
       }
       > span {
         display: inline-block;
-        padding: 12px 10px 15px 10px;
+        padding: 11px 10px 12px 10px;
         > a {
           color: white;
           background: transparent !important;
@@ -19,6 +42,47 @@
             margin-top: 4px;
             float: left;
             margin-right: 7px;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .burnup-navbar {
+    .navbar-nav {
+      > li {
+        border-bottom: 0px solid transparent;
+        margin-bottom: -1px;
+
+        &.active,
+        &:hover, &:focus, &:active, &:visited, &.open {
+          border-bottom: 0px solid transparent !important;
+        }
+
+        > a, > span {
+          font-size: 15px;
+          padding: 15px 8px;
+        }
+        &.notifications-dropdown-wrapper{
+          position: static;
+          > span {
+            position: static;
+            > ul {
+              position: absolute;
+              top: 47px;
+              z-index: 10000;
+              background: white;
+              width: 100% !important;
+            }
+            a {
+              color: #f2a89d;
+              font-size: 15px;
+              > i.fa {
+                margin-left: 0;
+                margin-right: 3px;
+              }
+            }
           }
         }
       }
