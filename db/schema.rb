@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170203232451) do
+ActiveRecord::Schema.define(version: 20170205210829) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -232,6 +232,7 @@ ActiveRecord::Schema.define(version: 20170203232451) do
     t.boolean  "vapid_enabled"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.boolean  "expired"
   end
 
   create_table "user_song_preferences", force: :cascade do |t|

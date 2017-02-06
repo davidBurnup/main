@@ -4,14 +4,14 @@ angular.module('Burnup.directives.buUsersSession', [])
   {
     restrict: 'A'
     scope:
-      amSessionData: "="
+      buUsersSession: "="
 
     controller: ($scope) ->
-
       $scope.setCurrentUser = (currentUserData) ->
+        console.log "ud", currentUserData
         if currentUserData?
           Auth.setSessionUserData(currentUserData)
           $rootScope.currentUser = Auth.currentUser()
 
-      $scope.setCurrentUser($scope.amSessionData)
+      $scope.setCurrentUser($scope.buUsersSession)
   }

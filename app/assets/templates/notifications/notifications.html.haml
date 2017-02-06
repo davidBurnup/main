@@ -2,12 +2,16 @@
 
   = link_to "#", "uib-dropdown-toggle" => true do
     = fa_icon "bell-o"
+    %span.inline-visible-xs
+      NOTIFICATIONS
     %span.badge.notification-count{"ng-show" => "ready"}
       {{unseenNotificationsCount}}
     %span.caret
 
   %ul.dropdown-menu#notifications-dropdown{"uib-dropdown-menu" => true, "infinite-scroll" => "getNotifications({nextPage: true})", "infinite-scroll-container" => "'#notifications-dropdown'"}
-
+    %li.mobile-header
+      %h3
+        NOTIFICATIONS
     %li{"ng-repeat" => "notification in notifications", "ng-class" => "notification.is_seen ? '' : 'is-unseen'"}
       .notification
         %a{"ng-href" => "/notifications/{{notification.id}}"}
