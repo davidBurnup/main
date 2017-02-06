@@ -28,20 +28,62 @@ onActivate = (event) ->
 
 # Borrowed from https://github.com/TalAter/UpUp
 
-onFetch = (event) ->
-  event.respondWith fetch(event.request).catch(->
-    # if it fails, try to return request from the cache
-    caches.match(event.request).then (response) ->
-      if response
-        return response
-      # if not found in cache, return default offline content for navigate requests
-      if event.request.mode == 'navigate' or event.request.method == 'GET' and event.request.headers.get('accept').includes('text/html')
-        console.log '[Serviceworker]', 'Fetching offline content', event
-        return caches.match('/offline.html')
-      return
-  )
-  return
+# onFetch = (event) ->
+#   event.respondWith fetch(event.request).catch(->
+#     # if it fails, try to return request from the cache
+#     caches.match(event.request).then (response) ->
+#       if response
+#         return response
+#       # if not found in cache, return default offline content for navigate requests
+#       if event.request.mode == 'navigate' or event.request.method == 'GET' and event.request.headers.get('accept').includes('text/html')
+#         console.log '[Serviceworker]', 'Fetching offline content', event
+#         return caches.match('/offline.html')
+#       return
+#   )
+#   return
 
 self.addEventListener 'install', onInstall
 self.addEventListener 'activate', onActivate
-self.addEventListener 'fetch', onFetch
+# self.addEventListener 'fetch', onFetch
+
+# Receiving Push Notification
+self.addEventListener 'push', (event) ->
+  console.log "received push event & data", event, event.data
+  if event.data and event.data.text()
+    d = null
+
+    try
+      d = JSON.parse(event.data.text())
+      console.log "received data", d
+    catch e
+      console.warn e
+      console.warn "Could not parse this data as JSON", event.data
+
+    if d?
+      title = d.title
+      body = d.body
+      icon = d.icon
+      tag = d.tag
+
+      event.waitUntil self.registration.showNotification(title,
+        body: body
+        icon: icon
+        tag: tag
+        data: d
+      )
+  return
+
+self.addEventListener 'notificationclick', (event) ->
+  console.log 'On notification click: ', event
+  if Notification::hasOwnProperty('data')
+    console.log 'Using Data', event
+    url = event.notification.data.url
+    event.waitUntil clients.openWindow(url)
+  # else
+  #   event.waitUntil getIdb().get(KEY_VALUE_STORE_NAME, event.notification.tag).then((url) ->
+  #     # At the moment you cannot open third party URL's, a simple trick
+  #     # is to redirect to the desired URL from a URL on your domain
+  #     redirectUrl = '/redirect.html?redirect=' + url
+  #     clients.openWindow redirectUrl
+  #   )
+  return
