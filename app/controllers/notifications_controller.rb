@@ -8,6 +8,9 @@ class NotificationsController < ApplicationController
     # Redirect to root activity show path
     if @notification.notifiable and @notification.notifiable.root_activity
       redirect_to show_activity_path(@notification.notifiable.root_activity)
+    else
+      flash[:error] = "Ce contenu n'existe plus !"
+      redirect_to root_path
     end
   end
 
@@ -16,7 +19,7 @@ class NotificationsController < ApplicationController
   def set_notification
     @notification = Notification.find(params[:id])
     if !@notification
-      flash[:error] = "Cette notification n'existe plus."
+      flash[:error] = "Ce contenu n'existe plus !"
       redirect_to root_path
     end
   end
