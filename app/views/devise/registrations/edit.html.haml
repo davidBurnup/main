@@ -12,7 +12,7 @@
             = f.label :avatar
           .col-lg-2.col-md-2.col-sm-2.col-xs-4
             = image_tag(resource.avatar.url(:thumb), :class => "img-circle")
-          .col-lg-2.col-md-2.col-sm-2.col-xs-2#avatar-file-input
+          .col-lg-2.col-md-2.col-sm-2.col-xs-12#avatar-file-input
             = f.input :avatar, :label => false, :input_html => {:class => "filestyle", :'data-size' => 'sm', :'data-input' => false, :'data-iconName' => 'glyphicon-camera', :'data-buttonText' => "Changer la photo"}
 
         .form-group
