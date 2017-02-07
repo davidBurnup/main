@@ -37,7 +37,7 @@ class Notification < ActiveRecord::Base
         notification_data = {
           title: self.notifier.full_name,
           body: ApplicationController.helpers.build_notification_full_content(self),
-          icon: "https://burnup.fr#{self.notifier.avatar.present? ? self.notifier.avatar.url(:cropped) : "/images/user.png"}",
+          icon: "https://burnup.fr#{self.notifier.avatar.present? ? self.notifier.avatar.url(:medium) : "/images/user.png"}",
           tag: "'#{self.id}'",
           url: "https://burnup.fr#{Rails.application.routes.url_helpers.notification_path(self)}"
         }
