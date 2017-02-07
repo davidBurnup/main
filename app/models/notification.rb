@@ -36,7 +36,7 @@ class Notification < ActiveRecord::Base
       notified.user_devices.each do |user_device|
         notification_data = {
           title: self.notifier.full_name,
-          body: ApplicationController.helpers.build_notification_header(self, self.notifier),
+          body: ApplicationController.helpers.build_notification_full_content(self),
           icon: "https://burnup.fr#{self.notifier.avatar.present? ? self.notifier.avatar.expiring_url(3.days, :cropped) : "/images/user.svg"}",
           tag: "'#{self.id}'",
           url: "https://burnup.fr#{Rails.application.routes.url_helpers.notification_path(self)}"

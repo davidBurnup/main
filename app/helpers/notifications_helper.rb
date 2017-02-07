@@ -26,4 +26,16 @@ module NotificationsHelper
 
     header_label
   end
+
+  def build_notification_full_content(notification)
+    c = ""
+
+    if h = build_notification_header(notification, notification.notifier)
+      c = h
+    end
+
+    c += notification.notifiable.notifiable_content
+
+    c
+  end
 end
