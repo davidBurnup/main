@@ -25,7 +25,7 @@
             .notification-notifiable-content
               {{notification.notifiable_content}}
 
-        .seen-notification{"ng-click" => "setAsSeen(notification)", "ng-if" => "!notification.is_seen"}
+        .seen-notification{"ng-click" => "setAsSeen(notification);$event.preventDefault();$event.stopPropagation()", "ng-if" => "!notification.is_seen"}
           %span{"ng-if" => "!notification.updating"}
             = fa_icon "check"
           %span{"ng-if" => "notification.updating"}

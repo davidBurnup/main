@@ -32,9 +32,9 @@ module NotificationsHelper
 
     if h = build_notification_header(notification, notification.notifier)
       c = h
+      c += " #{notification.notifiable.notifiable_content}"
     end
 
-    c += notification.notifiable.notifiable_content
 
     c
   end
