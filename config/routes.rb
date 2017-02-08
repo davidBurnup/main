@@ -67,7 +67,11 @@ Worship::Application.routes.draw do
     end
 
     resources :instrument_preferences, path: "instruments"
-    resources :activities, path: "activites"
+    resources :activities, path: "activites" do
+      collection do
+        get "/page/:page" => "activities#index"
+      end
+    end
   end
 
   require 'sidekiq/web'

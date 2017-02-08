@@ -11,6 +11,9 @@ angular.module('Burnup.models.Activity', ['ngResource', 'rails'])
         if context.id
           defaultUrl += "/#{context.id}"
 
+        if context.page
+          defaultUrl += "/page/#{context.page}"
+
         defaultUrl += ".json"
 
         defaultUrl

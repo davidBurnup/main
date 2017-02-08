@@ -35,7 +35,7 @@ class Meeting < ActiveRecord::Base
       title
     },
     image: lambda{|m|
-      m.creator ? m.avatar.url(:tiny) : "/images/user.svg"
+      m.creator ? m.creator.avatar.url(:tiny) : "/images/user.svg"
     }
   })
 
