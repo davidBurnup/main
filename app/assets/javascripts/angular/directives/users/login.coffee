@@ -3,9 +3,9 @@ angular.module('Burnup.directives.buUsersLogin', [])
 .directive 'buUsersLogin', (User, SelectizeTemplator, $filter, Church) ->
   {
     restrict: 'A'
-    controller: ($scope, $uibModal, $timeout, $element) ->
+    controller: ($scope, $uibModal, $timeout, $element, $window) ->
 
-      $element.on "click", ->
+      $scope.showSessionModal = ->
         modalInstance = $uibModal.open(
           templateUrl: 'users/login.html'
           controller: 'UsersLogin'
@@ -18,6 +18,12 @@ angular.module('Burnup.directives.buUsersLogin', [])
           #     $scope.feedRecipientId
         )
 
+      $element.on "click", ->
+        $scope.showSessionModal()
+
+      if $window.location.href.match("/utilisateurs/se-connecter")?
+        $scope.showSessionModal()
+        
       # modalInstance.result.then (p) ->
       #
 

@@ -10,6 +10,8 @@ Worship::Application.routes.draw do
 
   resources :comments
 
+  get 'utilisateurs/se-connecter' => "application#main_fallback"
+
   get 'notifications/:id' => "notifications#show", as: 'notification'
 
   get 'fil' => "socializables#index", :as => "feeds"
