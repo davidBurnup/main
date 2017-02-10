@@ -59,10 +59,11 @@
         &:hover, &:focus, &:active, &:visited, &.open {
           border-bottom: 0px solid transparent !important;
         }
-
+        > a {
+          padding: 15px 8px;
+        }
         > a, > span {
           font-size: 15px;
-          padding: 15px 8px;
         }
         &.notifications-dropdown-wrapper{
           position: static;
