@@ -1,4 +1,4 @@
-if activity and t = activity.trackable
+if activity and t = activity.trackable and t.feedable_option(:title).present? and t.feedable_option(:content).present?
   json.id activity.id
   if activity.owner
     json.owner do
@@ -16,4 +16,5 @@ if activity and t = activity.trackable
   json.policy do
     json.destroy policy(activity).destroy?
   end
+  json.url api_activity_url(activity, format: :json)
 end
