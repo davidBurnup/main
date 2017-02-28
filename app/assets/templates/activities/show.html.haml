@@ -1,0 +1,33 @@
+.panel-body
+  %a.pull-left.user-avatar{href: "#"}
+    %img.avatar{"ng-src" => "{{activity.owner.avatar.tiny}}"}
+
+  .media-body.content-body
+    %a.destroy-post.pull-right{"ng-if" => "activity.policity.destroy", "ng-click" => "destroy(activity)"}
+      %i.fa.fa-trash-o
+
+  -# LINKED ACTIVITY
+  %a.media-heading{"ng-if" => "activity.activityLink", href: "{{activity.activityLink}}"}
+    {{activity.title}}
+    %span.content{"ng-bind-html" => "activity.content"}
+
+  -# UNLINKED ACTIVITY
+  .media-heading{"ng-if" => "!activity.activityLink"}
+    {{activity.title}}
+    .activity-time{"am-time-ago" => "activity.createdAt | amParse:'DD/MM/YYYY HH:mm'"}
+
+  %span.content{"ng-if" => "!activity.activityLink", "ng-bind-html" => "activity.safeContent"}
+
+
+  -#   - if trackable_files.present?
+  -#     - trackable_files.each do |trackable_file|
+  -#       - trackable_attachment = trackable_file.send(trackable_file_key_name)
+  -#       %audio{src: trackable_attachment.url, width: "100%"}
+
+  .media-footer.activity-footer
+    %span.likes-container
+      %a.like-btn{"ng-click" => "burnToggle()"}
+        %i.fa.fa-heart{"ng-if" => "activity.liked"}
+        %i.fa.fa-heart-o{"ng-if" => "!activity.liked"}
+      %a.likers{"ng-click" => "showLikers()"}
+        {{activity.likeLabel}}

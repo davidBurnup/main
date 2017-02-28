@@ -11,6 +11,9 @@ angular.module('Burnup.models.User', ['ngResource', 'rails'])
         if context.id
           defaultUrl += "/#{context.id}"
 
+        if context.activityId
+          defaultUrl += "/aime/#{context.activityId}"
+
         defaultUrl += ".json"
 
         defaultUrl

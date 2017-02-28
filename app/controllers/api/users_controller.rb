@@ -4,7 +4,7 @@ module Api
 
     skip_before_filter :authorize_user, only: [:create]
 
-    before_action :set_user, only: [:update]
+    before_action :set_user, only: [:update, :toggle_like]
 
     def create
       @user = User.create(create_user_params)
@@ -13,6 +13,21 @@ module Api
     def update
       @user.update(update_user_params)
       if @user.new_record?
+        head :bad_request
+      end
+    end
+
+    def toggle_like
+      activity_id = params[:activity_id]
+
+      if activity_id and current_user
+        @activity = PublicActivity::Activity.where(id: activity_id).first
+        if @activity
+          @was_saved = current_user.toggle_like!(@activity)
+        end
+      end
+
+      if !@activity
         head :bad_request
       end
     end

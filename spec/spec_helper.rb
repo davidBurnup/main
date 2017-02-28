@@ -14,7 +14,12 @@ end
 
 Spork.each_run do
   # This code will be run each time you run your specs.
-
+  if Spork.using_spork?
+    RSpec.configure do |config|
+        config.reset
+        config.output_stream = $stdout
+    end
+  end
 end
 
 # --- Instructions ---
@@ -97,6 +102,12 @@ RSpec.configure do |config|
   # inherited by the metadata hash of host groups and examples, rather than
   # triggering implicit auto-inclusion in groups with matching metadata.
   config.shared_context_metadata_behavior = :apply_to_host_groups
+
+  config.include FactoryGirl::Syntax::Methods
+
+  config.before do
+    FactoryGirl.find_definitions if FactoryGirl.factories.count == 0
+  end
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.

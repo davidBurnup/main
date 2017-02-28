@@ -54,7 +54,11 @@ Worship::Application.routes.draw do
         get "/page/:page" => "notifications#index"
       end
     end
-    resources :users, only: [:create, :update], path: 'utilisateurs'
+    resources :users, only: [:create, :update], path: 'utilisateurs' do
+      member do
+        put 'aime/:activity_id' => "users#toggle_like", :as => "toggle_like"
+      end
+    end
 
     devise_scope :user do
       post "sessions/se-connecter" => "sessions#create", as: "sessions"

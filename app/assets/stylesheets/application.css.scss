@@ -130,7 +130,7 @@ footer {
 
 .navbar-inverse .navbar-nav > li {
   border-bottom: 4px solid transparent;
-  margin-bottom: -1px;
+  margin-bottom: 0px;
 
   &.active,
   &:hover {
@@ -330,7 +330,6 @@ footer {
 }
 
 .activity-footer {
-  margin-bottom: 10px;
   clear: both;
 
   .comments-list {

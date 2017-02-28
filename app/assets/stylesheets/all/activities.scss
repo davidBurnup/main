@@ -4,13 +4,60 @@
     .avatar {
       border-radius: 100px;
     }
+    .user-avatar {
+      margin-right: 12px;
+    }
     .media-heading {
-      font-size: 15px;
-      line-height: 15px;
-      margin-top: 11px;
-      margin-bottom: 21px;
+      font-size: 18px;
+      line-height: 18px;
+      margin-top: 9px;
+      margin-bottom: 20px;
       .activity-time {
         font-size: 12px;
+      }
+    }
+    .media-footer {
+      .likes-container {
+        text-align: left;
+        font-size: 17px;
+        > a.like-btn {
+          &:hover, &:focus, &:visited {
+            text-decoration: none;
+          }
+          // width: 22px;
+          // height: 29px;
+          display: inline-block;
+          font-size: 17px;
+          cursor: pointer;
+          &:hover {
+            text-decoration: none;
+          }
+
+          // vertical-align: middle;
+          // background-repeat: no-repeat;
+          // background-position: center;
+          // background-size: contain;
+          //
+          // &.unliked {
+          //   background: asset-url('logo-unliked.svg');
+          //   &:hover{
+          //     background: asset-url('logo-liked.svg');
+          //   }
+          // }
+          // &.liked {
+          //   background: asset-url('logo-liked.svg');
+          //   &:hover{
+          //     background: asset-url('logo-unliked.svg');
+          //   }
+          // }
+
+        }
+        > a.likers {
+          cursor: pointer;
+          &:hover {
+            text-decoration: none;
+          }
+        }
       }
     }
   }

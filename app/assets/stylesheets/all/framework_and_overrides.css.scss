@@ -9,6 +9,7 @@
 $brand-primary: #DA351C;
 $navbar-height: 50px;
 $badge-bg: #FFF;
+
 // $font-family-sans-serif: "sansationregular", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $badge-color: $brand-primary;
 @import "bootstrap-sprockets";
@@ -19,6 +20,10 @@ $badge-color: $brand-primary;
 @import "bootswatch/paper/bootswatch";
 @import "helpers";
 
+body {
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 100;
+}
 
 img {
   @extend .img-responsive;

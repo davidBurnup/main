@@ -1,35 +1,6 @@
-%ul.media-list#feed-activities{'infinite-scroll' => 'loadActivities()'}
-  %li.media.activity{"ng-repeat" => "activity in activities"}
-
-    -# = link_to "", :class => "pull-left" do
-    -#   = image_tag image_url, alt: image_alt, class: "img-circle user-avatar tiny"
-
-    %a.pull-left{href: "#"}
-      %img.avatar{"ng-src" => "{{activity.owner.avatar.tiny}}"}
-
-    .media-body.content-body
-      %a.destroy-post.pull-right{"ng-if" => "activity.policity.destroy", "ng-click" => "destroy(activity)"}
-        %i.fa.fa-trash-o
-
-    -# LINKED ACTIVITY
-    %a.media-heading{"ng-if" => "activity.activityLink", href: "activity.activityLink"}
-      {{activity.title}}
-      %span.content{"ng-bind-html" => "activity.content"}
-
-    -# UNLINKED ACTIVITY
-    .media-heading{"ng-if" => "!activity.activityLink"}
-      {{activity.title}}
-      .activity-time{"am-time-ago" => "activity.createdAt | amParse:'DD/MM/YYYY HH:mm'"}
-
-    %span.content{"ng-if" => "!activity.activityLink", "ng-bind-html" => "activity.safeContent"}
-
-
-    -#   - if trackable_files.present?
-    -#     - trackable_files.each do |trackable_file|
-    -#       - trackable_attachment = trackable_file.send(trackable_file_key_name)
-    -#       %audio{src: trackable_attachment.url, width: "100%"}
-
-    .media-footer.activity-footer
+#feed-activities{'infinite-scroll' => 'loadActivities()'}
+  .panel.activity{"ng-repeat" => "activity in activities", 'bu-activities-show' => true, 'activity' => 'activity'}
+    
 
 %div.loading-activities{"ng-if" => "activitiesLock"}
   .sk-folding-cube
