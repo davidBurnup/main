@@ -7,7 +7,7 @@ angular.module('Burnup.directives.buActivitiesShow', [])
     scope:
       activity: "="
 
-    controller: ($scope, Auth) ->
+    controller: ($scope, Auth, $timeout) ->
 
       $scope.currentUser = Auth.currentUser()
 

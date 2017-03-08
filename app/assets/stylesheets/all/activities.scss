@@ -17,9 +17,36 @@
       }
     }
     .media-footer {
-      .likes-container {
+      .social-actions-container {
         text-align: left;
-        font-size: 17px;
+        font-size: 15px;
+        .social-bar {
+          a {
+            font-size: 15px;
+            display: inline-block;
+            margin-right: 25px;
+            vertical-align: middle;
+          }
+        }
+        .likers-label {
+          hr {
+            margin: 10px 0;
+          }
+          .avatars {
+            margin-right: 10px;
+            vertical-align: middle;
+            img {
+              display: inline-block;
+              margin-right: -5px;
+              border: 2px solid #EEE;
+              width: 25px;
+              height: 25px;
+            }
+          }
+          .likers {
+            vertical-align: middle;
+          }
+        }
         > a.like-btn {
           &:hover, &:focus, &:visited {
             text-decoration: none;

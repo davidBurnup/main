@@ -38,6 +38,14 @@
   }
 }
 
+a {
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 #headers {
   margin-bottom: 20px;
 
@@ -54,6 +62,15 @@
   margin-left: 5px;
   margin-bottom: 0;
   margin-right: 5px;
+}
+.modal-dialog {
+  .modal-container {
+    opacity: 0;
+    @include transition();
+    &.active {
+      opacity: 1;
+    }
+  }
 }
 
 // .btn[class*="btn-"] {

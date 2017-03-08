@@ -25,9 +25,21 @@
   -#       %audio{src: trackable_attachment.url, width: "100%"}
 
   .media-footer.activity-footer
-    %span.likes-container
-      %a.like-btn{"ng-click" => "burnToggle()"}
-        %i.fa.fa-heart{"ng-if" => "activity.liked"}
-        %i.fa.fa-heart-o{"ng-if" => "!activity.liked"}
-      %a.likers{"ng-click" => "showLikers()"}
-        {{activity.likeLabel}}
+    %span.social-actions-container
+
+      .social-bar
+        %a.like-btn{"ng-click": "burnToggle()"}
+          %i.fa.fa-heart{"ng-if": "activity.liked"}
+          %i.fa.fa-heart-o{"ng-if": "!activity.liked"}
+          Je m'enflamme
+
+        %a.comment-btn{}
+          %span.glyphicon.glyphicon-comment
+          Commenter
+
+      .likers-label{"ng-if": "activity.likers.length > 0 || activity.liked"}
+        %hr
+        %span.avatars{"ng-if": "activity.likers.length > 0"}
+          %img.img-responsive.img-circle{"ng-src": "{{liker.avatar.tiny}}", "ng-repeat": "liker in activity.likers | limitTo: 3"}
+        %a.likers{"ng-click": "showLikers()"}
+          {{activity.likeLabel}}
