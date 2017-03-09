@@ -45,6 +45,17 @@
 #= require ng-file-upload/ng-file-upload.min
 #= require angular-svg-round-progressbar/build/roundProgress.min
 
+# MASONRY
+#= require ev-emitter/ev-emitter
+#= require jquery-bridget/jquery-bridget
+#= require desandro-matches-selector/matches-selector
+#= require fizzy-ui-utils/utils
+#= require get-size/get-size
+#= require outlayer/item
+#= require outlayer/outlayer
+#= require imagesloaded/imagesloaded
+#= require masonry/masonry
+#= require angular-masonry/angular-masonry
 
 # Order matters ! load first deps (controllers, directives, filters)
 #= require_tree ./angular/models

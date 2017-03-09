@@ -18,7 +18,7 @@ angular.module('Burnup.directives.buActivitiesShow', [])
           label = "Vous"
           if activity.likers.length > 0
             if activity.likers.length == 1
-              label += "et "
+              label += " et "
             else
               label += ", "
           else

@@ -1,6 +1,7 @@
-#feed-activities{'infinite-scroll' => 'loadActivities()'}
-  .panel.activity{"ng-repeat" => "activity in activities", 'bu-activities-show' => true, 'activity' => 'activity'}
-    
+#feed-activities.row{'infinite-scroll' => 'loadActivities()', masonry: true, "load-images": "true"}
+  .col-md-6.masonry-brick{"ng-repeat" => "activity in activities"}
+    .panel.activity{'bu-activities-show' => true, 'activity' => 'activity'}
+
 
 %div.loading-activities{"ng-if" => "activitiesLock"}
   .sk-folding-cube

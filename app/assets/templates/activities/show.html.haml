@@ -33,7 +33,7 @@
           %i.fa.fa-heart-o{"ng-if": "!activity.liked"}
           Je m'enflamme
 
-        %a.comment-btn{}
+        %a.comment-btn{"ng-click": "activity.showComments = !activity.showComments"}
           %span.glyphicon.glyphicon-comment
           Commenter
 
@@ -43,3 +43,6 @@
           %img.img-responsive.img-circle{"ng-src": "{{liker.avatar.tiny}}", "ng-repeat": "liker in activity.likers | limitTo: 3"}
         %a.likers{"ng-click": "showLikers()"}
           {{activity.likeLabel}}
+
+      .comments-container{"ng-if": "activity.showComments"}
+        comments
