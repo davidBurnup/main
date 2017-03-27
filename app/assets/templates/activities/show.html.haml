@@ -33,7 +33,7 @@
           %i.fa.fa-heart-o{"ng-if": "!activity.liked"}
           Je m'enflamme
 
-        %a.comment-btn{"ng-click": "activity.showComments = !activity.showComments"}
+        %a.comment-btn{"ng-click": "toggleComment()"}
           %span.glyphicon.glyphicon-comment
           Commenter
 
@@ -43,6 +43,23 @@
           %img.img-responsive.img-circle{"ng-src": "{{liker.avatar.tiny}}", "ng-repeat": "liker in activity.likers | limitTo: 3"}
         %a.likers{"ng-click": "showLikers()"}
           {{activity.likeLabel}}
+        .comments-count.pull-right{"ng-click": "toggleComment()"}
+          %i.fa.fa-comment
+          {{activity.comments.length}}
 
-      .comments-container{"ng-if": "activity.showComments"}
-        comments
+      .collapse{"uib-collapse": "!activity.showComments"}
+        .comments-container
+          .comment.flexed.text-left{"ng-repeat": "comment in activity.comments"}
+            %img.item.comment-avatar{src: '{{comment.creator.avatar.tiny}}'}
+            .item.comment-inner
+              .comment-creator
+                {{comment.creator.shortName}}
+                %span.comment-created-at{"am-time-ago" => "comment.createdAt | amParse:'DD/MM/YYYY HH:mm'", "ng-if": "comment.createdAt"}
+              {{comment.comment}}
+
+        %form.comment-form{name: 'comment-form', "ng-submit": "saveComment($event, activity.comment)"}
+          .form-group
+            %input.form-control{type: :text, placeholder: 'Commentaire ...', 'ng-model': 'activity.comment.comment', 'focus-me': 'activity.commentInputFocus', "ng-disabled": "activity.comment.saving"}
+
+          %button.btn.btn-primary{type: :submit, "ng-disabled": "activity.comment.saving"}
+            %i.fa.fa-paper-plane

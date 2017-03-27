@@ -9,7 +9,26 @@ Spork.prefork do
   # Loading more in this block will cause your tests to run faster. However,
   # if you change any configuration or code from libraries loaded here, you'll
   # need to restart spork for it take effect.
+  # For Devise
+  require "rails/application"
+  Spork.trap_method(Rails::Application, :reload_routes!)
+  Spork.trap_method(Rails::Application::RoutesReloader, :reload!)
 
+  # Preload for performance !
+  # require "#{Rails.root.to_s}/app/workers/positions_worker"
+  # require "#{Rails.root.to_s}/app/models/user"
+  require "active_support/all"
+  require "haml/template"
+  # require "doorkeeper/orm/mongoid5"
+  require "redis/namespace"
+  require "multi_json/adapters/json_gem"
+  require "jbuilder/dependency_tracker"
+  require "minitest/assertions"
+  require "rspec/rails"
+  # require "doorkeeper"
+  require "mail"
+  require "devise"
+  puts "Reloading spork !"
 end
 
 Spork.each_run do
@@ -107,6 +126,11 @@ RSpec.configure do |config|
 
   config.before do
     FactoryGirl.find_definitions if FactoryGirl.factories.count == 0
+  end
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
   end
 
 # The settings below are suggested to provide a good initial experience

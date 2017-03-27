@@ -21,5 +21,9 @@ if activity and t = activity.trackable and t.feedable_option(:title).present? an
     json.destroy policy(activity).destroy?
   end
 
+  json.comments activity.comments do |comment|
+    json.partial! "/api/activities/comments/comment", comment: comment
+  end
+
   json.url api_activity_url(activity, format: :json)
 end

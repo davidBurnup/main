@@ -221,6 +221,9 @@
 .flexed {
   display: flex;
   flex-wrap: wrap;
+  &.vcentered {
+    align-items: center;
+  }
   > .item {
     flex-grow: 1;
   }
@@ -237,4 +240,9 @@
 }
 .panel-heading.no-top-padding {
   padding-top: 0;
+}
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
 }

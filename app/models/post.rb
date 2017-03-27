@@ -57,6 +57,9 @@ class Post < ActiveRecord::Base
       if p.song
         Rails.application.routes.url_helpers.song_path(p.song)
       end
+    },
+    recipient: lambda{|p|
+      p.creator
     }
   })
 

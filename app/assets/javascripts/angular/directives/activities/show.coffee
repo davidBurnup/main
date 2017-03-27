@@ -1,13 +1,13 @@
 angular.module('Burnup.directives.buActivitiesShow', [])
 
-.directive 'buActivitiesShow', (Activity, $sce, Auth, User, $timeout, $uibModal) ->
+.directive 'buActivitiesShow', (Activity, $sce, Auth, User, $timeout, $uibModal, $http) ->
   {
     restrict: 'AE'
     templateUrl: 'activities/show.html'
     scope:
       activity: "="
 
-    controller: ($scope, Auth, $timeout) ->
+    controller: ($scope, Auth, $timeout, Comment) ->
 
       $scope.currentUser = Auth.currentUser()
 
@@ -54,8 +54,32 @@ angular.module('Burnup.directives.buActivitiesShow', [])
       $scope.$on "activity:refresh:likeLabel", ->
         $scope.activity.likeLabel = $scope.compileLikeLabel($scope.activity)
 
+      $scope.saveComment = (e, comment) ->
+        e.preventDefault()
+        unless comment.saving
+          comment.saving = true
+          $http.post("/api/activites/#{$scope.activity.id}/commentaires.json",
+            comment: comment
+          ).then (response) ->
+            comment.saving = false
+            $scope.activity.comments.push xcase.camelizeKeys(response.data)
+            $scope.activity.comment = new Comment(
+              activityId: $scope.activity.id
+            ) # Fill in a brand new comment
+            $scope.$emit "masonry.reload"
+
+      $scope.toggleComment = ->
+        $scope.activity.showComments = !$scope.activity.showComments
+        $scope.activity.comment = new Comment(
+          activityId: $scope.activity.id
+        ) # Fill in a brand new comment
+
+        $scope.activity.commentInputFocus = true
+        $scope.$emit "masonry.reload"
+
       $scope.burnToggle = ->
         $scope.activity.liked = !$scope.activity.liked
+        $scope.$emit "masonry.reload"
         if $scope.activity and $scope.currentUser
           new User(
             id: $scope.currentUser.id

@@ -8,8 +8,6 @@ Worship::Application.routes.draw do
 
   resources :churches
 
-  resources :comments
-
   get 'notifications/:id' => "notifications#show", as: 'notification'
 
   # get 'fil' => "socializables#index", :as => "feeds"
@@ -75,6 +73,7 @@ Worship::Application.routes.draw do
       collection do
         get "/page/:page" => "activities#index"
       end
+      resources :comments, path: "commentaires", controller: 'activities/comments'
     end
   end
 

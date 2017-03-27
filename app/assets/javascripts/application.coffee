@@ -44,6 +44,7 @@
 #= require ng-img-crop-full-extended/compile/minified/ng-img-crop
 #= require ng-file-upload/ng-file-upload.min
 #= require angular-svg-round-progressbar/build/roundProgress.min
+#= require xcase/dist/xcase.min
 
 # MASONRY
 #= require ev-emitter/ev-emitter

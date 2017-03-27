@@ -5,6 +5,7 @@ FactoryGirl.define do
 
     content "<p>my super post</p>"
     association :user, factory: :david
+    association :creator, factory: :david
     initialize_with { Post.find_or_create_by(content: content)}
 
   end

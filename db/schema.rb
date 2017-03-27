@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170101201616) do
+ActiveRecord::Schema.define(version: 20170321210032) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -59,15 +59,16 @@ ActiveRecord::Schema.define(version: 20170101201616) do
     t.text     "comment",          limit: 65535
     t.integer  "commentable_id",   limit: 4
     t.string   "commentable_type", limit: 255
-    t.integer  "user_id",          limit: 4
+    t.integer  "creator_id",       limit: 4
     t.string   "role",             limit: 255,   default: "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "updater_id",       limit: 4
   end
 
   add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
   add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+  add_index "comments", ["creator_id"], name: "index_comments_on_creator_id", using: :btree
 
   create_table "follows", force: :cascade do |t|
     t.string   "follower_type",   limit: 255
@@ -223,6 +224,17 @@ ActiveRecord::Schema.define(version: 20170101201616) do
   end
 
   add_index "songs", ["clean_content"], name: "clean_content_full_text", type: :fulltext
+
+  create_table "user_devices", force: :cascade do |t|
+    t.integer  "user_id",       limit: 4
+    t.string   "endpoint",      limit: 255
+    t.string   "auth",          limit: 255
+    t.string   "p256dh",        limit: 255
+    t.boolean  "vapid_enabled"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.boolean  "expired"
+  end
 
   create_table "user_song_preferences", force: :cascade do |t|
     t.integer  "song_id",       limit: 4
