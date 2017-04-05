@@ -52,6 +52,9 @@
           .comment.flexed.text-left{"ng-repeat": "comment in activity.comments"}
             %img.item.comment-avatar{src: '{{comment.creator.avatar.tiny}}'}
             .item.comment-inner
+
+              %a.destroy.pull-right{"ng-click": "destroyComment(comment)", "ng-if": "currentUser.id == comment.creator.id"}
+                %i.fa.fa-times
               .comment-creator
                 {{comment.creator.shortName}}
                 %span.comment-created-at{"am-time-ago" => "comment.createdAt | amParse:'DD/MM/YYYY HH:mm'", "ng-if": "comment.createdAt"}

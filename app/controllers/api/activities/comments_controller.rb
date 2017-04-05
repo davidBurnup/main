@@ -2,8 +2,8 @@ module Api
   module Activities
     class CommentsController < Api::ApiController
       include ApiConfig
-      before_action :set_activity, :set_comment, only: [:show, :edit, :update, :destroy]
-      before_action :set_activity, only: [:create]
+      before_action :set_activity, only: [:show, :edit, :create, :destroy, :update]
+      before_action :set_comment, only: [:show, :edit, :update, :destroy]
       # GET /api/activities/comments.json
       def index
         @comments = @activity.comments

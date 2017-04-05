@@ -77,6 +77,18 @@ angular.module('Burnup.directives.buActivitiesShow', [])
         $scope.activity.commentInputFocus = true
         $scope.$emit "masonry.reload"
 
+      $scope.destroyComment = (comment) ->
+        if confirm("Voulez-vous vraiment supprimer ce commentaire ?")
+          new Comment(
+            activityId: $scope.activity.id
+            id: comment.id
+          ).delete().then ->
+
+            $scope.activity.comments = $scope.activity.comments.filter (oldComment) ->
+              oldComment.id isnt comment.id
+
+            $scope.$emit "masonry.reload"
+
       $scope.burnToggle = ->
         $scope.activity.liked = !$scope.activity.liked
         $scope.$emit "masonry.reload"
