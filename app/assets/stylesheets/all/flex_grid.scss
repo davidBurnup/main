@@ -1,0 +1,25 @@
+// Flexed grid based on https://css-tricks.com/filling-space-last-row-flexbox/
+.flexed-grid {
+  display: flex;
+  flex-wrap: wrap;
+  // Prevents from overflow boxes to go to a new line
+  &.flex-unwrapped {
+    flex-wrap: nowrap;
+  }
+
+  &.flex-centered {
+    align-items: center;
+  }
+  .grid-item {
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding: 0 10px;
+    &.flex-shrinked {
+      flex-shrink: 1;
+    }
+    &.flex-fit {
+      flex-grow: 1;
+      min-width: 25%;
+    }
+  }
+}

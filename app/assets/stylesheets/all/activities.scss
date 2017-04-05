@@ -1,5 +1,22 @@
 @import "helpers";
 #feed-activities {
+  .activity-new-call-to-action {
+    .user-avatar {
+      margin: 0;
+      padding: 0;
+    }
+    .comment-input {
+      margin-bottom: 0;
+      padding-left: 0;
+    }
+    .add-photo {
+      border-radius: 100px;
+      width: 40px;
+      height: 40px;
+      background: #eee;
+      font-size: 16px;
+    }
+  }
   .activity {
     border-bottom: 1px solid #eee;
     .avatar {

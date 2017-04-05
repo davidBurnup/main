@@ -1,4 +1,8 @@
 #feed-activities.row{'infinite-scroll' => 'loadActivities()', masonry: true, "load-images": "true"}
+
+  .col-md-6.masonry-brick{"ng-if": "!activitiesLock"}
+    .panel.activity{'bu-activities-new': true}
+
   .col-md-6.masonry-brick{"ng-repeat" => "activity in activities"}
     .panel.activity{'bu-activities-show' => true, 'activity' => 'activity'}
 

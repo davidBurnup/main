@@ -13,6 +13,7 @@ angular.module('Burnup.directives.buActivitiesIndex', [])
       $scope.reachedLastPage = false
       $scope.activitiesLock = false
       $scope.currentUser = Auth.currentUser(getInstance: true)
+
       $scope.loadActivities = (forceRefresh) ->
 
         if ((!$scope.reachedLastPage and !$scope.activitiesLock) or forceRefresh)
