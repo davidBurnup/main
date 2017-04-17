@@ -2,7 +2,8 @@
 lock "3.7.1"
 
 set :application, "burnup"
-set :repo_url, "git@github.com:davidfabreguette/burnup.git"
+# set :repo_url, "git@github.com:davidfabreguette/burnup.git"
+set :repo_url, "git@vps359095.ovh.net:root/burnup.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -34,3 +35,5 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 
 # Restart Passenger using touch tmp/restart.txt
 set :passenger_restart_with_touch, true
+
+set :assets_roles, [:web, :app]

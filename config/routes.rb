@@ -8,6 +8,10 @@ Worship::Application.routes.draw do
 
   resources :churches
 
+  resources :comments
+
+  get 'utilisateurs/se-connecter' => "application#main_fallback"
+
   get 'notifications/:id' => "notifications#show", as: 'notification'
 
   # get 'fil' => "socializables#index", :as => "feeds"
@@ -55,6 +59,9 @@ Worship::Application.routes.draw do
     resources :users, only: [:create, :update], path: 'utilisateurs' do
       member do
         put 'aime/:activity_id' => "users#toggle_like", :as => "toggle_like"
+        post "push" => "users#push_subscribe"
+        # FIXME : change post for delete method once we found a way to send endpoint (which is an URL) via the URL param
+        post "push/unsubscribe" => "users#push_unsubscribe"
       end
     end
 

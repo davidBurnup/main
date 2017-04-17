@@ -26,6 +26,7 @@
   # Services
   "Burnup.services.Auth"
   "Burnup.services.SelectizeTemplator"
+  "Burnup.services.PushManager"
 
   # Directives
   "Burnup.directives.notifications"
@@ -41,6 +42,7 @@
   "Burnup.directives.buActivitiesIndex"
   "Burnup.directives.buActivitiesShow"
   "Burnup.directives.buActivitiesNew"
+  "Burnup.directives.buUsersSession"
 
   # Controllers
   "Burnup.controllers.Main"
@@ -48,9 +50,11 @@
   "Burnup.controllers.UsersLogin"
   "Burnup.controllers.ActivitiesLikersModal"
   "Burnup.controllers.ActivitiesNewModal"
+  "Burnup.controllers.UsersAccount"
 
   # Utils
   "utils.autofocus"
+  "utils.Browser"
 
 ])
 
@@ -60,12 +64,18 @@
    cfpLoadingBarProvider.spinnerTemplate = '<div><span class="fa fa-spinner">Chargement en cours ...</div>'
 )
 
-@app.run(($rootScope, amMoment) ->
+@app.run(($rootScope, amMoment, PushManager) ->
   @App = {}
   App.cable = Cable.createConsumer "wss://<%=Rails.application.secrets.CABLE_HOST%>:<%=Rails.application.secrets.CABLE_PORT%>"
   amMoment.changeLocale('fr')
   $rootScope.instrumentKeys = [<%= instrument_keys_labels.collect(&:to_json).join(",") %>]
 
+  if navigator.serviceWorker
+    navigator.serviceWorker.register('/serviceworker.js').then (reg) ->
+      console.log '[Companion]', 'Service worker registered!'
+      return
+
+  PushManager.initialize()
 )
 
 

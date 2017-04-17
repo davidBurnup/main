@@ -1,8 +1,8 @@
 // Temporary workaround for Rails 4.1.2 pending releaase of bootstrap-sass 3.1.2
-//= depend_on_asset "bootstrap/glyphicons-halflings-regular.eot"
-//= depend_on_asset "bootstrap/glyphicons-halflings-regular.svg"
-//= depend_on_asset "bootstrap/glyphicons-halflings-regular.ttf"
-//= depend_on_asset "bootstrap/glyphicons-halflings-regular.woff"
+// = depend_on_asset "bootstrap/glyphicons-halflings-regular.eot"
+// = depend_on_asset "bootstrap/glyphicons-halflings-regular.svg"
+// = depend_on_asset "bootstrap/glyphicons-halflings-regular.ttf"
+// = depend_on_asset "bootstrap/glyphicons-halflings-regular.woff"
 // import the CSS framework
 
 // Custom Variables
@@ -14,7 +14,7 @@ $badge-bg: #FFF;
 $badge-color: $brand-primary;
 @import "bootstrap-sprockets";
 @import "bootswatch/paper/variables";
-
+@import "https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css";
 
 @import "bootstrap";
 @import "bootswatch/paper/bootswatch";
@@ -23,6 +23,17 @@ $badge-color: $brand-primary;
 body {
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 100;
+}
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(#{$icon-font-path}#{$icon-font-name}.ttf) format('truetype');
+  src: url(#{$icon-font-path}#{$icon-font-name}.eot?#iefix)
+  format('embedded-opentype'),
+  url(#{$icon-font-path}#{$icon-font-name}.woff) format('woff'),
+  url(#{$icon-font-path}#{$icon-font-name}.ttf) , format('truetype'),
+  url(#{$icon-font-path}#{$icon-font-name}.svg##{$icon-font-svg-id})
+  format('svg');
 }
 
 img {
@@ -165,9 +176,9 @@ section {
 }
 
 .btn.btn-primary-bordered {
-  background: #e51c23;
+  background: #FFFFFF;
   border: 2px solid white;
-  color: white;
+  color: #da351c;
   font-size: 15px;
   padding: 3px 9px;
   outline: none !important;

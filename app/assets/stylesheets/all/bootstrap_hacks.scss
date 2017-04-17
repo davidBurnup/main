@@ -259,3 +259,11 @@
     -webkit-transform: translate3d(0, 1000%, 0);
     transform: translate3d(0, 1000%, 0);
 }
+.inline-visible-xs {
+  display: none;
+}
+@media (max-width: 768px){
+  .inline-visible-xs {
+    display: inline-block !important;
+  }
+}

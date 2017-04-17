@@ -1,6 +1,6 @@
 = render "devise/registrations/menu"
 
-.col-lg-6.col-md-9.col-sm-9.col-xs-12
+.col-lg-6.col-md-9.col-sm-9.col-xs-12{"ng-controller" => "UsersAccount"}
   .well
     .row#profile-form
       %h1.col-lg-12
@@ -12,7 +12,7 @@
             = f.label :avatar
           .col-lg-2.col-md-2.col-sm-2.col-xs-4
             = image_tag(resource.avatar.url(:thumb), :class => "img-circle")
-          .col-lg-2.col-md-2.col-sm-2.col-xs-2#avatar-file-input
+          .col-lg-2.col-md-2.col-sm-2.col-xs-12#avatar-file-input
             = f.input :avatar, :label => false, :input_html => {:class => "filestyle", :'data-size' => 'sm', :'data-input' => false, :'data-iconName' => 'glyphicon-camera', :'data-buttonText' => "Changer la photo"}
 
         .form-group
@@ -52,6 +52,13 @@
         -#  .form-group
         -#    = f.label :current_password
         -#    = f.password_field :current_password, class: 'form-control'
+        .form-group
+          .col-xs-8.col-xs-offset-3
+            .checkbox
+              %label
+                %input{:type => "checkbox", "ng-model" => "webpushEnabled", "ng-disabled" => "togglingWebpush"}/
+                Activer les notifications push
+
         .form-group
           .col-lg-2.col-md-2.col-sm-2.col-xs-2.col-xs-offset-1.profile-label
           .col-lg-6.col-md-6.col-sm-6.col-xs-8

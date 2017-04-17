@@ -55,7 +55,7 @@
             .file-input-button{"ng-if" => "currentUser.avatar"}
               %i.fa.fa-pencil{"ng-if" => "!currentUser.no_avatar"}
               %i.fa.fa-plus{"ng-if" => "currentUser.no_avatar"}
-              %img.avatar{"ng-src" => "{{currentUser.avatar.original}}", "ng-class" => "currentUser.no_avatar ? 'default' : ''"}
+              %img.avatar{"ng-src" => "{{currentUser.avatar.medium}}", "ng-class" => "currentUser.no_avatar ? 'default' : ''"}
 
             %input.avatar-pic-input.form-control#avatarFileInput{type: :file, name: "user[avatar]"}
             -# %input#fileInput{:type => "file"}/
