@@ -10,7 +10,9 @@
       %span{"ng-if": "withPhoto"}
 
     .modal-footer
-      %button.btn.btn-default{type: :button, "ng-click" => "close()"}
+      %button.btn.btn-default{type: :button, "ng-click" => "close()", "ng-disabled": "!post.content || savingPost"}
         ANNULER
-      %button.btn.btn-default{type: :submit, "ng-disabled": "!post.content", "ng-class": "post.content ? 'btn-primary': ''"}
-        PUBLIER
+      %button.btn.btn-default{type: :submit, "ng-disabled": "!post.content || savingPost", "ng-class": "post.content ? 'btn-primary': ''"}
+        %i.fa.fa-spin.fa-cog.loading{"ng-if": "savingPost"}
+        %span{"ng-if": "!savingPost"}
+          PUBLIER

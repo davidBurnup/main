@@ -111,5 +111,11 @@ angular.module('Burnup.directives.buActivitiesShow', [])
               likers: ->
                 $scope.activity.likers
           )
+      $scope.destroy = (e, activity) ->
+        e.preventDefault()
+        activity.delete()
+        .then ->
+          console.log "delete", activity
+          $scope.$emit "activity:destroy:success", activity.id
 
   }

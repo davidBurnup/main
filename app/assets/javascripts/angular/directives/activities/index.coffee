@@ -39,8 +39,12 @@ angular.module('Burnup.directives.buActivitiesIndex', [])
 
       $scope.loadActivities()
 
-      $scope.$on "post:create:success", (e, activity) ->
+      $scope.$on "activity:create:success", (e, activity) ->
         $scope.activities.splice 0, 0, activity
-
+        
+      $scope.$on "activity:destroy:success", (e, activityId) ->
+        $scope.activities = $scope.activities.filter (inMemoryActivity) ->
+          inMemoryActivity.id isnt activityId
+        $scope.$broadcast "masonry:reload"
 
   }

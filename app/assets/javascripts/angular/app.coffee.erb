@@ -61,7 +61,7 @@
 
 @app.config(($httpProvider, cfpLoadingBarProvider) ->
    $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
-   cfpLoadingBarProvider.spinnerTemplate = '<div><span class="fa fa-spinner">Chargement en cours ...</div>'
+   cfpLoadingBarProvider.includeSpinner = false
 )
 
 @app.run(($rootScope, amMoment, PushManager) ->

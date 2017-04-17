@@ -11,16 +11,19 @@ angular.module('Burnup.controllers.ActivitiesNewModal', [])
   $('.modal-backdrop').addClass('visible')
 
   $scope.close = ->
-    $('.modal-backdrop').removeClass('visible')
-    $uibModalInstance.close()
+    if !$scope.savingPost
+      $('.modal-backdrop').removeClass('visible')
+      $uibModalInstance.close()
 
   $scope.save = ($event) ->
     $event.preventDefault()
+    $scope.savingPost = true
     $scope.post.save()
     .then (activity) ->
+      $scope.savingPost = false
       $('.modal-backdrop').removeClass('visible')
       $uibModalInstance.close(activity)
-    
+
 
 
   $timeout ->

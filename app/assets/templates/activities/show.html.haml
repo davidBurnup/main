@@ -2,9 +2,15 @@
   %a.pull-left.user-avatar{href: "#"}
     %img.avatar{"ng-src" => "{{activity.owner.avatar.tiny}}"}
 
+  %span.pull-right.activity-menu{"uib-dropdown": true, "ng-if": "activity.policy.destroy"}
+    %a.activity-menu-toggler{id: "activity-menu-{{activity.id}}", :href => "", "uib-dropdown-toggle": true}
+      %i.fa.fa-chevron-down
+    %ul.dropdown-menu{"aria-labelledby": "activity-menu-{{activity.id}}", "uib-dropdown-menu": true}
+      %li
+        %a{"ng-click" => "destroy($event, activity)"}
+          Supprimer
+
   .media-body.content-body
-    %a.destroy-post.pull-right{"ng-if" => "activity.policity.destroy", "ng-click" => "destroy(activity)"}
-      %i.fa.fa-trash-o
 
   -# LINKED ACTIVITY
   %a.media-heading{"ng-if" => "activity.activityLink", href: "{{activity.activityLink}}"}
