@@ -11,7 +11,6 @@
  * file per style scope.
  *
  *= require ./all/framework_and_overrides
- * require ./all/bootswatch_simplex
  *= require bootstrap-datetimepicker
  *= require fullcalendar/fullcalendar.min
  *= require font-awesome
@@ -24,13 +23,17 @@
  *= require selectize/dist/css/selectize.default
  *= require selectize/dist/css/selectize.bootstrap3
  *= require ng-img-crop-full-extended/compile/minified/ng-img-crop
+ *= require angular-loading-bar/build/loading-bar.min
  */
 @import "all/helpers";
 
 [data-link-to]:hover {
   cursor: pointer;
 }
-
+textarea[msd-elastic] {
+	resize: none;
+	box-sizing: content-box;
+}
 .navbar-brand {
   img {
     height: 35px;

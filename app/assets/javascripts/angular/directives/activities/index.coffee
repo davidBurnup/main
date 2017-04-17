@@ -12,6 +12,7 @@ angular.module('Burnup.directives.buActivitiesIndex', [])
       $scope.page = 0
       $scope.reachedLastPage = false
       $scope.activitiesLock = false
+      $scope.initialized = false
       $scope.currentUser = Auth.currentUser(getInstance: true)
 
       $scope.loadActivities = (forceRefresh) ->
@@ -34,8 +35,12 @@ angular.module('Burnup.directives.buActivitiesIndex', [])
             if activities.length == 0
               $scope.reachedLastPage = true
             $scope.activitiesLock = false
+            $scope.initialized = true
 
       $scope.loadActivities()
+
+      $scope.$on "post:create:success", (e, activity) ->
+        $scope.activities.splice 0, 0, activity
 
 
   }

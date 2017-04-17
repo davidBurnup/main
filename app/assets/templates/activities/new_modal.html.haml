@@ -1,0 +1,16 @@
+%form{name: 'postForm', 'ng-submit': 'save($event)'}
+  #activities-new-modal.modal-container{"ng-class" => "active ? 'active' : ''"}
+    .modal-header.flexed-grid.flex-centered
+      %img.user-avatar.grid-item{"ng-src": "{{currentUser.avatar.tiny}}"}
+      %h1.grid-item.flex-fit
+        {{currentUser.fullName}}
+    .modal-body
+      .form-group
+        %textarea.form-control{"ng-model": "post.content", 'msd-elastic': true, rows: 1, placeholder: 'Qu\'est-ce qui vous enflamme aujourd\'hui ?'}
+      %span{"ng-if": "withPhoto"}
+
+    .modal-footer
+      %button.btn.btn-default{type: :button, "ng-click" => "close()"}
+        ANNULER
+      %button.btn.btn-default{type: :submit, "ng-disabled": "!post.content", "ng-class": "post.content ? 'btn-primary': ''"}
+        PUBLIER

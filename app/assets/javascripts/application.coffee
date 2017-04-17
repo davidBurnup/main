@@ -36,6 +36,8 @@
 #= require angular-rails-templates
 #= require_tree ../templates
 #= require angularjs/rails/resource
+#= require angular-elastic/elastic
+#= require angular-loading-bar/build/loading-bar.min
 
 # POST ANGULAR MODULES
 #= require angular-moment/angular-moment.min

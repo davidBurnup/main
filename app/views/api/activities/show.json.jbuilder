@@ -1,3 +1,3 @@
-if activity
-  json.partial! "activity", activity: activity
+if @activity
+  json.partial! "activity", activity: @activity
 end

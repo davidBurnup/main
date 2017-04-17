@@ -19,6 +19,9 @@
   }
   .activity {
     border-bottom: 1px solid #eee;
+    .content {
+      font-size: 17px;
+    }
     .avatar {
       border-radius: 100px;
     }
@@ -145,5 +148,18 @@
         }
       }
     }
+  }
+}
+#activities-new-modal {
+  .user-avatar {
+    @include rounded-corners(100px);
+    padding: 0;
+  }
+  h1 {
+    font-size: 20px;
+    margin: 0;
+  }
+  .modal-body {
+    padding: 0 15px;
   }
 }

@@ -2,7 +2,7 @@ Worship::Application.routes.draw do
 
   root :to => "application#main_fallback"
 
-  resources :posts
+  resources :posts, path: 'publications'
 
   resources :activities, only: [:index], path: "fil"#, only: [:destroy], controller: "socializables"
 
@@ -75,6 +75,7 @@ Worship::Application.routes.draw do
       end
       resources :comments, path: "commentaires", controller: 'activities/comments'
     end
+    resources :posts, path: 'publications', only: [:show, :create, :update, :destroy]
   end
 
   require 'sidekiq/web'

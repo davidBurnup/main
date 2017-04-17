@@ -9,7 +9,7 @@
   -# LINKED ACTIVITY
   %a.media-heading{"ng-if" => "activity.activityLink", href: "{{activity.activityLink}}"}
     {{activity.title}}
-    %span.content{"ng-bind-html" => "activity.content"}
+    %span.content{"ng-bind-html" => "activity.safeContent"}
 
   -# UNLINKED ACTIVITY
   .media-heading{"ng-if" => "!activity.activityLink"}

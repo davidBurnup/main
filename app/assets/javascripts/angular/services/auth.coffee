@@ -7,8 +7,11 @@ angular.module('Burnup.services.Auth', [])
   @promise = null
 
   currentUser = (options) ->
+    options = {} unless options
     if sessionStorage.getItem('currentUser')
       currentUserData = JSON.parse(unescape(sessionStorage.getItem('currentUser')))
+      if options.camelize
+        currentUserData = xcase.camelizeKeys(currentUserData)
     if options and options.getInstance
       return new User(currentUserData)
     else

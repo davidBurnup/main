@@ -1,18 +1,18 @@
-#feed-activities.row{'infinite-scroll' => 'loadActivities()', masonry: true, "load-images": "true"}
+#feed-activities.row{'infinite-scroll' => 'loadActivities()', masonry: true, "load-images": "true", 'masonry-options': "{stamp: '.stamp'}", "ng-show": "initialized"}
 
-  .col-md-6.masonry-brick{"ng-if": "!activitiesLock"}
+  .col-md-6.stamp
     .panel.activity{'bu-activities-new': true}
 
   .col-md-6.masonry-brick{"ng-repeat" => "activity in activities"}
     .panel.activity{'bu-activities-show' => true, 'activity' => 'activity'}
 
-
-%div.loading-activities{"ng-if" => "activitiesLock"}
-  .sk-folding-cube
-    .sk-cube1.sk-cube
-    .sk-cube2.sk-cube
-    .sk-cube4.sk-cube
-    .sk-cube3.sk-cube
+.clear{"ng-if" => "activitiesLock || !initialized"}
+  %div.loading-activities
+    .sk-folding-cube
+      .sk-cube1.sk-cube
+      .sk-cube2.sk-cube
+      .sk-cube4.sk-cube
+      .sk-cube3.sk-cube
 
   -#     \-
   -#     - if trackable

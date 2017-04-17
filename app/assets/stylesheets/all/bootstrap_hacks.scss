@@ -1,3 +1,4 @@
+@import "helpers";
 .col-xxs-1,
 .col-xxs-10,
 .col-xxs-11,
@@ -245,4 +246,16 @@
   display: inline-block;
   vertical-align: middle;
   float: none;
+}
+.modal.slide-top.fade:not(.in) .modal-dialog {
+    -webkit-transform: translate3d(0, -1000%, 0);
+    transform: translate3d(0, -1000%, 0);
+}
+.modal.slide-left.fade:not(.in) .modal-dialog {
+    -webkit-transform: translate3d(-1000%, 0, 0);
+    transform: translate3d(-1000%, 0, 0);
+}
+.modal.slide-bottom.fade:not(.in) .modal-dialog {
+    -webkit-transform: translate3d(0, 1000%, 0);
+    transform: translate3d(0, 1000%, 0);
 }

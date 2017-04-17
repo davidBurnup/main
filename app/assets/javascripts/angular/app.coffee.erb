@@ -11,6 +11,8 @@
   "selectize"
   "ngSanitize"
   "wu.masonry"
+  "angular-loading-bar"
+  "monospaced.elastic"
 
   # Models
   "Burnup.models.Notification"
@@ -19,6 +21,7 @@
   "Burnup.models.InstrumentPreference"
   "Burnup.models.Activity"
   "Burnup.models.Comment"
+  "Burnup.models.Post"
 
   # Services
   "Burnup.services.Auth"
@@ -44,6 +47,7 @@
   "Burnup.controllers.UserTou"
   "Burnup.controllers.UsersLogin"
   "Burnup.controllers.ActivitiesLikersModal"
+  "Burnup.controllers.ActivitiesNewModal"
 
   # Utils
   "utils.autofocus"
@@ -51,8 +55,9 @@
 ])
 
 
-@app.config(($httpProvider) ->
+@app.config(($httpProvider, cfpLoadingBarProvider) ->
    $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
+   cfpLoadingBarProvider.spinnerTemplate = '<div><span class="fa fa-spinner">Chargement en cours ...</div>'
 )
 
 @app.run(($rootScope, amMoment) ->

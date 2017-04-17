@@ -49,6 +49,7 @@ angular.module('Burnup.directives.buActivitiesShow', [])
         return label
 
       $scope.$watch "activity", (activity) ->
+        $scope.activity.safeContent = $sce.trustAsHtml(activity.content);
         $scope.$broadcast "activity:refresh:likeLabel"
 
       $scope.$on "activity:refresh:likeLabel", ->

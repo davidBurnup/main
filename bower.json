@@ -18,6 +18,9 @@
     "angular-svg-round-progressbar": "0.4.8",
     "angular-sanitize": "^1.6.1",
     "angular-masonry": "^0.16.0",
-    "xcase": "*"
+    "xcase": "*",
+    "angular-autogrow": "^0.1.1",
+    "angular-loading-bar": "^0.9.0",
+    "angular-elastic": "^2.5.1"
   }
 }

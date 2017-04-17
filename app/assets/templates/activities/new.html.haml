@@ -1,10 +1,10 @@
 .panel-body.activity-new-call-to-action
-  %form.flexed-grid.flex-centered{action: "#", "ng-submit": "saveNewPost()"}
+  %form.flexed-grid.flex-centered{action: "#"}
     %a.grid-item.user-avatar{href: "#"}
       %img.avatar{"ng-src" => "{{currentUser.avatar.tiny}}"}
 
     .form-group.comment-input.grid-item.flex-fit
-      %input.form-control{type: :text, placeholder: "Qu'est-ce-qui vous enflamme aujourd'hui ?"}
+      %input.form-control{type: :text, placeholder: "Qu'est-ce-qui vous enflamme aujourd'hui ?", "ng-focus": "openModal($event)"}
 
-    %button.btn.btn-default.add-photo.grid-item{type: :button}
+    %button.btn.btn-default.add-photo.grid-item{type: :button, "ng-focus": "openModal($event, {withPhoto: true})"}
       %i.fa.fa-camera
