@@ -51,11 +51,19 @@ Worship::Application.routes.draw do
   resources :meetings, :path => "reunions"
 
   namespace :api do
+
+    get "main" => "api#main"
+
     resources :notifications, only: [:index, :destroy, :update] do
       collection do
         get "/page/:page" => "notifications#index"
       end
     end
+
+    get "utilisateurs/courant" => "users#current", as: :current_user
+
+    resources :medias, only: [:create, :destroy]
+
     resources :users, only: [:create, :update], path: 'utilisateurs' do
       member do
         put 'aime/:activity_id' => "users#toggle_like", :as => "toggle_like"

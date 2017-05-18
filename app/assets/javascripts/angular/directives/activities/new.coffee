@@ -26,10 +26,11 @@ angular.module('Burnup.directives.buActivitiesNew', [])
                 options.withPhoto?
           )
           modalInstance.result.then (post) ->
-            new Activity(id: post.activityId).get()
-            .then (activity) ->
-              $scope.$emit "activity:create:success", activity
-              $scope.$emit "masonry:reload"
+            if post
+              new Activity(id: post.activityId).get()
+              .then (activity) ->
+                $scope.$emit "activity:create:success", activity
+                $scope.$emit "masonry:reload"
           , ->
             $log.info 'Modal dismissed at: ' + new Date
             return

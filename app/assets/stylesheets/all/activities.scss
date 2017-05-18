@@ -173,5 +173,81 @@
     .activity_comment {
       font-size: 15px;
     }
+    .files {
+      padding: 0;
+      li {
+        background: #fff;
+        padding: 10px 0;
+        @include rounded-corners(5px);
+        list-style: none;
+        border: 1px solid #ddd;
+        margin-bottom: 10px;
+        .destroy-file {
+          cursor: pointer;
+          &:hover {
+            i {
+              color: #af1603;
+            }
+          }
+          i {
+            @include transition();
+            font-size: 25px;
+            color: #ff3a21;
+          }
+        }
+        .flexed-grid {
+          padding: 0 5px;
+          .grid-item {
+            padding: 0 5px;
+          }
+        }
+        .file-preview {
+          max-height: 65px;
+        }
+        .pdf-icon {
+          width: 50px;
+        }
+        .file-name {
+          word-wrap: break-word;
+        }
+        .progress {
+          height: 10px;
+          margin: 10px 10px 0 10px;
+        }
+        &:last-child {
+          margin-bottom: 0;
+        }
+        &.invalid-file-header {
+          background: none;
+          border: 0px solid transparent;
+          margin-top: 20px;
+          margin-bottom: 0;
+          border-top: 1px solid #ddd;
+          padding-top: 20px;
+        }
+        &.invalid-file {
+          .grid-item {
+            $warn_label_color: #ff3a21;
+            .label.label-warning {
+              text-transform: uppercase;
+              background: $warn_label_color;
+              padding: 4px;
+              cursor: pointer;
+            }
+            i.fa.fa-warning {
+              font-size: 30px;
+              display: block;
+              padding: 16px 0;
+              background: $warn_label_color;
+              border-radius: 100%;
+              text-align: center;
+              height: 62px;
+              width: 62px;
+              color: white;
+            }
+          }
+        }
+      }
+    }
   }
 }

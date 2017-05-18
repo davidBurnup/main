@@ -6,6 +6,10 @@ module Api
 
     before_action :set_user, only: [:update, :toggle_like, :push_subscribe, :push_unsubscribe]
 
+    def current
+
+    end
+      
     def create
       @user = User.create(create_user_params)
     end

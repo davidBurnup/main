@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170321210032) do
+ActiveRecord::Schema.define(version: 20170518212418) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -100,14 +100,26 @@ ActiveRecord::Schema.define(version: 20170321210032) do
   add_index "likes", ["likeable_id", "likeable_type"], name: "fk_likeables", using: :btree
   add_index "likes", ["liker_id", "liker_type"], name: "fk_likes", using: :btree
 
-  create_table "media", force: :cascade do |t|
-    t.integer  "post_id",                 limit: 4
+  create_table "medias", force: :cascade do |t|
+    t.integer  "post_id",            limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "attachment_file_name",    limit: 255
-    t.string   "attachment_content_type", limit: 255
-    t.integer  "attachment_file_size",    limit: 4
-    t.datetime "attachment_updated_at"
+    t.string   "image_file_name",    limit: 255
+    t.string   "image_content_type", limit: 255
+    t.integer  "image_file_size",    limit: 4
+    t.datetime "image_updated_at"
+    t.string   "pdf_file_name",      limit: 255
+    t.string   "pdf_content_type",   limit: 255
+    t.integer  "pdf_file_size",      limit: 4
+    t.datetime "pdf_updated_at"
+    t.string   "word_file_name",     limit: 255
+    t.string   "word_content_type",  limit: 255
+    t.integer  "word_file_size",     limit: 4
+    t.datetime "word_updated_at"
+    t.string   "excel_file_name",    limit: 255
+    t.string   "excel_content_type", limit: 255
+    t.integer  "excel_file_size",    limit: 4
+    t.datetime "excel_updated_at"
   end
 
   create_table "meeting_songs", force: :cascade do |t|
@@ -185,6 +197,7 @@ ActiveRecord::Schema.define(version: 20170321210032) do
     t.datetime "updated_at"
     t.integer  "creator_id",   limit: 4
     t.integer  "updater_id",   limit: 4
+    t.boolean  "is_draft"
   end
 
   create_table "practice_users", force: :cascade do |t|

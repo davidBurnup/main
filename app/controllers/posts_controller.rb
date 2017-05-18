@@ -97,6 +97,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:content, :user_id, :song_id, :external_url, :music_medias_attributes => [:attachment])
+      params.require(:post).permit(:is_draft, :content, :user_id, :song_id, :external_url)
     end
 end

@@ -10,9 +10,15 @@ module Api
     # POST /posts
     # POST /posts.json
     def create
-      @post = Post.new(post_params)
+      if post_params and post_params[:is_draft]
+        @post = Post.where(is_draft: true, user_id: current_user.id).first
+        # raise @post.inspect
+      end
+      if !@post
+        @post = Post.new(post_params)
+      end
+
       @post.user = current_user
-      @post.remove_blank_music_medias
 
       respond_to do |format|
         if @post.save
@@ -52,7 +58,7 @@ module Api
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def post_params
-        params.require(:post).permit(:content, :user_id, :song_id, :external_url, :music_medias_attributes => [:attachment])
+        params.require(:post).permit(:content, :user_id, :song_id, :external_url, :is_draft)
       end
   end
 end

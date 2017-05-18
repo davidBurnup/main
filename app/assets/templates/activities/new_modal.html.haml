@@ -1,18 +1,86 @@
 %form{name: 'postForm', 'ng-submit': 'save($event)'}
-  #activities-new-modal.modal-container{"ng-class" => "active ? 'active' : ''"}
+  .loading-container{"ng-if": "!post"}
+    %i.fa.fa-cog.fa-spin
+  #activities-new-modal.ng-cloak{"ng-if": "post"}
     .modal-header.flexed-grid.flex-centered
       %img.user-avatar.grid-item{"ng-src": "{{currentUser.avatar.tiny}}"}
       %h1.grid-item.flex-fit
         {{currentUser.fullName}}
     .modal-body
-      .form-group
+      .form-group{"ng-if": "!withPhoto"}
         %textarea.form-control{"ng-model": "post.content", 'msd-elastic': true, rows: 1, placeholder: 'Qu\'est-ce qui vous enflamme aujourd\'hui ?'}
+
       %span{"ng-if": "withPhoto"}
+        -# .button.btn.btn-sm.btn-default{"ng-model": :files, "ngf-multiple": true, "ngf-select": true, "ngf-pattern": "images/*"}
+        -#   Select
+        -# Drop files:
+        -# .drop-box{"ng-model": "files", "ngf-drop": true} Drop
+        -#
+        -# Image thumbnail:
+        -# %img{"ng-repeat": "file in files", "ngf-thumbnail" => "file || '/thumb.jpg'"}/
+        -# Audio preview:
+        -# %audio{"ng-repeat": "file in files", :controls => "", "ngf-src" => "file"}
+        -# Video preview:
+        -# %video{"ng-repeat": "file in files", :controls => "", "ngf-src" => "file"}
+
+        .drop-box.text-center{ "ng-if": "files.length < 5",
+          :accept => "image/*,application/pdf",
+          "ngf-allow-dir": "true",
+          "ngf-drag-over-class": "'dragover'",
+          "ngf-drop": "upload($files)",
+          "ngf-capture": "'camera'",
+          "ngf-select": "upload($files, $invalidFiles)",
+          "ngf-multiple": "true",
+          "ngf-max-files": "2",
+          "ngf-min-size": "10KB",
+          "ngf-max-size": "50MB",
+          "ngf-dimensions": "$width > 500 && $height > 500",
+          "ngf-pattern": "'image/*,application/pdf'"}
+          Déposez ici vos fichiers pdf ou images
+
+        %ul.files{:style => "clear:both"}
+          %li.sel-file{"ng-repeat" => "f in files"}
+            %div.flexed-grid.flex-centered.flex-unwrapped
+              .grid-item>
+                -#&& fileIsAnImage(f.type)
+                -# Image preview made on the fly by ng-file-upload plugin
+                %img.thumb.file-preview{"ngf-thumbnail" => "!f.attachmentThumb && !f.$error && f"}
+                -# Image preview if file was already uploaded
+                %img.thumb.img-responsive.image-preview{"ng-src": "{{f.attachmentThumb}}", "ng-if": "f.attachmentThumb"}
+                -# PDF icon
+                %img.pdf-icon{src: "/images/pdf.svg", "ng-if": "f.type == 'application/pdf' || !f.type"}>
+              .grid-item.flex-fit.flex-shrinked.file-name>
+                {{f.name}}
+                -# {{f.name}} - size: {{f.size}}B - type: {{f.type}}
+              .grid-item
+                .destroy-file{"ng-click": "deleteAttachment(f)"}
+                  %i.fa.fa-times
+            %uib-progressbar{class: "progress-striped active", "ng-if": "f.progress < 100", value: 'f.progress', type: "success"}
+          %li.sel-file.invalid-file-header{"ng-if" => "invalidFiles.length > 0"}
+            Les fichiers suivants n'ont pas pu être téléchargés :
+          %li.sel-file.invalid-file{"ng-repeat" => "f in invalidFiles"}
+            %div.flexed-grid.flex-centered.flex-unwrapped
+              .grid-item
+                %i.fa.fa-warning>
+              .grid-item.flex-fit.flex-shrinked>
+                .file-name
+                  {{f.name}}
+                %span.validation-messages{"ng-repeat": "(errorKey, errorLabel) in f.errorsLabels"}
+                  %span.label.label-warning.message{"uib-popover": "{{errorLabel.popover}}"}
+                    {{errorLabel.label}}
+              -# Invalid File: {{f.$errorMessages}} {{f.$errorParam}}, {{f.name}} - size: {{f.size}}B - type:
+              -# {{f.type}}
 
     .modal-footer
-      %button.btn.btn-default{type: :button, "ng-click" => "close()", "ng-disabled": "!post.content || savingPost"}
-        ANNULER
-      %button.btn.btn-default{type: :submit, "ng-disabled": "!post.content || savingPost", "ng-class": "post.content ? 'btn-primary': ''"}
-        %i.fa.fa-spin.fa-cog.loading{"ng-if": "savingPost"}
-        %span{"ng-if": "!savingPost"}
-          PUBLIER
+      .row
+        .col-sm-6
+          .short-actions
+            .images-uploader{"ngf-select": true, "ng-model": "post.images", "ngf-multiple": "true"}
+              %i.fa.fa-picture
+        .col-sm-6
+          %button.btn.btn-default{type: :button, "ng-click" => "close()", "ng-disabled": "savingPost"}
+            ANNULER
+          %button.btn.btn-default{type: :submit, "ng-disabled": "!post.content || savingPost", "ng-class": "post.content ? 'btn-primary': ''"}
+            %i.fa.fa-spin.fa-cog.loading{"ng-if": "savingPost"}
+            %span{"ng-if": "!savingPost"}
+              PUBLIER
