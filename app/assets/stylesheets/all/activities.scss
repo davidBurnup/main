@@ -1,5 +1,8 @@
 @import "helpers";
 #feed-activities {
+  .stamp {
+    position: absolute;
+  }
   .activity-new-call-to-action {
     .user-avatar {
       margin: 0;
@@ -173,6 +176,23 @@
     .activity_comment {
       font-size: 15px;
     }
+    .drop-box {
+      font-size: 20px;
+      border: 4px dashed #eee;
+      border-radius: 5px;
+      padding: 20px 0;
+      margin: 10px 0;
+      cursor: pointer;
+      @include transition();
+      .fa.fa-plus-circle {
+        display: block;
+        margin: 0px 0 10px;
+        font-size: 60px;
+      }
+      &:hover, &:focus, &:active {
+        border-color: $main_color;
+      }
+    }
     .files {
       padding: 0;
       li {
@@ -248,6 +268,38 @@
           }
         }
       }
+    }
+  }
+}
+
+
+@media (max-width: 425px) {
+  #feed-activities {
+    .activity {
+      .user-avatar {
+        margin-right: 7px;
+        .avatar {
+          width: 30px;
+        }
+      }
+    }
+    .activity-new-call-to-action {
+      .comment-input {
+        padding-right: 10px;
+      }
+      .add-photo {
+        width: 25px;
+        height: 25px;
+        font-size: 12px;
+        padding: 0;
+      }
+    }
+  }
+}
+@media (max-width: 991px) {
+  #feed-activities {
+    .stamp {
+      width: 100%;
     }
   }
 }
