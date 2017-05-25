@@ -1,14 +1,14 @@
-%form{name: 'postForm', 'ng-submit': 'save($event)'}
-  .loading-container{"ng-if": "!post"}
+%form#activities-new-modal.ng-cloak{name: 'postForm', 'ng-submit': 'save($event)'}
+  .loading-container.text-center{"ng-if": "!post"}
     %i.fa.fa-cog.fa-spin
-  #activities-new-modal.ng-cloak{"ng-if": "post"}
+  %span{"ng-if": "post"}
     .modal-header.flexed-grid.flex-centered
       %img.user-avatar.grid-item{"ng-src": "{{currentUser.avatar.tiny}}"}
       %h1.grid-item.flex-fit
         {{currentUser.fullName}}
     .modal-body
       .form-group{"ng-if": "!withPhoto"}
-        %textarea.form-control{"ng-model": "post.content", 'msd-elastic': true, rows: 1, placeholder: 'Qu\'est-ce qui vous enflamme aujourd\'hui ?'}
+        %textarea.form-control{"ng-model": "post.content", 'msd-elastic': true, autofocus: true, rows: 1, placeholder: 'Qu\'est-ce qui vous enflamme aujourd\'hui ?', "ng-disabled": "savingPost"}
 
       %span{"ng-if": "withPhoto"}
         -# .button.btn.btn-sm.btn-default{"ng-model": :files, "ngf-multiple": true, "ngf-select": true, "ngf-pattern": "images/*"}
@@ -74,10 +74,16 @@
 
     .modal-footer
       .row
-        .col-sm-6
-          .short-actions
-            .images-uploader{"ngf-select": true, "ng-model": "post.images", "ngf-multiple": "true"}
-              %i.fa.fa-picture
+        .col-sm-6.text-left
+          %button.btn.btn-default{type: :button, "ng-click" => "withPhoto = !withPhoto"}
+            %span{"ng-if": "!withPhoto"}
+              %i.fa.fa-plus
+              %i.fa.fa-photo
+
+            %span{"ng-if": "withPhoto"}
+              %i.fa.fa-long-arrow-left
+              PUBLICATION
+
         .col-sm-6
           %button.btn.btn-default{type: :button, "ng-click" => "close()", "ng-disabled": "savingPost"}
             ANNULER

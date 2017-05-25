@@ -267,3 +267,8 @@
     display: inline-block !important;
   }
 }
+a, button {
+  &:focus {
+    outline: none !important;
+  }
+}
