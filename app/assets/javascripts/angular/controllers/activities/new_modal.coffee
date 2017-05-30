@@ -1,12 +1,14 @@
 angular.module('Burnup.controllers.ActivitiesNewModal', ['ngFileUpload'])
 
-.controller 'ActivitiesNewModal', ($scope, $timeout, $uibModalInstance, withPhoto, Auth, Post, Upload, $http) ->
+.controller 'ActivitiesNewModal', ($scope, $timeout, $uibModalInstance, withPhoto, Auth, Post, Upload, $http, recipientType, recipientId) ->
 
   $scope.withPhoto = withPhoto
   $scope.currentUser = Auth.currentUser(camelize: true)
   new Post(
    content: ""
    isDraft: true
+   recipientType: recipientType,
+   recipienId: recipientId
   ).save().then (post) ->
     if post and post.medias? and post.medias.length > 0
       for media in post.medias

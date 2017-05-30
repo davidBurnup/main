@@ -4,8 +4,9 @@ angular.module('Burnup.directives.buActivitiesNew', [])
   {
     restrict: 'EA'
     templateUrl: 'activities/new.html'
-    # scope:
-    #   activity: "="
+    scope:
+      recipientType: "="
+      recipientId: "="
 
     controller: ($scope) ->
       $scope.currentUser = Auth.currentUser()
@@ -24,6 +25,10 @@ angular.module('Burnup.directives.buActivitiesNew', [])
             resolve:
               withPhoto: ->
                 options.withPhoto?
+              recipientType: ->
+                $scope.recipientType
+              recipientId: ->
+                $scope.recipientId
           )
           modalInstance.result.then (post) ->
             if post

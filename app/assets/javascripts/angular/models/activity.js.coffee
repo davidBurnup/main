@@ -11,6 +11,9 @@ angular.module('Burnup.models.Activity', ['ngResource', 'rails'])
         if context.id
           defaultUrl += "/#{context.id}"
 
+        if context.recipientType and context.recipientId
+          defaultUrl += "/sur/#{context.recipientType}/#{context.recipientId}"
+
         if context.page
           defaultUrl += "/page/#{context.page}"
 

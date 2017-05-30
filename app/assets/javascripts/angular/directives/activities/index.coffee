@@ -4,8 +4,10 @@ angular.module('Burnup.directives.buActivitiesIndex', [])
   {
     restrict: 'E'
     templateUrl: 'activities/index.html'
-    # scope:
-    #   activity: "="
+    scope:
+      singleColumn: "="
+      recipientType: "="
+      recipientId: "="
 
     controller: ($scope) ->
       $scope.activities = []
@@ -27,7 +29,11 @@ angular.module('Burnup.directives.buActivitiesIndex', [])
           $scope.activitiesLock = true
           $scope.page += 1
 
-          Activity.get(page: $scope.page).then (activities) ->
+          Activity.get(
+            recipientType: $scope.recipientType,
+            recipientId: $scope.recipientId,
+            page: $scope.page
+          ).then (activities) ->
             angular.forEach activities, (activity) ->
               activity.safeContent = $sce.trustAsHtml(activity.content)
               $scope.activities.push activity
@@ -41,7 +47,7 @@ angular.module('Burnup.directives.buActivitiesIndex', [])
 
       $scope.$on "activity:create:success", (e, activity) ->
         $scope.activities.splice 0, 0, activity
-        
+
       $scope.$on "activity:destroy:success", (e, activityId) ->
         $scope.activities = $scope.activities.filter (inMemoryActivity) ->
           inMemoryActivity.id isnt activityId

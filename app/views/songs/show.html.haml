@@ -68,14 +68,16 @@
               load_chords()
         auto_load(toLoad)
     #social.tab-pane{:role => "tabpanel"}
-      .row
-        .col-sm-12
-          #post-form
-            = render "posts/form", :post => @post, :song => @song, :form_in_tab => true
-      .row
-        .col-sm-12
-          %ul.media-list#feed-activities
-            = render_activities(@post_activities)
+      %bu-activities-index{"single-column": "true", "recipient-type": "'Song'", "recipient-id": "#{@song.id}"}
 
-          #infinite-scrolling
-            = will_paginate @post_activities
+      -# .row
+      -#   .col-sm-12
+      -#     #post-form
+      -#       = render "posts/form", :post => @post, :song => @song, :form_in_tab => true
+      -# .row
+      -#   .col-sm-12
+      -#     %ul.media-list#feed-activities
+      -#       = render_activities(@post_activities)
+      -#
+      -#     #infinite-scrolling
+      -#       = will_paginate @post_activities

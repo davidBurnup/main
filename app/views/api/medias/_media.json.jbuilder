@@ -22,6 +22,7 @@ if media
       json.mini media.image.url( :mini)
       json.micro media.image.url( :micro)
     end
+    
   # elsif media.attachment.present?
   #   json.file do
   #     json.url media.attachment.url

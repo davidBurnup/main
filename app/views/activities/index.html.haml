@@ -8,5 +8,6 @@
 -#               #post-form
 -#                 = render "posts/form", :post => @post
 
-.container-fluid
-  %bu-activities-index
+- if current_user and current_user.church
+  .container-fluid
+    %bu-activities-index{"recipient-type": "'Church'", "recipient-id": "#{current_user.church.id}"}

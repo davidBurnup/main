@@ -24,6 +24,7 @@
  *= require selectize/dist/css/selectize.bootstrap3
  *= require ng-img-crop-full-extended/compile/minified/ng-img-crop
  *= require angular-loading-bar/build/loading-bar.min
+ *= require justifiedGallery/dist/css/justifiedGallery.min
  */
 @import "all/helpers";
 
@@ -351,7 +352,7 @@ footer {
 
 .activity-footer {
   clear: both;
-
+  margin-top: 15px;
   .comments-list {
     .media {
       > .img-circle {

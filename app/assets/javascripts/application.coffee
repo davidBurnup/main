@@ -38,6 +38,9 @@
 #= require angularjs/rails/resource
 #= require angular-elastic/elastic
 #= require angular-loading-bar/build/loading-bar.min
+#= require justifiedGallery/dist/js/jquery.justifiedGallery.min
+#= require jquery-colorbox/jquery.colorbox-min
+#= require jquery-colorbox/i18n/jquery.colorbox-fr
 
 # POST ANGULAR MODULES
 #= require angular-moment/angular-moment.min

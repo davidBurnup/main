@@ -7,7 +7,13 @@ module Api
     # GET /api/activities
     # GET /api/activities.json
     def index
-      @activities = PublicActivity::Activity.all.paginate(page: params[:page], per_page: 5).order('created_at DESC')
+      @activities = PublicActivity::Activity
+
+      if params[:recipient_type] and recipient_klass = params[:recipient_type].safe_constantize and r_id = params[:recipient_id] and @recipient = recipient_klass.find(r_id)
+        @activities = @activities.on(@recipient)
+      end
+      @activities = @activities.order('updated_at DESC, created_at DESC').paginate(page: params[:page], per_page: 5)
+
       authorize @activities
     end
 

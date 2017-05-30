@@ -1,4 +1,5 @@
 - if a.trackable and a.owner
+  -# :trackable_files => a.trackable.music_medias,
   = render "/public_activity/activity_container",
       :activity => a,
       :title => raw("#{a.owner.short_name} a publié #{(a.trackable.song.present? and a.trackable.song.title.present?) ? link_to("à propos du chant \"#{a.trackable.song.title.capitalize}\"", song_path(a.trackable.song, :anchor => "social")) : ""}"),
@@ -8,5 +9,4 @@
       :content => a.trackable.content_html,
       :trackable =>  a.trackable,
       :trackable_file_key_name => :attachment,
-      :trackable_files => a.trackable.music_medias,
       :not_linkable => true

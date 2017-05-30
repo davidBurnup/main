@@ -50,6 +50,13 @@ angular.module('Burnup.directives.buActivitiesShow', [])
 
       $scope.$watch "activity", (activity) ->
         $scope.activity.safeContent = $sce.trustAsHtml(activity.content);
+        $scope.activity.mediasForJG = []
+        if $scope.activity.medias?
+          for media in $scope.activity.medias
+            $scope.activity.mediasForJG.push {
+              title: "ttt"
+              imageUrl: media.image.original
+            }
         $scope.$broadcast "activity:refresh:likeLabel"
 
       $scope.$on "activity:refresh:likeLabel", ->

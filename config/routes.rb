@@ -86,6 +86,7 @@ Worship::Application.routes.draw do
     resources :instrument_preferences, path: "instruments"
     resources :activities, path: "activites" do
       collection do
+        get "/sur/:recipient_type/:recipient_id(/page/:page)" => "activities#index"
         get "/page/:page" => "activities#index"
       end
       resources :comments, path: "commentaires", controller: 'activities/comments'

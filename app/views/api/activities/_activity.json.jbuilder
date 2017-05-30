@@ -1,4 +1,4 @@
-if activity and t = activity.trackable and t.feedable_option(:title).present? and t.feedable_option(:content).present?
+if activity and t = activity.trackable #and t.feedable_option(:title).present? #and t.feedable_option(:content).present?
   json.id activity.id
   if activity.owner
     json.owner do
@@ -23,6 +23,12 @@ if activity and t = activity.trackable and t.feedable_option(:title).present? an
 
   json.comments activity.comments do |comment|
     json.partial! "/api/activities/comments/comment", comment: comment
+  end
+
+  if t.respond_to? :medias
+    json.medias t.medias do |media|
+      json.partial! "/api/medias/media", media: media
+    end
   end
 
   json.url api_activity_url(activity, format: :json)
