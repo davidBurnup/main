@@ -1,9 +1,9 @@
 = content_for :headers do
   %h3
     Utilisateurs
-
-%table.table
-  %tbody
-    - @users.each do |user|
-      %tr
-        = render user
+.col-md-12
+  %table.table
+    %tbody
+      - @users.each do |user|
+        %tr
+          = render user

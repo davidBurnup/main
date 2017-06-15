@@ -32,7 +32,9 @@ angular.module('Burnup.directives.buActivitiesNew', [])
           )
           modalInstance.result.then (post) ->
             if post
-              new Activity(id: post.activityId).get()
+              new Activity(
+                id: post.activityId
+              ).get()
               .then (activity) ->
                 $scope.$emit "activity:create:success", activity
                 $scope.$emit "masonry:reload"

@@ -41,7 +41,8 @@ class ApplicationController < ActionController::Base
 
   def unfinalized_callback
     if current_user and !current_user.is_finalized?
-      redirect_to unfinalized_user_path(current_user)
+      # TODO : recheck that step before renabling the callback !
+      # redirect_to unfinalized_user_path(current_user)
     end
   end
 

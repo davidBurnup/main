@@ -1,7 +1,7 @@
 #feed-activities.row{'infinite-scroll' => 'loadActivities()', masonry: true, "load-images": "true", 'masonry-options': "{stamp: '.stamp'}", "ng-show": "initialized"}
 
   .stamp{"ng-class": "singleColumn ? 'col-md-12' : 'col-md-6'"}
-    .panel.activity{'bu-activities-new': true}
+    .panel.activity{'bu-activities-new': true, "recipient-type": "recipientType", "recipient-id": "recipientId"}
 
   .masonry-brick{"ng-repeat" => "activity in activities", "ng-class": "singleColumn ? 'col-md-12' : 'col-md-6'"}
     .panel.activity{'bu-activities-show' => true, 'activity' => 'activity'}

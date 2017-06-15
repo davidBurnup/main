@@ -6,12 +6,18 @@ module ActsAsFeedable
   included do
 
     include PublicActivity::Common
+    attr_accessor :skip_activity_callbacks
 
     # tracked owner: Proc.new{ |controller, model| controller.current_user }, only: [:create, :update]
-    stampable
 
-    after_create :create_feed_activity
+    after_create :create_burn_activity, :unless => :skip_activity_callbacks
+    after_update :update_burn_activity, :unless => :skip_activity_callbacks
     before_destroy :destroy_activities
+
+    # This allows the use of "before_feeded / after_feeded model callback"
+    define_model_callbacks :feeded, only: [:before, :after]
+
+    define_model_callbacks :unfeeded, only: [:before, :after]
 
     def activity
       any_activity = nil
@@ -51,12 +57,60 @@ module ActsAsFeedable
       end
     end
 
-    def create_feed_activity
-     activity = self.create_activity key: "#{self.class.to_s.underscore}.create", owner: creator#, recipient: activity_recipient
+    # def create_feed_activity
+    #   activity = self.create_activity key: "#{self.class.to_s.underscore}.create", owner: creator#, recipient: activity_recipient
+    #
+    #   activity.recipient_type = activity_recipient_type
+    #   activity.recipient_id = activity_recipient_id
+    #   activity.save!
+    # end
 
-     activity.recipient_type = activity_recipient_type
-     activity.recipient_id = activity_recipient_id
-     activity.save!
+    def save_with_activity(recipient = nil, options = {})
+      @skip_activity_callbacks = true
+      if options[:with_raise]
+        save!
+      else
+        save
+      end
+      a = update_burn_activity(recipient)
+      @skip_activity_callbacks = false
+      a
+    end
+
+    def save_with_activity!(recipient = nil)
+      save_with_activity(recipient, with_raise: true)
+    end
+
+    def update_burn_activity(recipient = nil)
+      if self.activity
+        save_activity(self.activity, recipient)
+      else
+        create_burn_activity(recipient)
+      end
+    end
+
+    def create_burn_activity(recipient = nil)
+      unless self.new_record? and !self.activity
+        activity = self.create_activity key: "#{self.class.to_s.underscore}.create", trackable: self
+        save_activity(activity, recipient)
+      end
+    end
+
+    def save_activity(activity, recipient = nil)
+
+      if recipient
+        activity.recipient_type = recipient.class.name
+        activity.recipient_id = recipient.id
+      else
+        activity.recipient_type = activity_recipient_type
+        activity.recipient_id = activity_recipient_id
+      end
+
+      run_callbacks(:feeded) do
+        activity.save!
+      end
+
+      activity
    end
 
    def destroy_activities

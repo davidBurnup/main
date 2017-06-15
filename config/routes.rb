@@ -42,9 +42,9 @@ Worship::Application.routes.draw do
 
   get "utilisateurs/en-cours" => "users#show", :as => "current_user"
   resources :users, :path => "utilisateurs" do
-    member do
-      get 'finaliser-mon-compte' => "users#unfinalized", as: "unfinalized"
-    end
+    # member do
+    #   get 'finaliser-mon-compte' => "users#unfinalized", as: "unfinalized"
+    # end
   end
   get "utilisateurs/:id/instruments(/:target)" => "users#instruments"
   post "reunions/new" => "meetings#new"

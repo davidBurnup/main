@@ -23,7 +23,7 @@ module Api
       @post.user = current_user
 
       respond_to do |format|
-        if @post.save_for_recipient(@recipient)
+        if @post.save_with_activity(@recipient)
           format.json { render :show, status: :created, location: @post }
         else
           format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -36,7 +36,7 @@ module Api
     def update
       @post.assign_attributes(@prepared_post_params)
       respond_to do |format|
-        if @post.save_for_recipient(@recipient)
+        if @post.save_with_activity(@recipient)
           format.json { render :show, status: :ok, location: @post }
         else
           format.json { render json: @post.errors, status: :unprocessable_entity }

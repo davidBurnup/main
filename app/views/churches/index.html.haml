@@ -1,22 +1,23 @@
-%h1 Liste des églises
+.col-md-12
+  %h1 Liste des églises
 
-%table
-  %tr
-    %th Nom
-    %th
-    %th
-    %th
-
-  - @churches.each do |church|
+  %table
     %tr
-      %td= church.name
-      %td
-        = link_to 'Voir', church, class: "btn-xs btn btn-primary"
-        = link_to 'Modifier', edit_church_path(church), class: "btn-xs btn btn-primary"
-        = link_to 'Supprimer', church, :method => :delete, :data => { :confirm => "Voulez-vous vraiment supprimer cette #{Church.model_name.human}?" }, class: "btn-xs btn btn-primary"
+      %th Nom
+      %th
+      %th
+      %th
 
-%br
+    - @churches.each do |church|
+      %tr
+        %td= church.name
+        %td
+          = link_to 'Voir', church, class: "btn-xs btn btn-primary"
+          = link_to 'Modifier', edit_church_path(church), class: "btn-xs btn btn-primary"
+          = link_to 'Supprimer', church, :method => :delete, :data => { :confirm => "Voulez-vous vraiment supprimer cette #{Church.model_name.human}?" }, class: "btn-xs btn btn-primary"
 
-= link_to new_church_path, class: "btn btn-primary btn-md" do
-  = fa_icon "plus"
-  = "Ajouter une #{Church.model_name.human}"
+  %br
+
+  = link_to new_church_path, class: "btn btn-primary btn-md" do
+    = fa_icon "plus"
+    = "Ajouter une #{Church.model_name.human}"

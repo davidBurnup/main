@@ -1,8 +1,11 @@
-- if current_user.is_up_to_worship_leader?
-  = link_to new_meeting_path, :remote => true, class: "btn btn-primary btn-sm pull-right left-margin" do
-    = fa_icon "plus"
-    = "Nouvelle réunion"
-#meetings
+.col-md-12
+
+  - if current_user.is_up_to_worship_leader?
+    = link_to new_meeting_path, :remote => true, class: "btn btn-primary btn-sm pull-right left-margin" do
+      = fa_icon "plus"
+      = "Nouvelle réunion"
+
+  #meetings
 
 
 - if @meeting
