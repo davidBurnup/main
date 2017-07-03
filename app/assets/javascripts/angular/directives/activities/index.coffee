@@ -42,6 +42,8 @@ angular.module('Burnup.directives.buActivitiesIndex', [])
               $scope.reachedLastPage = true
             $scope.activitiesLock = false
             $scope.initialized = true
+            $timeout ->
+              $scope.$emit "masonry.reload"
 
       $scope.loadActivities()
 

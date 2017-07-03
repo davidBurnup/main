@@ -25,7 +25,7 @@ module ApplicationHelper
   end
 
 
-  def navigation_link(title, links, icon = "")
+  def navigation_link(title, links, icon = "", options = {})
 
     if links.is_a? Array
       link = links[0]
@@ -34,8 +34,16 @@ module ApplicationHelper
       links = [link]
     end
 
+    icon_wrapper = icon
+    if options[:icons] == "fontawesome"
+      icon_wrapper = "fa fa-#{icon_wrapper}"
+    elsif options[:icons] == "burnup"
+      icon_wrapper = "bu-#{icon_wrapper}"
+    elsif !options[:icon]
+      icon_wrapper = "glyphicon glyphicon-#{icon_wrapper}"
+    end
     html = "<li class='#{(links.any?{|any_link| current_page?(any_link)} ? "active" : "")}'>"
-    html += link_to raw("<i class='#{icon.present? ? "glyphicon glyphicon-#{icon}" : ""}'></i>&nbsp;#{title}"), link
+    html += link_to raw("<i class='#{icon.present? ? icon_wrapper : ""}'></i>&nbsp;#{title}"), link
     html += "</li>"
     raw html
   end

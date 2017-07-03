@@ -6,7 +6,7 @@ Worship::Application.routes.draw do
 
   resources :activities, only: [:index], path: "fil"#, only: [:destroy], controller: "socializables"
 
-  resources :churches
+  resources :churches, path: "pages"
 
   resources :comments
 

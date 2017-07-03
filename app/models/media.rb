@@ -4,6 +4,7 @@ class Media < ActiveRecord::Base
 
   def self.accepted_content_types(attachment_filter = nil)
     accepted_c_types = {
+      audio:  ["audio/mp3","audio/wav"],
       image:  ["image/jpeg", "image/gif", "image/png", "image/svg+xml", "image/jpg"],
       pdf: ["application/pdf", "application/x-pdf"],
       word: ["application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"],
@@ -50,12 +51,18 @@ class Media < ActiveRecord::Base
   }
   validates_attachment :excel, content_type: {content_type: Media.accepted_content_types([:excel])}, size: { in: 0..50.megabytes }
 
+  has_attached_file :audio, {
+    processors: nil,
+    default_url: "/images/audio.svg"
+  }
+  validates_attachment :audio, content_type: {content_type: Media.accepted_content_types([:audio])}, size: { in: 0..50.megabytes }
+
   belongs_to :post
 
   before_validation :unset_previous_attachment_if_needed, :check_for_attachment_presence
 
   def attachment_types
-    [:image, :pdf, :word, :excel]
+    Media.accepted_content_types.keys
   end
 
   def attachment_type

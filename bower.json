@@ -26,6 +26,7 @@
     "justifiedGallery": "^3.6.3",
     "swipebox": "^1.4.4",
     "jquery-colorbox": "^1.6.4",
-    "angular-audio": "^1.7.3"
+    "angular-audio": "^1.7.3",
+    "angularjs-slider": "^6.2.2"
   }
 }

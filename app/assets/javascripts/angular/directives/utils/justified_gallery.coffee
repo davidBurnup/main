@@ -62,6 +62,7 @@ do ->
                   rel: $scope.galleryName
                   scrolling: false
                 )
+                $scope.$emit "masonry.reload" # Trigger masonry reload
                 unless $rootScope.colorboxEventsAreSet
                   $(document)
                   .bind "cbox_open", ->

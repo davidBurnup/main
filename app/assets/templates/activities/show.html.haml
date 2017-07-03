@@ -27,6 +27,10 @@
 
     .medias-container{"ng-if": "activity.mediasForJG.length > 0"}
       %justified-gallery{images: "activity.mediasForJG", "gallery-name": "'activity-' + activity.id + '-gallery'"}
+
+    .audio-medias-container
+      %bu-medias-audio{"ng-repeat": "media in activity.medias", media: "media", "ng-if": "media.attachment.contentType == 'audio'"}
+
       -# .media{"ng-repeat": "media in activity.medias"}
       -#   %img.img-responsive{"ng-src": "{{media.image.thumb}}"}
   -#   - if trackable_files.present?

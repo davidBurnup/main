@@ -16,7 +16,13 @@
     %meta{:content => "#ff0000", :name => "theme-color"}/
 
   %body{"ng-app" => "Burnup", "ng-class" => "$root.pageIsUnscrollable == true ? 'unscrollable' : ''", "ng-controller" => "Main"}
-    %header= render 'layouts/navigation'
+
+    - if content_for? :pre_header
+      = yield :pre_header
+
+    %header
+      = render 'layouts/navigation', affixed: content_for?(:pre_header)
+
     %main.container{:role => "main"}
       - if content_for? :headers
         .row

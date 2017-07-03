@@ -1,0 +1,48 @@
+h1 {
+    color: #555;
+    font: bold 12px 'helvetica neue', helvetica, arial, sans-serif;
+    left: 0;
+    margin: 20px 0 0 0;
+    position: absolute;
+    top: 50%;
+    text-align: center;
+    width: 100%;
+}
+
+#bu-sound-bars {
+    height: 30px;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.bu-sound-bar {
+    background: #666;
+    bottom: 1px;
+    height: 3px;
+    width: 2%;
+    display: inline-block;
+    animation: sound 0ms -800ms linear infinite alternate;
+}
+
+@keyframes sound {
+    0% {
+       opacity: .35;
+        height: 3px;
+    }
+    100% {
+        opacity: 1;
+        height: 14px;
+    }
+}
+
+.bu-sound-bar:nth-child(1n)  { animation-duration: 474ms; }
+.bu-sound-bar:nth-child(2n)  { animation-duration: 433ms; }
+.bu-sound-bar:nth-child(3n)  { animation-duration: 407ms; }
+.bu-sound-bar:nth-child(4n)  { animation-duration: 458ms; }
+.bu-sound-bar:nth-child(5n)  { animation-duration: 400ms; }
+.bu-sound-bar:nth-child(6n)  { animation-duration: 427ms; }
+.bu-sound-bar:nth-child(7n)  { animation-duration: 441ms; }
+.bu-sound-bar:nth-child(8n)  { animation-duration: 419ms; }
+.bu-sound-bar:nth-child(9n)  { animation-duration: 487ms; }
+.bu-sound-bar:nth-child(10n) { animation-duration: 442ms; }​

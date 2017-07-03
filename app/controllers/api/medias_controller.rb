@@ -16,7 +16,7 @@ module Api
 
       @media = Media.new(m_params)
 
-      if !@media.save
+      if !@media.save!
         head :bad_request
       end
     end
@@ -38,7 +38,7 @@ module Api
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def media_params
-        params.require(:media).permit(:id, :attachment, :image, :pdf, :word, :excel, :post_id)
+        params.require(:media).permit(:id, :attachment, :image, :pdf, :word, :excel, :post_id, :audio)
       end
   end
 end

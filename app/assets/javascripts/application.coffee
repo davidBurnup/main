@@ -41,6 +41,7 @@
 #= require justifiedGallery/dist/js/jquery.justifiedGallery.min
 #= require jquery-colorbox/jquery.colorbox-min
 #= require jquery-colorbox/i18n/jquery.colorbox-fr
+#= require angular-audio/app/angular.audio.js
 
 # POST ANGULAR MODULES
 #= require angular-moment/angular-moment.min

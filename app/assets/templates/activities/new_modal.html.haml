@@ -24,7 +24,7 @@
         -# %video{"ng-repeat": "file in files", :controls => "", "ngf-src" => "file"}
 
         .drop-box.text-center{ "ng-if": "files.length < 5",
-          :accept => "image/*,application/pdf",
+          :accept => "image/*,application/pdf,audio/mp3,audio/wav",
           "ngf-allow-dir": "true",
           "ngf-drag-over-class": "'dragover'",
           "ngf-drop": "upload($files)",
@@ -35,7 +35,7 @@
           "ngf-min-size": "10KB",
           "ngf-max-size": "50MB",
           "ngf-dimensions": "$width > 500 && $height > 500",
-          "ngf-pattern": "'image/*,application/pdf'"}
+          "ngf-pattern": "'image/*,application/pdf,audio/*'"}
           %i.fa.fa-plus-circle
           Déposez ici vos fichiers pdf ou images
 
@@ -87,7 +87,7 @@
         .col-sm-6
           %button.btn.btn-default{type: :button, "ng-click" => "close()", "ng-disabled": "savingPost"}
             ANNULER
-          %button.btn.btn-default{type: :submit, "ng-disabled": "!post.content || savingPost", "ng-class": "post.content ? 'btn-primary': ''"}
+          %button.btn.btn-default{type: :submit, "ng-disabled": "(!post.content && files.length  == 0) || savingPost", "ng-class": "(post.content || files.length  > 0) ? 'btn-primary': ''"}
             %i.fa.fa-spin.fa-cog.loading{"ng-if": "savingPost"}
             %span{"ng-if": "!savingPost"}
               PUBLIER

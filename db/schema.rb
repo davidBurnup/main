@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170518212418) do
+ActiveRecord::Schema.define(version: 20170617054045) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -55,19 +55,19 @@ ActiveRecord::Schema.define(version: 20170518212418) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.string   "title",            limit: 50,    default: ""
-    t.text     "comment",          limit: 65535
+    t.string   "title",            limit: 50,  default: ""
+    t.string   "comment",          limit: 250
     t.integer  "commentable_id",   limit: 4
     t.string   "commentable_type", limit: 255
     t.integer  "creator_id",       limit: 4
-    t.string   "role",             limit: 255,   default: "comments"
+    t.string   "role",             limit: 255, default: "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "updater_id",       limit: 4
   end
 
   add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
-  add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
+  add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", length: {"commentable_type"=>191}, using: :btree
   add_index "comments", ["creator_id"], name: "index_comments_on_creator_id", using: :btree
 
   create_table "follows", force: :cascade do |t|
@@ -100,6 +100,16 @@ ActiveRecord::Schema.define(version: 20170518212418) do
   add_index "likes", ["likeable_id", "likeable_type"], name: "fk_likeables", using: :btree
   add_index "likes", ["liker_id", "liker_type"], name: "fk_likes", using: :btree
 
+  create_table "media", force: :cascade do |t|
+    t.integer  "post_id",                 limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "attachment_file_name",    limit: 255
+    t.string   "attachment_content_type", limit: 255
+    t.integer  "attachment_file_size",    limit: 4
+    t.datetime "attachment_updated_at"
+  end
+
   create_table "medias", force: :cascade do |t|
     t.integer  "post_id",            limit: 4
     t.datetime "created_at"
@@ -120,6 +130,10 @@ ActiveRecord::Schema.define(version: 20170518212418) do
     t.string   "excel_content_type", limit: 255
     t.integer  "excel_file_size",    limit: 4
     t.datetime "excel_updated_at"
+    t.string   "audio_file_name",    limit: 255
+    t.string   "audio_content_type", limit: 255
+    t.integer  "audio_file_size",    limit: 4
+    t.datetime "audio_updated_at"
   end
 
   create_table "meeting_songs", force: :cascade do |t|
@@ -189,7 +203,7 @@ ActiveRecord::Schema.define(version: 20170518212418) do
   add_index "notifications", ["deleted_at"], name: "index_notifications_on_deleted_at", using: :btree
 
   create_table "posts", force: :cascade do |t|
-    t.text     "content",      limit: 65535
+    t.string   "content",      limit: 250
     t.integer  "user_id",      limit: 4
     t.integer  "song_id",      limit: 4
     t.string   "external_url", limit: 255

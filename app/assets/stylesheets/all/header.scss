@@ -1,4 +1,16 @@
+@import "helpers";
 .burnup-navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+  @include transition(0.5s);
+  &.affix {
+    top: 0;
+    width: 100%;
+    z-index: 1;
+  }
+  &.affix-top {
+    margin-bottom: -51px;
+  }
   .navbar-brand {
     margin-top: 1px;
   }
@@ -31,6 +43,13 @@
       > a {
         font-size: 15px;
         padding: 15px 15px 8px 15px;
+        > i.bu-android-compass {
+          font-size: 22px;
+          height: 21px;
+          display: inline-block;
+          vertical-align: middle;
+          margin-top: -3px;
+        }
       }
       > span {
         display: inline-block;

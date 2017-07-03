@@ -1,4 +1,6 @@
-.burnup-navbar.navbar.navbar-inverse.navbar-fixed-top
+- affixed ||= false
+
+.burnup-navbar.navbar.navbar-inverse.ng-cloak{"data-spy": "#{affixed ? 'affix' : ''}", "data-offset-top": "{{$root.windowHeight}}", class: affixed ? '' : 'navbar-fixed-top'}
   .container
     .navbar-header
       %button.navbar-toggle{"data-target" => ".navbar-inverse-collapse", "data-toggle" => "collapse", :type => "button"}
@@ -14,3 +16,7 @@
       %ul.nav.navbar-nav.navbar-right
         = render 'layouts/navigation_links'
         = render 'layouts/navigation_links_right'
+
+-# :coffee
+-#   $ ->
+-#     $('.burnup-navbar').affix({    })
