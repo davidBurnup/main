@@ -3,13 +3,17 @@
     %i.fa.fa-cog.fa-spin
   %span{"ng-if": "post"}
     .modal-header.flexed-grid.flex-centered
-      %img.user-avatar.grid-item{"ng-src": "{{currentUser.avatar.tiny}}"}
-      %h1.grid-item.flex-fit
-        {{currentUser.fullName}}
+      .grid-item.no-padding
+        %img.user-avatar{"ng-src": "{{currentUser.avatar.tiny}}"}
+      .grid-item.flex-fit
+        %h1
+          {{currentUser.fullName}}
     .modal-body
-      .form-group{"ng-if": "!withPhoto"}
-        %textarea.form-control{"ng-model": "post.content", 'msd-elastic': true, autofocus: true, rows: 1, placeholder: 'Qu\'est-ce qui vous enflamme aujourd\'hui ?', "ng-disabled": "savingPost"}
-
+      .form-group{"ng-class": "{'has-error': (postForm.$submitted || postForm.content.$touched) && postForm.content.$error, 'has-success': (postForm.$submitted || postForm.content.$touched) && !postForm.content.$error}"}
+        -#{"ng-if": "!withPhoto"}
+        %textarea.form-control{name: "content", "ng-model": "post.content", 'msd-elastic': true, autofocus: true, rows: 1, placeholder: 'Qu\'est-ce qui vous enflamme aujourd\'hui ?*', "ng-disabled": "savingPost", "ng-required": "files.length == 0"}
+        .help-block{"ng-show": "(postForm.$submitted || postForm.content.$touched) && postForm.content.$error.required"}
+          Ce champ est obligatoire.
       %span{"ng-if": "withPhoto"}
         -# .button.btn.btn-sm.btn-default{"ng-model": :files, "ngf-multiple": true, "ngf-select": true, "ngf-pattern": "images/*"}
         -#   Select
@@ -37,7 +41,9 @@
           "ngf-dimensions": "$width > 500 && $height > 500",
           "ngf-pattern": "'image/*,application/pdf,audio/*'"}
           %i.fa.fa-plus-circle
-          Déposez ici vos fichiers pdf ou images
+          Déposez ici vos fichiers pdf, images (jpg/png),
+          %br
+          ou audio (mp3)
 
         %ul.files{:style => "clear:both"}
           %li.sel-file{"ng-repeat" => "f in files"}
@@ -75,19 +81,14 @@
     .modal-footer
       .row
         .col-sm-6.text-left
-          %button.btn.btn-default{type: :button, "ng-click" => "withPhoto = !withPhoto"}
-            %span{"ng-if": "!withPhoto"}
-              %i.fa.fa-plus
-              %i.fa.fa-photo
-
-            %span{"ng-if": "withPhoto"}
-              %i.fa.fa-long-arrow-left
-              PUBLICATION
+          %button.btn.btn-default{type: :button, "ng-click" => "withPhoto = !withPhoto", "ng-if": "!withPhoto"}
+            %i.fa.fa-plus
+            %i.fa.fa-photo
 
         .col-sm-6
           %button.btn.btn-default{type: :button, "ng-click" => "close()", "ng-disabled": "savingPost"}
             ANNULER
-          %button.btn.btn-default{type: :submit, "ng-disabled": "(!post.content && files.length  == 0) || savingPost", "ng-class": "(post.content || files.length  > 0) ? 'btn-primary': ''"}
+          %button.btn.btn-default{type: :submit, "ng-class": "(post.content || files.length  > 0) ? 'btn-primary': ''"}
             %i.fa.fa-spin.fa-cog.loading{"ng-if": "savingPost"}
             %span{"ng-if": "!savingPost"}
               PUBLIER
