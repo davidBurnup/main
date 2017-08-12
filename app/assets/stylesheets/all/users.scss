@@ -15,6 +15,7 @@
   }
   &.mini {
     max-width: 49px;
+    border-radius: 100px;
     padding-right: 0;
     margin-right: 10px;
   }
@@ -214,6 +215,10 @@ bu-users-new {
 
   p {
     font-size: 15px;
+  }
+
+  h1 {
+    font-size: 46px;
   }
 
   .selectize-container {

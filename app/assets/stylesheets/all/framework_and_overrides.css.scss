@@ -9,6 +9,8 @@
 $brand-primary: #DA351C;
 $navbar-height: 50px;
 $badge-bg: #FFF;
+$font-size-base: 15px;
+// $font-family-sans-serif: "sansationregular", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $badge-color: $brand-primary;
 @import "bootstrap-sprockets";
 @import "bootswatch/paper/variables";
@@ -17,6 +19,11 @@ $badge-color: $brand-primary;
 @import "bootstrap";
 @import "bootswatch/paper/bootswatch";
 @import "helpers";
+
+body {
+  font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  // font-weight: 100;
+}
 
 @font-face {
   font-family: 'Glyphicons Halflings';

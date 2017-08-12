@@ -1,0 +1,82 @@
+.panel-body
+  %a.pull-left.user-avatar{href: "#"}
+    %img.avatar{"ng-src" => "{{activity.owner.avatar.tiny}}"}
+
+  %span.pull-right.activity-menu{"uib-dropdown": true, "ng-if": "activity.policy.destroy"}
+    %a.activity-menu-toggler{id: "activity-menu-{{activity.id}}", :href => "", "uib-dropdown-toggle": true}
+      %i.fa.fa-chevron-down
+    %ul.dropdown-menu{"aria-labelledby": "activity-menu-{{activity.id}}", "uib-dropdown-menu": true}
+      %li
+        %a{"ng-click" => "destroy($event, activity)"}
+          Supprimer
+
+  .content-body
+
+
+    -# LINKED ACTIVITY
+    %a.media-heading{"ng-if" => "activity.activityLink", href: "{{activity.activityLink}}"}
+      {{activity.title}}
+      %span.content{"ng-bind-html" => "activity.safeContent"}
+
+    -# UNLINKED ACTIVITY
+    .media-heading{"ng-if" => "!activity.activityLink"}
+      {{activity.title}}
+      .activity-time{"am-time-ago" => "activity.createdAt | amParse:'DD/MM/YYYY HH:mm'"}
+
+    %span.content{"ng-if" => "!activity.activityLink", "ng-bind-html" => "activity.safeContent"}
+
+    .medias-container{"ng-if": "activity.mediasForJG.length > 0"}
+      %justified-gallery{images: "activity.mediasForJG", "gallery-name": "'activity-' + activity.id + '-gallery'"}
+
+    .audio-medias-container
+      %bu-medias-audio{"ng-repeat": "media in activity.medias", media: "media", "ng-if": "media.attachment.contentType == 'audio'"}
+
+      -# .media{"ng-repeat": "media in activity.medias"}
+      -#   %img.img-responsive{"ng-src": "{{media.image.thumb}}"}
+  -#   - if trackable_files.present?
+  -#     - trackable_files.each do |trackable_file|
+  -#       - trackable_attachment = trackable_file.send(trackable_file_key_name)
+  -#       %audio{src: trackable_attachment.url, width: "100%"}
+
+  .media-footer.activity-footer
+    %span.social-actions-container
+
+      .social-bar
+        %a.like-btn{"ng-click": "burnToggle()"}
+          %i.fa.fa-heart{"ng-if": "activity.liked"}
+          %i.fa.fa-heart-o{"ng-if": "!activity.liked"}
+          Je m'enflamme
+
+        %a.comment-btn{"ng-click": "toggleComment()"}
+          %span.glyphicon.glyphicon-comment
+          Commenter
+
+      .likers-label{"ng-if": "activity.likers.length > 0 || activity.liked"}
+        %hr
+        %span.avatars{"ng-if": "activity.likers.length > 0"}
+          %img.img-responsive.img-circle{"ng-src": "{{liker.avatar.tiny}}", "ng-repeat": "liker in activity.likers | limitTo: 3"}
+        %a.likers{"ng-click": "showLikers()"}
+          {{activity.likeLabel}}
+        .comments-count.pull-right{"ng-click": "toggleComment()"}
+          %i.fa.fa-comment
+          {{activity.comments.length}}
+
+      .collapse{"uib-collapse": "!activity.showComments"}
+        .comments-container
+          .comment.flexed.text-left{"ng-repeat": "comment in activity.comments"}
+            %img.item.comment-avatar{src: '{{comment.creator.avatar.tiny}}'}
+            .item.comment-inner
+
+              %a.destroy.pull-right{"ng-click": "destroyComment(comment)", "ng-if": "currentUser.id == comment.creator.id"}
+                %i.fa.fa-times
+              .comment-creator
+                {{comment.creator.shortName}}
+                %span.comment-created-at{"am-time-ago" => "comment.createdAt | amParse:'DD/MM/YYYY HH:mm'", "ng-if": "comment.createdAt"}
+              {{comment.comment}}
+
+        %form.comment-form{name: 'comment-form', "ng-submit": "saveComment($event, activity.comment)"}
+          .form-group
+            %input.form-control{type: :text, placeholder: 'Commentaire ...', 'ng-model': 'activity.comment.comment', 'focus-me': 'activity.commentInputFocus', "ng-disabled": "activity.comment.saving"}
+
+          %button.btn.btn-primary{type: :submit, "ng-disabled": "activity.comment.saving"}
+            %i.fa.fa-paper-plane

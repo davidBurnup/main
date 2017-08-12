@@ -5,6 +5,8 @@ class Comment < ActiveRecord::Base
 
   acts_as_likeable
 
+  stampable
+
   belongs_to :commentable, :polymorphic => true
 
   default_scope -> { order('created_at ASC') }
@@ -12,7 +14,7 @@ class Comment < ActiveRecord::Base
   notifiable({
     content: :comment,
     trigger: :after_save,
-    notifier: :user,
+    notifier: :creator,
     notifieds: lambda{|c|
       c.notifiable_users
     },
@@ -28,13 +30,11 @@ class Comment < ActiveRecord::Base
   end
 
 
-  belongs_to :user
-
   def notifiable_users(only_self: false, origin_notifiable_resolver: nil)
 
     n_users_ids = []
 
-    n_users_ids << self.user.id
+    n_users_ids << self.creator.id if self.creator
 
     if !only_self and commentable
       n_users_ids += commentable.notifiable_users(origin_notifiable_resolver: self)
@@ -48,7 +48,7 @@ class Comment < ActiveRecord::Base
   end
 
   def notifing_user
-    user
+    creator
   end
 
   def notifiable_content

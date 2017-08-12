@@ -70,7 +70,7 @@ module ActsAsNotifiable
           option = notifiable_option_key.(self)
         else
           # Check for static options (like icon)
-          if self.class.static_options.include?(key.to_sym)
+          if self.class.notifiable_static_options.include?(key.to_sym)
             option = notifiable_option_key
           else
             option = send(notifiable_option_key)
@@ -107,16 +107,16 @@ module ActsAsNotifiable
     }
 
     # Defines options that will not be sent to instance using ruby send method but used as static variable
-    @@static_options = [:icon, :locale_key]
+    @@notifiable_static_options = [:icon, :locale_key]
 
-    @@required_options = [:notifier, :notifieds]
+    @@notifiable_required_options = [:notifier, :notifieds]
 
     def notifiable(options = {})
 
       # create a reader on the class to access the options from the notifiable instance
       class << self; attr_reader :notifiable_options; end
 
-      if missing_options = (@@required_options - options.keys) and missing_options.present?
+      if missing_options = (@@notifiable_required_options - options.keys) and missing_options.present?
         raise "Missing Options #{missing_options} ! Please define those options to use this concern !"
       end
 
@@ -127,8 +127,8 @@ module ActsAsNotifiable
       end
     end
 
-    def static_options
-      @@static_options
+    def notifiable_static_options
+      @@notifiable_static_options
     end
   end
 end

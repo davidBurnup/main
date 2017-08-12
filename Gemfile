@@ -49,6 +49,7 @@ gem "bower-rails", "~> 0.11.0"
 gem "paranoia", "~> 2.2"
 gem 'exception_notification'
 gem 'geocoder'
+gem 'factory_girl'
 gem 'serviceworker-rails'
 gem 'webpush'
 
@@ -72,6 +73,10 @@ end
 group :development, :test do
   gem 'pry-rails'
   gem 'pry-rescue'
+  gem 'rspec-rails', '~> 3.5'
+  gem 'factory_girl'
+  gem "spork-rails"
+  gem 'spork', github: 'sporkrb/spork', branch: 'master'
 end
 group :test do
   gem 'capybara'

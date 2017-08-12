@@ -11,7 +11,6 @@
  * file per style scope.
  *
  *= require ./all/framework_and_overrides
- * require ./all/bootswatch_simplex
  *= require bootstrap-datetimepicker
  *= require fullcalendar/fullcalendar.min
  *= require font-awesome
@@ -24,17 +23,31 @@
  *= require selectize/dist/css/selectize.default
  *= require selectize/dist/css/selectize.bootstrap3
  *= require ng-img-crop-full-extended/compile/minified/ng-img-crop
+ *= require angular-loading-bar/build/loading-bar.min
+ *= require justifiedGallery/dist/css/justifiedGallery.min
+
  */
 @import "all/helpers";
 
 [data-link-to]:hover {
   cursor: pointer;
 }
-
+textarea[msd-elastic] {
+	resize: none;
+	box-sizing: content-box;
+}
 .navbar-brand {
   img {
     height: 35px;
     margin-top: -6px;
+  }
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    text-decoration: none;
   }
 }
 
@@ -54,6 +67,15 @@
   margin-left: 5px;
   margin-bottom: 0;
   margin-right: 5px;
+}
+.modal-dialog {
+  .modal-container {
+    opacity: 0;
+    @include transition();
+    &.active {
+      opacity: 1;
+    }
+  }
 }
 
 // .btn[class*="btn-"] {
@@ -126,6 +148,28 @@ footer {
   margin: 10px 0 0;
   //border-top: 1px dashed $main_color;
   padding: 10px 0;
+}
+
+.navbar-inverse .navbar-nav > li {
+  border-bottom: 4px solid transparent;
+  margin-bottom: 0px;
+
+  &.active,
+  &:hover {
+    border-bottom: 4px solid white;
+  }
+
+  &.active {
+    > a {
+      color: white;
+    }
+  }
+
+  &.dropdown {
+    .dropdown-menu {
+      margin-top: 3px;
+    }
+  }
 }
 
 .left-margin {
@@ -308,9 +352,8 @@ footer {
 }
 
 .activity-footer {
-  margin-bottom: 10px;
   clear: both;
-
+  margin-top: 15px;
   .comments-list {
     .media {
       > .img-circle {

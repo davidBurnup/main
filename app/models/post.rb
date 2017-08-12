@@ -3,10 +3,9 @@ class Post < ActiveRecord::Base
   include ActsAsNotifiable
   belongs_to :user
   belongs_to :song
-  has_many :music_medias
-  # has_many :medias
+  has_many :medias
 
-  accepts_nested_attributes_for :music_medias#, allow_destroy: true
+  accepts_nested_attributes_for :medias#, allow_destroy: true
 
   stampable
 
@@ -32,6 +31,35 @@ class Post < ActiveRecord::Base
       p.notifiable_users
     },
     icon: 'newspaper-o'
+  })
+
+  feedable({
+    title: lambda{|p|
+      title = ""
+
+      if p.creator
+        title = "#{p.creator.short_name} a publié "
+        if p.song and p.song.title.present?
+          title += "à propos du chant #{p.song.title}"
+        end
+      end
+
+      title
+    },
+    content: lambda{|p|
+      p.content_html
+    },
+    image: lambda{|p|
+      p.creator ? p.creator.avatar.url(:tiny) : "/images/user.svg"
+    },
+    image_link: lambda{|p|
+      if p.song
+        Rails.application.routes.url_helpers.song_path(p.song)
+      end
+    },
+    recipient: lambda{|p|
+      p.creator
+    }
   })
 
   # => only_self : gets notifiable users only for the current object

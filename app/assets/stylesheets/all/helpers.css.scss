@@ -102,8 +102,8 @@
 @mixin text-shadow-erase() {
   text-shadow: 0px 0px 0px transparent;
 }
-@mixin box-shadow-erase() {
-  box-shadow: 0px 0px 0px transparent;
+@mixin box-shadow-erase($anyImportant: "") {
+  box-shadow: 0px 0px 0px transparent $anyImportant;
 }
 @mixin rotate($deg: 2deg){
   -webkit-transform: rotate($deg);
@@ -124,6 +124,23 @@
   -ms-transform-origin: $position;
   -o-transform-origin: $position;
   transform-origin: $position;
+}
+
+@mixin blur($blurLength) {
+  -webkit-filter: blur($blurLength);
+  -moz-filter: blur($blurLength);
+  -o-filter: blur($blurLength);
+  // Looks like it doesn't work properly in EDGE ...
+  // -ms-filter: blur($blurLength);
+  filter: blur($blurLength);
+}
+@mixin brightness($amount) {
+  filter: brightness($amount);
+  filter: brightness($amount);
+  -webkit-filter: brightness($amount);
+  -moz-filter: brightness($amount);
+  -o-filter: brightness($amount);
+  -ms-filter: brightness($amount);
 }
 
 

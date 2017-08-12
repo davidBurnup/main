@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 
   def main_fallback
     if current_user
-      redirect_to feeds_path
+      redirect_to activities_path
     end
   end
 
@@ -41,7 +41,8 @@ class ApplicationController < ActionController::Base
 
   def unfinalized_callback
     if current_user and !current_user.is_finalized?
-      redirect_to unfinalized_user_path(current_user)
+      # TODO : recheck that step before renabling the callback !
+      # redirect_to unfinalized_user_path(current_user)
     end
   end
 

@@ -1,3 +1,4 @@
+@import "helpers";
 .col-xxs-1,
 .col-xxs-10,
 .col-xxs-11,
@@ -221,6 +222,9 @@
 .flexed {
   display: flex;
   flex-wrap: wrap;
+  &.vcentered {
+    align-items: center;
+  }
   > .item {
     flex-grow: 1;
   }
@@ -238,6 +242,23 @@
 .panel-heading.no-top-padding {
   padding-top: 0;
 }
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
+.modal.slide-top.fade:not(.in) .modal-dialog {
+    -webkit-transform: translate3d(0, -1000%, 0);
+    transform: translate3d(0, -1000%, 0);
+}
+.modal.slide-left.fade:not(.in) .modal-dialog {
+    -webkit-transform: translate3d(-1000%, 0, 0);
+    transform: translate3d(-1000%, 0, 0);
+}
+.modal.slide-bottom.fade:not(.in) .modal-dialog {
+    -webkit-transform: translate3d(0, 1000%, 0);
+    transform: translate3d(0, 1000%, 0);
+}
 .inline-visible-xs {
   display: none;
 }
@@ -245,4 +266,18 @@
   .inline-visible-xs {
     display: inline-block !important;
   }
+}
+a, button {
+  &:focus {
+    outline: none !important;
+  }
+}
+.no-right-padding {
+  padding-right: 0 !important;
+}
+.no-left-padding {
+  padding-left: 0 !important;
+}
+.no-padding {
+  padding: 0 !important;
 }

@@ -36,6 +36,12 @@
 #= require angular-rails-templates
 #= require_tree ../templates
 #= require angularjs/rails/resource
+#= require angular-elastic/elastic
+#= require angular-loading-bar/build/loading-bar.min
+#= require justifiedGallery/dist/js/jquery.justifiedGallery.min
+#= require jquery-colorbox/jquery.colorbox-min
+#= require jquery-colorbox/i18n/jquery.colorbox-fr
+#= require angular-audio/app/angular.audio.js
 
 # POST ANGULAR MODULES
 #= require angular-moment/angular-moment.min
@@ -44,7 +50,19 @@
 #= require ng-img-crop-full-extended/compile/minified/ng-img-crop
 #= require ng-file-upload/ng-file-upload.min
 #= require angular-svg-round-progressbar/build/roundProgress.min
+#= require xcase/dist/xcase.min
 
+# MASONRY
+#= require ev-emitter/ev-emitter
+#= require jquery-bridget/jquery-bridget
+#= require desandro-matches-selector/matches-selector
+#= require fizzy-ui-utils/utils
+#= require get-size/get-size
+#= require outlayer/item
+#= require outlayer/outlayer
+#= require imagesloaded/imagesloaded
+#= require masonry/masonry
+#= require angular-masonry/angular-masonry
 
 # Order matters ! load first deps (controllers, directives, filters)
 #= require_tree ./angular/models

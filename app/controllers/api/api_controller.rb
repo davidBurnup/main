@@ -3,5 +3,10 @@ module Api
 
     include ApiConfig
 
+    def main
+      render json:  {
+        status: :ok
+      }
+    end
   end
 end

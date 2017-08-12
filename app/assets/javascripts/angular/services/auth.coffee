@@ -1,15 +1,21 @@
 angular.module('Burnup.services.Auth', [])
 
-.factory 'Auth', ($http, $rootScope) ->
+.factory 'Auth', ($http, $rootScope, User) ->
   currentUserData = {}
   timeFormat = "DD/MM/YYYY HH:mm:ss"
   expirationLimit = 10
   @promise = null
 
-  currentUser = ->
+  currentUser = (options) ->
+    options = {} unless options
     if sessionStorage.getItem('currentUser')
       currentUserData = JSON.parse(unescape(sessionStorage.getItem('currentUser')))
-    return currentUserData
+      if options.camelize
+        currentUserData = xcase.camelizeKeys(currentUserData)
+    if options and options.getInstance
+      return new User(currentUserData)
+    else
+      return currentUserData
 
   setCurrentUser = (user) ->
     sessionStorage.setItem('currentUser', escape(JSON.stringify(user)))

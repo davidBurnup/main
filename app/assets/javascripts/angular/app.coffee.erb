@@ -10,12 +10,20 @@
   "ngImgCrop"
   "selectize"
   "ngSanitize"
+  "wu.masonry"
+  "angular-loading-bar"
+  "monospaced.elastic"
+  "angular-justified-gallery"
+  "ngAudio"
 
   # Models
   "Burnup.models.Notification"
   "Burnup.models.User"
   "Burnup.models.Church"
   "Burnup.models.InstrumentPreference"
+  "Burnup.models.Activity"
+  "Burnup.models.Comment"
+  "Burnup.models.Post"
 
   # Services
   "Burnup.services.Auth"
@@ -33,23 +41,32 @@
   "Burnup.directives.buInstrumentPreferencesShow"
   "Burnup.directives.buInstrumentPreferencesNew"
   "Burnup.directives.buUsersLogin"
+  "Burnup.directives.buActivitiesIndex"
+  "Burnup.directives.buActivitiesShow"
+  "Burnup.directives.buActivitiesNew"
   "Burnup.directives.buUsersSession"
+  "Burnup.directives.buHeaderShowCase"
+  "Burnup.directives.buMediasAudio"
 
   # Controllers
   "Burnup.controllers.Main"
   "Burnup.controllers.UserTou"
   "Burnup.controllers.UsersLogin"
+  "Burnup.controllers.ActivitiesLikersModal"
+  "Burnup.controllers.ActivitiesNewModal"
   "Burnup.controllers.UsersAccount"
 
   # Utils
   "utils.autofocus"
   "utils.Browser"
+  "utils.buAdaptWindow"
 
 ])
 
 
-@app.config(($httpProvider) ->
+@app.config(($httpProvider, cfpLoadingBarProvider) ->
    $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
+   cfpLoadingBarProvider.includeSpinner = false
 )
 
 @app.run(($rootScope, amMoment, PushManager) ->

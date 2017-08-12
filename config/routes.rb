@@ -2,11 +2,11 @@ Worship::Application.routes.draw do
 
   root :to => "application#main_fallback"
 
-  resources :posts
+  resources :posts, path: 'publications'
 
-  resources :activities, only: [:destroy], controller: "socializables"
+  resources :activities, only: [:index], path: "fil"#, only: [:destroy], controller: "socializables"
 
-  resources :churches
+  resources :churches, path: "pages"
 
   resources :comments
 
@@ -14,9 +14,9 @@ Worship::Application.routes.draw do
 
   get 'notifications/:id' => "notifications#show", as: 'notification'
 
-  get 'fil' => "socializables#index", :as => "feeds"
-
-  get 'fil/:id' => "socializables#show", as: "show_activity"
+  # get 'fil' => "socializables#index", :as => "feeds"
+  #
+  # get 'fil/:id' => "socializables#show", as: "show_activity"
 
   get 'action' => "socializables#action", :as => "my_action"
 
@@ -42,22 +42,31 @@ Worship::Application.routes.draw do
 
   get "utilisateurs/en-cours" => "users#show", :as => "current_user"
   resources :users, :path => "utilisateurs" do
-    member do
-      get 'finaliser-mon-compte' => "users#unfinalized", as: "unfinalized"
-    end
+    # member do
+    #   get 'finaliser-mon-compte' => "users#unfinalized", as: "unfinalized"
+    # end
   end
   get "utilisateurs/:id/instruments(/:target)" => "users#instruments"
   post "reunions/new" => "meetings#new"
   resources :meetings, :path => "reunions"
 
   namespace :api do
+
+    get "main" => "api#main"
+
     resources :notifications, only: [:index, :destroy, :update] do
       collection do
         get "/page/:page" => "notifications#index"
       end
     end
+
+    get "utilisateurs/courant" => "users#current", as: :current_user
+
+    resources :medias, only: [:create, :destroy]
+
     resources :users, only: [:create, :update], path: 'utilisateurs' do
       member do
+        put 'aime/:activity_id' => "users#toggle_like", :as => "toggle_like"
         post "push" => "users#push_subscribe"
         # FIXME : change post for delete method once we found a way to send endpoint (which is an URL) via the URL param
         post "push/unsubscribe" => "users#push_unsubscribe"
@@ -75,6 +84,14 @@ Worship::Application.routes.draw do
     end
 
     resources :instrument_preferences, path: "instruments"
+    resources :activities, path: "activites" do
+      collection do
+        get "/sur/:recipient_type/:recipient_id(/page/:page)" => "activities#index"
+        get "/page/:page" => "activities#index"
+      end
+      resources :comments, path: "commentaires", controller: 'activities/comments'
+    end
+    resources :posts, path: 'publications', only: [:show, :create, :update, :destroy]
   end
 
   require 'sidekiq/web'

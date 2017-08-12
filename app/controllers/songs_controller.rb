@@ -33,7 +33,7 @@ class SongsController < ApplicationController
     @post_activities = PublicActivity::Activity.where(:trackable_type => "Post", :trackable_id => song_posts.collect(&:id)).paginate(page: params[:page], per_page: 15).order('created_at DESC')
     @post = Post.new
     @post.song = @song
-    @post.music_medias.build
+    # @post.music_medias.build
 
     authorize @song
   end

@@ -1,0 +1,11 @@
+#likers-modal.modal-container{"ng-class" => "active ? 'active' : ''"}
+  .modal-header
+    .close{"ng-click" => "close()"}
+      %span.glyphicon.glyphicon-remove
+  .modal-body
+    %ul.list-group
+      %li.list-group-item{"ng-repeat": "liker in likers"}
+        %img.img-responsive.img-circle.liker-avatar{"ng-src": "{{liker.avatar.tiny}}"}
+        %h3
+          %a{href: "{{liker.paths.show}}"}
+            {{liker.name}}

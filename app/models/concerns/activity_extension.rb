@@ -7,6 +7,10 @@ module ActivityExtension
     acts_as_likeable
     acts_as_commentable
 
+    scope :on, ->(recipient){
+      where(recipient_type: recipient.class.to_s, recipient_id: recipient.id)
+    }
+
     def notifiable_users(only_self: false, origin_notifiable_resolver: nil)
       n_users_ids = []
 

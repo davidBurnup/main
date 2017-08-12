@@ -1,0 +1,28 @@
+#feed-activities.row{'infinite-scroll' => 'loadActivities()', masonry: true, "load-images": "true", 'masonry-options': "{stamp: '.stamp'}", "ng-show": "initialized"}
+
+  .stamp{"ng-class": "singleColumn ? 'col-lg-12' : 'col-lg-6'"}
+    .panel.activity{'bu-activities-new': true, "recipient-type": "recipientType", "recipient-id": "recipientId"}
+
+  .masonry-brick{"ng-repeat" => "activity in activities", "ng-class": "singleColumn ? 'col-lg-12' : 'col-lg-6'"}
+    .panel.activity{'bu-activities-show' => true, 'activity' => 'activity'}
+
+.clear{"ng-if" => "activitiesLock || !initialized"}
+  %div.loading-activities
+    .sk-folding-cube
+      .sk-cube1.sk-cube
+      .sk-cube2.sk-cube
+      .sk-cube4.sk-cube
+      .sk-cube3.sk-cube
+
+  -#     \-
+  -#     - if trackable
+  -#       = render "socializables/like", likable: activity
+  -#
+  -#   %span.comments-list
+  -#     - activity.comments.each do |comment|
+  -#       = render "comments/comment", comment: comment
+  -#   .media.comment-form
+  -#     = image_tag current_user.avatar.url(:mini), class: "img-circle pull-left   user-avatar mini"
+  -#     .media-body
+  -#       %span.comment-form
+  -#         = render "comments/form", comment: Comment.new, commentable: activity

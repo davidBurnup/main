@@ -1,0 +1,12 @@
+.audio-wrapper.flexed-grid
+  .grid-item.no-padding{type: :button, "ng-click": "togglePlay()"}
+    %button.audio-button
+      %i.fa.fa-play{"ng-if": "audio.paused"}
+      %i.fa.fa-pause{"ng-if": "!audio.paused"}
+  .grid-item.flex-fit
+    .track-info
+      %span.track-name
+        {{media.attachment.fileName | limitTo: 30}}
+      %span.track-time.pull-right
+        {{audio.currentTime | trackTime}} / {{(audio.currentTime + audio.remaining) | trackTime}}
+    %input.form-control.ng-valid.ng-dirty.ng-touched{:max => "1", :min => "0", "ng-model" => "audio.progress", :step => "0.01", :type => "range"}/

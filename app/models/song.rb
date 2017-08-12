@@ -26,6 +26,21 @@ class Song < ActiveRecord::Base
     icon: 'music'
   })
 
+  feedable({
+    title: lambda{|s|
+      s.creator ? s.creator.full_name : ""
+    },
+    content: lambda{|s|
+      "a ajouté le nouveau chant \"#{s.title.capitalize}\""
+    },
+    image: lambda{|s|
+      s.creator ? s.creator.avatar.url(:tiny) : "/images/user.svg"
+    },
+    activity_link: lambda{|s|
+      Rails.application.routes.url_helpers.song_path(s)
+    }
+  })
+
   validates :key, :title, :content, :presence => true
 
   def Song.match_note

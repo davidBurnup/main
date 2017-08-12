@@ -13,3 +13,23 @@ angular.module('utils.autofocus', [])
 
     }
 ]
+.directive 'focusMe', [
+  '$timeout'
+  '$parse'
+  ($timeout, $parse) ->
+    { link: (scope, element, attrs) ->
+      model = $parse(attrs.focusMe)
+      scope.$watch model, (value) ->
+        if value == true
+          $timeout ->
+            element[0].focus()
+            return
+        return
+      # to address @blesh's comment, set attribute value to 'false'
+      # on blur event:
+      element.bind 'blur', ->
+        scope.$apply model.assign(scope, false)
+        return
+      return
+ }
+]
