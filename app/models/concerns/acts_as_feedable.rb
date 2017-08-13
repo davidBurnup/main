@@ -106,6 +106,9 @@ module ActsAsFeedable
         activity.recipient_id = activity_recipient_id
       end
 
+      if !feedable_option(:is_draft).nil?
+        activity.is_draft = feedable_option(:is_draft)
+      end
       run_callbacks(:feeded) do
         activity.save!
       end
@@ -144,7 +147,8 @@ module ActsAsFeedable
       image: nil,
       image_link: nil,
       activity_link: nil,
-      recipient: nil
+      recipient: nil,
+      is_draft: nil
     }
 
     # Defines options that will not be sent to instance using ruby send method but used as static variable

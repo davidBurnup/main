@@ -3,6 +3,7 @@ module Api
   class ChurchesController < ApiController
 
     skip_before_filter :authorize_user, only: [:index, :create]
+    before_action :set_church, only: [:show]
 
     def index
 
@@ -20,10 +21,21 @@ module Api
       end
     end
 
+    def show
+      @church
+    end
+
     private
 
+    def set_church
+      @church = Church.find(params[:id])
+      if !@church
+        head :bad_request
+      end
+    end
+
     def church_params
-      params.require(:church).permit(:name)
+      params.require(:church).permit(:name, :slogan)
     end
 
   end

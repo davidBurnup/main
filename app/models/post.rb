@@ -59,7 +59,8 @@ class Post < ActiveRecord::Base
     },
     recipient: lambda{|p|
       p.creator
-    }
+    },
+    is_draft: :is_draft
   })
 
   # => only_self : gets notifiable users only for the current object

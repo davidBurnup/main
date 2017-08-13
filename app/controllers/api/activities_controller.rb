@@ -7,7 +7,7 @@ module Api
     # GET /api/activities
     # GET /api/activities.json
     def index
-      @activities = PublicActivity::Activity
+      @activities = PublicActivity::Activity.published
 
       if params[:recipient_type] and recipient_klass = params[:recipient_type].safe_constantize and r_id = params[:recipient_id] and @recipient = recipient_klass.find(r_id)
         @activities = @activities.on(@recipient)

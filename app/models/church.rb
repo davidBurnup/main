@@ -6,9 +6,12 @@ class Church < ActiveRecord::Base
   has_many :users
   has_many :church_roles
 
-  has_attached_file :logo, styles: {
-    medium: "300x300#",
-    thumb: "100x100#"
+  has_attached_file :logo, styles: lambda { |attachment|
+    attachment.instance.svg? ? {} : {
+      large: "400x400>",
+      medium: "200x200#",
+      thumb: "100x100#"
+    }
   }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
 
@@ -17,4 +20,12 @@ class Church < ActiveRecord::Base
   }
 
   stampable
+
+  def svg?
+    self.logo_content_type === 'image/svg+xml'
+  end
+
+  def logo_medium_style
+    svg? ? :original : :medium
+  end
 end

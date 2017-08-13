@@ -77,7 +77,7 @@ Worship::Application.routes.draw do
       post "sessions/se-connecter" => "sessions#create", as: "sessions"
     end
 
-    resources :churches, only: [:index, :create], path: 'eglises' do
+    resources :churches, only: [:index, :create, :show], path: 'eglises' do
       collection do
         get "/recherche/:search" => "churches#index"
       end

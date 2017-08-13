@@ -10,7 +10,7 @@ angular.module('Burnup.directives.buActivitiesNew', [])
 
     controller: ($scope) ->
       $scope.currentUser = Auth.currentUser()
-
+      
       $scope.openModal = ($event, options) ->
         options = {} unless options
         $timeout ->

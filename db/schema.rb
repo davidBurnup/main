@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170617054045) do
+ActiveRecord::Schema.define(version: 20170813093904) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20170617054045) do
     t.string   "recipient_type", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_draft"
   end
 
   add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
@@ -52,22 +53,23 @@ ActiveRecord::Schema.define(version: 20170617054045) do
     t.float    "longitude",         limit: 24
     t.integer  "creator_id",        limit: 4
     t.integer  "updater_id",        limit: 4
+    t.string   "slogan",            limit: 255
   end
 
   create_table "comments", force: :cascade do |t|
-    t.string   "title",            limit: 50,  default: ""
-    t.string   "comment",          limit: 250
+    t.string   "title",            limit: 50,    default: ""
+    t.text     "comment",          limit: 65535
     t.integer  "commentable_id",   limit: 4
     t.string   "commentable_type", limit: 255
     t.integer  "creator_id",       limit: 4
-    t.string   "role",             limit: 255, default: "comments"
+    t.string   "role",             limit: 255,   default: "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "updater_id",       limit: 4
   end
 
   add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
-  add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", length: {"commentable_type"=>191}, using: :btree
+  add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
   add_index "comments", ["creator_id"], name: "index_comments_on_creator_id", using: :btree
 
   create_table "follows", force: :cascade do |t|
@@ -203,7 +205,7 @@ ActiveRecord::Schema.define(version: 20170617054045) do
   add_index "notifications", ["deleted_at"], name: "index_notifications_on_deleted_at", using: :btree
 
   create_table "posts", force: :cascade do |t|
-    t.string   "content",      limit: 250
+    t.text     "content",      limit: 65535
     t.integer  "user_id",      limit: 4
     t.integer  "song_id",      limit: 4
     t.string   "external_url", limit: 255

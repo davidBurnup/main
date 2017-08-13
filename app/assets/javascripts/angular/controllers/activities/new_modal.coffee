@@ -3,8 +3,11 @@ angular.module('Burnup.controllers.ActivitiesNewModal', ['ngFileUpload'])
 .controller 'ActivitiesNewModal', ($scope, $timeout, $uibModalInstance, withPhoto, Auth, Post, Upload, $http, recipientType, recipientId) ->
 
   $scope.withPhoto = withPhoto
+  $scope.showPhoto = ->
+    $scope.withPhoto = true
+
   $scope.currentUser = Auth.currentUser(camelize: true)
-  console.log "p", recipientType, recipientId
+  
   new Post(
    content: ""
    isDraft: true
