@@ -1,11 +1,11 @@
-= simple_form_for(@church) do |f|
+= simple_form_for(@page) do |f|
   = f.error_notification
 
   .form-inputs
     = f.input :name
     = f.input :slogan
     -# = f.input :is_valid
-    = f.input :logo
+    = f.input :avatar
     = f.input :address
 
   .form-actions

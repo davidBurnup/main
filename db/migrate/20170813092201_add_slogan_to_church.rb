@@ -1,5 +1,5 @@
-class AddSloganToChurch < ActiveRecord::Migration
+class AddSloganToPage < ActiveRecord::Migration
   def change
-    add_column :churches, :slogan, :string
+    add_column :pages, :slogan, :string
   end
 end

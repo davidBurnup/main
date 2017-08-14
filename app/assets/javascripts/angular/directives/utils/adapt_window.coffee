@@ -3,7 +3,7 @@ angular.module('utils.buAdaptWindow', [])
 .directive 'buAdaptWindow',  ->
 
   restrict: 'A'
-  # templateUrl: 'churches/show.html'
+  # templateUrl: 'pages/show.html'
   scope:
     direction: "="
 

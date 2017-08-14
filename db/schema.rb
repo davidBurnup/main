@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170813093904) do
+ActiveRecord::Schema.define(version: 20170814085753) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -30,31 +30,6 @@ ActiveRecord::Schema.define(version: 20170813093904) do
   add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
   add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
-
-  create_table "church_roles", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.integer  "role",       limit: 4
-    t.integer  "church_id",  limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "churches", force: :cascade do |t|
-    t.string   "name",              limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "is_valid"
-    t.string   "logo_file_name",    limit: 255
-    t.string   "logo_content_type", limit: 255
-    t.integer  "logo_file_size",    limit: 4
-    t.datetime "logo_updated_at"
-    t.string   "address",           limit: 255
-    t.float    "latitude",          limit: 24
-    t.float    "longitude",         limit: 24
-    t.integer  "creator_id",        limit: 4
-    t.integer  "updater_id",        limit: 4
-    t.string   "slogan",            limit: 255
-  end
 
   create_table "comments", force: :cascade do |t|
     t.string   "title",            limit: 50,    default: ""
@@ -204,6 +179,31 @@ ActiveRecord::Schema.define(version: 20170813093904) do
 
   add_index "notifications", ["deleted_at"], name: "index_notifications_on_deleted_at", using: :btree
 
+  create_table "page_roles", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "role",       limit: 4
+    t.integer  "page_id",    limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pages", force: :cascade do |t|
+    t.string   "name",                limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_valid"
+    t.string   "avatar_file_name",    limit: 255
+    t.string   "avatar_content_type", limit: 255
+    t.integer  "avatar_file_size",    limit: 4
+    t.datetime "avatar_updated_at"
+    t.string   "address",             limit: 255
+    t.float    "latitude",            limit: 24
+    t.float    "longitude",           limit: 24
+    t.integer  "creator_id",          limit: 4
+    t.integer  "updater_id",          limit: 4
+    t.string   "slogan",              limit: 255
+  end
+
   create_table "posts", force: :cascade do |t|
     t.text     "content",      limit: 65535
     t.integer  "user_id",      limit: 4
@@ -246,7 +246,7 @@ ActiveRecord::Schema.define(version: 20170813093904) do
     t.text     "clean_content",    limit: 65535
     t.string   "author",           limit: 255
     t.integer  "created_by",       limit: 4
-    t.integer  "origin_church_id", limit: 4
+    t.integer  "origin_page_id",   limit: 4
     t.integer  "bpm",              limit: 4
     t.integer  "creator_id",       limit: 4
     t.integer  "updater_id",       limit: 4
@@ -307,7 +307,7 @@ ActiveRecord::Schema.define(version: 20170813093904) do
     t.datetime "avatar_updated_at"
     t.string   "first_name",             limit: 255
     t.string   "last_name",              limit: 255
-    t.integer  "church_id",              limit: 4
+    t.integer  "page_id",                limit: 4
     t.boolean  "is_finalized"
   end
 

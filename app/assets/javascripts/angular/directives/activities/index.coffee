@@ -8,6 +8,7 @@ angular.module('Burnup.directives.buActivitiesIndex', [])
       singleColumn: "="
       recipientType: "="
       recipientId: "="
+      writeModeEnabled: "="
 
     controller: ($scope) ->
       $scope.activities = []

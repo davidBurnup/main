@@ -1,6 +1,6 @@
-class CreateChurches < ActiveRecord::Migration
+class CreatePages < ActiveRecord::Migration
   def change
-    create_table :churches do |t|
+    create_table :pages do |t|
       t.string :name
 
       t.timestamps

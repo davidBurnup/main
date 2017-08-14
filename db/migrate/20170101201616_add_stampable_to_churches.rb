@@ -1,6 +1,6 @@
-class AddStampableToChurches < ActiveRecord::Migration
+class AddStampableToPages < ActiveRecord::Migration
   def change
-    add_column :churches, :creator_id, :integer
-    add_column :churches, :updater_id, :integer
+    add_column :pages, :creator_id, :integer
+    add_column :pages, :updater_id, :integer
   end
 end

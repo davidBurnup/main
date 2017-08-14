@@ -1,6 +1,6 @@
 angular.module('Burnup.directives.buUsersLogin', [])
 
-.directive 'buUsersLogin', (User, SelectizeTemplator, $filter, Church) ->
+.directive 'buUsersLogin', (User, SelectizeTemplator, $filter, Page) ->
   {
     restrict: 'A'
     controller: ($scope, $uibModal, $timeout, $element, $window) ->

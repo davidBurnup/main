@@ -1,0 +1,8 @@
+= content_for :pre_header do
+  .page-header-container.ng-cloak{"bu-adapt-window": "'height'"}
+    %bu-header-show-case{"page-id": "#{@page.id}"}
+    .background-image.bu-fade{style: "background-image:url('#{asset_path("father-son.jpg")}')"}
+
+- if @page
+  .container-fluid
+    %bu-activities-index{"recipient-type": "'Page'", "recipient-id": "#{@page.id}", "write-mode-enabled": "#{current_user and current_user.admin?}"}

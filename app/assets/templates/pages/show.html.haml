@@ -1,0 +1,19 @@
+.panel.panel-primary
+  .panel-heading.text-center
+    %h3
+      {{page.name}}
+  .panel-body
+    .page-logo
+      %img{"ng-src" => "{{page.logo.thumb}}"}
+    .page-detail
+      %p
+        %i.fa.fa-map-marker
+        {{page.address}}
+  .panel-footer
+    %button.btn.btn-default.btn-sm.btn-group-justified{type: :button, "ng-click" => "select()", "ng-if" => "currentUser.page_id != page.id"}
+      %i.fa.fa-check-circle
+      CHOISIR
+
+    %button.btn.btn-primary.btn-sm.btn-group-justified{type: :button, "ng-click" => "unselect()", "ng-if" => "currentUser.page_id == page.id"}
+      %i.fa.fa-times-circle
+      ANNULER

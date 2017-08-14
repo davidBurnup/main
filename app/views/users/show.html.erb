@@ -6,5 +6,5 @@
 
     <%= image_tag @user.avatar.url(:thumb), :class => "pull-left" %>
     <p>Email: <%= @user.email if @user.email %></p>
-    <p>Église: <%= @user.church.name if @user.church %></p>
+    <p>Église: <%= @user.page.name if @user.page %></p>
 <% end %>

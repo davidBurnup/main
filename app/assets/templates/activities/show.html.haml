@@ -1,11 +1,12 @@
 .panel-body
   %a.pull-left.user-avatar{href: "#"}
+    {{activity.owner.avatar.tiny}}
     %img.avatar{"ng-src" => "{{activity.owner.avatar.tiny}}"}
 
   %span.pull-right.activity-menu{"uib-dropdown": true, "ng-if": "activity.policy.destroy"}
     %a.activity-menu-toggler{id: "activity-menu-{{activity.id}}", :href => "", "uib-dropdown-toggle": true}
       %i.fa.fa-chevron-down
-    %ul.dropdown-menu{"aria-labelledby": "activity-menu-{{activity.id}}", "uib-dropdown-menu": true}
+    %ul.dropdown-menu{"aria-labelledby": "activity-menu-{{activity.id}}", "uib-dropdown-menu": true, "ng-if": "activity.policy.destroy"}
       %li
         %a{"ng-click" => "destroy($event, activity)"}
           Supprimer

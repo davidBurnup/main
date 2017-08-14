@@ -3,7 +3,7 @@ module Api
   class ActivitiesController < ApiController
 
     before_action :set_activity, only: [:show, :edit, :update, :destroy]
-
+    skip_before_filter :authorize_user, only: [:index]
     # GET /api/activities
     # GET /api/activities.json
     def index

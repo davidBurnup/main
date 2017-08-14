@@ -43,5 +43,9 @@
     %footer
       ©#{Time.now.year} - BURN UP - Tous droits réservés
 
-    :coffee
-      window.sessionStorage.setItem('currentUser', escape('#{current_user.to_builder}'))
+    - if current_user
+      :coffee
+        window.sessionStorage.setItem('currentUser', escape('#{current_user.to_builder}'))
+    - else
+      :coffee
+        window.sessionStorage.setItem('currentUser', escape('{}'))

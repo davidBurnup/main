@@ -19,16 +19,16 @@ namespace :migrate do
     if unrecipiented_activities.present?
       unrecipiented_activities.each do |activity|
         activity.update({
-          recipient_type: 'Church',
-          recipient_id: activity.owner.church_id
+          recipient_type: 'Page',
+          recipient_id: activity.owner.page_id
           })
       end
     end
 
     PublicActivity::Activity.where('activities.recipient_type = "User"').each do |activity|
       activity.update({
-        recipient_type: 'Church',
-        recipient_id: activity.owner.church_id
+        recipient_type: 'Page',
+        recipient_id: activity.owner.page_id
         })
     end
   end

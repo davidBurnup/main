@@ -1,5 +1,5 @@
 @import "helpers";
-bu-churches-show {
+bu-pages-show {
   &:last-child {
     .panel {
       margin-bottom: 0;
@@ -18,7 +18,7 @@ bu-churches-show {
       display: flex;
       align-items: center;
 
-      .church-logo {
+      .page-logo {
         min-width: 110px;
         border-radius: 100px;
         border: 5px solid #eee;
@@ -29,7 +29,7 @@ bu-churches-show {
         }
       }
 
-      .church-detail {
+      .page-detail {
         margin-left: 15px;
       }
     }
@@ -49,14 +49,14 @@ bu-churches-show {
   }
 }
 
-.churches-results {
+.pages-results {
   margin: 20px 0 0 0;
 }
 
-.church-chooser {
+.page-chooser {
   position: relative;
   margin-bottom: 0;
-  .searching-churches {
+  .searching-pages {
     position: absolute;
     right: 12px;
     top: 9px;
@@ -95,5 +95,43 @@ bu-churches-show {
     top: 30%;
     margin-top: -30px;
     position: absolute;
+  }
+  #page-info-container {
+    position: absolute;
+    z-index: 1;
+    bottom: 30%;
+    width: 100%;
+    h1 {
+      color: white;
+      text-align: center;
+      font-family: "Avenir Next";
+      font-size: 46px;
+    }
+    // .goDown {
+    //   color: white;
+    //   font-size: 40px;
+    //   position: absolute;
+    //   width: 40px;
+    //   height: 40px;
+    //   line-height: 40px;
+    //   left: 50%;
+    //   margin-left: -20px;
+    // }
+  }
+
+  .powered-by {
+    position: absolute;
+    z-index: 1;
+    bottom: 10px;
+    right: 10px;
+  }
+}
+@media (max-width:991px) {
+  .page-header-container {
+    #page-info-container {
+      h1 {
+        font-size: 28px;
+      }
+    }
   }
 }

@@ -1,6 +1,6 @@
-class ChurchRole < ActiveRecord::Base
+class PageRole < ActiveRecord::Base
   belongs_to :user
-  belongs_to :church
+  belongs_to :page
   enum :role => [:member, :moderator]
 
 

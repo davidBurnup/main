@@ -52,7 +52,7 @@ gem 'geocoder'
 gem 'factory_girl'
 gem 'serviceworker-rails'
 gem 'webpush'
-
+gem 'activeadmin', github: 'activeadmin'
 group :development do
   gem "haml-rails"
   gem 'better_errors'

@@ -6,10 +6,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   enum role: [:user, :worship_leader, :admin]
   enum instrument: %w(voice violin trombone trumpet piano acoustic_bass acoustic_guitar electric_guitar electric_bass_guitar drums bongos flute saxophone oboe)
-  belongs_to :church
+  belongs_to :page
 
   after_initialize :set_default_role, :if => :new_record?
-  after_initialize :set_default_church_role
+  after_initialize :set_default_page_role
 
   has_attached_file :avatar, :styles => {
     :medium => "200x200#",
@@ -27,8 +27,8 @@ class User < ActiveRecord::Base
   has_many :sent_notifications, foreign_key: :notifier_id, class_name: "Notification"
   has_many :user_devices
 
-  has_one :church_role
-  accepts_nested_attributes_for :church_role
+  has_one :page_role
+  accepts_nested_attributes_for :page_role
   accepts_nested_attributes_for :instrument_preferences, :reject_if => :all_blank, :allow_destroy => true
 
   validates :first_name, :last_name, :email, :presence => true
@@ -46,9 +46,9 @@ class User < ActiveRecord::Base
     self.role ||= :user
   end
 
-  def set_default_church_role
-    if church.present? and !self.church_role
-      self.build_church_role(:role => :member, :user_id => self.id, :church_id => self.church.id)
+  def set_default_page_role
+    if page.present? and !self.page_role
+      self.build_page_role(:role => :member, :user_id => self.id, :page_id => self.page.id)
     end
   end
 
@@ -103,8 +103,8 @@ class User < ActiveRecord::Base
     is_admin? or has_role?(:worship_leader)
   end
 
-  def has_church_role?(church_role)
-    self.church and self.church_role and self.church_role.church == self.church and self.church_role.role == church_role
+  def has_page_role?(page_role)
+    self.page and self.page_role and self.page_role.page == self.page and self.page_role.role == page_role
   end
 
 

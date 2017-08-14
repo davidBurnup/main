@@ -12,7 +12,7 @@
             %i.fa.fa-users
             Utilisateurs
         %li
-          = link_to churches_path do
+          = link_to pages_path do
             %i.fa.fa-building
             Églises
         %li.divider{role: "separator"}
@@ -21,5 +21,9 @@
 
 
 - else
-  %li= link_to raw('<i class="glyphicon glyphicon-log-in"></i> Se connecter'), new_user_session_path
+  -# %li= link_to raw('<i class="glyphicon glyphicon-log-in"></i> Se connecter'), new_user_session_path
+  %li
+    %a{"bu-users-login" => true}
+      %i.fa.fa-sign-in
+      SE CONNECTER
   %li= link_to raw('<i class="glyphicon glyphicon-plus"></i> S\'inscrire'), new_user_registration_path

@@ -8,13 +8,13 @@
   <% end %>
 </td>
 <td>
-  <% if user.church.present? %>
+  <% if user.page.present? %>
       <%= simple_form_for(user) do |f| %>
-          <%= f.simple_fields_for :church_role do |c| %>
+          <%= f.simple_fields_for :page_role do |c| %>
               <%= c.input :id, as: :hidden %>
               <%= c.input :user_id, as: :hidden %>
-              <%= c.input :church_id, as: :hidden %>
-              <%= c.input :role, as: :select, :label => false, :hint => "Role pour l'église #{user and user.church ? user.church.name : ""}", :collection => ChurchRole.roles.keys.map { |role| [I18n.t("church_roles.#{role}"), role] } %>
+              <%= c.input :page_id, as: :hidden %>
+              <%= c.input :role, as: :select, :label => false, :hint => "Role pour l'église #{user and user.page ? user.page.name : ""}", :collection => PageRole.roles.keys.map { |role| [I18n.t("page_roles.#{role}"), role] } %>
           <% end %>
           <%= f.submit 'Changer le role', :class => 'btn btn-primary btn-xs' %>
       <% end %>

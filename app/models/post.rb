@@ -71,10 +71,10 @@ class Post < ActiveRecord::Base
     if self.user
       n_users_ids << self.user.id
 
-      # all users from the same church
+      # all users from the same page
       # if post was just created
-      if self.id_changed? and self.user.church and only_self
-        n_users_ids += self.user.church.users.collect(&:id)
+      if self.id_changed? and self.user.page and only_self
+        n_users_ids += self.user.page.users.collect(&:id)
       end
     end
 

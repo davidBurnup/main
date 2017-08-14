@@ -1,6 +1,6 @@
-class AddLatitudeAndLongitudeToChurch < ActiveRecord::Migration
+class AddLatitudeAndLongitudeToPage < ActiveRecord::Migration
   def change
-    add_column :churches, :latitude, :float
-    add_column :churches, :longitude, :float
+    add_column :pages, :latitude, :float
+    add_column :pages, :longitude, :float
   end
 end

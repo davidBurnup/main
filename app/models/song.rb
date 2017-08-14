@@ -12,7 +12,7 @@ class Song < ActiveRecord::Base
   has_many :notes
   has_many :posts
   has_many :user_song_preferences
-  belongs_to :origin_church, :class_name => "Church", :foreign_key => "origin_church_id"
+  belongs_to :origin_page, :class_name => "Page", :foreign_key => "origin_page_id"
   belongs_to :creator, :class_name => "User", :foreign_key => "created_by"
 
 
@@ -49,8 +49,8 @@ class Song < ActiveRecord::Base
 
   def set_creator
     self.creator ||= User.current
-    if u = User.current and u.church.present?
-      self.origin_church ||= u.church
+    if u = User.current and u.page.present?
+      self.origin_page ||= u.page
     end
   end
 
@@ -443,10 +443,10 @@ class Song < ActiveRecord::Base
     if self.creator
       n_users_ids << self.creator.id
 
-      # all users from the same church
+      # all users from the same page
       # if post was just created
-      if self.id_changed? and self.creator.church
-        n_users_ids += self.creator.church.users.collect(&:id)
+      if self.id_changed? and self.creator.page
+        n_users_ids += self.creator.page.users.collect(&:id)
       end
     end
 

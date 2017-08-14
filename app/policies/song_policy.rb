@@ -1,5 +1,5 @@
 class SongPolicy
-  attr_reader :user, :church
+  attr_reader :user, :page
 
   def initialize(user, song)
     @user = user
@@ -15,26 +15,26 @@ class SongPolicy
   end
 
   def new?
-    church_atomic_authorization
+    page_atomic_authorization
   end
 
   def create?
-    church_atomic_authorization
+    page_atomic_authorization
   end
 
   def edit?
-    church_atomic_authorization
+    page_atomic_authorization
   end
 
   def update?
-    church_atomic_authorization
+    page_atomic_authorization
   end
 
   def destroy?
-    church_atomic_authorization
+    page_atomic_authorization
   end
 
-  def church_atomic_authorization
+  def page_atomic_authorization
     can = false
 
     # User is superadmin
@@ -42,8 +42,8 @@ class SongPolicy
       can = true
     end
 
-    # User is moderator of the origin church of the song
-    if @user.church and (@user.church == @song.origin_church or @song.new_record?) and @user.has_church_role?("moderator")
+    # User is moderator of the origin page of the song
+    if @user.page and (@user.page == @song.origin_page or @song.new_record?) and @user.has_page_role?("moderator")
       can = true
     end
 
