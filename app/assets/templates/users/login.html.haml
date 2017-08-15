@@ -9,10 +9,6 @@
     %form#new_user.new_user{"accept-charset" => "UTF-8", "ng-submit" => "login()"}
       %input{:name => "utf8", :type => "hidden", :value => "✓"}/
       .form-group
-        /
-          <haml_silent> if devise_mapping.registerable? </haml_silent><haml_block>
-          <haml_loud> link_to &quot;S&#39;inscrire&quot;, new_registration_path(resource_name), class: &#39;pull-right&#39;  </haml_loud>
-          </haml_block>
         .form-group.email.required.user_email{"ng-class" => "unauthorized ? 'has-error' : ''"}
           %label.email.required.control-label{:for => "user_email"}
             %abbr{:title => "requis"} *

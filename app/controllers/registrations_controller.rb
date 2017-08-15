@@ -1,9 +1,9 @@
 class RegistrationsController < Devise::RegistrationsController
-  before_filter :update_sanitized_params, if: :devise_controller?
+  before_action :update_sanitized_params, if: :devise_controller?
   layout :resolve_layout
 
   def new
-    redirect_to root_path(anchor: "sign-in")
+    redirect_to root_path(anchor: "sign-up")
   end
 
   def update_sanitized_params

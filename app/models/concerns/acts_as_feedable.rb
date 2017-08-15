@@ -105,6 +105,11 @@ module ActsAsFeedable
         activity.recipient_type = activity_recipient_type
         activity.recipient_id = activity_recipient_id
       end
+      if self.class.feedable_options.include? :owner
+        activity.owner = feedable_option(:owner, extra_proc_params: [activity])
+      elsif self.respond_to? :creator
+        activity.owner = self.creator
+      end
 
       if !feedable_option(:is_draft).nil?
         activity.is_draft = feedable_option(:is_draft)
@@ -120,11 +125,15 @@ module ActsAsFeedable
      activities.destroy_all
    end
 
-   def feedable_option(key)
+   def feedable_option(key, options = {})
      feedable_option_key = self.class.feedable_options[key.to_sym]
      if feedable_option_key
        if feedable_option_key.is_a? Proc
-         option = feedable_option_key.(self)
+         p = [self]
+         if options[:extra_proc_params]
+           p += options[:extra_proc_params]
+         end
+         option = feedable_option_key.(*p)
        else
          # Check for static options (like icon)
          if self.class.feedable_static_options.include?(key.to_sym)
@@ -148,7 +157,8 @@ module ActsAsFeedable
       image_link: nil,
       activity_link: nil,
       recipient: nil,
-      is_draft: nil
+      is_draft: nil,
+      owner: nil
     }
 
     # Defines options that will not be sent to instance using ruby send method but used as static variable

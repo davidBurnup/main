@@ -1,4 +1,4 @@
-class Post < ActiveRecord::Base
+class Post < ApplicationRecord
   include ActsAsFeedable
   include ActsAsNotifiable
   belongs_to :user
@@ -60,7 +60,14 @@ class Post < ActiveRecord::Base
     recipient: lambda{|p|
       p.creator
     },
-    is_draft: :is_draft
+    is_draft: :is_draft,
+    owner: lambda {|p, new_activity|
+      o = p.creator
+      if o and r = new_activity.recipient and r.is_a? Page and r.is_admin?(o)
+        o = r
+      end
+      o
+    }
   })
 
   # => only_self : gets notifiable users only for the current object

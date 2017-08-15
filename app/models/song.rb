@@ -1,4 +1,4 @@
-class Song < ActiveRecord::Base
+class Song < ApplicationRecord
   #
   include PublicActivity::Model
   include ActsAsNotifiable

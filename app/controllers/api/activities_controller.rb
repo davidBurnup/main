@@ -3,7 +3,7 @@ module Api
   class ActivitiesController < ApiController
 
     before_action :set_activity, only: [:show, :edit, :update, :destroy]
-    skip_before_filter :authorize_user, only: [:index]
+    skip_before_action :authorize_user, only: [:index]
     # GET /api/activities
     # GET /api/activities.json
     def index
@@ -12,7 +12,7 @@ module Api
       if params[:recipient_type] and recipient_klass = params[:recipient_type].safe_constantize and r_id = params[:recipient_id] and @recipient = recipient_klass.find(r_id)
         @activities = @activities.on(@recipient)
       end
-      @activities = @activities.order('updated_at DESC, created_at DESC').paginate(page: params[:page], per_page: 5)
+      @activities = @activities.order('updated_at DESC, created_at DESC').page(params[:page]).per(5)
 
       authorize @activities
     end

@@ -1,8 +1,6 @@
 
 %span.modal-wrapper.modal-tou{"ng-class" => "active ? 'active' : ''"}
   .modal-header
-    -# %a.btn.btn-default.pull-right.close-modal{type: "button", "ng-click" => "closeModal()"}
-    -#   = fa_icon "close"
     %button.close{"aria-hidden" => "true", :type => "button", "ng-click" => "closeModal()"} ×
     %h2.modal-heading
       Conditions générales d'utilisation du site burnup.fr

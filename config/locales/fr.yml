@@ -5,8 +5,8 @@ fr:
   activerecord:
     models:
       page:
-        one: "Église"
-        other: "Églises"
+        one: "Page"
+        other: "Pages"
         gender: 'F'
         is_valid: "Organisme authentique"
       user:
@@ -52,14 +52,14 @@ fr:
         avatar: Photo
         first_name: Prénom
         last_name: Nom
-        page: Église
+        page: Page
         name: Nom d'utilisateur
         email: Email
         remember_me: Se souvenir de moi
         password: Mot de passe
         password_confirmation: Mot de passe de confirmation
         current_password: Mot de passe actuel
-        page_id: Église
+        page_id: Page
       instrument_preferences:
         detail: Marque, modèle, etc...
       song:

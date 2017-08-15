@@ -8,7 +8,7 @@ angular.module('Burnup.directives.buActivitiesIndex', [])
       singleColumn: "="
       recipientType: "="
       recipientId: "="
-      writeModeEnabled: "="
+      writeModeEnabled: "=?"
 
     controller: ($scope) ->
       $scope.activities = []
@@ -17,6 +17,9 @@ angular.module('Burnup.directives.buActivitiesIndex', [])
       $scope.activitiesLock = false
       $scope.initialized = false
       $scope.currentUser = Auth.currentUser(getInstance: true)
+      console.log ")))", $scope.writeModeEnabled
+      unless $scope.writeModeEnabled?
+        $scope.writeModeEnabled = true
 
       $scope.loadActivities = (forceRefresh) ->
 

@@ -45,7 +45,7 @@
 
     - if current_user
       :coffee
-        window.sessionStorage.setItem('currentUser', escape('#{current_user.to_builder}'))
+        window.sessionStorage.setItem('currentUser', escape('#{raw current_user.to_builder}'))
     - else
       :coffee
         window.sessionStorage.setItem('currentUser', escape('{}'))

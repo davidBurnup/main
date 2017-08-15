@@ -1,6 +1,5 @@
 .panel-body
   %a.pull-left.user-avatar{href: "#"}
-    {{activity.owner.avatar.tiny}}
     %img.avatar{"ng-src" => "{{activity.owner.avatar.tiny}}"}
 
   %span.pull-right.activity-menu{"uib-dropdown": true, "ng-if": "activity.policy.destroy"}

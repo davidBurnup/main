@@ -1,4 +1,4 @@
-class Meeting < ActiveRecord::Base
+class Meeting < ApplicationRecord
   include ActsAsFeedable
   include ActsAsNotifiable
   has_many :meeting_users

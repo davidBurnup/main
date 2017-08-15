@@ -5,4 +5,4 @@
 
 - if @page
   .container-fluid
-    %bu-activities-index{"recipient-type": "'Page'", "recipient-id": "#{@page.id}", "write-mode-enabled": "#{current_user and current_user.admin?}"}
+    %bu-activities-index{"recipient-type": "'Page'", "recipient-id": "#{@page.id}", "write-mode-enabled": "#{current_user.present? and current_user.admin?}"}

@@ -15,7 +15,7 @@
 #= require turbolinks
 #= require bootstrap
 #= require bootstrap-filestyle.min
-#= require cable
+#= require action_cable
 #= require "jquery.autogrowtextarea"
 #= require cocoon
 #= require moment/min/moment.min
@@ -26,7 +26,6 @@
 #= require fullcalendar/fr
 #= require chosen-jquery
 #= require jquery-hotkeys
-#= require mediaelement_rails
 #= require angular
 #= require angular-sanitize
 #= require angular-animate

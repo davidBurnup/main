@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   include Jbuildable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -106,7 +106,6 @@ class User < ActiveRecord::Base
   def has_page_role?(page_role)
     self.page and self.page_role and self.page_role.page == self.page and self.page_role.role == page_role
   end
-
 
   def instruments
     if self.instrument_preferences.present?

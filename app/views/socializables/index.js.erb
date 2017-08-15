@@ -1,6 +1,6 @@
 $('#feed-activities').append('<%= j render_activities(@activities) %>');
 <% if @activities.next_page %>
-$('.pagination').replaceWith('<%= j will_paginate @activities %>');
+// $('.pagination').replaceWith('<%= j will_paginate @activities %>');
 <% else %>
 $(window).off('scroll');
 $('.pagination').remove();

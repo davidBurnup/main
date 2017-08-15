@@ -1,4 +1,4 @@
-class Practice < ActiveRecord::Base
+class Practice < ApplicationRecord
   belongs_to :meeting
   has_many :practice_users
 

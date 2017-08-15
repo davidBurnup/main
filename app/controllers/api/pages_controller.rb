@@ -2,7 +2,7 @@
 module Api
   class PagesController < ApiController
 
-    skip_before_filter :authorize_user, only: [:index, :create, :show]
+    skip_before_action :authorize_user, only: [:index, :create, :show]
     before_action :set_page, only: [:show]
 
     def index
