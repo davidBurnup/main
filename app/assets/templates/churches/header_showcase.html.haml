@@ -1,2 +1,19 @@
--# .player-container
--#   %i.fa.fa-play
+.header-showcase.container{"bu-vertical-align-absolute": true, "offset-top": "60"}
+  .row
+    .col-sm-5.col-sm-offset-1.col-xs-12.text-right.church-headline
+      %h1
+        Il nous a aimé en premier,
+        %br
+        nous sommes fait pour notre
+        %b
+          premier amour
+      %button.btn.btn-primary.btn-lg
+        EN SAVOIR PLUS
+
+    .col-sm-5.col-sm-offset-1.col-xs-12.activity.hidden-xs
+      %h2
+        DERNIÈRE PUBLICATION
+      %bu-activities-show{'activity-id': 'lastActivityId', 'ng-if': 'lastActivityId'}
+
+      %a.more-feed{href: true, "ng-click": "slideDown()"}
+        %i.fa.fa-angle-double-down

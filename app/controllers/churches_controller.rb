@@ -1,6 +1,8 @@
 class ChurchesController < ApplicationController
   before_action :set_church, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized, :except => [:show, :attach]
+  skip_before_action :authorize_user, only: [:show]
+
 
   # GET /churches
   # GET /churches.json

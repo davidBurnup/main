@@ -17,10 +17,13 @@ angular.module('Burnup.directives.buMediasAudio', [])
 
 
       $scope.togglePlay = ->
-        console.log "audio", $scope.audio, $scope.audio.currentTime
         if $scope.audio.paused
           $scope.audio.play()
         else
           $scope.audio.pause()
+
+      $scope.$watch "audio", (audio) ->
+        if audio
+          $scope.$emit "audio:loaded"
 
   }

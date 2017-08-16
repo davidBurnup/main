@@ -2,7 +2,7 @@
   .page-header-container.ng-cloak{"bu-adapt-window": "'height'"}
     %img.page-logo{src: asset_path("heart-bits.svg")}
 
-    %bu-header-show-case
+    %bu-header-show-case{"church-id": "#{@church.id}"}
     .background-image{style: "background-image:url('#{asset_path("father-son.jpg")}')"}
 
 - if @church

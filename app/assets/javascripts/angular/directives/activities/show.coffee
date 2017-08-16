@@ -5,15 +5,22 @@ angular.module('Burnup.directives.buActivitiesShow', [])
     restrict: 'AE'
     templateUrl: 'activities/show.html'
     scope:
-      activity: "="
+      activity: "=?"
+      activityId: "=?"
 
     controller: ($scope, Auth, $timeout, Comment) ->
 
       $scope.currentUser = Auth.currentUser()
 
+      if $scope.activityId?
+        Activity.get(
+          id: $scope.activityId
+        ).then (activity) ->
+          $scope.$emit "activity:loaded", activity
+          $scope.activity = activity
+
       $scope.compileLikeLabel = (activity) ->
         label = ""
-        # console.log "activity",activity
         if activity.liked
           label = "Vous"
           if activity.likers.length > 0
@@ -45,20 +52,20 @@ angular.module('Burnup.directives.buActivitiesShow', [])
         else
           label += "Ça fait bruler mon coeur !"
 
-        # console.log "label", label
         return label
 
       $scope.$watch "activity", (activity) ->
-        $scope.activity.safeContent = $sce.trustAsHtml(activity.content);
-        $scope.activity.mediasForJG = []
-        if $scope.activity.medias?
-          for media in $scope.activity.medias
-            if media.image?
-              $scope.activity.mediasForJG.push {
-                title: "ttt"
-                imageUrl: media.image.original
-              }
-        $scope.$broadcast "activity:refresh:likeLabel"
+        if $scope.activity?
+          $scope.activity.safeContent = $sce.trustAsHtml(activity.content);
+          $scope.activity.mediasForJG = []
+          if $scope.activity.medias?
+            for media in $scope.activity.medias
+              if media.image?
+                $scope.activity.mediasForJG.push {
+                  title: "ttt"
+                  imageUrl: media.image.original
+                }
+          $scope.$broadcast "activity:refresh:likeLabel"
 
       $scope.$on "activity:refresh:likeLabel", ->
         $scope.activity.likeLabel = $scope.compileLikeLabel($scope.activity)
@@ -123,7 +130,6 @@ angular.module('Burnup.directives.buActivitiesShow', [])
         e.preventDefault()
         activity.delete()
         .then ->
-          console.log "delete", activity
           $scope.$emit "activity:destroy:success", activity.id
 
   }

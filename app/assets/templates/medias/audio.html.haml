@@ -7,6 +7,6 @@
     .track-info
       %span.track-name
         {{media.attachment.fileName | limitTo: 30}}
-      %span.track-time.pull-right
+      %span.track-time.pull-right.hidden-xs
         {{audio.currentTime | trackTime}} / {{(audio.currentTime + audio.remaining) | trackTime}}
     %input.form-control.ng-valid.ng-dirty.ng-touched{:max => "1", :min => "0", "ng-model" => "audio.progress", :step => "0.01", :type => "range"}/

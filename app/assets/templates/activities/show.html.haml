@@ -1,4 +1,4 @@
-.panel-body
+.panel-body{"ng-if": "activity"}
   %a.pull-left.user-avatar{href: "#"}
     %img.avatar{"ng-src" => "{{activity.owner.avatar.tiny}}"}
 
@@ -38,7 +38,7 @@
   -#       - trackable_attachment = trackable_file.send(trackable_file_key_name)
   -#       %audio{src: trackable_attachment.url, width: "100%"}
 
-  .media-footer.activity-footer
+  .media-footer.activity-footer{"ng-if": "currentUser.length > 0"}
     %span.social-actions-container
 
       .social-bar

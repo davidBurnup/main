@@ -4,7 +4,21 @@ angular.module('Burnup.directives.buHeaderShowCase', [])
 
   restrict: 'EA'
   templateUrl: 'churches/header_showcase.html'
-  controller: ($scope, $rootScope, ngAudio) ->
-    # $scope.sound = ngAudio.load("/mon-coeur-est-a-toi.mp3")
-    #
-    # $scope.sound.play()
+  scope:
+    churchId: "="
+  controller: ($scope, $rootScope, ngAudio, Church) ->
+    Church.get(
+      id: $scope.churchId
+    ).then (church) ->
+      $scope.lastActivityId = church.lastActivityId
+
+    $scope.$on "activity:loaded", (e, activity) ->
+      $scope.$broadcast "verticalAlign:resize"
+
+    $scope.$on "audio:loaded", (e, activity) ->
+      $scope.$broadcast "verticalAlign:resize"
+
+    $scope.slideDown = ->
+      $('html, body').animate({
+    	   scrollTop: $("#feed-activities").offset().top
+    	}, 'slow')

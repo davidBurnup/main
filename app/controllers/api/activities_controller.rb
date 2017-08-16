@@ -3,6 +3,7 @@ module Api
   class ActivitiesController < ApiController
 
     before_action :set_activity, only: [:show, :edit, :update, :destroy]
+    skip_before_action :authorize_user, only: [:index, :show]
 
     # GET /api/activities
     # GET /api/activities.json

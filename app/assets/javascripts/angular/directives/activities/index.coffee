@@ -16,6 +16,8 @@ angular.module('Burnup.directives.buActivitiesIndex', [])
       $scope.activitiesLock = false
       $scope.initialized = false
       $scope.currentUser = Auth.currentUser(getInstance: true)
+      $scope.userCanPublish = Object.keys($scope.currentUser).length > 0
+      console.log "kj", $scope.userCanPublish
 
       $scope.loadActivities = (forceRefresh) ->
 
