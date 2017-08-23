@@ -1,10 +1,14 @@
 class RegistrationsController < Devise::RegistrationsController
-  before_filter :update_sanitized_params, if: :devise_controller?
+  before_action :update_sanitized_params, if: :devise_controller?
   layout :resolve_layout
 
+  def new
+    redirect_to root_path(anchor: "sign-up")
+  end
+
   def update_sanitized_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :email, :password, :password_confirmation, :church_id])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :name, :email, :church_id, :password, :password_confirmation, :current_password, :avatar])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :email, :password, :password_confirmation, :page_id])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :name, :email, :page_id, :password, :password_confirmation, :current_password, :avatar])
   end
 
   def after_inactive_sign_up_path_for(resource)
@@ -81,7 +85,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def user_params
-    params.require(:user).permit(:current_password, :password, :password_confirmation, :church_id)
+    params.require(:user).permit(:current_password, :password, :password_confirmation, :page_id)
   end
 
   def instruments_params

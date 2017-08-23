@@ -51,21 +51,21 @@
             Le mot de passe doit comporter au moins 8 caractères.
 
     -# .col-md-12
-    -#   .form-group{"ng-class" => "{'has-error': (signUpForm['user[church_id]'].$dirty && signUpForm['user[church_id]'].$invalid)}"}
+    -#   .form-group{"ng-class" => "{'has-error': (signUpForm['user[page_id]'].$dirty && signUpForm['user[page_id]'].$invalid)}"}
     -#     %label
     -#       Église ou Association
     -#
     -#     .selectize-container
-    -#       %div.creating-sign{"ng-if" => "creatingChurch"}
+    -#       %div.creating-sign{"ng-if" => "creatingPage"}
     -#         %i.fa.fa-cog.fa-spin
     -#         Création en cours ...
-    -#       %div.searching-churches{"ng-if" => "searchingChurches"}
+    -#       %div.searching-pages{"ng-if" => "searchingPages"}
     -#         %i.fa.fa-cog.fa-spin
-    -#       %selectize{config: "selectizeConfig", "ng-model" => "user.church_id", options: "churches", required: true, name: "user[church_id]", "ng-disabled" => "creatingChurch"}
+    -#       %selectize{config: "selectizeConfig", "ng-model" => "user.page_id", options: "pages", required: true, name: "user[page_id]", "ng-disabled" => "creatingPage"}
     -#
-    -#     %span.help-block{"ng-if" => "signUpForm['user[church_id]'].$dirty && signUpForm['user[church_id]'].$invalid"}
+    -#     %span.help-block{"ng-if" => "signUpForm['user[page_id]'].$dirty && signUpForm['user[page_id]'].$invalid"}
     -#       %i.fa.fa-warning
-    -#       %span{"ng-if" => "signUpForm['user[church_id]'].$error.required"}
+    -#       %span{"ng-if" => "signUpForm['user[page_id]'].$error.required"}
     -#         L'église est obligatoire !
 
     .col-md-12

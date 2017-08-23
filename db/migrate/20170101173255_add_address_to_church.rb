@@ -1,5 +1,5 @@
-class AddAddressToChurch < ActiveRecord::Migration
+class AddAddressToPage < ActiveRecord::Migration
   def change
-    add_column :churches, :address, :string
+    add_column :pages, :address, :string
   end
 end

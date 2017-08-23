@@ -1,4 +1,4 @@
-class UserSongPreference < ActiveRecord::Base
+class UserSongPreference < ApplicationRecord
 
   belongs_to :user
   belongs_to :song

@@ -1,8 +1,11 @@
 likable ||= nil
 
 if likable
-
-  likers = User.where(id: (likable.likers(User).collect(&:id) - (current_user ? [current_user.id] : []) ))
+  user_ids = likable.likers(User).collect(&:id)
+  if current_user
+    user_ids << current_user.id
+  end
+  likers = User.where(id: user_ids)
 
   json.likers likers do |user|
     json.id user.id

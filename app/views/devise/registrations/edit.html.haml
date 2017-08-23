@@ -27,9 +27,9 @@
             = f.text_field :last_name, :autofocus => true, class: 'form-control'
         .form-group
           .col-lg-2.col-md-2.col-sm-2.col-xs-2.col-xs-offset-1.profile-label
-            = f.label :church
+            = f.label :page
           .col-lg-6.col-md-6.col-sm-6.col-xs-8
-            = f.input :church_id, :as => :select, :label => false, :collection => Church.all.map{|c| [c.name, c.id]}
+            = f.input :page_id, :as => :select, :label => false, :collection => Page.all.map{|c| [c.name, c.id]}
         .form-group
           .col-lg-2.col-md-2.col-sm-2.col-xs-2.col-xs-offset-1.profile-label
             = f.label :email

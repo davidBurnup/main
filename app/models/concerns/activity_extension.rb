@@ -8,7 +8,11 @@ module ActivityExtension
     acts_as_commentable
 
     scope :on, ->(recipient){
-      where(recipient_type: recipient.class.to_s, recipient_id: recipient.id)
+      where(recipient_type: recipient.class.to_s, recipient_id: recipient.id).published
+    }
+
+    scope :published, -> {
+      where('activities.is_draft IS NOT true')
     }
 
     def notifiable_users(only_self: false, origin_notifiable_resolver: nil)

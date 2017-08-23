@@ -1,21 +1,21 @@
-angular.module('Burnup.directives.buChurchesShow', [])
+angular.module('Burnup.directives.buPagesShow', [])
 
-.directive 'buChurchesShow', (User, SelectizeTemplator, $filter, Church) ->
+.directive 'buPagesShow', (User, SelectizeTemplator, $filter, Page) ->
   {
     restrict: 'E'
-    templateUrl: 'churches/show.html'
+    templateUrl: 'pages/show.html'
     scope:
-      church: "="
+      page: "="
 
     controller: ($scope, $uibModal, $timeout, Auth, $rootScope) ->
 
       $scope.currentUser = Auth.currentUser()
 
       $scope.select = ->
-        $scope.$emit "church:select", $scope.church
+        $scope.$emit "page:select", $scope.page
 
       $scope.unselect = ->
-        $scope.$emit "church:unselect", $scope.church
+        $scope.$emit "page:unselect", $scope.page
 
       $rootScope.$on "currentUser:updated", (e, currentUser) ->
         $scope.currentUser = currentUser

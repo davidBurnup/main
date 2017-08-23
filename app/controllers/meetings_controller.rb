@@ -111,8 +111,8 @@ class MeetingsController < ApplicationController
   private
 
     def prepare_form
-      if current_user.church
-          @users = current_user.church.users
+      if current_user.page
+          @users = current_user.page.users
       else
           @users = User.all
       end

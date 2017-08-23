@@ -1,7 +1,7 @@
 %span{"uib-dropdown" => true, "auto-close" => "outsideClick", "is-open" => "status.isOpen"}
 
-  = link_to "#", "uib-dropdown-toggle" => true do
-    = fa_icon "bell-o"
+  %a{href: "#", "uib-dropdown-toggle" => true}
+    %i.fa.fa-bell-o
     %span.inline-visible-xs
       NOTIFICATIONS
     %span.badge.notification-count{"ng-show" => "ready"}
@@ -27,13 +27,13 @@
 
         .seen-notification{"ng-click" => "setAsSeen(notification);$event.preventDefault();$event.stopPropagation()", "ng-if" => "!notification.is_seen"}
           %span{"ng-if" => "!notification.updating"}
-            = fa_icon "check"
+            %i.fa.fa-check
           %span{"ng-if" => "notification.updating"}
-            = fa_icon "cog", class: "fa-spin"
+            %i.fa.fa-spin.fa-cog
 
     %li.loading.text-center{"ng-if" => "!ready"}
       %i.fa.fa-cog.fa-spin
 
     %li.no-result{"ng-if" => "!notifications || (notifications && notifications.length == 0)"}
-      = fa_icon "bell-slash-o"
+      %i.fa.fa-bell-slash-o
       Aucune notification pour l'instant !

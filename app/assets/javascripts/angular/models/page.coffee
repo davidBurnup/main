@@ -1,12 +1,12 @@
-angular.module('Burnup.models.Church', ['ngResource', 'rails'])
+angular.module('Burnup.models.Page', ['ngResource', 'rails'])
 
-.factory 'Church', ($resource, RailsResource, railsSerializer) ->
+.factory 'Page', ($resource, RailsResource, railsSerializer) ->
 
-  class Church extends RailsResource
+  class Page extends RailsResource
     @configure
 
       url: (context) ->
-        defaultUrl = '/api/eglises'
+        defaultUrl = '/api/pages'
 
         if context.id
           defaultUrl += "/#{context.id}"
@@ -18,7 +18,7 @@ angular.module('Burnup.models.Church', ['ngResource', 'rails'])
 
         defaultUrl
 
-      , name: 'church'
+      , name: 'page'
 
 
-  return Church
+  return Page

@@ -1,4 +1,4 @@
-class Media < ActiveRecord::Base
+class Media < ApplicationRecord
 
   self.table_name = "medias"
 

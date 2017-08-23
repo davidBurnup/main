@@ -19,7 +19,7 @@ class PublicActivity::ActivityPolicy
   end
 
   def destroy?
-    @user and (@user.admin? or @record.owner == @user)
+    @user.present? and (@user.admin? or @record.owner == @user)
   end
 
 end

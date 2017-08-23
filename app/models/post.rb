@@ -1,4 +1,4 @@
-class Post < ActiveRecord::Base
+class Post < ApplicationRecord
   include ActsAsFeedable
   include ActsAsNotifiable
   belongs_to :user
@@ -34,11 +34,17 @@ class Post < ActiveRecord::Base
   })
 
   feedable({
-    title: lambda{|p|
+    title: lambda{|p, activity|
       title = ""
 
       if p.creator
-        title = "#{p.creator.short_name} a publié "
+        title = "#{p.creator.short_name}"
+
+        if activity.owner and p.owner.respond_to? :feed_owner_option
+          title = p.owner.feed_owner_option(:title)
+        end
+
+        title += " a publié "
         if p.song and p.song.title.present?
           title += "à propos du chant #{p.song.title}"
         end
@@ -59,8 +65,18 @@ class Post < ActiveRecord::Base
     },
     recipient: lambda{|p|
       p.creator
+    },
+    is_draft: :is_draft,
+    owner: lambda {|p, new_activity|
+      o = p.creator
+      if o and r = new_activity.recipient and r.is_a? Page and r.is_admin?(o)
+        o = r
+      end
+      o
     }
   })
+
+  
 
   # => only_self : gets notifiable users only for the current object
   def notifiable_users(only_self: false, origin_notifiable_resolver: nil)
@@ -70,10 +86,10 @@ class Post < ActiveRecord::Base
     if self.user
       n_users_ids << self.user.id
 
-      # all users from the same church
+      # all users from the same page
       # if post was just created
-      if self.id_changed? and self.user.church and only_self
-        n_users_ids += self.user.church.users.collect(&:id)
+      if self.id_changed? and self.user.page and only_self
+        n_users_ids += self.user.page.users.collect(&:id)
       end
     end
 

@@ -1,4 +1,4 @@
-class InstrumentPreference < ActiveRecord::Base
+class InstrumentPreference < ApplicationRecord
 
   belongs_to :user
 

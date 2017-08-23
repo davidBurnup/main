@@ -21,18 +21,18 @@
             .step-sublabel
               ou votre commaunauté
 
-        %form{"ng-submit" => "chooseChurch()", name: "chooseChurch", "ng-if" => "!submitted"}
-          .church-chooser.form-group
+        %form{"ng-submit" => "choosePage()", name: "choosePage", "ng-if" => "!submitted"}
+          .page-chooser.form-group
 
-            %div.searching-churches{"ng-if" => "searchingChurches"}
+            %div.searching-pages{"ng-if" => "searchingPages"}
               %i.fa.fa-cog.fa-spin
 
-            %input.form-control{placeholder: 'Nom ...', type: :text, name: 'name', "ng-model" => "church.name", "ng-model-options" => "{ updateOn: 'default blur', debounce: {'default': 800, 'blur': 0} }", "ng-if" => "currentUser.church_id == null"}
+            %input.form-control{placeholder: 'Nom ...', type: :text, name: 'name', "ng-model" => "page.name", "ng-model-options" => "{ updateOn: 'default blur', debounce: {'default': 800, 'blur': 0} }", "ng-if" => "currentUser.page_id == null"}
 
-            .churches-results{"ng-if" => "!searchingChurches"}
-              %bu-churches-show{"ng-repeat" => "church in churches", church: "church"}
+            .pages-results{"ng-if" => "!searchingPages"}
+              %bu-pages-show{"ng-repeat" => "page in pages", page: "page"}
 
-            .no-church-found{"ng-if" => "chooseChurch.name.$dirty && !searchingChurches && churches.length == 0"}
+            .no-page-found{"ng-if" => "choosePage.name.$dirty && !searchingPages && pages.length == 0"}
               %h3
                 AUCUNE RÉSULTAT
               %p

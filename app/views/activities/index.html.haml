@@ -7,7 +7,6 @@
 -#             .col-sm-12
 -#               #post-form
 -#                 = render "posts/form", :post => @post
-
 - if current_user
   .container-fluid
-    %bu-activities-index{"recipient-type": "'Church'", "recipient-id": "#{current_user.church ? current_user.church.id : ''}"}
+    %bu-activities-index{"recipient-type": "'Page'", "recipient-id": "#{current_user.page ? current_user.page.id : ''}"}

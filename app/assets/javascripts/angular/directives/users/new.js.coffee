@@ -1,6 +1,6 @@
 angular.module('Burnup.directives.buUsersNew', [])
 
-.directive 'buUsersNew', (User, SelectizeTemplator, $filter, Church) ->
+.directive 'buUsersNew', (User, SelectizeTemplator, $filter, Page) ->
   {
     restrict: 'E'
     templateUrl: 'users/new.html'

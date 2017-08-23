@@ -2,7 +2,7 @@
 module Api
   class UsersController < ApiController
 
-    skip_before_filter :authorize_user, only: [:create]
+    skip_before_action :authorize_user, only: [:create]
 
     before_action :set_user, only: [:update, :toggle_like, :push_subscribe, :push_unsubscribe]
 
@@ -93,7 +93,7 @@ module Api
     end
 
     def update_user_params
-      params.require(:user).permit(:church_id, :avatar, :is_finalized)
+      params.require(:user).permit(:page_id, :avatar, :is_finalized)
     end
   end
 end

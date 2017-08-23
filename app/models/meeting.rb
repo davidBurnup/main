@@ -1,4 +1,4 @@
-class Meeting < ActiveRecord::Base
+class Meeting < ApplicationRecord
   include ActsAsFeedable
   include ActsAsNotifiable
   has_many :meeting_users
@@ -64,10 +64,10 @@ class Meeting < ActiveRecord::Base
     if self.creator
       n_users_ids << self.creator.id
 
-      # all users from the same church
+      # all users from the same page
       # if post was just created
-      if self.id_changed? and self.creator.church
-        n_users_ids += self.creator.church.users.collect(&:id)
+      if self.id_changed? and self.creator.page
+        n_users_ids += self.creator.page.users.collect(&:id)
       end
     end
 

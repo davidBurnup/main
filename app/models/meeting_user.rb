@@ -1,4 +1,4 @@
-class MeetingUser < ActiveRecord::Base
+class MeetingUser < ApplicationRecord
   belongs_to :user
   belongs_to :meeting
 

@@ -1,6 +1,6 @@
 angular.module('Burnup.directives.buUsersFinalize', ['ngImgCrop', 'ngFileUpload', 'angular-svg-round-progressbar'])
 
-.directive 'buUsersFinalize', (User, SelectizeTemplator, $filter, Auth, Church, Upload) ->
+.directive 'buUsersFinalize', (User, SelectizeTemplator, $filter, Auth, Page, Upload) ->
   {
     restrict: 'E'
     templateUrl: 'users/finalize.html'
@@ -10,24 +10,24 @@ angular.module('Burnup.directives.buUsersFinalize', ['ngImgCrop', 'ngFileUpload'
     controller: ($scope, $uibModal, $timeout, User) ->
 
       $scope.currentUser = Auth.currentUser()
-      $scope.churches = []
-      $scope.church = {}
+      $scope.pages = []
+      $scope.page = {}
 
-      $scope.$watch "church.name", (churchName) ->
-        console.log "churchName", churchName
-        $scope.churches = []
-        $scope.searchingChurches = true
-        Church.query(search: churchName).then (churches) ->
-          $scope.churches = churches
-          $scope.searchingChurches = false
+      $scope.$watch "page.name", (pageName) ->
+        console.log "pageName", pageName
+        $scope.pages = []
+        $scope.searchingPages = true
+        Page.query(search: pageName).then (pages) ->
+          $scope.pages = pages
+          $scope.searchingPages = false
 
-      $scope.$on "church:unselect", (e, church) ->
-        $scope.currentUser.church_id = null
+      $scope.$on "page:unselect", (e, page) ->
+        $scope.currentUser.page_id = null
         new User($scope.currentUser).save().then ->
           Auth.setCurrentUser($scope.currentUser)
 
-      $scope.$on "church:select", (e, church) ->
-        $scope.currentUser.church_id = church.id
+      $scope.$on "page:select", (e, page) ->
+        $scope.currentUser.page_id = page.id
         new User($scope.currentUser).save().then ->
           Auth.setCurrentUser($scope.currentUser)
 

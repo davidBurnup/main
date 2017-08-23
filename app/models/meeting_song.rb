@@ -1,5 +1,5 @@
 # encoding: utf-8
-class MeetingSong < ActiveRecord::Base
+class MeetingSong < ApplicationRecord
 
   belongs_to :song
   belongs_to :leader, :class_name => "User", :foreign_key => :leader_id

@@ -14,6 +14,7 @@
         %textarea.form-control{name: "content", "ng-model": "post.content", 'msd-elastic': true, autofocus: true, rows: 1, placeholder: 'Qu\'est-ce qui vous enflamme aujourd\'hui ?*', "ng-disabled": "savingPost", "ng-required": "files.length == 0"}
         .help-block{"ng-show": "(postForm.$submitted || postForm.content.$touched) && postForm.content.$error.required"}
           Ce champ est obligatoire.
+
       %span{"ng-if": "withPhoto"}
         -# .button.btn.btn-sm.btn-default{"ng-model": :files, "ngf-multiple": true, "ngf-select": true, "ngf-pattern": "images/*"}
         -#   Select
@@ -81,7 +82,7 @@
     .modal-footer
       .row
         .col-sm-6.text-left
-          %button.btn.btn-default{type: :button, "ng-click" => "withPhoto = !withPhoto", "ng-if": "!withPhoto"}
+          %button.btn.btn-default{type: :button, "ng-click" => "showPhoto()", "ng-if": "!withPhoto"}
             %i.fa.fa-plus
             %i.fa.fa-photo
 

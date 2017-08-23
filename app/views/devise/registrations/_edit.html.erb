@@ -20,7 +20,7 @@
               <%= f.file_field :avatar %>
             </div>
             <div class="form-group">
-              <%= f.input :church, :as => :select, :collection => Church.all.map{|c| [c.name, c.id]} %>
+              <%= f.input :page, :as => :select, :collection => Page.all.map{|c| [c.name, c.id]} %>
             </div>
             <div class="form-group">
               <%= f.label :email %>

@@ -36,6 +36,7 @@
     }
     .avatar {
       border-radius: 100px;
+      max-width: 40px;
     }
     .user-avatar {
       margin-right: 12px;
@@ -166,6 +167,7 @@
   .user-avatar {
     @include rounded-corners(100px);
     padding: 0;
+    max-width: 40px;
   }
   h1 {
     font-size: 20px;

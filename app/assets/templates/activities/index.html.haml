@@ -1,11 +1,9 @@
 #feed-activities.row{'infinite-scroll' => 'loadActivities()', masonry: true, "load-images": "true", 'masonry-options': "{stamp: '.stamp'}", "ng-show": "initialized", "preserve-order": true}
-
-  .stamp{"ng-class": "singleColumn ? 'col-lg-12' : 'col-lg-6'", "ng-show": "userCanPublish"}
+  .stamp{"ng-class": "singleColumn ? 'col-lg-12' : 'col-lg-6'", "ng-show": "writeModeEnabled"}
     .panel.activity{'bu-activities-new': true, "recipient-type": "recipientType", "recipient-id": "recipientId"}
 
   .masonry-brick{"ng-repeat" => "activity in activities", "ng-class": "singleColumn ? 'col-lg-12' : 'col-lg-6'"}
     .panel.activity{'bu-activities-show' => true, 'activity' => 'activity'}
-
 .clear{"ng-if" => "activitiesLock || !initialized"}
   %div.loading-activities
     .sk-folding-cube

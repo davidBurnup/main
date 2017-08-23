@@ -1,2 +1,2 @@
-class UserDevice < ActiveRecord::Base
+class UserDevice < ApplicationRecord
 end

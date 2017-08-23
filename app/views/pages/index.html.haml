@@ -1,0 +1,23 @@
+.col-md-12
+  %h1 Liste des églises
+
+  %table
+    %tr
+      %th Nom
+      %th
+      %th
+      %th
+
+    - @pages.each do |page|
+      %tr
+        %td= page.name
+        %td
+          = link_to 'Voir', page, class: "btn-xs btn btn-primary"
+          = link_to 'Modifier', edit_page_path(page), class: "btn-xs btn btn-primary"
+          = link_to 'Supprimer', page, :method => :delete, :data => { :confirm => "Voulez-vous vraiment supprimer cette #{Page.model_name.human}?" }, class: "btn-xs btn btn-primary"
+
+  %br
+
+  = link_to new_page_path, class: "btn btn-primary btn-md" do
+    = fa_icon "plus"
+    = "Ajouter une #{Page.model_name.human}"

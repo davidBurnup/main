@@ -4,9 +4,9 @@ fr:
       not_saved: "Erreur lors de la sauvegarde"
   activerecord:
     models:
-      church:
-        one: "Église"
-        other: "Églises"
+      page:
+        one: "Page"
+        other: "Pages"
         gender: 'F'
         is_valid: "Organisme authentique"
       user:
@@ -46,20 +46,20 @@ fr:
             content:
               blank: Paroles obligatoires
     attributes:
-      church:
+      page:
         name: Nom
       user:
         avatar: Photo
         first_name: Prénom
         last_name: Nom
-        church: Église
+        page: Page
         name: Nom d'utilisateur
         email: Email
         remember_me: Se souvenir de moi
         password: Mot de passe
         password_confirmation: Mot de passe de confirmation
         current_password: Mot de passe actuel
-        church_id: Église
+        page_id: Page
       instrument_preferences:
         detail: Marque, modèle, etc...
       song:
@@ -81,7 +81,7 @@ fr:
         start_at: Horaires de début
         duration: Durée
         reminder: Rappel
-  church_roles:
+  page_roles:
     member: Membre
     moderator: Modérateur
   user_roles:

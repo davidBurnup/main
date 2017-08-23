@@ -1,9 +1,9 @@
-class ChurchPolicy
-  attr_reader :user, :church
+class PagePolicy
+  attr_reader :user, :page
 
-  def initialize(user, church)
+  def initialize(user, page)
     @user = user
-    @church = church
+    @page = page
   end
 
   def index?

@@ -1,12 +1,13 @@
 Worship::Application.routes.draw do
 
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root :to => "application#main_fallback"
 
   resources :posts, path: 'publications'
 
   resources :activities, only: [:index], path: "fil"#, only: [:destroy], controller: "socializables"
 
-  resources :churches, path: "pages"
+  resources :pages, path: "pages"
 
   resources :comments
 
@@ -77,9 +78,9 @@ Worship::Application.routes.draw do
       post "sessions/se-connecter" => "sessions#create", as: "sessions"
     end
 
-    resources :churches, only: [:index, :create, :show], path: 'eglises' do
+    resources :pages, only: [:index, :create, :show], path: 'pages' do
       collection do
-        get "/recherche/:search" => "churches#index"
+        get "/recherche/:search" => "pages#index"
       end
     end
 

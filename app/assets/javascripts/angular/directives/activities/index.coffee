@@ -8,19 +8,20 @@ angular.module('Burnup.directives.buActivitiesIndex', [])
       singleColumn: "="
       recipientType: "="
       recipientId: "="
+      writeModeEnabled: "=?"
 
     controller: ($scope) ->
-      $scope.activities = []
+      $scope.activities = []  
       $scope.page = 0
       $scope.reachedLastPage = false
       $scope.activitiesLock = false
       $scope.initialized = false
       $scope.currentUser = Auth.currentUser(getInstance: true)
-      $scope.userCanPublish = Object.keys($scope.currentUser).length > 0
-      console.log "kj", $scope.userCanPublish
+      unless $scope.writeModeEnabled?
+        $scope.writeModeEnabled = true
+
 
       $scope.loadActivities = (forceRefresh) ->
-
         if ((!$scope.reachedLastPage and !$scope.activitiesLock) or forceRefresh)
 
           if forceRefresh

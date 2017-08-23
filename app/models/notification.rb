@@ -1,4 +1,4 @@
-class Notification < ActiveRecord::Base
+class Notification < ApplicationRecord
 
   belongs_to :notifiable, polymorphic: true
   belongs_to :notifier, class_name: "User"

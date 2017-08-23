@@ -67,11 +67,14 @@ module Api
       def prepare_params
         @prepared_post_params = post_params
         if r_klass = @prepared_post_params[:recipient_type] and r_klass = r_klass.safe_constantize and r_id = @prepared_post_params[:recipient_id] and @recipient = r_klass.find(r_id)
-          @prepared_post_params.delete :recipient_type
-          @prepared_post_params.delete :recipient_id
+
+        elsif current_user
+          @recipient = current_user
         else
-          head :bad_request
+          head :bad_request          
         end
+        @prepared_post_params.delete :recipient_type
+        @prepared_post_params.delete :recipient_id
       end
   end
 end

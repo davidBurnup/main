@@ -2,7 +2,8 @@ if activity and t = activity.trackable #and t.feedable_option(:title).present? #
   json.id activity.id
   if activity.owner
     json.owner do
-      json.partial! "/api/users/user", user: activity.owner
+      # json.partial! "/api/users/user", user: activity.owner
+      json.partial! "/api/#{activity.owner.class.to_s.underscore.pluralize}/#{activity.owner.class.to_s.underscore}", "#{activity.owner.class.to_s.underscore.to_sym}": activity.owner
     end
   end
 

@@ -1,4 +1,4 @@
-class PracticeUser < ActiveRecord::Base
+class PracticeUser < ApplicationRecord
   belongs_to :user
   belongs_to :practice
 

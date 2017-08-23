@@ -1,8 +1,8 @@
-class Comment < ActiveRecord::Base
+class Comment < ApplicationRecord
 
   include ActsAsNotifiable
   include ActsAsCommentable::Comment
-
+  
   acts_as_likeable
 
   stampable
