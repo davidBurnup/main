@@ -101,6 +101,22 @@ bu-pages-show {
     z-index: 1;
     bottom: 30%;
     width: 100%;
+    left: 100%;
+    @include transition();
+    &.active {
+      left: 0;
+    }
+  }
+  #page-title-container {
+    position: absolute;
+    z-index: 1;
+    bottom: 30%;
+    width: 100%;
+    left: -100%;
+    @include transition();
+    &.active {
+      left: 0;
+    }
     h1 {
       color: white;
       text-align: center;

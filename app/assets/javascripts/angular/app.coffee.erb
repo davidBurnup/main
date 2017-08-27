@@ -34,6 +34,7 @@
   "Burnup.directives.notifications"
   "Burnup.directives.buDecoPane"
   "Burnup.directives.buUsersNew"
+  "Burnup.directives.buUsersShow"
   "Burnup.directives.buUsersFinalize"
   "Burnup.directives.buBootstrapFile"
   "Burnup.directives.buPagesShow"
@@ -82,10 +83,15 @@
       return
 
   PushManager.initialize()
+
+  $(document).on 'turbolinks:load', ->
+    $rootScope.$broadcast "TurboLink:page:changed"
 )
 
+$(document).on 'turbolinks:before-change', ->
+  angular.element("body").scope().$broadcast("$destroy")
 
-$(document).on 'page:load', ->
-  $('[ng-app]').each ->
-    module = $(this).attr('ng-app')
+$(document).on 'turbolinks:load', ->
+  $('[angular-rails-app]').each ->
+    module = $(this).attr('angular-rails-app')
     angular.bootstrap(this, [module])

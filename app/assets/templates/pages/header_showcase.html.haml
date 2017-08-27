@@ -1,17 +1,21 @@
--# .player-container
--#   %i.fa.fa-play
-%img.page-logo{"ng-src": "{{page.avatar.medium}}" }
-#page-info-container.text-center
-  %h1.slogan.bu-slide-top
-    {{page.slogan}}
-    .actions
-      %button.btn.btn-default.btn-md
-        %i.fa.fa-info-circle
-        À PROPOS
-      %button.btn.btn-primary.btn-md{"ng-click": "goDown()"}
-        %i.fa.fa-chevron-down
-        DÉCOUVRIR
-  -# %a.goDown.slide-top{"ng-click": "goDown()"}
-  -#   %i.fa.fa-chevron-down
 
-%img.powered-by{src: asset_path("power-by.svg")}
+%span.main-header-container
+  %img.page-logo{"ng-src": "{{page.avatar.medium}}"}
+
+  #page-title-container.text-center{"ng-class": "infoModalOn ? '' : 'active'"}
+    %h1.slogan.bu-slide-top
+      {{page.slogan}}
+      .actions
+        %button.btn.btn-default.btn-md{"ng-click": "showInfo()"}
+          %i.fa.fa-info-circle
+          À PROPOS
+        %button.btn.btn-primary.btn-md{"ng-click": "goDown()"}
+          %i.fa.fa-chevron-down
+          DÉCOUVRIR
+    -# %a.goDown.slide-top{"ng-click": "goDown()"}
+    -#   %i.fa.fa-chevron-down
+
+  #page-info-container.text-center{"ng-class": "infoModalOn ? 'active' : ''"}
+    %h1.slogan.bu-slide-top
+      test
+  -# %img.powered-by{src: asset_path("power-by.svg")}

@@ -40,10 +40,10 @@ class User < ApplicationRecord
   }
 
   feed_owner({
-    title: lambda{|p|
+    title: lambda{|u|
       owner_title = ""
-      if p.creator
-        owner_title = p.creator.short_name
+      if u
+        owner_title = u.short_name
       end
       owner_title
     }

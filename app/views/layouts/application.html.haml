@@ -15,7 +15,7 @@
     %link{:color => "#da351c", :href => "/safari-pinned-tab.svg", :rel => "mask-icon"}/
     %meta{:content => "#ff0000", :name => "theme-color"}/
 
-  %body{"ng-app" => "Burnup", "ng-class" => "$root.pageIsUnscrollable == true ? 'unscrollable' : ''", "ng-controller" => "Main"}
+  %body{"angular-rails-app" => "Burnup", "ng-class" => "$root.pageIsUnscrollable == true ? 'unscrollable' : ''", "ng-controller" => "Main"}
 
     - if content_for? :pre_header
       = yield :pre_header

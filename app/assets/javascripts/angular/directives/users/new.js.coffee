@@ -5,7 +5,7 @@ angular.module('Burnup.directives.buUsersNew', [])
     restrict: 'E'
     templateUrl: 'users/new.html'
     scope:
-      user: "="
+      user: "=?"
 
     controller: ($scope, $uibModal, $timeout) ->
 

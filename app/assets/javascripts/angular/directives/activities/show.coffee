@@ -1,4 +1,5 @@
 angular.module('Burnup.directives.buActivitiesShow', [])
+angular.module('Burnup.directives.buActivitiesShow', [])
 
 .directive 'buActivitiesShow', (Activity, $sce, Auth, User, $timeout, $uibModal, $http) ->
   {
@@ -11,6 +12,7 @@ angular.module('Burnup.directives.buActivitiesShow', [])
     controller: ($scope, Auth, $timeout, Comment) ->
 
       $scope.currentUser = Auth.currentUser()
+      $scope.isLoggedIn = Auth.isLoggedIn()
 
       if $scope.activityId?
         Activity.get(
@@ -21,10 +23,12 @@ angular.module('Burnup.directives.buActivitiesShow', [])
 
       $scope.compileLikeLabel = (activity) ->
         label = ""
+        other_likes_count = activity.likers.length
         if activity.liked
           label = "Vous"
-          if activity.likers.length > 0
-            if activity.likers.length == 1
+          other_likes_count -= 1
+          if activity.likers.length > 1
+            if activity.likers.length == 2
               label += " et "
             else
               label += ", "
@@ -36,16 +40,17 @@ angular.module('Burnup.directives.buActivitiesShow', [])
           if liker.name and liker.id != $scope.currentUser.id
             label += "#{liker.name}"
 
-          # Choose separator
-          if i >= 2 or (activity.likers.length > 1 and i == (activity.likers.length - 2))
-            label += " et "
-          else if activity.likers.length > 2 and i < (activity.likers.length - 2)
-            label += ", "
+          if other_likes_count > 1
+            # Choose separator
+            if i >= 2 or (other_likes_count > 1 and i == (activity.likers.length - 2))
+              label += " et "
+            else if other_likes_count > 2 and i < (activity.likers.length - 2)
+              label += ", "
 
-          # Break the loop if more than 2 iterations
-          if i >= 1
-            label += "#{activity.likers.length - 2} autre#{if activity.likers.length > 3 then 's' else ''} personne#{if activity.likers.length > 3 then 's' else ''} "
-            break
+            # Break the loop if more than 2 iterations
+            if i >= 1
+              label += "#{activity.likers.length - 2} autre#{if activity.likers.length > 3 then 's' else ''} personne#{if activity.likers.length > 3 then 's' else ''} "
+              break
 
         if activity.likers.length > 0 or activity.liked
           label += " brul#{if activity and activity.liked then 'ez' else (if activity.likers.length > 1 then "ent" else "e")} pour ceci."

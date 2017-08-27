@@ -72,6 +72,16 @@ ActiveRecord::Schema.define(version: 20170814085753) do
     t.index ["liker_id", "liker_type"], name: "fk_likes"
   end
 
+  create_table "media", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string "attachment_file_name"
+    t.string "attachment_content_type"
+    t.integer "attachment_file_size"
+    t.datetime "attachment_updated_at"
+  end
+
   create_table "medias", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "post_id"
     t.datetime "created_at"
@@ -217,7 +227,7 @@ ActiveRecord::Schema.define(version: 20170814085753) do
     t.datetime "updated_at"
   end
 
-  create_table "songs", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "songs", id: :integer, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
     t.string "title"
     t.text "content"
     t.string "key"

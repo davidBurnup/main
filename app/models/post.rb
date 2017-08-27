@@ -34,14 +34,14 @@ class Post < ApplicationRecord
   })
 
   feedable({
-    title: lambda{|p, activity|
+    title: lambda{|p|
       title = ""
 
-      if p.creator
+      if p.creator and activity = p.activity
         title = "#{p.creator.short_name}"
 
-        if activity.owner and p.owner.respond_to? :feed_owner_option
-          title = p.owner.feed_owner_option(:title)
+        if activity.owner and activity.owner.respond_to? :feed_owner_option
+          title = activity.owner.feed_owner_option(:title)
         end
 
         title += " a publié "
@@ -76,7 +76,7 @@ class Post < ApplicationRecord
     }
   })
 
-  
+
 
   # => only_self : gets notifiable users only for the current object
   def notifiable_users(only_self: false, origin_notifiable_resolver: nil)
