@@ -8,6 +8,7 @@ if user
     json.original user.avatar.url(:original)
     json.tiny user.avatar.url(:tiny)
     json.medium user.avatar.url(:medium)
+    json.thumb user.avatar.url(:thumb)
   end
   if !user.avatar.present?
     json.no_avatar true

@@ -36,9 +36,13 @@ angular.module('Burnup.services.Auth', [])
       sessionStorage.setItem('currentUser', escape(JSON.stringify(uData)))
       sessionStorage.setItem('lastLoginTime', moment().format(timeFormat))
 
+  isLoggedIn = ->
+    return currentUser() and currentUser().id?
+
 
   {
     currentUser: currentUser
     setCurrentUser: setCurrentUser
     setSessionUserData: setSessionUserData
+    isLoggedIn: isLoggedIn
   }

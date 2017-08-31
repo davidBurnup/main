@@ -65,7 +65,7 @@ Worship::Application.routes.draw do
 
     resources :medias, only: [:create, :destroy]
 
-    resources :users, only: [:create, :update], path: 'utilisateurs' do
+    resources :users, only: [:create, :update, :show], path: 'utilisateurs' do
       member do
         put 'aime/:activity_id' => "users#toggle_like", :as => "toggle_like"
         post "push" => "users#push_subscribe"

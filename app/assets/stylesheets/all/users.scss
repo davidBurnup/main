@@ -261,3 +261,12 @@ bu-users-new {
     margin: 0 0 10px 0;
   }
 }
+bu-users-show {
+  h1 {
+    font-size: 20px;
+    vertical-align: middle;
+  }
+  .avatar {
+    @include rounded-corners(100px);
+  }
+}

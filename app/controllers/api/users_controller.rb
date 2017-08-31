@@ -4,14 +4,17 @@ module Api
 
     skip_before_action :authorize_user, only: [:create]
 
-    before_action :set_user, only: [:update, :toggle_like, :push_subscribe, :push_unsubscribe]
+    before_action :set_user, only: [:update, :toggle_like, :push_subscribe, :push_unsubscribe, :show]
 
     def current
 
     end
-      
+
     def create
       @user = User.create(create_user_params)
+    end
+
+    def show
     end
 
     def update

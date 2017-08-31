@@ -2,11 +2,10 @@ likable ||= nil
 
 if likable
   user_ids = likable.likers(User).collect(&:id)
-  if current_user
+  if current_user and current_user.likes?(likable)
     user_ids << current_user.id
   end
   likers = User.where(id: user_ids)
-
   json.likers likers do |user|
     json.id user.id
     json.name user.short_name
