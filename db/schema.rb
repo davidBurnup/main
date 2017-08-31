@@ -13,14 +13,14 @@
 ActiveRecord::Schema.define(version: 20170814085753) do
 
   create_table "activities", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "trackable_id"
     t.string "trackable_type"
-    t.integer "owner_id"
+    t.integer "trackable_id"
     t.string "owner_type"
+    t.integer "owner_id"
     t.string "key"
     t.text "parameters"
-    t.integer "recipient_id"
     t.string "recipient_type"
+    t.integer "recipient_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean "is_draft"
@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 20170814085753) do
   create_table "comments", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title", limit: 50, default: ""
     t.text "comment"
-    t.integer "commentable_id"
     t.string "commentable_type"
+    t.integer "commentable_id"
     t.integer "creator_id"
     t.string "role", default: "comments"
     t.datetime "created_at"
@@ -70,6 +70,16 @@ ActiveRecord::Schema.define(version: 20170814085753) do
     t.datetime "created_at"
     t.index ["likeable_id", "likeable_type"], name: "fk_likeables"
     t.index ["liker_id", "liker_type"], name: "fk_likes"
+  end
+
+  create_table "media", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string "attachment_file_name"
+    t.string "attachment_content_type"
+    t.integer "attachment_file_size"
+    t.datetime "attachment_updated_at"
   end
 
   create_table "medias", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -217,7 +227,7 @@ ActiveRecord::Schema.define(version: 20170814085753) do
     t.datetime "updated_at"
   end
 
-  create_table "songs", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "songs", id: :integer, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
     t.string "title"
     t.text "content"
     t.string "key"
@@ -280,8 +290,8 @@ ActiveRecord::Schema.define(version: 20170814085753) do
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
     t.integer "invitation_limit"
-    t.integer "invited_by_id"
     t.string "invited_by_type"
+    t.integer "invited_by_id"
     t.integer "invitations_count", default: 0
     t.string "avatar_file_name"
     t.string "avatar_content_type"

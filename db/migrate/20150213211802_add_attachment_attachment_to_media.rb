@@ -1,4 +1,4 @@
-class AddAttachmentAttachmentToMedia < ActiveRecord::Migration
+class AddAttachmentAttachmentToMedia < ActiveRecord::Migration[4.2]
   def self.up
     change_table :media do |t|
       t.attachment :attachment

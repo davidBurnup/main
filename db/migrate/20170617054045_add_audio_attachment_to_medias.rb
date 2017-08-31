@@ -1,4 +1,4 @@
-class AddAudioAttachmentToMedias < ActiveRecord::Migration
+class AddAudioAttachmentToMedias < ActiveRecord::Migration[4.2]
   def change
     [:audio].each do |attachment|
       add_column :medias, "#{attachment}_file_name".to_sym, :string

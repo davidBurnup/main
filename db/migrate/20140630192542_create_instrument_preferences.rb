@@ -1,4 +1,4 @@
-class CreateInstrumentPreferences < ActiveRecord::Migration
+class CreateInstrumentPreferences < ActiveRecord::Migration[4.2]
   def change
     create_table :instrument_preferences do |t|
       t.integer :instrument

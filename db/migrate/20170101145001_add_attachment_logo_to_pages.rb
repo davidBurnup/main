@@ -1,4 +1,4 @@
-class AddAttachmentLogoToPages < ActiveRecord::Migration
+class AddAttachmentLogoToPages < ActiveRecord::Migration[4.2]
   def self.up
     change_table :pages do |t|
       t.attachment :logo

@@ -1,4 +1,4 @@
-class CreatePracticeUsers < ActiveRecord::Migration
+class CreatePracticeUsers < ActiveRecord::Migration[4.2]
   def change
     create_table :practice_users do |t|
       t.integer :user_id

@@ -1,4 +1,4 @@
-class CreatePageRoles < ActiveRecord::Migration
+class CreatePageRoles < ActiveRecord::Migration[4.2]
   def change
     create_table :page_roles do |t|
       t.integer :user_id

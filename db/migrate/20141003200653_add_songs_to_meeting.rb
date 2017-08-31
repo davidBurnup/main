@@ -1,4 +1,4 @@
-class AddSongsToMeeting < ActiveRecord::Migration
+class AddSongsToMeeting < ActiveRecord::Migration[4.2]
   def change
     add_column :meetings, :songs, :text
   end

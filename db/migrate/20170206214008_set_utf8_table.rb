@@ -1,4 +1,4 @@
-class SetUtf8Table < ActiveRecord::Migration
+class SetUtf8Table < ActiveRecord::Migration[4.2]
   def change_encoding(encoding,collation)
     connection = ActiveRecord::Base.connection
     tables = connection.tables

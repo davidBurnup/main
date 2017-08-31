@@ -1,4 +1,4 @@
-class CreateMeetingUsers < ActiveRecord::Migration
+class CreateMeetingUsers < ActiveRecord::Migration[4.2]
   def change
     create_table :meeting_users do |t|
       t.integer :user_id

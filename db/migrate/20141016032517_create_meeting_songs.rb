@@ -1,4 +1,4 @@
-class CreateMeetingSongs < ActiveRecord::Migration
+class CreateMeetingSongs < ActiveRecord::Migration[4.2]
   def change
     create_table :meeting_songs do |t|
       t.integer :song_id
