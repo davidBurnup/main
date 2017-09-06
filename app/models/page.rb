@@ -17,6 +17,10 @@ class Page < ApplicationRecord
   }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
+
+  has_attached_file :background_image, styles: { cover: "1300x900>" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :background_image, content_type: /\Aimage\/.*\z/
+
   feed_owner({
     title: lambda{|p|
       owner_title = ""

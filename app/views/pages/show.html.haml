@@ -1,7 +1,8 @@
 = content_for :pre_header do
-  .page-header-container.ng-cloak{"bu-adapt-window": "'height'"}
+  .page-header-container.ng-cloak{"bu-adapt-window": "'height'", class: "page-#{@page.id}"}
     %bu-header-show-case{"page-id": "#{@page.id}"}
-    .background-image.bu-fade{style: "background-image:url('#{asset_path("father-son.jpg")}')"}
+    / .background-image.bu-fade{style: "background-image:url('#{asset_path("pa.jpg")}')"}
+    .background-image.bu-fade{style: "background-image:url('#{@page.background_image.url(:cover)}')"}
 
 - if @page
   .container-fluid

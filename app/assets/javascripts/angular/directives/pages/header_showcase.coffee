@@ -1,6 +1,6 @@
 angular.module('Burnup.directives.buHeaderShowCase', [])
 
-.directive 'buHeaderShowCase',  (Page) ->
+.directive 'buHeaderShowCase',  (Page, $sce) ->
 
   restrict: 'EA'
   scope:
@@ -13,13 +13,14 @@ angular.module('Burnup.directives.buHeaderShowCase', [])
     if $scope.pageId
       Page.get(id: $scope.pageId).then (page) ->
         $scope.page = page
-        console.log "c", page
+        if page.youtubeVideoId?
+          $scope.youtubeUrl = $sce.trustAsResourceUrl("http://www.youtube.com/embed/#{page.youtubeVideoId}")
 
     $scope.goDown = ->
       n = $(window).height()
       $('html, body').animate { scrollTop: n }, 1000
 
-    $scope.showInfo = ->
+    $scope.toggleInfo = ->
       $scope.infoModalOn = !$scope.infoModalOn
 
     # $scope.sound = ngAudio.load("/mon-coeur-est-a-toi.mp3")

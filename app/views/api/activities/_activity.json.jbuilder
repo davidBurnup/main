@@ -14,8 +14,13 @@ if activity and t = activity.trackable #and t.feedable_option(:title).present? #
   json.content t.feedable_option(:content)
   json.image t.feedable_option(:image)
   json.image_link t.feedable_option(:image_link)
-  json.activity_link t.feedable_option(:activity_link)
 
+  if t.feedable_option(:activity_link).present?
+    json.activity_link t.feedable_option(:activity_link)
+  else
+    json.activity_link activity_path(activity)
+  end
+  
   json.partial! "/api/likes/like", likable: activity
 
   json.created_at l(activity.created_at)

@@ -1,6 +1,4 @@
 angular.module('Burnup.directives.buActivitiesShow', [])
-angular.module('Burnup.directives.buActivitiesShow', [])
-
 .directive 'buActivitiesShow', (Activity, $sce, Auth, User, $timeout, $uibModal, $http) ->
   {
     restrict: 'AE'

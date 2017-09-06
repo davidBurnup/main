@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170814085753) do
+ActiveRecord::Schema.define(version: 20170906191509) do
 
   create_table "activities", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "trackable_type"
@@ -195,6 +195,12 @@ ActiveRecord::Schema.define(version: 20170814085753) do
     t.integer "creator_id"
     t.integer "updater_id"
     t.string "slogan"
+    t.text "description"
+    t.string "youtube_video_id"
+    t.string "background_image_file_name"
+    t.string "background_image_content_type"
+    t.integer "background_image_file_size"
+    t.datetime "background_image_updated_at"
   end
 
   create_table "posts", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

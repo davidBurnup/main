@@ -19,8 +19,8 @@ angular.module('utils.buAdaptWindow', [])
     scrollBehavior = ->
       scrollPosition = $(window).scrollTop()
       maxPosition = $(window).outerHeight()
-      minBackgroundYPosition = 35 # in %
-      maxBackgroundYPosition = 65 # in %
+      minBackgroundYPosition = 0 # in %
+      maxBackgroundYPosition = 100 # in %
 
       # Compute Scroll in percentage of the header height
       scrollPercentage = scrollPosition / maxPosition

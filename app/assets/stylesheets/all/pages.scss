@@ -96,6 +96,14 @@ bu-pages-show {
     margin-top: -30px;
     position: absolute;
   }
+  .vid {
+    width: 400px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+  }
+  .actions {
+    margin-top: 10px;
+  }
   #page-info-container {
     position: absolute;
     z-index: 1;
@@ -106,11 +114,27 @@ bu-pages-show {
     &.active {
       left: 0;
     }
+    .slogan, .description {
+      color: #FFFFFF;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 30px;
+    }
+    .info-actions {
+      margin-top: 20px;
+      .description {
+        font-size: 16px;
+      }
+      .back-button {
+        color: white;
+        margin: 0 20px;
+      }
+    }
   }
   #page-title-container {
     position: absolute;
     z-index: 1;
-    bottom: 30%;
+    bottom: 10%;
     width: 100%;
     left: -100%;
     @include transition();
@@ -177,7 +201,20 @@ bu-pages-show {
   }
 }
 @media (max-width: 768px) {
+  .page-1 {
+    .background-image.bu-fade {
+      background-position: right;
+    }
+  }
   .page-header-container {
+    #page-title-container {
+
+      bottom: 30%;
+      h1 {
+        font-size: 26px;  
+      }
+    } 
+
     bu-header-show-case {
       .church-headline {
         text-align: center;

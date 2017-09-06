@@ -4,8 +4,11 @@
   .form-inputs
     = f.input :name
     = f.input :slogan
+    = f.input :description, as: :text
+    = f.input :youtube_video_id
     -# = f.input :is_valid
     = f.input :avatar
+    = f.input :background_image
     = f.input :address
 
   .form-actions

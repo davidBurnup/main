@@ -14,16 +14,18 @@
 
 
     -# LINKED ACTIVITY
-    %a.media-heading{"ng-if" => "activity.activityLink", href: "{{activity.activityLink}}"}
-      {{activity.title}}
-      %span.content{"ng-bind-html" => "activity.safeContent"}
+    .media-heading{"ng-if" => "activity.activityLink"}
+      %a{href: "{{activity.activityLink}}"} 
+        {{activity.title}}
+      .activity-time{"am-time-ago" => "activity.createdAt | amParse:'DD/MM/YYYY HH:mm'"}
+      / %span.content{"ng-bind-html" => "activity.safeContent"}
 
     -# UNLINKED ACTIVITY
     .media-heading{"ng-if" => "!activity.activityLink"}
       {{activity.title}}
       .activity-time{"am-time-ago" => "activity.createdAt | amParse:'DD/MM/YYYY HH:mm'"}
 
-    %span.content{"ng-if" => "!activity.activityLink", "ng-bind-html" => "activity.safeContent"}
+    %span.content{"ng-bind-html" => "activity.safeContent"}
 
     .medias-container{"ng-if": "activity.mediasForJG.length > 0"}
       %justified-gallery{images: "activity.mediasForJG", "gallery-name": "'activity-' + activity.id + '-gallery'"}

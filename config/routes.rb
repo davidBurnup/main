@@ -5,7 +5,7 @@ Worship::Application.routes.draw do
 
   resources :posts, path: 'publications'
 
-  resources :activities, only: [:index], path: "fil"#, only: [:destroy], controller: "socializables"
+  resources :activities, only: [:index, :show], path: "fil"#, only: [:destroy], controller: "socializables"
 
   resources :pages, path: "pages"
 

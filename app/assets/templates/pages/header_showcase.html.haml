@@ -3,19 +3,38 @@
   %img.page-logo{"ng-src": "{{page.avatar.medium}}"}
 
   #page-title-container.text-center{"ng-class": "infoModalOn ? '' : 'active'"}
+
     %h1.slogan.bu-slide-top
+      .vid.hidden-xs.hidden-sm{"ng-if": "youtubeUrl"}
+        .embed-responsive.embed-responsive-16by9
+          %iframe{:allowfullscreen => "", :frameborder => "0", width: 'auto', height: 'auto', "ng-src": "{{youtubeUrl}}"}
+      
       {{page.slogan}}
       .actions
-        %button.btn.btn-default.btn-md{"ng-click": "showInfo()"}
+        %button.btn.btn-default.btn-md{"ng-click": "toggleInfo()"}
           %i.fa.fa-info-circle
           À PROPOS
         %button.btn.btn-primary.btn-md{"ng-click": "goDown()"}
           %i.fa.fa-chevron-down
           DÉCOUVRIR
+        %button.btn.btn-primary.btn-md{"ng-href": "/pages/{{page.id}}/edit", "ng-if": "page.isEditable"}
+          %i.fa.fa-edit
+          MODIFIER
     -# %a.goDown.slide-top{"ng-click": "goDown()"}
     -#   %i.fa.fa-chevron-down
 
-  #page-info-container.text-center{"ng-class": "infoModalOn ? 'active' : ''"}
+  #page-info-container.text-center{"ng-class": "infoModalOn ? 'active' : ''"}      
     %h1.slogan.bu-slide-top
-      test
+      {{page.name}}
+    .description
+      {{page.description}}
+
+
+    .info-actions
+      %a.back-button{"ng-click": "toggleInfo()"}
+        %i.fa.fa-long-arrow-left
+        RETOUR
+      %button.btn.btn-primary.btn-md{"ng-click": "goDown()"}
+        %i.fa.fa-chevron-down
+        DÉCOUVRIR
   -# %img.powered-by{src: asset_path("power-by.svg")}

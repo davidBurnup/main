@@ -28,7 +28,7 @@ class User < ApplicationRecord
   has_many :sent_notifications, foreign_key: :notifier_id, class_name: "Notification"
   has_many :user_devices
 
-  has_one :page_role
+  has_many :page_role
   accepts_nested_attributes_for :page_role
   accepts_nested_attributes_for :instrument_preferences, :reject_if => :all_blank, :allow_destroy => true
 

@@ -39,6 +39,11 @@
         - if content_for? :right_column
           #right-column.col-lg-4.col-md-4.col-sm-12
             = yield :right_column
+
+        - if !content_for? :left_column and flash.present? and !@no_main_flash
+          .container-fluid
+            - flash.each do |key, msg|
+              = render "/layouts/flash", :msg => msg, :key => key
         = yield
     %footer
       ©#{Time.now.year} - BURN UP - Tous droits réservés

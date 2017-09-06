@@ -46,11 +46,17 @@ class PagesController < ApplicationController
   def update
     authorize @page
     respond_to do |format|
+      @page.description = "1234"
       if @page.update(page_params)
-        format.html { render :edit, notice: 'Page was successfully updated.' }
+        format.html {
+          flash[:notice] = "Votre page a bien été sauvegardé."
+          redirect_to edit_page_path(@page)
+        }
         format.json { render :show, status: :ok, location: @page }
       else
-        format.html { render :edit }
+        format.html { 
+          render :edit, error: @page.errors 
+        }
         format.json { render json: @page.errors, status: :unprocessable_entity }
       end
     end
@@ -76,6 +82,6 @@ class PagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_params
-      params.require(:page).permit(:name, :is_valid, :avatar, :address, :slogan)
+      params.require(:page).permit(:name, :is_valid, :avatar, :address, :slogan, :description, :youtube_video_id, :background_image)
     end
 end
