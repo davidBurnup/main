@@ -74,7 +74,7 @@
 
 @app.run(($rootScope, amMoment, PushManager) ->
   @App = {}
-  App.cable = ActionCable.createConsumer "ws://<%=Rails.application.secrets.CABLE_HOST%>:<%=Rails.application.secrets.CABLE_PORT%>"
+  App.cable = ActionCable.createConsumer "wss://<%=Rails.application.secrets.CABLE_HOST%>:<%=Rails.application.secrets.CABLE_PORT%>"
   amMoment.changeLocale('fr')
   $rootScope.instrumentKeys = [<%= instrument_keys_labels.collect(&:to_json).join(",") %>]
 
