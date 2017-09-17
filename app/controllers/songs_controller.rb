@@ -1,5 +1,6 @@
 class SongsController < ApplicationController
 
+  before_action :set_page, only: [:index]
   before_action :set_song, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized
   skip_before_action :authorize_user, only: [:show]
@@ -13,8 +14,14 @@ class SongsController < ApplicationController
         :path => songs_search_path
     }
     @any_search_term = ""
+
     @songs = Song.order(:title => :asc)
-    @song = @songs.first
+
+    if params[:page_id]
+      @songs = @songs.where(origin_page_id: params[:page_id])
+    end
+
+    @song = @songs.first || Song.new
     if params[:search_term].present?
       @any_search_term = params[:search_term]
       search_query = "%#{@any_search_term}%"
@@ -30,7 +37,7 @@ class SongsController < ApplicationController
   def show
 
     song_posts = @song.posts
-    @post_activities = PublicActivity::Activity.where(:trackable_type => "Post", :trackable_id => song_posts.collect(&:id)).paginate(page: params[:page], per_page: 15).order('created_at DESC')
+    @post_activities = PublicActivity::Activity.where(:trackable_type => "Post", :trackable_id => song_posts.collect(&:id)).page(params[:page]).per(15).order('created_at DESC')
     @post = Post.new
     @post.song = @song
     # @post.music_medias.build
@@ -98,8 +105,12 @@ class SongsController < ApplicationController
       @song = Song.find(params[:id])
     end
 
+    def set_page
+      @page = Page.find(params[:page_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def song_params
-      params.require(:song).permit(:title, :content, :key, :author, :bpm)
+      params.require(:song).permit(:title, :content, :key, :author, :bpm, :origin_page_id)
     end
 end

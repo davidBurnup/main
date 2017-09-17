@@ -13,9 +13,14 @@ angular.module('Burnup.services.Auth', [])
       if options.camelize
         currentUserData = xcase.camelizeKeys(currentUserData)
     if options and options.getInstance
-      return new User(currentUserData)
+      u = new User(currentUserData)
     else
-      return currentUserData
+      u = currentUserData
+
+    if Object.keys(u).length > 0
+      return u
+    else
+      return
 
   setCurrentUser = (user) ->
     sessionStorage.setItem('currentUser', escape(JSON.stringify(user)))

@@ -1,5 +1,5 @@
 
-- if @activity.recipient.is_a? Page
+- if @activity.recipient.is_a? Page and false
 	= content_for :pre_header do
 		.page-header-container.ng-cloak{"bu-adapt-window": "'height'"}
 			%bu-header-show-case{"page-id": "#{@activity.recipient.id}"}
@@ -8,5 +8,10 @@
 
 #feed-activities
 	.container-fluid
-		.col-md-9
-			.panel.activity{'bu-activities-show' => true, 'activity-id': @activity.id}
+		.row
+			.col-md-8.col-sm-12
+				.panel.activity{'bu-activities-show' => true, 'activity-id': @activity.id}
+
+		%hr.no-margin-top
+
+		%bu-activities-index{"recipient-type": "#{@activity.recipient_type}", "recipient-id": "#{@activity.recipient.id}", "write-mode-enabled": "false"}

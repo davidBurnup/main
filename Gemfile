@@ -52,13 +52,14 @@ gem 'factory_girl'
 gem 'serviceworker-rails'
 gem 'webpush'
 gem 'rails_admin'
+gem 'friendly_id', '~> 5.1.0'
 group :development do
   gem "haml-rails"
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :mri_21, :rbx]
   gem 'hub', :require=>nil
   gem 'rails_layout'
-  gem 'web-console', '~> 3.5'
+  # gem 'web-console', '~> 3.5'
   gem "capistrano", "~> 3.7"
   gem 'capistrano-rvm'
   gem 'capistrano-rbenv'

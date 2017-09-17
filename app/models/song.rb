@@ -9,6 +9,8 @@ class Song < ApplicationRecord
   after_save :parse_notes
   before_save :set_creator
 
+  stampable
+
   has_many :notes
   has_many :posts
   has_many :user_song_preferences
@@ -28,16 +30,30 @@ class Song < ApplicationRecord
 
   feedable({
     title: lambda{|s|
-      s.creator ? s.creator.full_name : ""
+      t = s.creator ? s.creator.full_name : ""
+
+      t += " a publié un chant"
+
     },
     content: lambda{|s|
-      "a ajouté le nouveau chant \"#{s.title.capitalize}\""
+      c = "<div class=\"song-line\"><h1 class=\"song-title\">#{s.title}</h1></div>"
+      c += s.clean_html_content
     },
     image: lambda{|s|
       s.creator ? s.creator.avatar.url(:tiny) : "/images/user.svg"
     },
     activity_link: lambda{|s|
       Rails.application.routes.url_helpers.song_path(s)
+    },
+    recipient: lambda{|p|
+      p.origin_page
+    },
+    owner: lambda {|p, new_activity|
+      o = p.creator
+      if o and r = new_activity.recipient and r.is_a? Page and r.is_admin?(o)
+        o = r
+      end
+      o
     }
   })
 
@@ -49,9 +65,9 @@ class Song < ApplicationRecord
 
   def set_creator
     self.creator ||= User.current
-    if u = User.current and u.page.present?
-      self.origin_page ||= u.page
-    end
+    # if u = User.current and u.page.present?
+    #   self.origin_page ||= u.page
+    # end
   end
 
   def user_song_preference(user)

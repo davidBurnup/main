@@ -383,6 +383,9 @@ footer {
 .post_music_medias_attachment .form-control.file {
   width: 100px;
 }
+.no-margin-top {
+  margin-top: 0;
+}
 @media (max-width: 768px) {
   .navbar-inverse .navbar-nav > li.active,
   .navbar-inverse .navbar-nav > li:hover {

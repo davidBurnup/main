@@ -7,7 +7,9 @@ Worship::Application.routes.draw do
 
   resources :activities, only: [:index, :show], path: "fil"#, only: [:destroy], controller: "socializables"
 
-  resources :pages, path: "pages"
+  resources :pages, path: "pages" do
+    resources :chants, :controller => "songs", :as => "songs"
+  end
 
   resources :comments
 
@@ -78,7 +80,7 @@ Worship::Application.routes.draw do
       post "sessions/se-connecter" => "sessions#create", as: "sessions"
     end
 
-    resources :pages, only: [:index, :create, :show], path: 'pages' do
+    resources :pages, only: [:index, :create, :show, :update], path: 'pages' do
       collection do
         get "/recherche/:search" => "pages#index"
       end

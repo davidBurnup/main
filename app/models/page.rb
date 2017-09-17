@@ -1,11 +1,12 @@
 class Page < ApplicationRecord
-
+  extend FriendlyId
   include ActsAsFeedOwner
   geocoded_by :address   # can also be an IP address
   after_validation :geocode          # auto-fetch coordinates
 
   has_many :users
   has_many :page_roles
+  friendly_id :name, use: [:slugged, :finders]
 
   has_attached_file :avatar, styles: lambda { |attachment|
     attachment.instance.svg? ? {} : {
@@ -49,7 +50,35 @@ class Page < ApplicationRecord
     page_roles.admins
   end
 
-  def is_admin?(user)
-    admins.where("page_roles.user_id = ?", user.id).present?
+  def is_admin?(user = nil)
+    user.present? and admins.where("page_roles.user_id = ?", user.id).present?
   end
+
+  def is_followed_by?(user = nil)
+    user.present? and page_role_of(user).present?
+  end
+
+  def page_role_of(user = nil)
+    user.present? and page_roles.where("page_roles.user_id = ?", user.id).first
+  end
+
+  def follow!(user)
+    PageRole.create({
+      user: user,
+      page: self,
+      role: :member
+      })
+  end
+
+  def unfollow!(user)
+    if pr = page_role_of(user)
+      pr.destroy
+    end
+  end
+
+  def has_any_songs?
+    PublicActivity::Activity.where(recipient_type: 'Page', recipient_id: self.id, trackable_type: 'Song').count > 0
+  end
+
+
 end

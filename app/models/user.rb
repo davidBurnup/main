@@ -10,7 +10,7 @@ class User < ApplicationRecord
   belongs_to :page
 
   after_initialize :set_default_role, :if => :new_record?
-  after_initialize :set_default_page_role
+  # after_initialize :set_default_page_role
 
   has_attached_file :avatar, :styles => {
     :medium => "200x200#",
@@ -28,8 +28,8 @@ class User < ApplicationRecord
   has_many :sent_notifications, foreign_key: :notifier_id, class_name: "Notification"
   has_many :user_devices
 
-  has_many :page_role
-  accepts_nested_attributes_for :page_role
+  has_many :page_roles
+  accepts_nested_attributes_for :page_roles
   accepts_nested_attributes_for :instrument_preferences, :reject_if => :all_blank, :allow_destroy => true
 
   validates :first_name, :last_name, :email, :presence => true
@@ -57,11 +57,11 @@ class User < ApplicationRecord
     self.role ||= :user
   end
 
-  def set_default_page_role
-    if page.present? and !self.page_role
-      self.build_page_role(:role => :member, :user_id => self.id, :page_id => self.page.id)
-    end
-  end
+  # def set_default_page_role
+  #   if page.present? and !self.page_role
+  #     self.build_page_role(:role => :member, :user_id => self.id, :page_id => self.page.id)
+  #   end
+  # end
 
   def short_name
     full_name = ""
@@ -114,9 +114,9 @@ class User < ApplicationRecord
     is_admin? or has_role?(:worship_leader)
   end
 
-  def has_page_role?(page_role)
-    self.page and self.page_role and self.page_role.page == self.page and self.page_role.role == page_role
-  end
+  # def has_page_role?(page_role)
+  #   self.page and self.page_role and self.page_role.page == self.page and self.page_role.role == page_role
+  # end
 
   def instruments
     if self.instrument_preferences.present?
@@ -132,6 +132,10 @@ class User < ApplicationRecord
 
   def finalize!
     self.update(is_finalized: true)
+  end
+
+  def followed_pages
+    Page.where("pages.id IN (?)", self.page_roles.collect(&:page_id))
   end
 
 

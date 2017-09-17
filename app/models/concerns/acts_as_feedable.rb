@@ -92,7 +92,9 @@ module ActsAsFeedable
     def create_burn_activity(recipient = nil)
       unless self.new_record? and !self.activity
         activity = self.create_activity key: "#{self.class.to_s.underscore}.create", trackable: self
-        save_activity(activity, recipient)
+        unless activity.new_record?
+          save_activity(activity, recipient)
+        end
       end
     end
 

@@ -15,6 +15,15 @@ module ActivityExtension
       where('activities.is_draft IS NOT true')
     }
 
+    # after_save :set_activity_visibility
+
+    # FIXME : Find a way to load association properly (inheriting ApplicationRecord ?)
+    # has_many :activity_visibilities, class_name: "ActivityVisibility"
+    # def activity_visibilities
+    #   ActivityVisibility.where(activity_id: self.id)
+    # end
+    # alias visibilities activity_visibilities
+
     def notifiable_users(only_self: false, origin_notifiable_resolver: nil)
       n_users_ids = []
 
@@ -40,5 +49,17 @@ module ActivityExtension
     def root_activity
       self
     end
+
+    # def set_activity_visibility
+    #   unless activity_visibilities.present?
+    #     ActivityVisibility.create({
+    #       activity: self
+    #       })
+    #   end
+    # end
+
+    # def visibility
+    #   activity_visibilities.collect(&:visibility)
+    # end
   end
 end

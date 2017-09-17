@@ -12,6 +12,21 @@ module Api
 
       if params[:recipient_type] and recipient_klass = params[:recipient_type].safe_constantize and r_id = params[:recipient_id] and @recipient = recipient_klass.find(r_id)
         @activities = @activities.on(@recipient)
+      elsif current_user
+        # This is user current feed !
+        query_params = ['User', current_user.id]
+        query = "(activities.recipient_type = ? AND activities.recipient_id = ?)"
+
+        # Followed Pages
+        if pages = current_user.followed_pages and pages.present?
+          query += " OR (activities.recipient_type = ? AND activities.recipient_id IN (?))"
+          query_params += ["Page"] + pages.collect(&:id)
+        end
+
+        @activities = @activities.where(query, *query_params)
+
+      else
+        head :bad_request # should not happen
       end
       @activities = @activities.order('updated_at DESC, created_at DESC').page(params[:page]).per(5)
 

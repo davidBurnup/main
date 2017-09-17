@@ -1,4 +1,4 @@
-.panel-body{"ng-if": "activity"}
+.activity-wrapper.panel-body{"ng-if": "activity", class: "{{activity.trackableType}}"}
   %a.pull-left.user-avatar{"ng-if": "activity.owner.url", "ng-href": "{{activity.owner.url}}"}
     %img.avatar{"ng-src" => "{{activity.owner.avatar.tiny}}"}
 
@@ -35,11 +35,16 @@
 
       -# .media{"ng-repeat": "media in activity.medias"}
       -#   %img.img-responsive{"ng-src": "{{media.image.thumb}}"}
-  -#   - if trackable_files.present?
-  -#     - trackable_files.each do |trackable_file|
-  -#       - trackable_attachment = trackable_file.send(trackable_file_key_name)
-  -#       %audio{src: trackable_attachment.url, width: "100%"}
-
+      -#   - if trackable_files.present?
+      -#     - trackable_files.each do |trackable_file|
+      -#       - trackable_attachment = trackable_file.send(trackable_file_key_name)
+      -#       %audio{src: trackable_attachment.url, width: "100%"}
+    / %pre
+    /   {{activity}}
+    .song-btn.text-right{"ng-if": "activity.trackableType == 'Song'"}
+      %a.btn.btn-primary.btn-sm{"ng-href": "{{activity.activityLink}}"}
+        VOIR LE CHANT
+        %i.fa.fa-chevron-right
   .media-footer.activity-footer{"ng-if": "isLoggedIn"}
     %span.social-actions-container
 

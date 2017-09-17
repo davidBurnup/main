@@ -166,6 +166,30 @@ bu-pages-show {
     right: 10px;
   }
 }
+
+#page-title-container {
+  #page-avatar {
+    @include rounded-corners(100px);
+  }
+  h1 {
+    color: #333;
+    margin: 0;
+    font-size: 40px;
+    .sub-title {
+      font-size: 16px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+  h2 {
+    font-size: 14px;
+    margin: 0;
+    font-style: italic;
+  }
+  .action-bar {
+    margin-top: 10px;
+  }
+}
 @media (max-width:991px) {
   .page-header-container {
     #page-info-container {
@@ -207,13 +231,19 @@ bu-pages-show {
     }
   }
   .page-header-container {
+    .page-logo {
+      @include transition();
+      &.slided-xs {
+        left: -100%;
+      }
+    }
     #page-title-container {
 
       bottom: 30%;
       h1 {
-        font-size: 26px;  
+        font-size: 26px;
       }
-    } 
+    }
 
     bu-header-show-case {
       .church-headline {

@@ -46,7 +46,6 @@ class PagesController < ApplicationController
   def update
     authorize @page
     respond_to do |format|
-      @page.description = "1234"
       if @page.update(page_params)
         format.html {
           flash[:notice] = "Votre page a bien été sauvegardé."
@@ -77,7 +76,7 @@ class PagesController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_page
-      @page = Page.find(params[:id])
+      @page = Page.where(slug: params[:id]).first
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -28,8 +28,8 @@ angular.module('Burnup.directives.buUsersLogin', [])
         $scope.autoOpen = true
         $rootScope.sessionModalOpened = true
 
-      if $scope.autoOpen
-        $('html, body').animate { scrollTop: n }, 1000
+      # if $scope.autoOpen
+      #   $('html, body').animate { scrollTop: n }, 1000
       # modalInstance.result.then (p) ->
       #
 

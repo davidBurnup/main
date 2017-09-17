@@ -3,7 +3,7 @@ module Api
   class PagesController < ApiController
 
     skip_before_action :authorize_user, only: [:index, :create, :show]
-    before_action :set_page, only: [:show]
+    before_action :set_page, only: [:show, :update]
 
     def index
 
@@ -23,6 +23,16 @@ module Api
 
     def show
       @page
+    end
+
+    def update
+      if p = params[:page] and !p[:is_followed].nil? and current_user and !@page.is_admin?(current_user)
+        if p[:is_followed] and !@page.is_followed_by?(current_user)
+          @page.follow!(current_user)
+        else
+          @page.unfollow!(current_user)
+        end
+      end
     end
 
     private

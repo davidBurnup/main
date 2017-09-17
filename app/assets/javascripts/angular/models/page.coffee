@@ -20,5 +20,9 @@ angular.module('Burnup.models.Page', ['ngResource', 'rails'])
 
       , name: 'page'
 
+    toggleFollow: ->
+      @.isFollowed = !@.isFollowed
+      @.update()
+
 
   return Page

@@ -1,6 +1,11 @@
 .container
+  
+
   .row
     .col-sm-12
+      - if @page
+        %bu-pages-header-title{"page-id": @page.id, "sub-title": "'CHANTS'"}
+  
       %table.table.table-striped.table-hover
         %tr
           %th.col-sm-7

@@ -28,19 +28,17 @@
     clear: both;
   }
 }
-
-#song_content {}
-
 #song-form {
   margin-top: -10px;
 }
-
 #song-container {
   padding-top: 20px;
   font-size: 16px;
   position: relative;
   line-height: 25px;
+}
 
+#song-container, .activity-wrapper.Song {
   .section-padder {
     display: block;
     height: 35px;
@@ -72,7 +70,11 @@
       margin: 25px 0 0;
     }
   }
-
+  &.activity-wrapper {
+    .song-line {
+      margin: 0;
+    }
+  }
   #song-notes {
     .note {
       @include transition();

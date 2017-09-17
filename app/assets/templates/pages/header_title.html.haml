@@ -1,0 +1,36 @@
+.row#page-title-container
+	.col-sm-2.col-md-1.hidden-xs
+		%img.img-responsive#page-avatar{"ng-src": "{{page.avatar.medium}}"}
+
+	.col-sm-10.col-md-11.col-xs-12
+		%h1
+			{{page.name}}
+			%span.sub-title{"ng-if": "subTitle"}
+				| {{subTitle}}
+		%h2
+			{{page.slogan}}
+
+		.action-bar
+			%button.btn.btn-sm{"ng-click": "toggleFollow()", "ng-if": "currentUser && !page.isEditable", "ng-disabled": "isFollowing", "ng-class": "page.isFollowed ? 'btn-default' : 'btn-primary'"}
+				%span{"ng-if": "page.isFollowed"}
+					%i.fa.fa-times
+					NE PLUS SUIVRE
+				%span{"ng-if": "!page.isFollowed"}
+					%i.fa.fa-arrow-right
+					SUIVRE
+
+			%button.btn.btn-primary.btn-sm{"ng-href": "/pages/{{page.id}}/edit", "ng-if": "page.isEditable"}
+				%i.fa.fa-cogs
+				PARAMÈTRES
+
+			%button.btn.btn-default.btn-sm{"ng-click": "showInfo()"}
+				%i.fa.fa-info-circle
+				À PROPOS
+
+			%a.btn.btn-default.btn-sm{"ng-if": "page.hasAnySongs", "ng-href": "{{page.urls.songs}}"}
+				%i.fa.fa-music
+				CHANTS
+
+.row
+	.col-md-12
+		%hr

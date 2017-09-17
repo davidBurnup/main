@@ -89,6 +89,9 @@ main {
   //width: 100%;
   padding-top: 20px;
   margin-top: $navbar-height + 10px;
+  &.static-margin {
+    // margin-top: 10px;
+  }
 }
 
 section {

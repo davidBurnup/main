@@ -23,7 +23,7 @@
     %header
       = render 'layouts/navigation', affixed: content_for?(:pre_header)
 
-    %main.container{:role => "main"}
+    %main.container{:role => "main", class: content_for?(:pre_header) ? 'static-margin' : ''}
       - if content_for? :headers
         .row
           #headers.col-lg-12
