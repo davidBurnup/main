@@ -53,8 +53,8 @@ class PagesController < ApplicationController
         }
         format.json { render :show, status: :ok, location: @page }
       else
-        format.html { 
-          render :edit, error: @page.errors 
+        format.html {
+          render :edit, error: @page.errors
         }
         format.json { render json: @page.errors, status: :unprocessable_entity }
       end
@@ -77,6 +77,10 @@ class PagesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_page
       @page = Page.where(slug: params[:id]).first
+      unless @page
+        flash[:error] = "Cette page n'existe"
+        redirect_to root_path
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

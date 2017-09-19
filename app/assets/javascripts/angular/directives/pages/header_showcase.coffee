@@ -16,7 +16,7 @@ angular.module('Burnup.directives.buPagesHeaderShowCase', [])
       Page.get(id: $scope.pageId).then (page) ->
         $scope.page = page
         if page.youtubeVideoId?
-          $scope.youtubeUrl = $sce.trustAsResourceUrl("http://www.youtube.com/embed/#{page.youtubeVideoId}")
+          $scope.youtubeUrl = $sce.trustAsResourceUrl("https://www.youtube.com/embed/#{page.youtubeVideoId}")
 
     $scope.goDown = ->
       $scope.infoModalOn = false
