@@ -20,7 +20,7 @@ module Api
         # Followed Pages
         if pages = current_user.followed_pages and pages.present?
           query += " OR (activities.recipient_type = ? AND activities.recipient_id IN (?))"
-          query_params += ["Page"] + pages.collect(&:id)
+          query_params += ["Page"] + [pages.collect(&:id)]
         end
 
         @activities = @activities.where(query, *query_params)
