@@ -32,4 +32,14 @@ namespace :migrate do
         })
     end
   end
+
+
+  task :set_all_song_to_acac => :environment do
+    acac_page = Page.where(slug: "assemblee-chretienne-ales").first
+    Song.all.each do |song|
+      song.origin_page = acac_page
+      song.save
+    end
+  end
+
 end
