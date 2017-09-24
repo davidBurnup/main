@@ -106,7 +106,7 @@ class SongsController < ApplicationController
     end
 
     def set_page
-      @page = Page.find(params[:page_id])
+      @page = Page.where(slug: params[:page_id]).first
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
