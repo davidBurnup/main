@@ -7,7 +7,7 @@ class NotificationsController < ApplicationController
 
     # Redirect to root activity show path
     if @notification.notifiable and @notification.notifiable.root_activity
-      redirect_to show_activity_path(@notification.notifiable.root_activity)
+      redirect_to activity_path(@notification.notifiable.root_activity)
     else
       flash[:error] = "Ce contenu n'existe plus !"
       redirect_to root_path
