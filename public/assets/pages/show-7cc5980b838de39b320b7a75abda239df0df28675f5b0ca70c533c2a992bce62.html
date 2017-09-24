@@ -1,0 +1,28 @@
+<div class='panel panel-primary'>
+<div class='panel-heading text-center'>
+<h3>
+{{page.name}}
+</h3>
+</div>
+<div class='panel-body'>
+<div class='page-logo'>
+<img ng-src='{{page.logo.thumb}}'>
+</div>
+<div class='page-detail'>
+<p>
+<i class='fa fa-map-marker'></i>
+{{page.address}}
+</p>
+</div>
+</div>
+<div class='panel-footer'>
+<button class='btn btn-default btn-sm btn-group-justified' ng-click='select()' ng-if='currentUser.page_id != page.id' type='button'>
+<i class='fa fa-check-circle'></i>
+CHOISIR
+</button>
+<button class='btn btn-primary btn-sm btn-group-justified' ng-click='unselect()' ng-if='currentUser.page_id == page.id' type='button'>
+<i class='fa fa-times-circle'></i>
+ANNULER
+</button>
+</div>
+</div>

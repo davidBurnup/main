@@ -1,0 +1,19 @@
+<div class='audio-wrapper flexed-grid'>
+<div class='grid-item no-padding' ng-click='togglePlay()' type='button'>
+<button class='audio-button'>
+<i class='fa fa-play' ng-if='audio.paused'></i>
+<i class='fa fa-pause' ng-if='!audio.paused'></i>
+</button>
+</div>
+<div class='grid-item flex-fit'>
+<div class='track-info'>
+<span class='track-name'>
+{{media.attachment.fileName | limitTo: 30}}
+</span>
+<span class='track-time pull-right hidden-xs'>
+{{audio.currentTime | trackTime}} / {{(audio.currentTime + audio.remaining) | trackTime}}
+</span>
+</div>
+<input class='form-control ng-valid ng-dirty ng-touched' max='1' min='0' ng-model='audio.progress' step='0.01' type='range'>
+</div>
+</div>

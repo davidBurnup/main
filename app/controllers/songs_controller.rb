@@ -17,8 +17,8 @@ class SongsController < ApplicationController
 
     @songs = Song.order(:title => :asc)
 
-    if params[:page_id]
-      @songs = @songs.where(origin_page_id: params[:page_id])
+    if @page
+      @songs = @songs.where(origin_page_id: @page.id)
     end
 
     @song = @songs.first || Song.new

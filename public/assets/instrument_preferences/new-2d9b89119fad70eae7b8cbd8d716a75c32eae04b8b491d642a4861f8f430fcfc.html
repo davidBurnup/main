@@ -1,0 +1,14 @@
+<div class='row' ng-if='ready'>
+<div class='col-xs-12'>
+<selectize config='instrumentConfig' ng-model='instrument.instrument' options='instrumentOptions'></selectize>
+</div>
+<div class='col-xs-12 flexed'>
+<div class='item form-group'>
+<input class='form-control' ng-model='instrument.detail' placeholder='Marque, Modèle, ...' type='text'>
+</div>
+<button class='item btn btn-primary new-submit' ng-click='create()' ng-disabled='!instrument.instrument' type='button'>
+<i class='fa fa-plus-circle'></i>
+AJOUTER
+</button>
+</div>
+</div>
