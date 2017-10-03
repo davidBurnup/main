@@ -2,13 +2,15 @@
 	.col-sm-2.col-md-1.hidden-xs
 		%img.img-responsive#page-avatar{"ng-src": "{{page.avatar.medium}}"}
 
-	.col-sm-10.col-md-11.col-xs-12
+	.col-sm-5.col-md-5.col-xs-12.text-center-xs
+
 		%h1
 			{{page.name}}
 			%span.sub-title{"ng-if": "subTitle"}
 				| {{subTitle}}
 		%h2
 			{{page.slogan}}
+
 
 		.action-bar
 			%button.btn.btn-sm{"ng-click": "toggleFollow()", "ng-if": "currentUser && !page.isEditable", "ng-disabled": "isFollowing", "ng-class": "page.isFollowed ? 'btn-default' : 'btn-primary'"}
@@ -30,6 +32,24 @@
 			%a.btn.btn-default.btn-sm{"ng-if": "page.hasAnySongs", "ng-href": "{{page.urls.songs}}"}
 				%i.fa.fa-music
 				CHANTS
+
+	.col-sm-5.col-md-6.col-xs-12.text-right.text-center-xs
+		%hr.visible-xs
+		.banner.hidden-sm.hidden-xxs{"ng-if": "page.patreonUrl"}
+			AIDEZ-NOUS À
+			%br
+			ALLER PLUS LOIN !
+		.socials
+			%a.patreon{"href": "{{page.patreonUrl}}", "ng-if": "page.patreonUrl", target: "_blank"}
+				%img{src: asset_path("patreon.svg")}
+				-# %i.fa.fa-youtube
+			%a{"href": "{{page.youtubeUrl}}", "ng-if": "page.youtubeUrl", target: "_blank"}
+				%i.fa.fa-youtube
+			%a{"href": "{{page.facebookUrl}}", "ng-if": "page.facebookUrl", target: "_blank"}
+				%i.fa.fa-facebook
+			%a{"href": "{{page.twitterUrl}}", "ng-if": "page.twitterUrl", target: "_blank"}
+				%i.fa.fa-twitter
+
 
 .row
 	.col-md-12

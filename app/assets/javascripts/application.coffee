@@ -41,6 +41,7 @@
 #= require jquery-colorbox/jquery.colorbox-min
 #= require jquery-colorbox/i18n/jquery.colorbox-fr
 #= require angular-audio/app/angular.audio.js
+#= require angular-socialshare/dist/angular-socialshare.min
 
 # POST ANGULAR MODULES
 #= require angular-moment/angular-moment.min

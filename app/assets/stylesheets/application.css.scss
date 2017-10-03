@@ -386,9 +386,19 @@ footer {
 .no-margin-top {
   margin-top: 0;
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .navbar-inverse .navbar-nav > li.active,
   .navbar-inverse .navbar-nav > li:hover {
     border-bottom: 0 solid transparent;
+  }
+}
+@media (max-width: 767px) {
+  .text-center-xs {
+    text-align: center !important;
+  }
+}
+@media (max-width: 470px) {
+  .hidden-xxs {
+    display: none !important;
   }
 }

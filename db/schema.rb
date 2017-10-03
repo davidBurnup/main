@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170917161034) do
+ActiveRecord::Schema.define(version: 20171002193150) do
 
   create_table "activities", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "trackable_type"
@@ -221,6 +221,10 @@ ActiveRecord::Schema.define(version: 20170917161034) do
     t.integer "background_image_file_size"
     t.datetime "background_image_updated_at"
     t.string "slug"
+    t.string "youtube_url"
+    t.string "twitter_url"
+    t.string "facebook_url"
+    t.string "patreon_url"
     t.index ["slug"], name: "index_pages_on_slug", unique: true
   end
 

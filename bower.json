@@ -27,6 +27,7 @@
     "swipebox": "^1.4.4",
     "jquery-colorbox": "^1.6.4",
     "angular-audio": "^1.7.3",
-    "angularjs-slider": "^6.2.2"
+    "angularjs-slider": "^6.2.2",
+    "angular-socialshare": "angularjs-socialshare#^2.3.11"
   }
 }

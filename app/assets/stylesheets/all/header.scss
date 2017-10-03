@@ -1,6 +1,6 @@
 @import "helpers";
 .page-header-container {
-  width: 100%; 
+  width: 100%;
   overflow: hidden;
 }
 .burnup-navbar {
@@ -22,7 +22,7 @@
     > li {
       border-bottom: 4px solid transparent;
       margin-bottom: -1px;
-
+      height: 50px;
       &.active,
       &:hover, &:focus, &:active, &:visited, &.open {
         border-bottom: 4px solid white !important;
@@ -57,7 +57,7 @@
       }
       > span {
         display: inline-block;
-        padding: 11px 10px 12px 10px;
+        padding: 12px 10px 12px 10px;
         > a {
           color: white;
           background: transparent !important;

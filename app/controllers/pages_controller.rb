@@ -49,7 +49,7 @@ class PagesController < ApplicationController
       if @page.update(page_params)
         format.html {
           flash[:notice] = "Votre page a bien été sauvegardé."
-          redirect_to edit_page_path(@page)
+          render :edit
         }
         format.json { render :show, status: :ok, location: @page }
       else
@@ -85,6 +85,6 @@ class PagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_params
-      params.require(:page).permit(:name, :is_valid, :avatar, :address, :slogan, :description, :youtube_video_id, :background_image)
+      params.require(:page).permit(:name, :is_valid, :avatar, :address, :slogan, :description, :youtube_video_id, :background_image, :youtube_url, :facebook_url, :twitter_url, :patreon_url)
     end
 end
