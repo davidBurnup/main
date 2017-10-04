@@ -75,10 +75,11 @@ bu-pages-show {
     z-index: 0;
   }
   .page-logo {
+    $logo_width: 440px;
     position: absolute;
-    width: 200px;
+    width: $logo_width;
     left: 50%;
-    margin-left: -100px;
+    margin-left: -$logo_width / 2;
     top: 24%;
     margin-top: -100px;
     z-index: 1;
@@ -134,7 +135,7 @@ bu-pages-show {
   #page-title-container {
     position: absolute;
     z-index: 1;
-    bottom: 10%;
+    bottom: 20%;
     width: 100%;
     left: -100%;
     @include transition();
@@ -317,13 +318,15 @@ bu-pages-show {
   .page-header-container {
     .page-logo {
       @include transition();
+      width: 300px;
+      margin-left: -150px;
+      top: 18%;
       &.slided-xs {
         left: -100%;
       }
     }
     #page-title-container {
-
-      bottom: 30%;
+      bottom: 10%;
       h1 {
         font-size: 26px;
       }
@@ -336,6 +339,13 @@ bu-pages-show {
           font-size: 33px;
         }
       }
+    }
+  }
+}
+@media (max-width: 320px) {
+  .page-header-container {
+    .page-logo {
+      top: 21%;
     }
   }
 }

@@ -31,6 +31,11 @@ if page
     json.thumb page.avatar.url(page.svg? ? :original : :thumb)
     json.tiny page.avatar.url(page.svg? ? :original : :tiny)
   end
+
+  json.logo do
+    json.banner page.logo.url(page.svg? ? :original : :banner)
+  end
+
   json.background_image do
     json.cover page.avatar.url(page.svg? ? :original : :cover)
   end

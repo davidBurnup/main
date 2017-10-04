@@ -1,7 +1,8 @@
 
 %span.main-header-container
 
-  %img.page-logo{"ng-src": "{{page.avatar.medium}}", "ng-class": "infoModalOn ? 'slided-xs' : ''"}
+  %img.page-logo{"ng-src": "{{page.avatar.medium}}", "ng-class": "infoModalOn ? 'slided-xs' : ''", "ng-if": "!page.logo"}
+  %img.page-logo{"ng-src": "{{page.logo.banner}}", "ng-class": "infoModalOn ? 'slided-xs' : ''", "ng-if": "page.logo"}
 
   #page-title-container.text-center{"ng-class": "infoModalOn ? '' : 'active'"}
 
@@ -19,12 +20,12 @@
         %button.btn.btn-primary.btn-md{"ng-click": "goDown()"}
           %i.fa.fa-chevron-down
           DÉCOUVRIR
-          
+
     -# %a.goDown.slide-top{"ng-click": "goDown()"}
     -#   %i.fa.fa-chevron-down
 
   #page-info-container.text-center{"ng-class": "infoModalOn ? 'active' : ''"}
-    %h1.slogan.bu-slide-top
+    %h1.slogan.bu-slide-top.visible-xs
       {{page.name}}
     .description
       {{page.description}}

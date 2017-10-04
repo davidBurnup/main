@@ -85,6 +85,6 @@ class PagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_params
-      params.require(:page).permit(:name, :is_valid, :avatar, :address, :slogan, :description, :youtube_video_id, :background_image, :youtube_url, :facebook_url, :twitter_url, :patreon_url)
+      params.require(:page).permit(:name, :is_valid, :logo, :avatar, :address, :slogan, :description, :youtube_video_id, :background_image, :youtube_url, :facebook_url, :twitter_url, :patreon_url)
     end
 end
