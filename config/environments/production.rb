@@ -73,8 +73,8 @@ Rails.application.configure do
   config.active_support.deprecation = :notify
 
   # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => "http://burnup.ac-ac.fr" }
-    config.action_mailer.asset_host = "http://burnup.ac-ac.fr"
+  config.action_mailer.default_url_options = { :host => "http://burnup.fr" }
+    config.action_mailer.asset_host = "http://burnup.fr"
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true

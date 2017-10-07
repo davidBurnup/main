@@ -1,5 +1,5 @@
 if Rails.env.production?
-  ActionMailer::Base.default_url_options[:host] = "burnup.ac-ac.fr"
+  ActionMailer::Base.default_url_options[:host] = "burnup.fr"
   # ActionMailer::Base.smtp_settings = {
   #   :address   => "smtp.mailgun.org",
   #   :port      => 587, # ports 587 and 2525 are also supported with STARTTLS
