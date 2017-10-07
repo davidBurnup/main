@@ -9,13 +9,21 @@ if Rails.env.production?
   #   :authentication => 'login', # Mandrill supports 'plain' or 'login'
   #   :domain => 'sandbox57f9a0eb31734214b5839beda27c123a.mailgun.org', # your domain to identify your server when connecting
   # }
+  # ActionMailer::Base.smtp_settings = {
+  #   :address   => "ssl0.ovh.net",
+  #   :port      => 587, # ports 587 and 2525 are also supported with STARTTLS
+  #   :enable_starttls_auto => true, # detects and uses STARTTLS
+  #   :user_name => "pas-de-reponse@ac-ac.fr",
+  #   :password  => Rails.application.secrets.ovh_password, # SMTP password is any valid API key
+  #   :authentication => 'login', # Mandrill supports 'plain' or 'login'
+  #   :domain => 'sandbox57f9a0eb31734214b5839beda27c123a.mailgun.org', # your domain to identify your server when connecting
+  # }
   ActionMailer::Base.smtp_settings = {
-    :address   => "ssl0.ovh.net",
-    :port      => 587, # ports 587 and 2525 are also supported with STARTTLS
-    :enable_starttls_auto => true, # detects and uses STARTTLS
-    :user_name => "pas-de-reponse@ac-ac.fr",
-    :password  => Rails.application.secrets.ovh_password, # SMTP password is any valid API key
-    :authentication => 'login', # Mandrill supports 'plain' or 'login'
-    :domain => 'sandbox57f9a0eb31734214b5839beda27c123a.mailgun.org', # your domain to identify your server when connecting
+    :user_name => Rails.application.secrets.MAILTRAP_USER,
+    :password => Rails.application.secrets.MAILTRAP_PWD,
+    :address => 'smtp.mailtrap.io',
+    :domain => 'smtp.mailtrap.io',
+    :port => '2525',
+    :authentication => :cram_md5
   }
 end

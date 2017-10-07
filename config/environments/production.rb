@@ -74,9 +74,8 @@ Rails.application.configure do
 
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => "http://burnup.fr" }
-    config.action_mailer.asset_host = "http://burnup.fr"
+  config.action_mailer.asset_host = "http://burnup.fr"
 
-  config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 
@@ -107,13 +106,4 @@ Rails.application.configure do
   config.action_cable.disable_request_forgery_protection = true
 
   config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-      :user_name => Rails.application.secrets.MAILTRAP_USER,
-      :password => Rails.application.secrets.MAILTRAP_PWD,
-      :address => 'smtp.mailtrap.io',
-      :domain => 'smtp.mailtrap.io',
-      :port => '2525',
-      :authentication => :cram_md5
-    }
-
 end
