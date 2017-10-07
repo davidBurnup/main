@@ -1,0 +1,105 @@
+<form name='signUpForm' ng-if='!submitted' ng-submit='submit()'>
+<div class='row'>
+<div class='col-xs-6 col-xxs-12' ng-class='{&#39;has-error&#39;: (signUpForm[&#39;user[first_name]&#39;].$dirty &amp;&amp; signUpForm[&#39;user[first_name]&#39;].$invalid)}'>
+<div class='form-group'>
+<label>
+Prénom
+</label>
+<input class='form-control' name='user[first_name]' ng-model='user.firstName' required type='text'>
+<span class='help-block' ng-if='signUpForm[&#39;user[first_name]&#39;].$dirty &amp;&amp; signUpForm[&#39;user[first_name]&#39;].$invalid'>
+<i class='fa fa-warning'></i>
+<span ng-if='signUpForm[&#39;user[first_name]&#39;].$error.required'>
+Le prénom est obligatoire !
+</span>
+</span>
+</div>
+</div>
+<div class='col-xs-6 col-xxs-12' ng-class='{&#39;has-error&#39;: (signUpForm[&#39;user[last_name]&#39;].$dirty &amp;&amp; signUpForm[&#39;user[last_name]&#39;].$invalid)}'>
+<div class='form-group'>
+<label>
+Nom
+</label>
+<input class='form-control' name='user[last_name]' ng-model='user.lastName' required type='text'>
+<span class='help-block' ng-if='signUpForm[&#39;user[last_name]&#39;].$dirty &amp;&amp; signUpForm[&#39;user[last_name]&#39;].$invalid'>
+<i class='fa fa-warning'></i>
+<span ng-if='signUpForm[&#39;user[last_name]&#39;].$error.required'>
+Le nom est obligatoire !
+</span>
+</span>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-md-12'>
+<div class='form-group' ng-class='{&#39;has-error&#39;: (signUpForm[&#39;user[email]&#39;].$dirty &amp;&amp; signUpForm[&#39;user[email]&#39;].$invalid) || errors[&#39;email&#39;]}'>
+<label>
+Email
+</label>
+<input autocomplete='off' class='form-control' name='user[email]' ng-model='user.email' required type='email'>
+<span class='help-block' ng-if='signUpForm[&#39;user[email]&#39;].$dirty &amp;&amp; signUpForm[&#39;user[email]&#39;].$invalid || errors[&#39;email&#39;]'>
+<i class='fa fa-warning'></i>
+<span ng-if='signUpForm[&#39;user[email]&#39;].$error.required'>
+L'adresse email est obligatoire !
+</span>
+<span ng-if='signUpForm[&#39;user[email]&#39;].$error.email'>
+L'adresse email doit être valide !
+</span>
+<span ng-if='errors[&#39;email&#39;]'>
+{{errors['email']}}
+</span>
+</span>
+</div>
+</div>
+<div class='col-md-12'>
+<div class='form-group' ng-class='{&#39;has-error&#39;: (signUpForm[&#39;user[password]&#39;].$dirty &amp;&amp; signUpForm[&#39;user[password]&#39;].$invalid)}'>
+<label>
+Mot de passe
+</label>
+<input autocomplete='off' class='form-control' name='user[password]' ng-minlength='8' ng-model='user.password' required type='password'>
+<span class='help-block' ng-if='signUpForm[&#39;user[password]&#39;].$dirty &amp;&amp; signUpForm[&#39;user[password]&#39;].$invalid'>
+<i class='fa fa-warning'></i>
+<span ng-if='signUpForm[&#39;user[password]&#39;].$error.required'>
+Le mot de passe est obligatoire !
+</span>
+<span ng-if='signUpForm[&#39;user[password]&#39;].$error.minlength'>
+Le mot de passe doit comporter au moins 8 caractères.
+</span>
+</span>
+</div>
+</div>
+<div class='col-md-12'>
+<div class='form-group'>
+<div class='checkbox'>
+<label>
+<input name='user[tou]' ng-model='user.tou' required type='checkbox'>
+J'accepte les conditions d'utilisation de Burnup.
+</label>
+</div>
+</div>
+</div>
+<div class='col-md-12'>
+<div class='text-right'>
+<button class='btn btn-primary' ng-disabled='signUpForm.$invalid || submitting' type='submit'>
+<span ng-if='!submitting'>
+<i class='fa fa-plus'></i>
+S'INSCRIRE
+</span>
+<span ng-if='submitting'>
+<i class='fa fa-cog fa-spin'></i>
+</span>
+</button>
+</div>
+</div>
+</div>
+</form>
+<div ng-if='submitted'>
+<div class='alert alert-warning text-center user-saved'>
+<h2>
+<i class='fa fa-check-circle'></i>
+Votre compte a bien été créé !
+</h2>
+<p>
+Vous allez recevoir un email afin de confirmer votre compte.
+</p>
+</div>
+</div>

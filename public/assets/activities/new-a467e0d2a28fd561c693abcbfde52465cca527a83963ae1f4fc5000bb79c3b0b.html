@@ -1,0 +1,13 @@
+<div class='panel-body activity-new-call-to-action'>
+<form action='#' class='flexed-grid flex-centered'>
+<a class='grid-item user-avatar' href='#'>
+<img class='avatar' ng-src='{{currentUser.avatar.tiny}}'>
+</a>
+<div class='form-group comment-input grid-item flex-fit'>
+<input class='form-control' ng-focus='openModal($event)' placeholder='Qu&#39;est-ce-qui vous enflamme aujourd&#39;hui ?' type='text'>
+</div>
+<button class='btn btn-default add-photo grid-item' ng-focus='openModal($event, {withPhoto: true})' type='button'>
+<i class='fa fa-camera'></i>
+</button>
+</form>
+</div>

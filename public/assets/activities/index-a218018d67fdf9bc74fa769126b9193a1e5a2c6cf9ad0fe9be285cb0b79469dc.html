@@ -1,0 +1,18 @@
+<div class='row' id='feed-activities' infinite-scroll='loadActivities()' load-images='true' masonry masonry-options='{stamp: &#39;.stamp&#39;}' ng-show='initialized' preserve-order>
+<div class='stamp col-md-6 col-xs-12' ng-class='singleColumn ? &#39;col-lg-12&#39; : &#39;col-lg-6&#39;' ng-show='writeModeEnabled'>
+<div bu-activities-new class='panel activity' recipient-id='recipientId' recipient-type='recipientType'></div>
+</div>
+<div class='masonry-brick col-md-6 col-xs-12' ng-class='singleColumn ? &#39;col-lg-12&#39; : &#39;col-lg-6&#39;' ng-repeat='activity in activities'>
+<div activity='activity' bu-activities-show class='panel activity'></div>
+</div>
+</div>
+<div class='clear' ng-if='activitiesLock || !initialized'>
+<div class='loading-activities'>
+<div class='sk-folding-cube'>
+<div class='sk-cube1 sk-cube'></div>
+<div class='sk-cube2 sk-cube'></div>
+<div class='sk-cube4 sk-cube'></div>
+<div class='sk-cube3 sk-cube'></div>
+</div>
+</div>
+</div>
