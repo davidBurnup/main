@@ -106,4 +106,14 @@ Rails.application.configure do
   # Websocket has been closed .... error :'(
   config.action_cable.disable_request_forgery_protection = true
 
+  config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      :user_name => Rails.application.secrets.MAILTRAP_USER,
+      :password => Rails.application.secrets.MAILTRAP_PWD,
+      :address => 'smtp.mailtrap.io',
+      :domain => 'smtp.mailtrap.io',
+      :port => '2525',
+      :authentication => :cram_md5
+    }
+
 end
