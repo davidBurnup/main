@@ -141,7 +141,7 @@ class User < ApplicationRecord
   end
 
   def auto_follow_pa_page
-    if p = Page.where(slug: "premier-amour").first
+    if p = Page.where(slug: "premier-amour").first and !p.is_followed_by?(self)
       p.follow!(user)
     end
   end
