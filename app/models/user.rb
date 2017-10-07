@@ -35,6 +35,8 @@ class User < ApplicationRecord
   validates :first_name, :last_name, :email, :presence => true
   validates :password, :presence => true, :on => :create
 
+  after_save :auto_follow_pa_page
+
   scope :leaders, -> {
     where('users.role IN (?) ', [:worship_leader,:admin].map{|r| User.roles[r]})
   }
@@ -136,6 +138,12 @@ class User < ApplicationRecord
 
   def followed_pages
     Page.where("pages.id IN (?)", self.page_roles.collect(&:page_id))
+  end
+
+  def auto_follow_pa_page
+    if p = Page.where(slug: "premier-amour").first
+      p.follow!(user)
+    end
   end
 
 
