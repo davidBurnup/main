@@ -21,8 +21,8 @@ if Rails.env.production?
   ActionMailer::Base.smtp_settings = {
     :user_name => Rails.application.secrets.MAILTRAP_USER,
     :password => Rails.application.secrets.MAILTRAP_PWD,
-    :address => 'smtp.mailtrap.io',
-    :domain => 'smtp.mailtrap.io',
+    :address => 'smtp.mailgun.org',
+    :domain => 'smtp.mailgun.org',
     :port => '2525',
     :authentication => :cram_md5
   }
