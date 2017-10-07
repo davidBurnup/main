@@ -15,7 +15,7 @@
 
     -# LINKED ACTIVITY
     .media-heading{"ng-if" => "activity.activityLink"}
-      %a{href: "{{activity.activityLink}}"} 
+      %a{href: "{{activity.activityLink}}"}
         {{activity.title}}
       .activity-time{"am-time-ago" => "activity.createdAt | amParse:'DD/MM/YYYY HH:mm'"}
       / %span.content{"ng-bind-html" => "activity.safeContent"}
@@ -45,6 +45,7 @@
       %a.btn.btn-primary.btn-sm{"ng-href": "{{activity.activityLink}}"}
         VOIR LE CHANT
         %i.fa.fa-chevron-right
+
   .media-footer.activity-footer{"ng-if": "isLoggedIn"}
     %span.social-actions-container
 
@@ -57,6 +58,14 @@
         %a.comment-btn{"ng-click": "toggleComment()"}
           %span.glyphicon.glyphicon-comment
           Commenter
+
+        -# %a{:socialshare => "", "socialshare-hashtags" => "angularjs, angular-socialshare",
+        -#   "socialshare-provider" => "facebook",
+        -#   "socialshare-text" => "{{activity.content}}",
+        -#   "socialshare-url" => "{{activity.activityLink}}"}
+        -#   %i.fa.fa-share
+        -#   Partager
+
 
       .likers-label{"ng-if": "activity.likers.length > 0 || activity.liked"}
         %hr
