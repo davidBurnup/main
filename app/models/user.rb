@@ -117,7 +117,7 @@ class User < ApplicationRecord
   end
 
   def has_page_role?(page_role)
-    self.pages_roles.where(page_id: page_role.page_id).count > 0
+    self.page_roles.where(page_id: page_role.page_id).count > 0
   end
 
   def instruments
