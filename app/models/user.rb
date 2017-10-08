@@ -116,8 +116,8 @@ class User < ApplicationRecord
     is_admin? or has_role?(:worship_leader)
   end
 
-  def has_page_role?(page_role)
-    self.page_roles.where(page_id: page_role.page_id).count > 0
+  def has_page_role?(page, page_role)
+    self.page_roles.where(page_id: page_id, role: page_role).count > 0
   end
 
   def instruments
