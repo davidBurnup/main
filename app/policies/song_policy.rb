@@ -43,9 +43,9 @@ class SongPolicy
     end
 
     # User is moderator of the origin page of the song
-    # if @user.page and (@user.page == @song.origin_page or @song.new_record?) and @user.has_page_role?("moderator")
-    #   can = true
-    # end
+    if @user.page and (@user.page == @song.origin_page or @song.new_record?) and @user.has_page_role?("moderator")
+      can = true
+    end
 
     can
   end
