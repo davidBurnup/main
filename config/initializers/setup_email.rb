@@ -18,12 +18,12 @@ if Rails.env.production?
   #   :authentication => 'login', # Mandrill supports 'plain' or 'login'
   #   :domain => 'sandbox57f9a0eb31734214b5839beda27c123a.mailgun.org', # your domain to identify your server when connecting
   # }
-  ActionMailer::Base.smtp_settings = {
-    :user_name => Rails.application.secrets.MAILTRAP_USER,
-    :password => Rails.application.secrets.MAILTRAP_PWD,
-    :address => 'smtp.mailgun.org',
-    :domain => 'smtp.mailgun.org',
-    :port => '2525',
-    :authentication => :cram_md5
-  }
+  # ActionMailer::Base.smtp_settings = {
+  #   :user_name => Rails.application.secrets.MAILTRAP_USER,
+  #   :password => Rails.application.secrets.MAILTRAP_PWD,
+  #   :address => 'smtp.mailgun.org',
+  #   :domain => 'smtp.mailgun.org',
+  #   :port => '2525',
+  #   :authentication => :cram_md5
+  # }
 end

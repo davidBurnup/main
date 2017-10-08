@@ -106,4 +106,13 @@ Rails.application.configure do
   config.action_cable.disable_request_forgery_protection = true
 
   config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.smtp_settings = {
+      :port           => 587,
+      :address        => "smtp.mailgun.org",
+      :domain         => 'ammy.fr',
+      :user_name      => Rails.application.secrets.MAILTRAP_USER,
+      :password       => Rails.application.secrets.MAILTRAP_PWD,
+      :authentication => :plain
+    }
 end
