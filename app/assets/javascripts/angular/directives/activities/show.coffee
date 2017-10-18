@@ -21,39 +21,40 @@ angular.module('Burnup.directives.buActivitiesShow', [])
 
       $scope.compileLikeLabel = (activity) ->
         label = ""
-        other_likes_count = activity.likers.length
-        if activity.liked
-          label = "Vous"
-          other_likes_count -= 1
-          if activity.likers.length > 1
-            if activity.likers.length == 2
-              label += " et "
+        if $scope.currentUser?
+          other_likes_count = activity.likers.length
+          if activity.liked
+            label = "Vous"
+            other_likes_count -= 1
+            if activity.likers.length > 1
+              if activity.likers.length == 2
+                label += " et "
+              else
+                label += ", "
             else
-              label += ", "
+              label += " "
+
+          for liker, i in activity.likers
+
+            if liker? and liker.id? and liker.name and liker.id != $scope.currentUser.id
+              label += "#{liker.name}"
+
+            if other_likes_count > 1
+              # Choose separator
+              if i >= 2 or (other_likes_count > 1 and i == (activity.likers.length - 2))
+                label += " et "
+              else if other_likes_count > 2 and i < (activity.likers.length - 2)
+                label += ", "
+
+              # Break the loop if more than 2 iterations
+              if i >= 1
+                label += "#{activity.likers.length - 2} autre#{if activity.likers.length > 3 then 's' else ''} personne#{if activity.likers.length > 3 then 's' else ''} "
+                break
+
+          if activity.likers.length > 0 or activity.liked
+            label += " brul#{if activity and activity.liked then 'ez' else (if activity.likers.length > 1 then "ent" else "e")} pour ceci."
           else
-            label += " "
-
-        for liker, i in activity.likers
-
-          if liker.name and liker.id != $scope.currentUser.id
-            label += "#{liker.name}"
-
-          if other_likes_count > 1
-            # Choose separator
-            if i >= 2 or (other_likes_count > 1 and i == (activity.likers.length - 2))
-              label += " et "
-            else if other_likes_count > 2 and i < (activity.likers.length - 2)
-              label += ", "
-
-            # Break the loop if more than 2 iterations
-            if i >= 1
-              label += "#{activity.likers.length - 2} autre#{if activity.likers.length > 3 then 's' else ''} personne#{if activity.likers.length > 3 then 's' else ''} "
-              break
-
-        if activity.likers.length > 0 or activity.liked
-          label += " brul#{if activity and activity.liked then 'ez' else (if activity.likers.length > 1 then "ent" else "e")} pour ceci."
-        else
-          label += "Ça fait bruler mon coeur !"
+            label += "Ça fait bruler mon coeur !"
 
         return label
 
