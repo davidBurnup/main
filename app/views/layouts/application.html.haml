@@ -15,6 +15,19 @@
     %link{:color => "#da351c", :href => "/safari-pinned-tab.svg", :rel => "mask-icon"}/
     %meta{:content => "#ff0000", :name => "theme-color"}/
 
+    -# FACEBOOK METAS
+    %meta{property: "og:url", content: request.original_url}
+    %meta{property: "og:locale", content: "fr_FR"}
+    %meta{property: "og:title", content: @meta_title ? @meta_title : "BurnUP | Bruler d'amour"}
+    - if @meta_description
+      %meta{property: "og:description", content: @meta_description}
+    - if @meta_fb_type
+      %meta{property: "og:type", content: @meta_fb_type}
+    - if @meta_video
+      %meta{property: "og:video", content: @meta_video}
+
+    %meta{property: "fb:app_id", content: "767467860099473"}
+
   %body{"angular-rails-app" => "Burnup", "ng-class" => "$root.pageIsUnscrollable == true ? 'unscrollable' : ''", "ng-controller" => "Main"}
 
     - if content_for? :pre_header

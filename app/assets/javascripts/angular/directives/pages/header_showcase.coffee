@@ -5,8 +5,9 @@ angular.module('Burnup.directives.buPagesHeaderShowCase', [])
   restrict: 'EA'
   scope:
     pageId: '='
+    autoScroll: "=?"
   templateUrl: 'pages/header_showcase.html'
-  controller: ($scope, $rootScope, ngAudio, Auth) ->
+  controller: ($scope, $rootScope, ngAudio, Auth, $timeout) ->
 
     $scope.infoModalOn = false
 
@@ -34,6 +35,9 @@ angular.module('Burnup.directives.buPagesHeaderShowCase', [])
       $scope.goUp()
       $scope.infoModalOn = true
 
+    if $scope.autoScroll
+      $timeout ->
+        $scope.goDown()
 
     # $scope.sound = ngAudio.load("/mon-coeur-est-a-toi.mp3")
     #

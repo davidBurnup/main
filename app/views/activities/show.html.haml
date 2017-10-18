@@ -1,17 +1,20 @@
 
-- if @activity.recipient.is_a? Page and false
+- if @activity.recipient.is_a? Page
 	= content_for :pre_header do
 		.page-header-container.ng-cloak{"bu-adapt-window": "'height'"}
-			%bu-header-show-case{"page-id": "#{@activity.recipient.id}"}
+			%bu-pages-header-show-case{"page-id": "#{@activity.recipient.id}", "auto-scroll": "true"}
 			.background-image.bu-fade{style: "background-image:url('#{asset_path("pa.jpg")}')"}
 
 
 #feed-activities
 	.container-fluid
 		.row
+			.col-md-12
+				%bu-pages-header-title{"page-id": @activity.recipient.id}
+		.row
 			.col-md-8.col-sm-12
 				.panel.activity{'bu-activities-show' => true, 'activity-id': @activity.id}
 
-		%hr.no-margin-top
-
-		%bu-activities-index{"recipient-type": "#{@activity.recipient_type}", "recipient-id": "#{@activity.recipient.id}", "write-mode-enabled": "false"}
+		-# %hr.no-margin-top
+		-#
+		-# %bu-activities-index{"recipient-type": "#{@activity.recipient_type}", "recipient-id": "#{@activity.recipient.id}", "write-mode-enabled": "false"}
