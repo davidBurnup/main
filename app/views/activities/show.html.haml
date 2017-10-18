@@ -8,9 +8,10 @@
 
 #feed-activities
 	.container-fluid
-		.row
-			.col-md-12
-				%bu-pages-header-title{"page-id": @activity.recipient.id}
+		- if @activity.recipient.is_a? Page
+			.row
+				.col-md-12
+					%bu-pages-header-title{"page-id": @activity.recipient.id}
 		.row
 			.col-md-8.col-sm-12
 				.panel.activity{'bu-activities-show' => true, 'activity-id': @activity.id}
