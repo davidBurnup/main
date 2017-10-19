@@ -67,8 +67,9 @@
             $('ul.nav-tabs > li > a#lyrics-tab').on 'shown.bs.tab', (e) ->
               load_chords()
         auto_load(toLoad)
-    #social.tab-pane{:role => "tabpanel"}
-      %bu-activities-index{"single-column": "true", "recipient-type": "'Song'", "recipient-id": "#{@song.id}"}
+    - if current_user
+      #social.tab-pane{:role => "tabpanel"}
+        %bu-activities-index{"single-column": "true", "recipient-type": "'Song'", "recipient-id": "#{@song.id}"}
 
       -# .row
       -#   .col-sm-12
