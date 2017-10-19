@@ -38,12 +38,12 @@ class SongPolicy
     can = false
 
     # User is superadmin
-    if is_super_admin = @user.has_role?("admin")
+    if @user and is_super_admin = @user.has_role?("admin")
       can = true
     end
 
     # User is moderator of the origin page of the song
-    if @user.page and (@user.page == @song.origin_page or @song.new_record?) and @song.origin_page and @user.has_page_role?(@song.origin_page, "moderator")
+    if @user and @user.page and (@user.page == @song.origin_page or @song.new_record?) and @song.origin_page and @user.has_page_role?(@song.origin_page, "moderator")
       can = true
     end
 
