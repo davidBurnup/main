@@ -29,7 +29,7 @@
         -# %video{"ng-repeat": "file in files", :controls => "", "ngf-src" => "file"}
 
         .drop-box.text-center{ "ng-if": "files.length < 5",
-          :accept => "image/*,application/pdf,audio/mp3,audio/wav",
+          :accept => "image/*,application/pdf,audio/mp3,audio/wav,video/mp4",
           "ngf-allow-dir": "true",
           "ngf-drag-over-class": "'dragover'",
           "ngf-drop": "upload($files)",
@@ -38,9 +38,9 @@
           "ngf-multiple": "true",
           "ngf-max-files": "2",
           "ngf-min-size": "10KB",
-          "ngf-max-size": "50MB",
+          "ngf-max-size": "150MB",
           "ngf-dimensions": "$width > 500 && $height > 500",
-          "ngf-pattern": "'image/*,application/pdf,audio/*'"}
+          "ngf-pattern": "'image/*,application/pdf,audio/*,video/mp4'"}
           %i.fa.fa-plus-circle
           Déposez ici vos fichiers pdf, images (jpg/png),
           %br
@@ -50,6 +50,8 @@
           %li.sel-file{"ng-repeat" => "f in files"}
             %div.flexed-grid.flex-centered.flex-unwrapped
               .grid-item>
+                -# %pre
+                -#   {{f}}
                 -#&& fileIsAnImage(f.type)
                 -# Image preview made on the fly by ng-file-upload plugin
                 %img.thumb.file-preview{"ngf-thumbnail" => "!f.attachmentThumb && !f.$error && f"}
@@ -57,9 +59,18 @@
                 %img.thumb.img-responsive.image-preview{"ng-src": "{{f.attachmentThumb}}", "ng-if": "f.attachmentThumb"}
                 -# PDF icon
                 %img.pdf-icon{src: "/images/pdf.svg", "ng-if": "f.type == 'application/pdf' || !f.type"}>
+
+                %i.fa.fa-cog.fa-spin{"ng-if": "!f.id"}
               .grid-item.flex-fit.flex-shrinked.file-name>
                 {{f.name}}
                 -# {{f.name}} - size: {{f.size}}B - type: {{f.type}}
+                .choose-poster{"ng-if": "(f.type == 'video/mp4' || f.type == 'video') && f.id"}
+                  %button.btn.btn-xs.btn-primary{:accept => "image/*",
+                    "ngf-select": "uploadPoster($files, $invalidFiles, f)",
+                    "ngf-multiple": "false",
+                    "ngf-pattern": "'image/*'"}
+                    CHOISIR LA COUVERTURE
+
               .grid-item
                 .destroy-file{"ng-click": "deleteAttachment(f)"}
                   %i.fa.fa-times

@@ -12,6 +12,13 @@ if media
     end
   end
 
+  if media.poster_image.present?
+    json.poster_image do
+      json.original media.poster_image.url
+      json.large media.poster_image.url(:large)
+    end
+  end
+
   if media.image.present?
     json.image do
       json.original media.image.url( :original)

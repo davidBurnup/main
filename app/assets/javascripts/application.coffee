@@ -42,6 +42,12 @@
 #= require jquery-colorbox/i18n/jquery.colorbox-fr
 #= require angular-audio/app/angular.audio.js
 #= require angular-socialshare/dist/angular-socialshare.min
+#= require videogular/videogular.min
+#= require videogular/videogular.min
+#= require videogular-controls/vg-controls.min
+#= require videogular-overlay-play/vg-overlay-play.min
+#= require videogular-poster/vg-poster.min
+#= require videogular-buffering/vg-buffering.min
 
 # POST ANGULAR MODULES
 #= require angular-moment/angular-moment.min

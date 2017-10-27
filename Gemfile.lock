@@ -163,6 +163,9 @@ GEM
     cucumber-wire (0.0.1)
     database_cleaner (1.0.1)
     debug_inspector (0.0.3)
+    delayed_paperclip (3.0.1)
+      activejob (>= 4.2)
+      paperclip (>= 3.3)
     devise (4.3.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -347,6 +350,8 @@ GEM
     rdoc (4.3.0)
     redcarpet (3.4.0)
     redis (3.3.3)
+    redis-namespace (1.5.3)
+      redis (~> 3.0, >= 3.0.4)
     ref (2.0.0)
     remotipart (1.3.1)
     responders (2.4.0)
@@ -420,6 +425,8 @@ GEM
     sshkit (1.14.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    streamio-ffmpeg (3.0.2)
+      multi_json (~> 1.8)
     temple (0.8.0)
     therubyracer (0.12.3)
       libv8 (~> 3.16.14.15)
@@ -476,6 +483,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2.2)
   cucumber-rails
   database_cleaner (= 1.0.1)
+  delayed_paperclip
   devise
   devise_invitable
   exception_notification
@@ -506,6 +514,7 @@ DEPENDENCIES
   rails_admin
   rails_autolink
   rails_layout
+  redis-namespace
   rspec-rails (~> 3.6)
   sass-rails (~> 5.0.6)
   sdoc (~> 0.4.2)
@@ -516,6 +525,7 @@ DEPENDENCIES
   sinatra (~> 2)
   socialization!
   spring
+  streamio-ffmpeg
   therubyracer
   turbolinks
   uglifier (>= 3.2.0)

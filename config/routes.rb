@@ -65,7 +65,7 @@ Worship::Application.routes.draw do
 
     get "utilisateurs/courant" => "users#current", as: :current_user
 
-    resources :medias, only: [:create, :destroy]
+    resources :medias, only: [:create, :destroy, :update]
 
     resources :users, only: [:create, :update, :show], path: 'utilisateurs' do
       member do

@@ -21,6 +21,20 @@ module Api
       end
     end
 
+    def update
+      @media = Media.find(params[:id])
+      unless @media
+        head :bad_request
+      end
+
+      @media.update(media_params)
+
+      respond_to do |format|
+        format.json { render :create }
+      end
+
+    end
+
     # DELETE /posts/1
     # DELETE /posts/1.json
     def destroy
@@ -38,7 +52,7 @@ module Api
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def media_params
-        params.require(:media).permit(:id, :attachment, :image, :pdf, :word, :excel, :post_id, :audio)
+        params.require(:media).permit(:id, :attachment, :image, :pdf, :word, :excel, :post_id, :audio, :video, :poster_image)
       end
   end
 end

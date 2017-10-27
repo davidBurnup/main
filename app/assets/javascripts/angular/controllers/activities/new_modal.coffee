@@ -7,7 +7,7 @@ angular.module('Burnup.controllers.ActivitiesNewModal', ['ngFileUpload'])
     $scope.withPhoto = true
 
   $scope.currentUser = Auth.currentUser(camelize: true)
-  
+
   new Post(
    content: ""
    isDraft: true
@@ -101,9 +101,7 @@ angular.module('Burnup.controllers.ActivitiesNewModal', ['ngFileUpload'])
           media = response.data
           console.log "rr", media, response
           if media?
-            file.id = media.id
-            if media.image?
-              file.attachmentThumb = media.image.mini
+            $scope.refreshFile(file, media)
           return
         return
       ), ((response) ->
@@ -115,11 +113,81 @@ angular.module('Burnup.controllers.ActivitiesNewModal', ['ngFileUpload'])
         file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total))
     return
 
+  $scope.uploadPoster = (files, invalidFiles, media) ->
+    if (media.type == "video" || media.type == "video/mp4") and files.length == 1
+      files[0].upload = Upload.upload
+        # url: 'https://angular-file-upload-cors-srv.appspot.com/upload'
+        url: "/api/medias/#{media.id}.json"
+        method: 'PUT'
+        headers:
+          'Content-Type': files[0].type
+        ignoreLoadingBar: true
+        data:
+          media:
+            poster_image: files[0]
+
+      files[0].upload.then ((response) ->
+        $timeout ->
+          # file.result = response.data[0]
+          newMedia = response.data
+          console.log "finished uploading poster", newMedia, response
+          if newMedia?
+            files[0].id = newMedia.id
+            if newMedia.attachment?
+              if newMedia.image?
+                files[0].attachmentThumb = newMedia.image.mini
+              else
+                files[0].attachmentThumb = newMedia.attachment.thumb
+              if newMedia.posterImage?
+                files[0].posterImage = newMedia.posterImage
+            # console.log "sending", files[0], newMedia
+            $scope.$broadcast "update:uploadedFile", newMedia
+          return
+        return
+      ), ((response) ->
+        if response.status > 0
+          $scope.errorMsg = response.status + ': ' + response.data
+        return
+      ), (evt) ->
+        # Math.min is to fix IE which reports 200% sometimes
+        files[0].progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total))
+
+  $scope.$on "update:uploadedFile", (e, media) ->
+    console.log "files", $scope.files, media
+    for file in $scope.files
+      if file.id == media.id
+        $scope.refreshFile(file, media)
   $scope.deleteAttachment = (file) ->
-    if confirm("Voulez-vous vraiment supprimer cette pièce d'identité ?") and file? and file.id?
+    if confirm("Voulez-vous vraiment supprimer cet élément ?") and file? and file.id?
       $http.delete("/api/medias/#{file.id}.json").then ->
         $scope.files = $scope.files.filter (existingFile) ->
           existingFile.id isnt file.id
 
   $scope.fileIsAnImage = (type) ->
-    type in ['image/jpeg', 'image/png', 'image/gif', 'image/jpg']
+    type in ['image/jpeg', 'image/png', 'image/gif', 'image/jpg', "video/mp4"]
+
+  $scope.refreshFile = (file, media) ->
+    file.id = media.id
+    if media.attachment?
+      file.attachment = media.attachment
+      file.type = media.attachment.contentType
+
+      if media.image?
+        file.attachmentThumb = media.image.mini
+      else
+        file.attachmentThumb = media.attachment.thumb
+
+      # console.log "refreshed file", file, media
+      if media.video?
+        $scope.subscribeToAC(media)
+
+  $scope.subscribeToAC = (media) ->
+    App.notifications = App.cable.subscriptions.create 'VideosChannel',
+    received: (progress) ->
+      console.log "progress", progress
+
+    connected: ->
+      # FIXME: While we wait for cable subscriptions to always be finalized before sending messages
+      setTimeout =>
+        @perform 'videos_subscribed', media_id: media.id
+        , 1000

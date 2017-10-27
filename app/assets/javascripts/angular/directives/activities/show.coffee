@@ -1,4 +1,9 @@
-angular.module('Burnup.directives.buActivitiesShow', [])
+angular.module('Burnup.directives.buActivitiesShow', [
+			"ngSanitize",
+			"com.2fdevs.videogular",
+			"com.2fdevs.videogular.plugins.controls",
+			"com.2fdevs.videogular.plugins.overlayplay",
+			"com.2fdevs.videogular.plugins.poster"])
 .directive 'buActivitiesShow', (Activity, $sce, Auth, User, $timeout, $uibModal, $http) ->
   {
     restrict: 'AE'
@@ -11,6 +16,7 @@ angular.module('Burnup.directives.buActivitiesShow', [])
 
       $scope.currentUser = Auth.currentUser()
       $scope.isLoggedIn = Auth.isLoggedIn()
+      $scope.videoConfig = {}
 
       if $scope.activityId?
         Activity.get(
@@ -18,6 +24,7 @@ angular.module('Burnup.directives.buActivitiesShow', [])
         ).then (activity) ->
           $scope.$emit "activity:loaded", activity
           $scope.activity = activity
+
 
       $scope.compileLikeLabel = (activity) ->
         label = ""
@@ -66,9 +73,19 @@ angular.module('Burnup.directives.buActivitiesShow', [])
             for media in $scope.activity.medias
               if media.image?
                 $scope.activity.mediasForJG.push {
-                  title: "ttt"
+                  # title: "ttt"
                   imageUrl: media.image.original
                 }
+              if media.attachment.contentType == "video"
+                media.videoConfig =
+                  sources: [
+                    {
+                      src: $sce.trustAsResourceUrl(media.attachment.url)
+                      type: 'video/mp4'
+                    }
+                  ]
+                  theme: '/videogular-theme/videogular.min.css'
+                  plugins: poster: media.posterImage.large
           $scope.$broadcast "activity:refresh:likeLabel"
 
       $scope.$on "activity:refresh:likeLabel", ->
@@ -135,5 +152,8 @@ angular.module('Burnup.directives.buActivitiesShow', [])
         activity.delete()
         .then ->
           $scope.$emit "activity:destroy:success", activity.id
+
+
+
 
   }

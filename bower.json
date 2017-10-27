@@ -28,6 +28,12 @@
     "jquery-colorbox": "^1.6.4",
     "angular-audio": "^1.7.3",
     "angularjs-slider": "^6.2.2",
-    "angular-socialshare": "angularjs-socialshare#^2.3.11"
+    "angular-socialshare": "angularjs-socialshare#^2.3.11",
+    "videogular": "^1.4.4",
+    "videogular-themes-default": "^1.4.4",
+    "videogular-controls": "^1.4.4",
+    "videogular-buffering": "^1.4.4",
+    "videogular-overlay-play": "^1.4.4",
+    "videogular-poster": "^1.4.4"
   }
 }

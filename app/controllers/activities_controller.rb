@@ -31,13 +31,21 @@ class ActivitiesController < ApplicationController
               @meta_fb_type = "article"
               @meta_title = @activity.trackable.content.truncate(30)
               @meta_description = @activity.trackable.content
+
               youtube_regex = /((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?/
               if video_url_matches = @activity.trackable.content.match(youtube_regex) and video_url_matches.present?
-                @meta_video = video_url_matches[0]
+                # @meta_video = video_url_matches[0]
                 if video_url_matches[5]
                   @meta_image = "https://img.youtube.com/vi/#{video_url_matches[5]}/hqdefault.jpg"
                 end
               end
+
+              @post = @activity.trackable
+              if @post.medias.count > 0 and @post.medias.where.not(video_file_name: nil).count > 0
+                any_video_media = @post.medias.where.not(video_file_name: nil).first
+                @meta_video = "#{request.base_url}#{any_video_media.video.url}"
+              end
+
             end
           end
 	  		end

@@ -4,6 +4,7 @@ class Media < ApplicationRecord
 
   def self.accepted_content_types(attachment_filter = nil)
     accepted_c_types = {
+      video: ["video/mp4", "video/avi", "video/flv", "video/m4v", "video/mkv", "video/x-matroska", "video/mov", "video/mpeg", "video/mpg", "video/mts", "video/vob", "video/webm", "video/wmv", "video/3gp", "video/3gpp", "video/x-msvideo", "video/x-flv", "video/quicktime", "video/mp2t", "video/x-ms-wmv"],
       audio:  ["audio/mp3","audio/wav"],
       image:  ["image/jpeg", "image/gif", "image/png", "image/svg+xml", "image/jpg"],
       pdf: ["application/pdf", "application/x-pdf"],
@@ -32,6 +33,34 @@ class Media < ApplicationRecord
     }
   }
   validates_attachment :image, content_type: {content_type: Media.accepted_content_types([:image])}, size: { in: 0..50.megabytes }
+
+  has_attached_file :video, {
+    :styles => {
+      :mp4 => ["", [:mp4]]
+    },
+    processors: [:streamio_transcoder],
+    default_url: "/images/video.svg",
+    :s3_permissions => :private
+  }
+  validates_attachment :video, content_type: {content_type: Media.accepted_content_types([:video])}, size: { in: 0..300.megabytes }
+  process_in_background :video
+
+  has_attached_file :poster_image, {
+    :styles => {
+      :large =>  ["690x388#", [:jpeg,:png,:gif]],
+      # :cover =>  ["345x130#", [:jpeg,:png,:gif]],
+      :medium_uncropped => ["400x300>", [:jpeg,:png,:gif]],
+      :medium => ["533x400#", [:jpeg,:png,:gif]],
+      :thumb =>  ["200x200#", [:jpeg,:png,:gif]],
+      :mini =>  ["120x65>", [:jpeg,:png,:gif]],
+      :micro => "35x35#"
+    },
+    :convert_options => {
+      :all => '-background white -flatten +matte'
+    }
+  }
+  validates_attachment :image, content_type: {content_type: Media.accepted_content_types([:image])}, size: { in: 0..50.megabytes }
+
 
   has_attached_file :pdf, {
     processors: nil,
@@ -89,6 +118,8 @@ class Media < ApplicationRecord
     att_thumb = nil
     if attachment_type == :image
       att_thumb = attachment.url(:mini)
+    elsif attachment_type == :video and poster_image.present?
+      att_thumb = poster_image.url(:mini)
     else
       att_thumb = "/images/#{attachment_type}.svg"
     end

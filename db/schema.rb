@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171015171120) do
+ActiveRecord::Schema.define(version: 20171025061649) do
 
   create_table "activities", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "trackable_type"
@@ -125,6 +125,16 @@ ActiveRecord::Schema.define(version: 20171015171120) do
     t.string "audio_content_type"
     t.integer "audio_file_size"
     t.datetime "audio_updated_at"
+    t.string "video_file_name"
+    t.string "video_content_type"
+    t.integer "video_file_size"
+    t.datetime "video_updated_at"
+    t.string "poster_image_file_name"
+    t.string "poster_image_content_type"
+    t.integer "poster_image_file_size"
+    t.datetime "poster_image_updated_at"
+    t.float "transcoding_progress", limit: 24
+    t.boolean "video_processing"
   end
 
   create_table "meeting_songs", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

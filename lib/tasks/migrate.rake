@@ -42,4 +42,12 @@ namespace :migrate do
     end
   end
 
+  desc "Migrate old medias linked to post to mediatisable"
+  # WE DO NOT SUPPORT DATA MIGRATION PREVIOUS TO V1
+  task :old_medias_from_posts_to_mediatisable => :environment do
+    Media.where.not(post_id: nil).each do |media|
+      media.update_attributes(mediatisable_id: media.post_id, mediatisable_type: 'Post')
+    end
+  end
+
 end

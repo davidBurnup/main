@@ -53,6 +53,9 @@ gem 'serviceworker-rails'
 gem 'webpush'
 gem 'rails_admin'
 gem 'friendly_id', '~> 5.1.0'
+gem 'streamio-ffmpeg'
+gem 'delayed_paperclip'
+gem 'redis-namespace'
 group :development do
   gem "haml-rails"
   gem 'better_errors'

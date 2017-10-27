@@ -33,6 +33,25 @@
     .audio-medias-container
       %bu-medias-audio{"ng-repeat": "media in activity.medias", media: "media", "ng-if": "media.attachment.contentType == 'audio'"}
 
+
+    .video-medias-container.embed-responsive.embed-responsive-16by9.videogular-container{"ng-repeat": "media in activity.medias"}
+      -# %pre
+      -#   {{media}}
+      %videogular.embed-responsive-item{"vg-theme" => "media.videoConfig.theme", "ng-if": "media.attachment.contentType == 'video'"}
+        %vg-media{"vg-src" => "media.videoConfig.sources"}
+        %vg-controls
+          %vg-play-pause-button
+          %vg-time-display {{ currentTime | date:'mm:ss' }}
+          %vg-scrub-bar
+            %vg-scrub-bar-current-time
+          %vg-time-display {{ timeLeft | date:'mm:ss' }}
+          %vg-volume
+            %vg-mute-button
+            %vg-volume-bar
+          %vg-fullscreen-button
+        %vg-overlay-play
+        %vg-poster{"vg-url" => "media.videoConfig.plugins.poster"}
+
       -# .media{"ng-repeat": "media in activity.medias"}
       -#   %img.img-responsive{"ng-src": "{{media.image.thumb}}"}
       -#   - if trackable_files.present?
