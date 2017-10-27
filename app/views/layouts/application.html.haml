@@ -29,6 +29,10 @@
       %meta{property: "og:type", content: @meta_fb_type}
     - if @meta_video
       %meta{property: "og:video", content: @meta_video}
+      - if @meta_video_width
+        %meta{property: "og:video:width", content: @meta_video_width}
+      - if @meta_video_height
+        %meta{property: "og:video:height", content: @meta_video_height}
 
     %meta{property: "fb:app_id", content: "767467860099473"}
 
