@@ -44,6 +44,7 @@ class ActivitiesController < ApplicationController
               if @post.medias.count > 0 and @post.medias.where.not(video_file_name: nil).count > 0
                 any_video_media = @post.medias.where.not(video_file_name: nil).first
                 @meta_video = "#{request.base_url}#{any_video_media.video.url}"
+                @meta_image = nil
               end
 
             end
