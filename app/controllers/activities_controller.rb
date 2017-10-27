@@ -45,6 +45,7 @@ class ActivitiesController < ApplicationController
                 any_video_media = @post.medias.where.not(video_file_name: nil).first
                 @meta_video = "#{request.base_url}#{any_video_media.video.url}"
                 @meta_image = nil
+                @meta_fb_type = "video"
                 if any_video_media.poster_image.present?
                   @meta_image = "#{request.base_url}#{any_video_media.poster_image.url(:large)}"
                 end
