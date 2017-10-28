@@ -47,7 +47,7 @@ class ActivitiesController < ApplicationController
                 @meta_video_width = "690"
                 @meta_video_height = "388"
                 @meta_image = nil
-                @meta_fb_type = "video.other"
+                @meta_fb_type = "article"
                 if any_video_media.poster_image.present?
                   @meta_image = "#{request.base_url}#{any_video_media.poster_image.url(:large, timestamp: false)}"
                 end
