@@ -28,9 +28,8 @@
     - if @meta_fb_type
       %meta{property: "og:type", content: @meta_fb_type}
     - if @meta_video
-      %meta{property: "og:video:secure_url", content: @meta_video}
+      -# %meta{property: "og:video:secure_url", content: @meta_video}
       %meta{property: "og:video:url", content: @meta_video}
-      %meta{property: "og:video:type", content: "application/x-shockwave-flash"}
       %meta{property: "og:video:type", content: "video/mp4"}
       - if @meta_video_width
         %meta{property: "og:video:width", content: @meta_video_width}
