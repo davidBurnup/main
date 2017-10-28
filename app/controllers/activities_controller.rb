@@ -34,7 +34,7 @@ class ActivitiesController < ApplicationController
 
               youtube_regex = /((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?/
               if video_url_matches = @activity.trackable.content.match(youtube_regex) and video_url_matches.present?
-                # @meta_video = video_url_matches[0]
+                @meta_video = video_url_matches[0]
                 if video_url_matches[5]
                   @meta_image = "https://img.youtube.com/vi/#{video_url_matches[5]}/hqdefault.jpg"
                 end
@@ -46,8 +46,6 @@ class ActivitiesController < ApplicationController
                 @meta_video = "#{request.base_url}#{any_video_media.video.url(:mp4, timestamp: false)}"
                 @meta_video_width = "690"
                 @meta_video_height = "388"
-                @meta_image = nil
-                @meta_fb_type = "article"
                 if any_video_media.poster_image.present?
                   @meta_image = "#{request.base_url}#{any_video_media.poster_image.url(:large, timestamp: false)}"
                 end
