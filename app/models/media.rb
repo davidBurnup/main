@@ -42,7 +42,7 @@ class Media < ApplicationRecord
     default_url: "/images/video.svg",
     :s3_permissions => :private
   }
-  validates_attachment :video, content_type: {content_type: Media.accepted_content_types([:video])}, size: { in: 0..300.megabytes }
+  validates_attachment :video, content_type: {content_type: Media.accepted_content_types([:video])}, size: { in: 0..1000.megabytes }
   process_in_background :video
 
   has_attached_file :poster_image, {
