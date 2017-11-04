@@ -11,12 +11,13 @@ angular.module('Burnup.directives.buActivitiesIndex', [])
       writeModeEnabled: "=?"
 
     controller: ($scope) ->
-      $scope.activities = []  
+      $scope.activities = []
       $scope.page = 0
       $scope.reachedLastPage = false
       $scope.activitiesLock = false
       $scope.initialized = false
       $scope.currentUser = Auth.currentUser(getInstance: true)
+      
       unless $scope.writeModeEnabled?
         $scope.writeModeEnabled = true
 
