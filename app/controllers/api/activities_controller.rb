@@ -29,7 +29,7 @@ module Api
         head :bad_request # should not happen
       end
 
-      @activities = @activities.order('updated_at DESC, created_at DESC').page(params[:page]).per(5)
+      @activities = @activities.order('updated_at DESC, created_at DESC')#.page(params[:page]).per(5)
       AppLogger.debug "---#{@activities.first.id}"
       AppLogger.debug "---#{@activities.inspect}"
       authorize @activities
