@@ -1,6 +1,7 @@
 class Page < ApplicationRecord
   extend FriendlyId
   include ActsAsFeedOwner
+  include ActsAsSearchable
   geocoded_by :address   # can also be an IP address
   after_validation :geocode          # auto-fetch coordinates
 
@@ -44,6 +45,8 @@ class Page < ApplicationRecord
   }
 
   stampable
+  searchkick word_start: [:name]
+  searchable label_method: :name
 
   def svg?
     self.avatar_content_type === 'image/svg+xml'

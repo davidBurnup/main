@@ -57,6 +57,8 @@ Worship::Application.routes.draw do
 
     get "main" => "api#main"
 
+    get "/recherche/:term(/sur/:classes)" => "searches#index"
+
     resources :notifications, only: [:index, :destroy, :update] do
       collection do
         get "/page/:page" => "notifications#index"

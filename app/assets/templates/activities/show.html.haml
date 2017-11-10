@@ -1,4 +1,4 @@
-.activity-wrapper.panel-body{"ng-if": "activity", class: "{{activity.trackableType}}"}
+.activity-wrapper.panel-body{"ng-show": "activity", class: "{{activity.trackableType}}"}
   %a.pull-left.user-avatar{"ng-if": "activity.owner.url", "ng-href": "{{activity.owner.url}}"}
     %img.avatar{"ng-src" => "{{activity.owner.avatar.tiny}}"}
 

@@ -7,11 +7,19 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   # protect_from_forgery with: :null_session
-
+  before_action :set_search
   before_action :authorize_user, except: [:main_fallback]
   before_action :unfinalized_callback, except: [:main_fallback], if: :current_user
   layout "public", only: [:main_fallback]
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
+  def set_search
+    @enable_search = {
+        :search_domain => [:pages],
+        :path => songs_search_path
+    }
+    @any_search_term = ""
+  end
 
   def after_sign_out_path(resource)
     new_user_session_path

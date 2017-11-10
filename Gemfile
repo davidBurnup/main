@@ -56,6 +56,7 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'streamio-ffmpeg'
 gem 'delayed_paperclip'
 gem 'redis-namespace'
+gem 'searchkick'
 group :development do
   gem "haml-rails"
   gem 'better_errors'

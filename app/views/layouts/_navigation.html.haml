@@ -9,10 +9,11 @@
         %span.icon-bar
       = link_to raw(image_tag('logo-square.svg')), root_path, class: 'navbar-brand'
     .navbar-collapse.collapse.navbar-inverse-collapse
-      - if @enable_search.present?
-        = form_for :search, :html => {:class => "navbar-form navbar-left hidden-sm hidden-xs"}, :url => @enable_search[:path] do |f|
-          .form-group
-            = text_field_tag :search_term, @any_search_term || "", :class => "form-control", :placeholder => "Recherche ..."
+      %bu-search-index
+      -# - if @enable_search.present?
+      -#   = form_for :search, :html => {:class => "navbar-form navbar-left hidden-sm hidden-xs"}, :url => @enable_search[:path] do |f|
+      -#     .form-group
+      -#       = text_field_tag :search_term, @any_search_term || "", :class => "form-control", :placeholder => "Recherche ..."
       %ul.nav.navbar-nav.navbar-right
         = render 'layouts/navigation_links'
         = render 'layouts/navigation_links_right'

@@ -9,11 +9,11 @@ class SongsController < ApplicationController
   # GET /songs.json
   def index
 
-    @enable_search = {
-        :search_domain => [:songs],
-        :path => songs_search_path
-    }
-    @any_search_term = ""
+    # @enable_search = {
+    #     :search_domain => [:songs],
+    #     :path => songs_search_path
+    # }
+    # @any_search_term = ""
 
     @songs = Song.order(:title => :asc)
 

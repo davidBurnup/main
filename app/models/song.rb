@@ -5,12 +5,13 @@ class Song < ApplicationRecord
   # tracked owner: Proc.new{ |controller, model| controller.current_user }, only: :create
   # include PublicActivity::Common
   include ActsAsFeedable
+  include ActsAsSearchable
 
   after_save :parse_notes
   before_save :set_creator
 
   stampable
-
+  searchkick word_start: [:title, :content]
   has_many :notes
   has_many :posts
   has_many :user_song_preferences
@@ -57,6 +58,9 @@ class Song < ApplicationRecord
     }
   })
 
+  searchable({
+    label_method: :title
+    })
   validates :key, :title, :content, :presence => true
 
   def Song.match_note

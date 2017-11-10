@@ -1,0 +1,9 @@
+%input.form-control{"ng-model" => "searchTerm",
+  placeholder: "Rechercher ...",
+  type: :text,
+  "typeahead-loading" => "searchLoading",
+  "typeahead-no-results" => "noResults",
+  "typeahead-on-select": "onSelect($item, $model, $label, $event)",
+  "uib-typeahead" => "search for search in getSearch($viewValue)"}/
+.search-icon
+  %i.fa.fa-search
