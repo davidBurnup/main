@@ -45,7 +45,7 @@ class Page < ApplicationRecord
   }
 
   stampable
-  searchkick word_start: [:name]
+  # searchkick word_start: [:name]
   searchable label_method: :name
 
   def svg?

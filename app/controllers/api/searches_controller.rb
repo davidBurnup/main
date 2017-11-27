@@ -17,7 +17,7 @@ module Api
         end
 
         # Page.search("Prem", fields: [:name], match: :word_start).first
-        @results = Searchkick.search(term, fields: [:name, :title, :content], index_name: searched_classes, match: :word_start)
+        # @results = Searchkick.search(term, fields: [:name, :title, :content], index_name: searched_classes, match: :word_start)
       end
     end
 

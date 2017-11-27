@@ -11,7 +11,7 @@ class Song < ApplicationRecord
   before_save :set_creator
 
   stampable
-  searchkick word_start: [:title, :content]
+  # searchkick word_start: [:title, :content]
   has_many :notes
   has_many :posts
   has_many :user_song_preferences

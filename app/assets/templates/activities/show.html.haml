@@ -34,10 +34,10 @@
       %bu-medias-audio{"ng-repeat": "media in activity.medias", media: "media", "ng-if": "media.attachment.contentType == 'audio'"}
 
 
-    .video-medias-container.embed-responsive.embed-responsive-16by9.videogular-container{"ng-repeat": "media in activity.medias"}
+    .video-medias-container.embed-responsive.embed-responsive-16by9.videogular-container{"ng-repeat": "media in activity.medias", "ng-if": "media.attachment.contentType == 'video'"}
       -# %pre
       -#   {{media}}
-      %videogular.embed-responsive-item{"vg-theme" => "media.videoConfig.theme", "ng-if": "media.attachment.contentType == 'video'"}
+      %videogular.embed-responsive-item{"vg-theme" => "media.videoConfig.theme"}
         %vg-media{"vg-src" => "media.videoConfig.sources"}
         %vg-controls
           %vg-play-pause-button
