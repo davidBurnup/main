@@ -78,7 +78,7 @@ class PagesController < ApplicationController
     def set_page
       @page = Page.where(slug: params[:id]).first
       unless @page
-        flash[:error] = "Cette page n'existe"
+        # flash[:error] = "Cette page n'existe"
         redirect_to root_path
       end
     end
