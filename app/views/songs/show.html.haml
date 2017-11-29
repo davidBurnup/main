@@ -41,6 +41,12 @@
       - if @song.bpm.present?
         .song-bpm
           = "#{@song.bpm} BPM"
+  - if @song.origin_page
+    %hr
+    %h4
+      Proposé par
+    = link_to page_path(@song.origin_page) do
+      = image_tag @song.origin_page.logo.url(:origin)
 
 = content_for :left_column do
 

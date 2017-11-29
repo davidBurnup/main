@@ -5,9 +5,10 @@
 	.col-sm-5.col-md-5.col-xs-12.text-center-xs
 
 		%h1
-			{{page.name}}
-			%span.sub-title{"ng-if": "subTitle"}
-				| {{subTitle}}
+			%a{"ng-href": "/pages/{{page.id}}"}
+				{{page.name}}
+				%span.sub-title{"ng-if": "subTitle"}
+					| {{subTitle}}
 		%h2
 			{{page.slogan}}
 
