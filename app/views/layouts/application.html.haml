@@ -78,6 +78,18 @@
       :coffee
         window.sessionStorage.setItem('currentUser', escape('{}'))
 
+    / Global site tag (gtag.js) - Google Analytics
+    %script{:async => "", :src => "https://www.googletagmanager.com/gtag/js?id=UA-110390008-1"}
+    -# GA
+    :coffee
+      gtag = ->
+        dataLayer.push arguments
+        return
+
+      window.dataLayer = window.dataLayer or []
+      gtag 'js', new Date
+      gtag 'config', 'UA-110390008-1'
+      
     -# FACEBOOOK
     :coffee
       window.fbAsyncInit = ->
