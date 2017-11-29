@@ -26,13 +26,18 @@ module ActsAsSearchable
       searchable_option(:label_method)
     end
 
+    def searched_attributes
+      searchable_option(:attributes)
+    end
+
   end
 
 
     module ClassMethods
 
       @@default_searchable_options = {
-        label_method: nil
+        label_method: nil,
+        attributes: []
       }
 
       # Defines options that will not be sent to instance using ruby send method but used as static variable

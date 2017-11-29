@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171025061649) do
+ActiveRecord::Schema.define(version: 20171129033200) do
 
   create_table "activities", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "trackable_type"
@@ -209,7 +209,7 @@ ActiveRecord::Schema.define(version: 20171025061649) do
     t.datetime "updated_at"
   end
 
-  create_table "pages", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "pages", id: :integer, force: :cascade, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -239,6 +239,7 @@ ActiveRecord::Schema.define(version: 20171025061649) do
     t.string "logo_content_type"
     t.integer "logo_file_size"
     t.datetime "logo_updated_at"
+    t.index ["name"], name: "index_pages_on_name", type: :fulltext
     t.index ["slug"], name: "index_pages_on_slug", unique: true
   end
 
@@ -289,6 +290,7 @@ ActiveRecord::Schema.define(version: 20171025061649) do
     t.integer "creator_id"
     t.integer "updater_id"
     t.index ["clean_content"], name: "clean_content_full_text", type: :fulltext
+    t.index ["title", "content"], name: "index_songs_on_title_and_content", type: :fulltext
   end
 
   create_table "user_devices", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

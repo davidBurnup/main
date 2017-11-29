@@ -2,6 +2,7 @@ class Page < ApplicationRecord
   extend FriendlyId
   include ActsAsFeedOwner
   include ActsAsSearchable
+  include SearchCop
   geocoded_by :address   # can also be an IP address
   after_validation :geocode          # auto-fetch coordinates
 
@@ -46,7 +47,17 @@ class Page < ApplicationRecord
 
   stampable
   # searchkick word_start: [:name]
-  searchable label_method: :name
+  searchable label_method: :name, attributes: [:name]
+
+  search_scope :search do
+    attributes all: [:name]
+
+    options :all, :type => :fulltext, default: true
+
+    # Use default: true to explicitly enable fields as default fields (whitelist approach)
+    # Use default: false to explicitly disable fields as default fields (blacklist approach)
+  end
+
 
   def svg?
     self.avatar_content_type === 'image/svg+xml'

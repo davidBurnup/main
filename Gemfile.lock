@@ -290,6 +290,7 @@ GEM
     orm_adapter (0.5.0)
     paranoia (2.3.1)
       activerecord (>= 4.0, < 5.2)
+    polyglot (0.3.5)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -405,6 +406,8 @@ GEM
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    search_cop (1.0.9)
+      treetop
     searchkick (2.3.2)
       activemodel (>= 4.1)
       elasticsearch (>= 1)
@@ -450,6 +453,8 @@ GEM
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.8)
+    treetop (1.6.9)
+      polyglot (~> 0.3)
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.3)
@@ -534,6 +539,7 @@ DEPENDENCIES
   rspec-rails (~> 3.6)
   sass-rails (~> 5.0.6)
   sdoc (~> 0.4.2)
+  search_cop
   searchkick
   serviceworker-rails
   sidekiq (~> 5)

@@ -2,6 +2,8 @@ module Api
   class SearchesController < Api::ApiController
     include ApiConfig
 
+    skip_before_action :authorize_user
+
     # POST /posts
     # POST /posts.json
     def index
@@ -14,6 +16,12 @@ module Api
 
         if searched_classes.present?
           searched_classes = searched_classes.collect(&:safe_constantize).compact.uniq
+        end
+
+        @results = []
+
+        searched_classes.each do |searched_class|
+          @results += searched_class.search("#{term}*")
         end
 
         # Page.search("Prem", fields: [:name], match: :word_start).first

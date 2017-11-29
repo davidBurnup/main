@@ -6,6 +6,7 @@ class Song < ApplicationRecord
   # include PublicActivity::Common
   include ActsAsFeedable
   include ActsAsSearchable
+  include SearchCop
 
   after_save :parse_notes
   before_save :set_creator
@@ -59,8 +60,18 @@ class Song < ApplicationRecord
   })
 
   searchable({
-    label_method: :title
+    label_method: :title, attributes: [:title]
     })
+
+  search_scope :search do
+    attributes all: [:title, :content]
+
+    options :all, :type => :fulltext, default: true
+
+    # Use default: true to explicitly enable fields as default fields (whitelist approach)
+    # Use default: false to explicitly disable fields as default fields (blacklist approach)
+  end
+
   validates :key, :title, :content, :presence => true
 
   def Song.match_note
