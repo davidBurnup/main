@@ -17,13 +17,13 @@
     .media-heading{"ng-if" => "activity.activityLink"}
       %a{href: "{{activity.activityLink}}"}
         {{activity.title}}
-      .activity-time{"am-time-ago" => "activity.createdAt | amParse:'DD/MM/YYYY HH:mm'"}
+      .activity-time{"am-time-ago" => "activity.updatedAt | amParse:'DD/MM/YYYY HH:mm'"}
       / %span.content{"ng-bind-html" => "activity.safeContent"}
 
     -# UNLINKED ACTIVITY
     .media-heading{"ng-if" => "!activity.activityLink"}
       {{activity.title}}
-      .activity-time{"am-time-ago" => "activity.createdAt | amParse:'DD/MM/YYYY HH:mm'"}
+      .activity-time{"am-time-ago" => "activity.updatedAt | amParse:'DD/MM/YYYY HH:mm'"}
 
     %span.content{"ng-bind-html" => "activity.safeContent"}
 
@@ -108,7 +108,7 @@
                 %i.fa.fa-times
               .comment-creator
                 {{comment.creator.shortName}}
-                %span.comment-created-at{"am-time-ago" => "comment.createdAt | amParse:'DD/MM/YYYY HH:mm'", "ng-if": "comment.createdAt"}
+                %span.comment-created-at{"am-time-ago" => "comment.updatedAt | amParse:'DD/MM/YYYY HH:mm'", "ng-if": "comment.updatedAt"}
               {{comment.comment}}
 
         %form.comment-form{name: 'comment-form', "ng-submit": "saveComment($event, activity.comment)"}

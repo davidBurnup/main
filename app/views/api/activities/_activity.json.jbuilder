@@ -24,6 +24,7 @@ if activity and t = activity.trackable #and t.feedable_option(:title).present? #
   json.partial! "/api/likes/like", likable: activity
 
   json.created_at l(activity.created_at)
+  json.updated_at l(activity.updated_at)
   json.policy do
     json.destroy policy(activity).destroy?
   end
