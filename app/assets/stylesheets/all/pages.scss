@@ -145,8 +145,8 @@ bu-pages-show {
     h1 {
       color: white;
       text-align: center;
-      font-family: "Avenir Next";
-      font-size: 46px;
+      // font-family: "Avenir Next";
+      font-size: 40px;
     }
 
     // .goDown {
@@ -320,7 +320,7 @@ bu-pages-show {
       @include transition();
       width: 300px;
       margin-left: -150px;
-      top: 18%;
+      top: 28%;
       &.slided-xs {
         left: -100%;
       }

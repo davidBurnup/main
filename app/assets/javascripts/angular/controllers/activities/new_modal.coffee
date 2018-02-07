@@ -11,8 +11,9 @@ angular.module('Burnup.controllers.ActivitiesNewModal', ['ngFileUpload'])
   new Post(
    content: ""
    isDraft: true
-   recipientType: recipientType,
+   recipientType: recipientType
    recipientId: recipientId
+   visibility: 'public'
   ).save().then (post) ->
     if post and post.medias? and post.medias.length > 0
       for media in post.medias
@@ -35,15 +36,16 @@ angular.module('Burnup.controllers.ActivitiesNewModal', ['ngFileUpload'])
       $('.modal-backdrop').removeClass('visible')
       $uibModalInstance.close()
 
-  $scope.save = ($event) ->
+  $scope.save = ($event, postForm) ->
     $event.preventDefault()
-    $scope.savingPost = true
-    $scope.post.isDraft = false
-    $scope.post.save()
-    .then (activity) ->
-      $scope.savingPost = false
-      $('.modal-backdrop').removeClass('visible')
-      $uibModalInstance.close(activity)
+    if postForm.$valid
+      $scope.savingPost = true
+      $scope.post.isDraft = false
+      $scope.post.save()
+      .then (activity) ->
+        $scope.savingPost = false
+        $('.modal-backdrop').removeClass('visible')
+        $uibModalInstance.close(activity)
 
   $scope.upload = (files, invalidFiles) ->
     console.log "files", invalidFiles

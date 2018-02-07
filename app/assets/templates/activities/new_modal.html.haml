@@ -1,4 +1,4 @@
-%form#activities-new-modal.ng-cloak{name: 'postForm', 'ng-submit': 'save($event)'}
+%form#activities-new-modal.ng-cloak{name: 'postForm', 'ng-submit': 'save($event, postForm)', "novalidate": true}
   .loading-container.text-center{"ng-if": "!post"}
     %i.fa.fa-cog.fa-spin
   %span{"ng-if": "post"}
@@ -12,7 +12,7 @@
       .form-group{"ng-class": "{'has-error': (postForm.$submitted || postForm.content.$touched) && postForm.content.$error, 'has-success': (postForm.$submitted || postForm.content.$touched) && !postForm.content.$error}"}
         -#{"ng-if": "!withPhoto"}
         %textarea.form-control{name: "content", "ng-model": "post.content", 'msd-elastic': true, autofocus: true, rows: 1, placeholder: 'Qu\'est-ce qui vous enflamme aujourd\'hui ?*', "ng-disabled": "savingPost", "ng-required": "files.length == 0"}
-        .help-block{"ng-show": "(postForm.$submitted || postForm.content.$touched) && postForm.content.$error.required"}
+        .help-block{"ng-show": "(postForm.$submitted) && postForm.content.$error.required"}
           Ce champ est obligatoire.
 
       %span{"ng-if": "withPhoto"}
@@ -89,6 +89,25 @@
                     {{errorLabel.label}}
               -# Invalid File: {{f.$errorMessages}} {{f.$errorParam}}, {{f.name}} - size: {{f.size}}B - type:
               -# {{f.type}}
+
+      %hr
+      
+      %h3
+        Qui pourra voir votre publication ?
+
+      .visibility-btns.btn-group.btn-group-justified
+        %a.btn.btn-default.btn-sm{href: "#", "ng-model": "post.visibility", "uib-btn-radio": "'public'", "ng-class": "post.visibility == 'public' ? 'btn-primary' : ''"}
+          %i.fa.fa-globe
+          TOUT LE MONDE
+        %a.btn.btn-default.btn-sm{href: "#", "ng-model": "post.visibility", "uib-btn-radio": "'member'", "ng-class": "post.visibility == 'member' ? 'btn-primary' : ''"}
+          %i.fa.fa-users
+          LES MEMBRES
+        %a.btn.btn-default.btn-sm{href: "#", "ng-model": "post.visibility", "uib-btn-radio": "'admin'", "ng-class": "post.visibility == 'admin' ? 'btn-primary' : ''"}
+          %i.fa.fa-address-card
+          LES ADMINS
+        %a.btn.btn-default.btn-sm{href: "#", "ng-model": "post.visibility", "uib-btn-radio": "'self'", "ng-class": "post.visibility == 'self' ? 'btn-primary' : ''"}
+          %i.fa.fa-lock
+          MOI UNIQUEMENT
 
     .modal-footer
       .row
