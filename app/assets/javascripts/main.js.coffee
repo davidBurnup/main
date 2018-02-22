@@ -81,7 +81,7 @@
       $(el).css('margin-top', diff/2)
   ), 100
 @auto_load = (ready_var) ->
-  console.log('ok assets changed !')
+  console.log('ok assets changed ! ')
   $(document).ready(ready_var)
   $(document).on('turbolinks:load', ready_var)
   $(document).on('page:load', ready_var);
