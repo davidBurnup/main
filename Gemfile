@@ -29,7 +29,7 @@ gem "chosen-rails"
 gem "sidekiq", "~> 5"
 gem "sidekiq-cron", "~> 0.6"
 gem "letter_opener", :group => :development
-gem 'sinatra', '~> 2'
+gem 'sinatra', '~> 2.0.1'
 gem 'mandrill-api'
 gem 'jquery-hotkeys-rails'
 gem 'acts_as_commentable'
@@ -51,13 +51,15 @@ gem 'geocoder'
 gem 'factory_girl'
 gem 'serviceworker-rails'
 gem 'webpush'
-gem 'rails_admin'
+gem 'rails_admin', '~> 1.3.0'
 gem 'friendly_id', '~> 5.1.0'
 gem 'streamio-ffmpeg'
 gem 'delayed_paperclip'
 gem 'redis-namespace'
 gem 'searchkick'
 gem 'search_cop'
+gem 'loofah', '~> 2.2.1'
+gem 'nokogiri', '~> 1.8.1'
 group :development do
   gem "haml-rails"
   gem 'better_errors'
