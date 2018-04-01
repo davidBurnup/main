@@ -8,6 +8,9 @@
   margin-bottom: 10px;
   height: 70px;
 }
+#song-tabs {
+  display:none;
+}
 #headers {
   margin-bottom: -10px;
 }
@@ -40,6 +43,7 @@ blockquote {
   border-bottom: 0px solid transparent;
 }
 #song-container {
+  font-size:20px;
 }
 #right-column {
   display: none;

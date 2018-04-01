@@ -16,7 +16,7 @@ module Api
 
       @media = Media.new(m_params)
 
-      if !@media.save!
+      if !@media.save
         head :bad_request
       end
     end

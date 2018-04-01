@@ -51,7 +51,7 @@
 = content_for :left_column do
 
   / Nav tabs
-  %ul.nav.nav-tabs{:role => "tablist"}
+  %ul#song-tabs.nav.nav-tabs{:role => "tablist"}
     %li.active{:role => "presentation"}
       %a{"aria-controls" => "lyrics", "data-toggle" => "tab", :href => "#lyrics", :role => "tab", :id => "lyrics-tab"}
         Paroles
